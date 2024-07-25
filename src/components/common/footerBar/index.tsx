@@ -8,14 +8,19 @@ import {
   MarkerIcon,
   MegaPhoneIcon,
 } from '@/public/icon';
+import { usePathname } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
 const FooterBar = () => {
+  const path = usePathname();
+
   const routerClick = (page: string) => {
     alert(`${page}페이지 이동`);
   };
-  return (
+  return path === '/' ? (
+    <></>
+  ) : (
     <div className={cn('container')}>
       <MarkerIcon width="30" height="30" onClick={() => routerClick('지도')} />
       <BordIcon width="30" height="30" onClick={() => routerClick('게시판')} />
