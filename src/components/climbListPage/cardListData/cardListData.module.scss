@@ -1,5 +1,8 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; /* 카드 사이의 간격을 설정합니다. 필요에 따라 조정할 수 있습니다. */
+  justify-content: center;
+  gap: 16px; 
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
