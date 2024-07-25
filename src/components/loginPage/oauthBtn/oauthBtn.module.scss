@@ -1,0 +1,21 @@
+.container {
+  @include flex-arrange(center, center);
+  gap: 20px;
+
+  .oauthStyle {
+    border-radius: 50%;
+    padding: 15px;
+  }
+  .google {
+    @extend .oauthStyle;
+    background: white;
+    margin-left: 7px;
+  }
+  .kakao {
+    @extend .oauthStyle;
+    background: yellow;
+  }
+  .naver {
+    margin-top: 5px;
+  }
+}

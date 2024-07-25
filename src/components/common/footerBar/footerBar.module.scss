@@ -1,0 +1,9 @@
+.container {
+  @include flex-arrange(space-around, center);
+  width: 100%;
+  height: 70px;
+  background: skyblue;
+  position: absolute;
+  bottom: 0;
+  position: fixed;
+}
