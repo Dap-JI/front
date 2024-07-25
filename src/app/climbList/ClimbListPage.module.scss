@@ -8,3 +8,7 @@
   padding-right: 20px;
   overflow-y: scroll;
 }
+
+.container::-webkit-scrollbar {
+  display: none;
+}
