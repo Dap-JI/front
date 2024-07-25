@@ -1,9 +1,14 @@
 .container {
-  width: 80%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 336px;
+  position: fixed;
+  padding-top: 10px;
+  background: beige;
   .glass {
     position: absolute;
     top: 28px;
     right: 10px;
   }
 }
+
+//push위한 주석
