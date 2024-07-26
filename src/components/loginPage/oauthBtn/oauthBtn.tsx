@@ -9,7 +9,6 @@ import OauthPopup from '@/src/components/loginPage/oauthPopup';
 const cn = classNames.bind(styles);
 
 const OauthBtn = () => {
-  const router = useRouter();
 
   const kakaoLogin = () => {
     OauthPopup('kakao');

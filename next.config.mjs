@@ -6,6 +6,7 @@ const withPWA = nextPwa({
 });
 
 const nextConfig = {
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
