@@ -5,6 +5,8 @@ import OauthBtn from '@/src/components/loginPage/oauthBtn/oauthBtn';
 const cn = classNames.bind(styles);
 
 const Home = () => {
+  // const code = new URLSearchParams(window.location.search).get('code');
+  // console.log(code);
   return (
     <div className={cn('container')}>
       <h1>Dap Ji</h1>
