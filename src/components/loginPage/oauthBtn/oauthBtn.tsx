@@ -4,14 +4,14 @@ import classNames from 'classnames/bind';
 import styles from './oauthBtn.module.scss';
 import { GoogleIcon, NaverIcon, KakaoIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
+import OauthPopup from '@/src/components/loginPage/oauthPopup';
 
 const cn = classNames.bind(styles);
 
 const OauthBtn = () => {
-  const router = useRouter();
-  const loginClick = (oauth: string) => {
-    alert(`${oauth} 로그인!`);
-    router.push('/climbList');
+
+  const kakaoLogin = () => {
+    OauthPopup('kakao');
   };
 
   return (
@@ -20,19 +20,19 @@ const OauthBtn = () => {
         width="60"
         height="60"
         className={cn('google')}
-        onClick={() => loginClick('google')}
+        // onClick={() => loginClick('google')}
       />
       <KakaoIcon
         width="60"
         height="60"
         className={cn('kakao')}
-        onClick={() => loginClick('kakao')}
+        onClick={kakaoLogin}
       />
       <NaverIcon
         width="65"
         height="65"
         className={cn('naver')}
-        onClick={() => loginClick('naver')}
+        // onClick={() => loginClick('naver')}
       />
     </div>
   );
