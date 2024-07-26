@@ -9,6 +9,7 @@ const OauthPopup = (authType: string) => {
   const top = window.screen.height / 2 - height / 2;
   const options = `width=${width},height=${height},top=${top},left=${left}`;
   (window.location.href = `${baseURL}/api/auth/${authType}`), name, options;
+  // window.open(`${baseURL}/api/auth/${authType}`, name, options);
 };
 
 export default OauthPopup;
