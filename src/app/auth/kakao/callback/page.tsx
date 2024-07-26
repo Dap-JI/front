@@ -13,7 +13,7 @@ const Kakao = () => {
       router.push('/climbList');
     }
   }, []);
-  
+
   return <div>Kakao</div>;
 };
 

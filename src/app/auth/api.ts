@@ -5,8 +5,13 @@ const KakaoLogin = async (code: string) => {
     await fetchData({
       param: `/api/auth/kakao/callback?code=${code}`,
     });
-  } catch {
-    console.error('카카오로그인 에러');
+    // if (window.opener) {
+    //   window.opener.location.href = '/climbList';
+    //   window.close();
+    //   return;
+    // }
+  } catch (e) {
+    console.error(e, '카카오로그인 에러');
   }
 };
 
