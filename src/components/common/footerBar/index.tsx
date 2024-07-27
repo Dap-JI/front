@@ -18,9 +18,12 @@ const FooterBar = () => {
   const routerClick = (page: string) => {
     alert(`${page}페이지 이동`);
   };
-  return path === '/' ? (
-    <></>
-  ) : (
+  
+  if (path === '/' || path.startsWith('/auth')) {
+    return null;
+  }
+
+  return (
     <div className={cn('container')}>
       <MarkerIcon width="30" height="30" onClick={() => routerClick('지도')} />
       <BordIcon width="30" height="30" onClick={() => routerClick('게시판')} />
