@@ -9,7 +9,7 @@ const cn = classNames.bind(styles);
 const DetailPage = () => {
   return (
     <div className={cn('container')}>
-      <h1> 클라이밍장 이름 </h1>
+      <h1> 락랜드 </h1>
       <div>
         <Notification />
         <HolderColor />
