@@ -9,19 +9,22 @@ import OauthPopup from '@/src/components/loginPage/oauthPopup';
 const cn = classNames.bind(styles);
 
 const OauthBtn = () => {
-
   const kakaoLogin = () => {
     OauthPopup('kakao');
   };
 
+  const NaverLogin = () => {
+    OauthPopup('naver');
+  };
+
   return (
     <div className={cn('container')}>
-      <GoogleIcon
+      {/* <GoogleIcon
         width="60"
         height="60"
         className={cn('google')}
         // onClick={() => loginClick('google')}
-      />
+      /> */}
       <KakaoIcon
         width="60"
         height="60"
@@ -32,7 +35,7 @@ const OauthBtn = () => {
         width="65"
         height="65"
         className={cn('naver')}
-        // onClick={() => loginClick('naver')}
+        onClick={NaverLogin}
       />
     </div>
   );
