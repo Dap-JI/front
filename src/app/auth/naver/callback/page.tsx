@@ -1,20 +1,20 @@
 'use client';
 import React, { useEffect } from 'react';
-import { KakaoLogin } from '@/src/app/auth/api';
 import { useRouter } from 'next/navigation';
+import { NaverLogin } from '@/src/app/auth/api';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
-import styles from './kakaoCallBack.module.scss';
+import styles from './naverCallBack.module.scss';
 
 const cn = classNames.bind(styles);
 
-const KakaoCallback = () => {
+const NaverCallback = () => {
   const router = useRouter();
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
-      KakaoLogin(code);
+      NaverLogin(code);
       router.push('/climbList');
     }
   }, []);
@@ -32,4 +32,4 @@ const KakaoCallback = () => {
   );
 };
 
-export default KakaoCallback;
+export default NaverCallback;

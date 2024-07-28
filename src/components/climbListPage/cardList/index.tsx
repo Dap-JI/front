@@ -1,7 +1,9 @@
+'use client';
 import styles from './cardList.module.scss';
 import classNames from 'classnames/bind';
 import { ClimbLIstType } from '@/src/utils/dummy';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -10,9 +12,15 @@ type CardListProps = {
 };
 
 const CardList = ({ list }: CardListProps) => {
-  const { logo, name } = list;
+  const { logo, name, gym_id } = list;
+  const router = useRouter();
+
+  const detailClick = (gym_id: number | undefined) => {
+    router.push(`/climbList/${gym_id}`);
+  };
+
   return (
-    <li className={cn('container')}>
+    <li className={cn('container')} onClick={() => detailClick(gym_id)}>
       <div className={cn('image')}>
         <Image
           src={logo}
