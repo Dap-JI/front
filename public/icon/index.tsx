@@ -62,6 +62,7 @@ export const KakaoIcon = ({ ...props }: IconPropsType) => {
           clipRule="evenodd"
           d="M12 2C4.58478 2 1 6.48339 1 10.2764C1 13.1185 2.90422 15.6254 5.80456 17.1151L4.58478 21.4564C4.476 21.8413 4.927 22.1468 5.27289 21.9254L10.6226 18.4853C11.0736 18.5279 11.5331 18.5528 12 18.5528C18.0744 18.5528 23 14.8474 23 10.2764C23 6.48339 19 2 12 2Z"
           fill="black"
+          transform="translate(0, 1)"
         />
       </g>
     </IconTemplate>
@@ -71,10 +72,10 @@ export const KakaoIcon = ({ ...props }: IconPropsType) => {
 export const NaverIcon = ({ ...props }: IconPropsType) => {
   return (
     <IconTemplate {...props}>
-      <circle cx="10" cy="10" r="10" fill="#03C75A" />
       <path
         d="M11.35 10.25L8.50002 6.19995H6.15002V13.8H8.65002V9.74995L11.5 13.8H13.85V6.19995H11.35V10.25Z"
         fill="white"
+        transform="translate(2.5, 2.5)"
       />
     </IconTemplate>
   );
@@ -159,6 +160,79 @@ export const BordIcon = ({ ...props }: IconPropsType) => {
   return (
     <IconTemplate {...props}>
       <path d="m19 1h-14a5.006 5.006 0 0 0 -5 5v12a5.006 5.006 0 0 0 5 5h14a5.006 5.006 0 0 0 5-5v-12a5.006 5.006 0 0 0 -5-5zm-14 2h14a3 3 0 0 1 3 3v1h-20v-1a3 3 0 0 1 3-3zm14 18h-14a3 3 0 0 1 -3-3v-9h20v9a3 3 0 0 1 -3 3zm0-8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 0-2h12a1 1 0 0 1 1 1zm-4 4a1 1 0 0 1 -1 1h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 1 1zm-12-12a1 1 0 1 1 1 1 1 1 0 0 1 -1-1zm3 0a1 1 0 1 1 1 1 1 1 0 0 1 -1-1zm3 0a1 1 0 1 1 1 1 1 1 0 0 1 -1-1z" />
+    </IconTemplate>
+  );
+};
+
+export const LeftArrowIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        d="M17.17,24a1,1,0,0,1-.71-.29L8.29,15.54a5,5,0,0,1,0-7.08L16.46.29a1,1,0,1,1,1.42,1.42L9.71,9.88a3,3,0,0,0,0,4.24l8.17,8.17a1,1,0,0,1,0,1.42A1,1,0,0,1,17.17,24Z"
+        fill="black"
+      />
+    </IconTemplate>
+  );
+};
+export const RightArrowIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        d="M7,24a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42l8.17-8.17a3,3,0,0,0,0-4.24L6.29,1.71A1,1,0,0,1,7.71.29l8.17,8.17a5,5,0,0,1,0,7.08L7.71,23.71A1,1,0,0,1,7,24Z"
+        fill="black"
+      />
+    </IconTemplate>
+  );
+};
+
+export const BellIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <g id="_01_align_center" data-name="01 align center">
+        <path
+          fill="black"
+          d="M23.259,16.2l-2.6-9.371A9.321,9.321,0,0,0,2.576,7.3L.565,16.35A3,3,0,0,0,3.493,20H7.1a5,5,0,0,0,9.8,0h3.47a3,3,0,0,0,2.89-3.8ZM12,22a3,3,0,0,1-2.816-2h5.632A3,3,0,0,1,12,22Zm9.165-4.395a.993.993,0,0,1-.8.395H3.493a1,1,0,0,1-.976-1.217l2.011-9.05a7.321,7.321,0,0,1,14.2-.372l2.6,9.371A.993.993,0,0,1,21.165,17.605Z"
+        />
+      </g>
+    </IconTemplate>
+  );
+};
+
+export const ShareIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <g id="_01_align_center" data-name="01 align center">
+        <path
+          fill="black"
+          d="M19.333,14.667a4.66,4.66,0,0,0-3.839,2.024L8.985,13.752a4.574,4.574,0,0,0,.005-3.488l6.5-2.954a4.66,4.66,0,1,0-.827-2.643,4.633,4.633,0,0,0,.08.786L7.833,8.593a4.668,4.668,0,1,0-.015,6.827l6.928,3.128a4.736,4.736,0,0,0-.079.785,4.667,4.667,0,1,0,4.666-4.666ZM19.333,2a2.667,2.667,0,1,1-2.666,2.667A2.669,2.669,0,0,1,19.333,2ZM4.667,14.667A2.667,2.667,0,1,1,7.333,12,2.67,2.67,0,0,1,4.667,14.667ZM19.333,22A2.667,2.667,0,1,1,22,19.333,2.669,2.669,0,0,1,19.333,22Z"
+        />
+      </g>
+    </IconTemplate>
+  );
+};
+
+export const DoubleRightArrowIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fill="black"
+        d="M13.1,19a1,1,0,0,1-.7-1.71L17,12.71a1,1,0,0,0,0-1.42L12.4,6.71a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0L18.4,9.88a3,3,0,0,1,0,4.24l-4.59,4.59A1,1,0,0,1,13.1,19Z"
+      />
+      <path
+        fill="black"
+        d="M6.1,19a1,1,0,0,1-.7-1.71L10.69,12,5.4,6.71a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0l6,6a1,1,0,0,1,0,1.42l-6,6A1,1,0,0,1,6.1,19Z"
+      />
+    </IconTemplate>
+  );
+};
+
+export const AddIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fill="black"
+        d="m12 0a12 12 0 1 0 12 12 12.013 12.013 0 0 0 -12-12zm0 22a10 10 0 1 1 10-10 10.011 10.011 0 0 1 -10 10zm1-11h4v2h-4v4h-2v-4h-4v-2h4v-4h2z"
+      />
     </IconTemplate>
   );
 };

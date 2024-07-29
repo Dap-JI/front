@@ -1,0 +1,60 @@
+.container {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  color: #fff;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.color-red {
+  background-color: red;
+}
+
+.color-orange {
+  background-color: orange;
+}
+
+.color-yellow {
+  background-color: yellow;
+}
+
+.color-green {
+  background-color: green;
+}
+
+.color-blue {
+  background-color: blue;
+}
+
+.color-indigo {
+  background-color: indigo;
+}
+
+.color-purple {
+  background-color: purple;
+}
+
+.color-white {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.color-gray {
+  background-color: gray;
+}
+
+.color-black {
+  background-color: black;
+}
+
+.color-pink {
+  background-color: pink;
+}
