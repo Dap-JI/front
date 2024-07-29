@@ -1,0 +1,14 @@
+.container {
+  @include flex-arrange(space-around, center);
+  @include font-style(1.5rem, white, 700);
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  gap: 20px;
+  .icon {
+    width: 20%;
+  }
+  .text{
+    margin-right:15px
+  }
+}

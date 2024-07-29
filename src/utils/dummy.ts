@@ -1,5 +1,5 @@
 export type ClimbLIstType = {
-  gym_id?: number;
+  gym_idx?: number;
   name: string;
   adress?: string;
   logo: any;
@@ -8,210 +8,210 @@ export type ClimbLIstType = {
 
 export const climbLists = [
   {
-    gym_id: 1,
+    gym_idx: 1,
     name: '락랜드',
     adress: '서울특별시 강북구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcCa4na%2FbtsIMxBjSX8%2Fmy6IojkItzLjKZ1WoWAIzK%2Fimg.jpg',
     notice: '8월 30일부터 다음셋팅입니다',
   },
   {
-    gym_id: 2,
+    gym_idx: 2,
     name: '클라이밍월드',
     adress: '서울특별시 종로구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FYptzI%2FbtsIMCWFQ9C%2FA38QkNnQQ1KePj7K0ZtWz0%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 3,
+    gym_idx: 3,
     name: '볼더파크',
     adress: '서울특별시 용산구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwLygU%2FbtsINu4VkwW%2FWdNfcOvdzGXNIiOmq1qIpk%2Fimg.jpg',
     notice: '9월 5일 신규 루트 세팅 예정',
   },
   {
-    gym_id: 4,
+    gym_idx: 4,
     name: '클라임존',
     adress: '서울특별시 서대문구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F8t6sg%2FbtsIOoJCGoE%2FVoXB0BL7tKW7N0NOUXXtGK%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 5,
+    gym_idx: 5,
     name: '알피니스트',
     adress: '서울특별시 강남구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '10월 1일부터 대회 준비로 인해 일시 휴업',
   },
   {
-    gym_id: 6,
+    gym_idx: 6,
     name: '클라임스페이스',
     adress: '서울특별시 마포구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 7,
+    gym_idx: 7,
     name: '볼더랜드',
     adress: '서울특별시 성북구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '8월 25일 새로운 회원 모집',
   },
   {
-    gym_id: 8,
+    gym_idx: 8,
     name: '클라이머즈',
     adress: '서울특별시 은평구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 9,
+    gym_idx: 9,
     name: '클라이밍하우스',
     adress: '서울특별시 강서구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '9월 10일 이벤트 공지 예정',
   },
   {
-    gym_id: 10,
+    gym_idx: 10,
     name: '락하우스',
     adress: '서울특별시 동대문구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 11,
+    gym_idx: 11,
     name: '클라이밍아레나',
     adress: '서울특별시 중랑구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '8월 20일부터 신규 루트 오픈',
   },
   {
-    gym_id: 12,
+    gym_idx: 12,
     name: '클라임파크',
     adress: '서울특별시 노원구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 13,
+    gym_idx: 13,
     name: '볼더짐',
     adress: '서울특별시 구로구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '9월 1일 클라이밍 강좌 개설',
   },
   {
-    gym_id: 14,
+    gym_idx: 14,
     name: '클라이밍랜드',
     adress: '서울특별시 금천구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 15,
+    gym_idx: 15,
     name: '클라임업',
     adress: '서울특별시 영등포구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '10월 5일부터 운영 시간 변경',
   },
   {
-    gym_id: 16,
+    gym_idx: 16,
     name: '볼더클럽',
     adress: '서울특별시 양천구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 17,
+    gym_idx: 17,
     name: '클라이밍펀',
     adress: '서울특별시 도봉구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '8월 15일 회원 이벤트',
   },
   {
-    gym_id: 18,
+    gym_idx: 18,
     name: '락펀',
     adress: '서울특별시 동작구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 19,
+    gym_idx: 19,
     name: '클라임아카데미',
     adress: '서울특별시 관악구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: '9월 20일부터 강습 시작',
   },
   {
-    gym_id: 20,
+    gym_idx: 20,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 21,
+    gym_idx: 21,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 22,
+    gym_idx: 22,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 23,
+    gym_idx: 23,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 24,
+    gym_idx: 24,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 25,
+    gym_idx: 25,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 26,
+    gym_idx: 26,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 27,
+    gym_idx: 27,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 28,
+    gym_idx: 28,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 29,
+    gym_idx: 29,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
   {
-    gym_id: 230,
+    gym_idx: 230,
     name: '클라임챌린지',
     adress: '서울특별시 서초구 ',
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
@@ -219,3 +219,222 @@ export const climbLists = [
   },
 
 ];
+
+export type ContentDetail = {
+    post_idx: number;
+    user_idx: number;
+    gym_idx: number;
+    clrearday: Date,
+    content: string | null;
+    media: string,
+    color: string,
+    created_at: Date
+};
+
+export type ContentDetailProps = {
+  list: ContentDetail;
+};
+
+
+export const contentDetail = [
+  {
+    post_idx: 1,
+    user_idx: 1,
+    gym_idx: 2,
+    clrearday: '2024-07-01',
+    content: '오늘 성공했어요 1',
+    media: 'www.example1.com',
+    color: 'red',
+    created_at: '2024-07-01 00:00:00'
+  },
+  {
+    post_idx: 2,
+    user_idx: 2,
+    gym_idx: 3,
+    clrearday: '2024-07-02',
+    content: '오늘 성공했어요 2',
+    media: 'www.example2.com',
+    color: 'blue',
+    created_at: '2024-07-02 00:00:00'
+  },
+  {
+    post_idx: 3,
+    user_idx: 3,
+    gym_idx: 1,
+    clrearday: '2024-07-03',
+    content: '오늘 성공했어요 3',
+    media: 'www.example3.com',
+    color: 'green',
+    created_at: '2024-07-03 00:00:00'
+  },
+  {
+    post_idx: 4,
+    user_idx: 4,
+    gym_idx: 4,
+    clrearday: '2024-07-04',
+    content: '오늘 성공했어요 4',
+    media: 'www.example4.com',
+    color: 'yellow',
+    created_at: '2024-07-04 00:00:00'
+  },
+  {
+    post_idx: 5,
+    user_idx: 5,
+    gym_idx: 5,
+    clrearday: '2024-07-05',
+    content: '오늘 성공했어요 5',
+    media: 'www.example5.com',
+    color: 'pink',
+    created_at: '2024-07-05 00:00:00'
+  },
+  {
+    post_idx: 6,
+    user_idx: 6,
+    gym_idx: 6,
+    clrearday: '2024-07-06',
+    content: '오늘 성공했어요 6',
+    media: 'www.example6.com',
+    color: 'purple',
+    created_at: '2024-07-06 00:00:00'
+  },
+  {
+    post_idx: 7,
+    user_idx: 7,
+    gym_idx: 7,
+    clrearday: '2024-07-07',
+    content: '오늘 성공했어요 7',
+    media: 'www.example7.com',
+    color: 'white',
+    created_at: '2024-07-07 00:00:00'
+  },
+  {
+    post_idx: 8,
+    user_idx: 8,
+    gym_idx: 8,
+    clrearday: '2024-07-08',
+    content: '오늘 성공했어요 8',
+    media: 'www.example8.com',
+    color: 'gray',
+    created_at: '2024-07-08 00:00:00'
+  },
+  {
+    post_idx: 9,
+    user_idx: 9,
+    gym_idx: 9,
+    clrearday: '2024-07-09',
+    content: '오늘 성공했어요 9',
+    media: 'www.example9.com',
+    color: 'black',
+    created_at: '2024-07-09 00:00:00'
+  },
+  {
+    post_idx: 10,
+    user_idx: 10,
+    gym_idx: 10,
+    clrearday: '2024-07-10',
+    content: '오늘 성공했어요 10',
+    media: 'www.example10.com',
+    color: 'white',
+    created_at: '2024-07-10 00:00:00'
+  },
+  {
+    post_idx: 11,
+    user_idx: 1,
+    gym_idx: 2,
+    clrearday: '2024-07-11',
+    content: '오늘 성공했어요 11',
+    media: 'www.example11.com',
+    color: 'blue',
+    created_at: '2024-07-11 00:00:00'
+  },
+  {
+    post_idx: 12,
+    user_idx: 2,
+    gym_idx: 3,
+    clrearday: '2024-07-12',
+    content: '오늘 성공했어요 12',
+    media: 'www.example12.com',
+    color: 'pink',
+    created_at: '2024-07-12 00:00:00'
+  },
+  {
+    post_idx: 13,
+    user_idx: 3,
+    gym_idx: 4,
+    clrearday: '2024-07-13',
+    content: '오늘 성공했어요 13',
+    media: 'www.example13.com',
+    color: 'pink',
+    created_at: '2024-07-13 00:00:00'
+  },
+  {
+    post_idx: 14,
+    user_idx: 4,
+    gym_idx: 5,
+    clrearday: '2024-07-14',
+    content: '오늘 성공했어요 14',
+    media: 'www.example14.com',
+    color: 'green',
+    created_at: '2024-07-14 00:00:00'
+  },
+  {
+    post_idx: 15,
+    user_idx: 5,
+    gym_idx: 6,
+    clrearday: '2024-07-15',
+    content: '오늘 성공했어요 15',
+    media: 'www.example15.com',
+    color: 'yellow',
+    created_at: '2024-07-15 00:00:00'
+  },
+  {
+    post_idx: 16,
+    user_idx: 6,
+    gym_idx: 7,
+    clrearday: '2024-07-16',
+    content: '오늘 성공했어요 16',
+    media: 'www.example16.com',
+    color: 'purple',
+    created_at: '2024-07-16 00:00:00'
+  },
+  {
+    post_idx: 17,
+    user_idx: 7,
+    gym_idx: 8,
+    clrearday: '2024-07-17',
+    content: '오늘 성공했어요 17',
+    media: 'www.example17.com',
+    color: 'gray',
+    created_at: '2024-07-17 00:00:00'
+  },
+  {
+    post_idx: 18,
+    user_idx: 8,
+    gym_idx: 9,
+    clrearday: '2024-07-18',
+    content: '오늘 성공했어요 18',
+    media: 'www.example18.com',
+    color: 'black',
+    created_at: '2024-07-18 00:00:00'
+  },
+  {
+    post_idx: 19,
+    user_idx: 9,
+    gym_idx: 10,
+    clrearday: '2024-07-19',
+    content: '오늘 성공했어요 19',
+    media: 'www.example19.com',
+    color: 'white',
+    created_at: '2024-07-19 00:00:00'
+  },
+  {
+    post_idx: 20,
+    user_idx: 10,
+    gym_idx: 1,
+    clrearday: '2024-07-20',
+    content: '오늘 성공했어요 20',
+    media: 'www.example20.com',
+    color: 'indigo',
+    created_at: '2024-07-20 00:00:00'
+  }
+]
