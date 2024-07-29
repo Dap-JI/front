@@ -217,224 +217,244 @@ export const climbLists = [
     logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrpH7d%2FbtsIMFlyHDh%2FTnaklhHTWwWevnmrDRvPjk%2Fimg.jpg',
     notice: null,
   },
-
 ];
 
 export type ContentDetail = {
-    post_idx: number;
-    user_idx: number;
-    gym_idx: number;
-    clrearday: Date,
-    content: string | null;
-    media: string,
-    color: string,
-    created_at: Date
+  post_idx: number;
+  user_idx: number;
+  gym_idx: number;
+  clearday: any;
+  content: string | null;
+  media: string;
+  color: string;
+  usename: string;
+  created_at: any;
 };
 
 export type ContentDetailProps = {
   list: ContentDetail;
 };
 
-
-export const contentDetail = [
+export const contentDetailData = [
   {
     post_idx: 1,
     user_idx: 1,
     gym_idx: 2,
-    clrearday: '2024-07-01',
-    content: '오늘 성공했어요 1',
+    clearday: '2024-07-01',
+    content:
+      '오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1',
     media: 'www.example1.com',
     color: 'red',
-    created_at: '2024-07-01 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-01 00:00:00',
   },
   {
     post_idx: 2,
     user_idx: 2,
     gym_idx: 3,
-    clrearday: '2024-07-02',
+    clearday: '2024-07-02',
     content: '오늘 성공했어요 2',
     media: 'www.example2.com',
     color: 'blue',
-    created_at: '2024-07-02 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-02 00:00:00',
   },
   {
     post_idx: 3,
     user_idx: 3,
     gym_idx: 1,
-    clrearday: '2024-07-03',
+    clearday: '2024-07-03',
     content: '오늘 성공했어요 3',
     media: 'www.example3.com',
     color: 'green',
-    created_at: '2024-07-03 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-03 00:00:00',
   },
   {
     post_idx: 4,
     user_idx: 4,
     gym_idx: 4,
-    clrearday: '2024-07-04',
+    clearday: '2024-07-04',
     content: '오늘 성공했어요 4',
     media: 'www.example4.com',
     color: 'yellow',
-    created_at: '2024-07-04 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-04 00:00:00',
   },
   {
     post_idx: 5,
     user_idx: 5,
     gym_idx: 5,
-    clrearday: '2024-07-05',
+    clearday: '2024-07-05',
     content: '오늘 성공했어요 5',
     media: 'www.example5.com',
     color: 'pink',
-    created_at: '2024-07-05 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-05 00:00:00',
   },
   {
     post_idx: 6,
     user_idx: 6,
     gym_idx: 6,
-    clrearday: '2024-07-06',
+    clearday: '2024-07-06',
     content: '오늘 성공했어요 6',
     media: 'www.example6.com',
     color: 'purple',
-    created_at: '2024-07-06 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-06 00:00:00',
   },
   {
     post_idx: 7,
     user_idx: 7,
     gym_idx: 7,
-    clrearday: '2024-07-07',
+    clearday: '2024-07-07',
     content: '오늘 성공했어요 7',
     media: 'www.example7.com',
     color: 'white',
-    created_at: '2024-07-07 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-07 00:00:00',
   },
   {
     post_idx: 8,
     user_idx: 8,
     gym_idx: 8,
-    clrearday: '2024-07-08',
+    clearday: '2024-07-08',
     content: '오늘 성공했어요 8',
     media: 'www.example8.com',
     color: 'gray',
-    created_at: '2024-07-08 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-08 00:00:00',
   },
   {
     post_idx: 9,
     user_idx: 9,
     gym_idx: 9,
-    clrearday: '2024-07-09',
+    clearday: '2024-07-09',
     content: '오늘 성공했어요 9',
     media: 'www.example9.com',
     color: 'black',
-    created_at: '2024-07-09 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-09 00:00:00',
   },
   {
     post_idx: 10,
     user_idx: 10,
     gym_idx: 10,
-    clrearday: '2024-07-10',
+    clearday: '2024-07-10',
     content: '오늘 성공했어요 10',
     media: 'www.example10.com',
     color: 'white',
-    created_at: '2024-07-10 00:00:00'
+    usename: '박지용',
+    created_at: '2024-07-10 00:00:00',
   },
-  {
-    post_idx: 11,
-    user_idx: 1,
-    gym_idx: 2,
-    clrearday: '2024-07-11',
-    content: '오늘 성공했어요 11',
-    media: 'www.example11.com',
-    color: 'blue',
-    created_at: '2024-07-11 00:00:00'
-  },
-  {
-    post_idx: 12,
-    user_idx: 2,
-    gym_idx: 3,
-    clrearday: '2024-07-12',
-    content: '오늘 성공했어요 12',
-    media: 'www.example12.com',
-    color: 'pink',
-    created_at: '2024-07-12 00:00:00'
-  },
-  {
-    post_idx: 13,
-    user_idx: 3,
-    gym_idx: 4,
-    clrearday: '2024-07-13',
-    content: '오늘 성공했어요 13',
-    media: 'www.example13.com',
-    color: 'pink',
-    created_at: '2024-07-13 00:00:00'
-  },
-  {
-    post_idx: 14,
-    user_idx: 4,
-    gym_idx: 5,
-    clrearday: '2024-07-14',
-    content: '오늘 성공했어요 14',
-    media: 'www.example14.com',
-    color: 'green',
-    created_at: '2024-07-14 00:00:00'
-  },
-  {
-    post_idx: 15,
-    user_idx: 5,
-    gym_idx: 6,
-    clrearday: '2024-07-15',
-    content: '오늘 성공했어요 15',
-    media: 'www.example15.com',
-    color: 'yellow',
-    created_at: '2024-07-15 00:00:00'
-  },
-  {
-    post_idx: 16,
-    user_idx: 6,
-    gym_idx: 7,
-    clrearday: '2024-07-16',
-    content: '오늘 성공했어요 16',
-    media: 'www.example16.com',
-    color: 'purple',
-    created_at: '2024-07-16 00:00:00'
-  },
-  {
-    post_idx: 17,
-    user_idx: 7,
-    gym_idx: 8,
-    clrearday: '2024-07-17',
-    content: '오늘 성공했어요 17',
-    media: 'www.example17.com',
-    color: 'gray',
-    created_at: '2024-07-17 00:00:00'
-  },
-  {
-    post_idx: 18,
-    user_idx: 8,
-    gym_idx: 9,
-    clrearday: '2024-07-18',
-    content: '오늘 성공했어요 18',
-    media: 'www.example18.com',
-    color: 'black',
-    created_at: '2024-07-18 00:00:00'
-  },
-  {
-    post_idx: 19,
-    user_idx: 9,
-    gym_idx: 10,
-    clrearday: '2024-07-19',
-    content: '오늘 성공했어요 19',
-    media: 'www.example19.com',
-    color: 'white',
-    created_at: '2024-07-19 00:00:00'
-  },
-  {
-    post_idx: 20,
-    user_idx: 10,
-    gym_idx: 1,
-    clrearday: '2024-07-20',
-    content: '오늘 성공했어요 20',
-    media: 'www.example20.com',
-    color: 'indigo',
-    created_at: '2024-07-20 00:00:00'
-  }
-]
+  //   {
+  //     post_idx: 11,
+  //     user_idx: 1,
+  //     gym_idx: 2,
+  //     clearday: '2024-07-11',
+  //     content: '오늘 성공했어요 11',
+  //     media: 'www.example11.com',
+  //     color: 'blue',
+  // usename:'박지용',
+  // created_at: '2024-07-11 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 12,
+  //     user_idx: 2,
+  //     gym_idx: 3,
+  //     clearday: '2024-07-12',
+  //     content: '오늘 성공했어요 12',
+  //     media: 'www.example12.com',
+  //     color: 'pink',
+  // usename:'박지용',
+  // created_at: '2024-07-12 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 13,
+  //     user_idx: 3,
+  //     gym_idx: 4,
+  //     clearday: '2024-07-13',
+  //     content: '오늘 성공했어요 13',
+  //     media: 'www.example13.com',
+  //     color: 'pink',
+  // usename:'박지용',
+  // created_at: '2024-07-13 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 14,
+  //     user_idx: 4,
+  //     gym_idx: 5,
+  //     clearday: '2024-07-14',
+  //     content: '오늘 성공했어요 14',
+  //     media: 'www.example14.com',
+  //     color: 'green',
+  // usename:'박지용',
+  // created_at: '2024-07-14 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 15,
+  //     user_idx: 5,
+  //     gym_idx: 6,
+  //     clearday: '2024-07-15',
+  //     content: '오늘 성공했어요 15',
+  //     media: 'www.example15.com',
+  //     color: 'yellow',
+  // usename:'박지용',
+  // created_at: '2024-07-15 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 16,
+  //     user_idx: 6,
+  //     gym_idx: 7,
+  //     clearday: '2024-07-16',
+  //     content: '오늘 성공했어요 16',
+  //     media: 'www.example16.com',
+  //     color: 'purple',
+  // usename:'박지용',
+  // created_at: '2024-07-16 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 17,
+  //     user_idx: 7,
+  //     gym_idx: 8,
+  //     clearday: '2024-07-17',
+  //     content: '오늘 성공했어요 17',
+  //     media: 'www.example17.com',
+  //     color: 'gray',
+  // usename:'박지용',
+  // created_at: '2024-07-17 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 18,
+  //     user_idx: 8,
+  //     gym_idx: 9,
+  //     clearday: '2024-07-18',
+  //     content: '오늘 성공했어요 18',
+  //     media: 'www.example18.com',
+  //     color: 'black',
+  // usename:'박지용',
+  // created_at: '2024-07-18 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 19,
+  //     user_idx: 9,
+  //     gym_idx: 10,
+  //     clearday: '2024-07-19',
+  //     content: '오늘 성공했어요 19',
+  //     media: 'www.example19.com',
+  //     color: 'white',
+  // usename:'박지용',
+  // created_at: '2024-07-19 00:00:00'
+  //   },
+  //   {
+  //     post_idx: 20,
+  //     user_idx: 10,
+  //     gym_idx: 1,
+  //     clearday: '2024-07-20',
+  //     content: '오늘 성공했어요 20',
+  //     media: 'www.example20.com',
+  //     color: 'indigo',
+  // usename:'박지용',
+  // created_at: '2024-07-20 00:00:00'
+  //   }
+];
