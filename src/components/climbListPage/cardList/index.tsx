@@ -12,15 +12,15 @@ type CardListProps = {
 };
 
 const CardList = ({ list }: CardListProps) => {
-  const { logo, name, gym_id } = list;
+  const { logo, name, gym_idx } = list;
   const router = useRouter();
 
-  const detailClick = (gym_id: number | undefined) => {
-    router.push(`/climbList/${gym_id}`);
+  const detailClick = (gym_ixd: number | undefined) => {
+    router.push(`/climbList/${gym_ixd}`);
   };
 
   return (
-    <li className={cn('container')} onClick={() => detailClick(gym_id)}>
+    <li className={cn('container')} onClick={() => detailClick(gym_idx)}>
       <div className={cn('image')}>
         <Image
           src={logo}
