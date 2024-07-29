@@ -1,6 +1,6 @@
 .container {
   @include flex-arrange(center, center);
-  gap: 20px;
+  gap: 30px;
 
   .oauthStyle {
     border-radius: 50%;

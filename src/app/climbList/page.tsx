@@ -2,7 +2,6 @@
 import SearchBar from '@/src/components/common/searchBar';
 import classNames from 'classnames/bind';
 import styles from './ClimbListPage.module.scss';
-import FooterBar from '@/src/components/common/footerBar';
 import CardListData from '@/src/components/climbListPage/cardListData';
 import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/src/utils/fetchData';
@@ -24,7 +23,6 @@ const ClimbListPage = () => {
     <div className={cn('container')}>
       <SearchBar />
       <CardListData />
-      <FooterBar />
     </div>
   );
 };
