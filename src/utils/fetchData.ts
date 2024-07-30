@@ -23,9 +23,6 @@ const fetchData = async <T>({
       url: param,
       method,
       data: requestData,
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
     });
     return response.data;
   }
