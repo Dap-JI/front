@@ -2,4 +2,9 @@
   padding: 10px;
   background: beige;
   height: 100vh;
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
