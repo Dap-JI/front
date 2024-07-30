@@ -1,7 +1,15 @@
-import React from 'react';
+import classNames from 'classnames/bind';
+import styles from './detailUploadPage.module.scss';
+import UploadForm from '@/src/components/uploadPage/uploadForm';
+
+const cn = classNames.bind(styles);
 
 const DetailUploadPage = () => {
-  return <div>UploadPage</div>;
+  return (
+    <div className={cn('container')}>
+      <UploadForm />
+    </div>
+  );
 };
 
 export default DetailUploadPage;

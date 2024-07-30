@@ -1,7 +1,6 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import {
-  DetailType,
   ClimbDetailResponseType,
   ClimbLIstType,
 } from '@/src/utils/type';
@@ -10,6 +9,7 @@ type ClimbDetailProps = {
   climbListid: string;
 };
 
+//클라이밍장 리스트 데이터
 export const useClimbList = () => {
   return useQuery<ClimbLIstType[]>({
     queryKey: ['climbList'],
@@ -20,6 +20,7 @@ export const useClimbList = () => {
   });
 };
 
+//클라이밍장 디테일 데이터
 export const useClimbDetailDatas = ({ climbListid }: ClimbDetailProps) => {
   return useQuery<ClimbDetailResponseType>({
     queryKey: ['climbDetail', climbListid],
@@ -29,3 +30,5 @@ export const useClimbDetailDatas = ({ climbListid }: ClimbDetailProps) => {
       }),
   });
 };
+
+//클라이밍장 데이터 업로드 함수
