@@ -1,11 +1,3 @@
-export type ClimbLIstType = {
-  gym_idx?: number;
-  name: string;
-  adress?: string;
-  logo: any;
-  notice?: string | null;
-};
-
 export const climbLists = [
   {
     gym_idx: 1,
@@ -219,25 +211,9 @@ export const climbLists = [
   },
 ];
 
-export type ContentDetail = {
-  post_idx: number;
-  user_idx: number;
-  gym_idx: number;
-  clearday: any;
-  content: string | null;
-  media: string;
-  color: string;
-  usename: string;
-  created_at: any;
-};
-
-export type ContentDetailProps = {
-  list: ContentDetail;
-};
-
 export const contentDetailData = [
   {
-    post_idx: 1,
+    post_idx: '1',
     user_idx: 1,
     gym_idx: 2,
     clearday: '2024-07-01',
@@ -249,7 +225,7 @@ export const contentDetailData = [
     created_at: '2024-07-01 00:00:00',
   },
   {
-    post_idx: 2,
+    post_idx: '2',
     user_idx: 2,
     gym_idx: 3,
     clearday: '2024-07-02',
@@ -260,7 +236,7 @@ export const contentDetailData = [
     created_at: '2024-07-02 00:00:00',
   },
   {
-    post_idx: 3,
+    post_idx: '3',
     user_idx: 3,
     gym_idx: 1,
     clearday: '2024-07-03',
@@ -271,7 +247,7 @@ export const contentDetailData = [
     created_at: '2024-07-03 00:00:00',
   },
   {
-    post_idx: 4,
+    post_idx: '4',
     user_idx: 4,
     gym_idx: 4,
     clearday: '2024-07-04',
@@ -282,7 +258,7 @@ export const contentDetailData = [
     created_at: '2024-07-04 00:00:00',
   },
   {
-    post_idx: 5,
+    post_idx: '5',
     user_idx: 5,
     gym_idx: 5,
     clearday: '2024-07-05',
@@ -293,7 +269,7 @@ export const contentDetailData = [
     created_at: '2024-07-05 00:00:00',
   },
   {
-    post_idx: 6,
+    post_idx: '6',
     user_idx: 6,
     gym_idx: 6,
     clearday: '2024-07-06',
@@ -304,7 +280,7 @@ export const contentDetailData = [
     created_at: '2024-07-06 00:00:00',
   },
   {
-    post_idx: 7,
+    post_idx: '7',
     user_idx: 7,
     gym_idx: 7,
     clearday: '2024-07-07',
@@ -315,7 +291,7 @@ export const contentDetailData = [
     created_at: '2024-07-07 00:00:00',
   },
   {
-    post_idx: 8,
+    post_idx: '8',
     user_idx: 8,
     gym_idx: 8,
     clearday: '2024-07-08',
@@ -326,7 +302,7 @@ export const contentDetailData = [
     created_at: '2024-07-08 00:00:00',
   },
   {
-    post_idx: 9,
+    post_idx: '9',
     user_idx: 9,
     gym_idx: 9,
     clearday: '2024-07-09',
@@ -337,7 +313,7 @@ export const contentDetailData = [
     created_at: '2024-07-09 00:00:00',
   },
   {
-    post_idx: 10,
+    post_idx: '10',
     user_idx: 10,
     gym_idx: 10,
     clearday: '2024-07-10',
@@ -348,7 +324,7 @@ export const contentDetailData = [
     created_at: '2024-07-10 00:00:00',
   },
   //   {
-  //     post_idx: 11,
+  //     post_idx: '11',
   //     user_idx: 1,
   //     gym_idx: 2,
   //     clearday: '2024-07-11',
@@ -359,7 +335,7 @@ export const contentDetailData = [
   // created_at: '2024-07-11 00:00:00'
   //   },
   //   {
-  //     post_idx: 12,
+  //     post_idx: '12',
   //     user_idx: 2,
   //     gym_idx: 3,
   //     clearday: '2024-07-12',
@@ -370,7 +346,7 @@ export const contentDetailData = [
   // created_at: '2024-07-12 00:00:00'
   //   },
   //   {
-  //     post_idx: 13,
+  //     post_idx: '13',
   //     user_idx: 3,
   //     gym_idx: 4,
   //     clearday: '2024-07-13',
@@ -381,7 +357,7 @@ export const contentDetailData = [
   // created_at: '2024-07-13 00:00:00'
   //   },
   //   {
-  //     post_idx: 14,
+  //     post_idx: '14',
   //     user_idx: 4,
   //     gym_idx: 5,
   //     clearday: '2024-07-14',
@@ -392,7 +368,7 @@ export const contentDetailData = [
   // created_at: '2024-07-14 00:00:00'
   //   },
   //   {
-  //     post_idx: 15,
+  //     post_idx: '15',
   //     user_idx: 5,
   //     gym_idx: 6,
   //     clearday: '2024-07-15',
@@ -403,7 +379,7 @@ export const contentDetailData = [
   // created_at: '2024-07-15 00:00:00'
   //   },
   //   {
-  //     post_idx: 16,
+  //     post_idx: '16',
   //     user_idx: 6,
   //     gym_idx: 7,
   //     clearday: '2024-07-16',
@@ -414,7 +390,7 @@ export const contentDetailData = [
   // created_at: '2024-07-16 00:00:00'
   //   },
   //   {
-  //     post_idx: 17,
+  //     post_idx: '17',
   //     user_idx: 7,
   //     gym_idx: 8,
   //     clearday: '2024-07-17',
@@ -425,7 +401,7 @@ export const contentDetailData = [
   // created_at: '2024-07-17 00:00:00'
   //   },
   //   {
-  //     post_idx: 18,
+  //     post_idx: '18',
   //     user_idx: 8,
   //     gym_idx: 9,
   //     clearday: '2024-07-18',
@@ -436,7 +412,7 @@ export const contentDetailData = [
   // created_at: '2024-07-18 00:00:00'
   //   },
   //   {
-  //     post_idx: 19,
+  //     post_idx: '19',
   //     user_idx: 9,
   //     gym_idx: 10,
   //     clearday: '2024-07-19',
@@ -447,7 +423,7 @@ export const contentDetailData = [
   // created_at: '2024-07-19 00:00:00'
   //   },
   //   {
-  //     post_idx: 20,
+  //     post_idx: '20',
   //     user_idx: 10,
   //     gym_idx: 1,
   //     clearday: '2024-07-20',
