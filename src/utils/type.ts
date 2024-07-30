@@ -41,3 +41,11 @@ export type DetailMainContentProps = {
 export type DetailMainContentListProps = {
   lists: DetailType[];
 };
+
+//업로드 폼 타입
+export interface useFormProps {
+  date: string;
+  text: string;
+  video: any;
+  // passwordconfirm?: FieldError;
+}
