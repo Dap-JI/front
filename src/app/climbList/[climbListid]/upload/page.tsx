@@ -1,3 +1,4 @@
+'use client';
 import classNames from 'classnames/bind';
 import styles from './detailUploadPage.module.scss';
 import UploadForm from '@/src/components/uploadPage/uploadForm';
