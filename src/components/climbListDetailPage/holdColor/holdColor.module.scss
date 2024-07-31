@@ -1,4 +1,4 @@
-.container {
+.circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -11,6 +11,13 @@
     box-shadow 0.2s ease;
   cursor: pointer;
   margin-right: 10px;
+  position: relative;
+}
+
+.checkIcon {
+  position: absolute;
+  top: -13px;
+  right: 0px;
 }
 
 .color-red {
@@ -60,3 +67,4 @@
 .color-brown {
   background-color: #964b00;
 }
+

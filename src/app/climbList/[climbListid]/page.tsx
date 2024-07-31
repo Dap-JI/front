@@ -9,6 +9,8 @@ import { LeftArrowIcon, AddIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import { useClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
+import { useState } from 'react';
+import LoadingSpinner from '@/src/components/loadingSpinner';
 
 const cn = classNames.bind(styles);
 type DetailPageProps = {
@@ -16,6 +18,8 @@ type DetailPageProps = {
 };
 
 const DetailPage = ({ params }: DetailPageProps) => {
+  const [activeColor, setActiveColor] = useState<string | null>(null);
+
   const router = useRouter();
   const { climbListid } = params;
 
@@ -38,7 +42,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   //업로드 페이지
 
   if (isLoading) {
-    return console.log('로딩중');
+    return <LoadingSpinner />;
   }
   //로딩중 들어가야할 것
 
@@ -51,7 +55,10 @@ const DetailPage = ({ params }: DetailPageProps) => {
       </div>
       <div>
         <Notification />
-        <HoldColorList />
+        <HoldColorList
+          activeColor={activeColor}
+          setActiveColor={setActiveColor}
+        />
       </div>
       <div>
         {noList && <NodetailData />}

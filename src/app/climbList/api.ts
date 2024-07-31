@@ -1,9 +1,6 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery } from '@tanstack/react-query';
-import {
-  ClimbDetailResponseType,
-  ClimbLIstType,
-} from '@/src/utils/type';
+import { ClimbDetailResponseType, ClimbLIstType } from '@/src/utils/type';
 
 type ClimbDetailProps = {
   climbListid: string;
