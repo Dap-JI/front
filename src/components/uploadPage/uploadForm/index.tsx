@@ -27,14 +27,13 @@ const UploadForm = () => {
   const onSubmit = (data: any) => {
     console.log(data);
   };
-  console.log(setValue);
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <UploadInput uploadFiles={uploadFiles || []} />
       {/* <UploadInput register={register('video')} setValue={setValue} /> */}
       <CommonInput
         id="date"
-        label="날짜"
         placeholder="완등 날짜를 입력해주세요"
         register={register('date', {
           required: '날짜를 입력해주세요',

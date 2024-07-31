@@ -18,12 +18,15 @@ const HoldColorList = () => {
     'black',
     'white',
     'pink',
+    'brown',
   ];
   return (
-    <div className={cn('container')}>
-      {colors.map((color: string, index: number) => (
-        <HolderColor key={index} color={color} />
-      ))}
+    <div className={cn('outerContainer')}>
+      <div className={cn('innerContainer')}>
+        {colors.map((color: string, index: number) => (
+          <HolderColor key={index} color={color} />
+        ))}
+      </div>
     </div>
   );
 };
