@@ -14,7 +14,6 @@ type UploadInputProps = {
 };
 
 const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
-  // const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [fileUploaded, setFileUploaded] = useState(false);
 
   const { mutate: videoUpload, isPending } = useMutation({

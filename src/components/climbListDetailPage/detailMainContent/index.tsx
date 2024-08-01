@@ -30,7 +30,15 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
-        <video src={media} autoPlay muted controls playsInline />
+        <video
+          // src="/icon/qoemalsmp4.mp4"
+          // src="https://dapji.s3.ap-northeast-2.amazonaws.com/videos/1722478960503-qoemalsmp4.mp4"
+          src={media}
+          autoPlay
+          muted
+          controls
+          playsInline
+        />
       </div>
       <p>{content}</p>
     </div>

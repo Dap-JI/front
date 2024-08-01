@@ -1,4 +1,3 @@
-// 'sue client';
 import classNames from 'classnames/bind';
 import styles from './uploadForm.module.scss';
 import UploadInput from '@/src/components/common/uploadInput';
@@ -30,11 +29,10 @@ const UploadForm = () => {
   const onSubmit = (data: any) => {
     console.log(data);
   };
-  
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <UploadInput videoUrl={videoUrl} setVideoUrl={setVideoUrl} />
-      {/* <UploadInput register={register('video')} setValue={setValue} /> */}
       <CommonInput
         id="date"
         placeholder="완등 날짜를 입력해주세요"
