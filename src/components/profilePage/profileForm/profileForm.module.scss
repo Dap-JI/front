@@ -2,4 +2,55 @@
   width: 100%;
   @include flex-arrange(center, center);
   flex-direction: column;
+  gap: 20px;
+
+  .imageWrapper {
+    width: 150px;
+    height: 150px;
+    position: relative;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .infoWrapper {
+    @include flex-arrange(center, center);
+    @include font-style(1.3rem, black 500);
+
+    width: 70%;
+    gap: 20px;
+
+    .btnStyle {
+      width: 100%;
+      height: 30px;
+      background: rgb(230, 222, 222);
+      border-radius: 5px;
+      padding: 0 8px;
+    }
+
+    .profileEdit {
+      @extend .btnStyle;
+      @include flex-arrange(center, center);
+    }
+
+    .oauth {
+      @extend .btnStyle;
+      @include flex-arrange(flex-start, center);
+      span {
+        margin: auto;
+      }
+    }
+    .oauth-kakao {
+      background: #f7e600;
+    }
+    .oauth-naver {
+      background: #03c75a;
+    }
+  }
+  .textWrapper {
+    width: 70%;
+  }
 }

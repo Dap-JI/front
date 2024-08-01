@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: 50px;
+  background: white;
+  border-radius: 5px;
+  padding: 5px;
+  @include flex-arrange(flex-start, center);
+  gap: 20px;
+  .mainContent {
+    @include flex-arrange(center, flex-start);
+    flex-direction: column;
+    margin-right: auto;
+    gap: 5px;
+
+    .title {
+      @include font-style(1.2rem, black, 600);
+    }
+    .infoWrapper {
+      @include flex-arrange(center, space-evenly);
+      gap: 20px;
+    }
+  }
+}
+
+.outerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

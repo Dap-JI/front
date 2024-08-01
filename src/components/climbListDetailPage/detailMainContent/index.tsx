@@ -34,7 +34,14 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
-        <video src={media} autoPlay muted controls playsInline />
+        <video
+          src={media}
+          autoPlay
+          muted
+          controls
+          playsInline
+          controlsList="nodownload"
+        />
       </div>
       <p>{content}</p>
     </div>

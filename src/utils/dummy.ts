@@ -221,7 +221,7 @@ export const contentDetailData = [
       '오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1오늘 성공했어요 1',
     media: 'www.example1.com',
     color: 'red',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-01 00:00:00',
   },
   {
@@ -232,7 +232,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 2',
     media: 'www.example2.com',
     color: 'blue',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-02 00:00:00',
   },
   {
@@ -243,7 +243,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 3',
     media: 'www.example3.com',
     color: 'green',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-03 00:00:00',
   },
   {
@@ -254,7 +254,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 4',
     media: 'www.example4.com',
     color: 'yellow',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-04 00:00:00',
   },
   {
@@ -265,7 +265,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 5',
     media: 'www.example5.com',
     color: 'pink',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-05 00:00:00',
   },
   {
@@ -276,7 +276,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 6',
     media: 'www.example6.com',
     color: 'purple',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-06 00:00:00',
   },
   {
@@ -287,7 +287,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 7',
     media: 'www.example7.com',
     color: 'white',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-07 00:00:00',
   },
   {
@@ -298,7 +298,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 8',
     media: 'www.example8.com',
     color: 'gray',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-08 00:00:00',
   },
   {
@@ -309,7 +309,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 9',
     media: 'www.example9.com',
     color: 'black',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-09 00:00:00',
   },
   {
@@ -320,7 +320,7 @@ export const contentDetailData = [
     content: '오늘 성공했어요 10',
     media: 'www.example10.com',
     color: 'white',
-    usename: '박지용',
+    username: '박지용',
     created_at: '2024-07-10 00:00:00',
   },
   //   {
@@ -331,7 +331,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 11',
   //     media: 'www.example11.com',
   //     color: 'blue',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-11 00:00:00'
   //   },
   //   {
@@ -342,7 +342,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 12',
   //     media: 'www.example12.com',
   //     color: 'pink',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-12 00:00:00'
   //   },
   //   {
@@ -353,7 +353,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 13',
   //     media: 'www.example13.com',
   //     color: 'pink',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-13 00:00:00'
   //   },
   //   {
@@ -364,7 +364,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 14',
   //     media: 'www.example14.com',
   //     color: 'green',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-14 00:00:00'
   //   },
   //   {
@@ -375,7 +375,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 15',
   //     media: 'www.example15.com',
   //     color: 'yellow',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-15 00:00:00'
   //   },
   //   {
@@ -386,7 +386,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 16',
   //     media: 'www.example16.com',
   //     color: 'purple',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-16 00:00:00'
   //   },
   //   {
@@ -397,7 +397,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 17',
   //     media: 'www.example17.com',
   //     color: 'gray',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-17 00:00:00'
   //   },
   //   {
@@ -408,7 +408,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 18',
   //     media: 'www.example18.com',
   //     color: 'black',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-18 00:00:00'
   //   },
   //   {
@@ -419,7 +419,7 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 19',
   //     media: 'www.example19.com',
   //     color: 'white',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-19 00:00:00'
   //   },
   //   {
@@ -430,7 +430,148 @@ export const contentDetailData = [
   //     content: '오늘 성공했어요 20',
   //     media: 'www.example20.com',
   //     color: 'indigo',
-  // usename:'박지용',
+  // username:'박지용',
   // created_at: '2024-07-20 00:00:00'
   //   }
+];
+
+export const BoardDatas = [
+  {
+    board_idx: 1,
+    user_idx: 1,
+    title: '이거 진짜 진짜 좋음 왜냐하면',
+    category: '장비',
+    username: '박지용',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 2,
+    user_idx: 2,
+    title: '이 제품 완전 추천합니다',
+    category: '용품',
+    username: '김민수',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 3,
+    user_idx: 3,
+    title: '정말 편리한 아이템이에요',
+    category: '기타',
+    username: '이서연',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 4,
+    user_idx: 4,
+    title: '효율이 정말 좋습니다',
+    category: '장비',
+    username: '최재혁',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 5,
+    user_idx: 5,
+    title: '강력 추천하는 아이템',
+    category: '용품',
+    username: '박서준',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 6,
+    user_idx: 6,
+    title: '정말 유용한 제품입니다',
+    category: '기타',
+    username: '김지수',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 7,
+    user_idx: 7,
+    title: '쓰고나서 만족도가 높아요',
+    category: '장비',
+    username: '장예은',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 8,
+    user_idx: 8,
+    title: '다른 사람에게도 추천합니다',
+    category: '용품',
+    username: '윤하준',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 9,
+    user_idx: 9,
+    title: '기대 이상으로 좋습니다',
+    category: '기타',
+    username: '서지훈',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+  {
+    board_idx: 1,
+    user_idx: 10,
+    title: '다시 사고 싶은 제품입니다',
+    category: '장비',
+    username: '한예지',
+    created_at: '2024-07-30T02:48:05.000Z',
+  },
+];
+
+export const PostDatas = [
+  {
+    thumbnailId: 1,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 2,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 3,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 4,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 5,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 6,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 7,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 8,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 9,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 10,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
+  {
+    thumbnailId: 11,
+    thumbnail:
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
+  },
 ];
