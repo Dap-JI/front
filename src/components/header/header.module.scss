@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  height: 70px;
+  @include flex-arrange(space-around, center);
+  position: fixed;
+  background: beige;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 2;
+  h1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
