@@ -2,14 +2,14 @@
 import classNames from 'classnames/bind';
 import styles from './ProfileAllData.module.scss';
 import { useState } from 'react';
-import ProfileBoardData from '../profileBoardData';
-import ProfilePostData from '../profilePostData';
+import ProfileBoardDatas from '../profileBoardData';
+import ProfilePostDatas from '../profilePostData';
 import { PostIcon, BoardIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
 
 const ProfileAllData = () => {
-  const [selectList, setSelectList] = useState<any>('post');
+  const [selectList, setSelectList] = useState<string>('post');
   const [underlineStyle, setUnderlineStyle] = useState<any>({ left: '0%' });
 
   const handleIconClick = (type: string, left: string) => {
@@ -34,7 +34,7 @@ const ProfileAllData = () => {
         </div>
         <div className={cn('underline')} style={underlineStyle} />
       </div>
-      {selectList === 'post' ? <ProfilePostData /> : <ProfileBoardData />}
+      {selectList === 'post' ? <ProfilePostDatas /> : <ProfileBoardDatas />}
     </div>
   );
 };

@@ -33,7 +33,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
   const lists = climbDetailDatas?.posts ?? [];
   const gymName = climbDetailDatas?.gym_name ?? '';
   const noList = climbDetailDatas?.posts.length === 0;
-
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);

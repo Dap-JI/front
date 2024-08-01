@@ -26,9 +26,9 @@ const ProfileForm = () => {
       <div className={cn('infoWrapper')}>
         <div className={cn('oauth', `oauth-${oauth}`)}>
           {oauth === 'kakao' ? (
-            <KakaoIcon width="20" height="20" />
+            <KakaoIcon width="17" height="17" />
           ) : (
-            <NaverIcon width="20" height="20" />
+            <NaverIcon width="30" height="30" />
           )}
           <span>{oauth}</span>
         </div>
