@@ -19,6 +19,7 @@ type DetailPageProps = {
 
 const DetailPage = ({ params }: DetailPageProps) => {
   const [activeColor, setActiveColor] = useState<string | null>(null);
+  const [isUpLoading, setIsUpLoading] = useState(false);
 
   const router = useRouter();
   const { climbListid } = params;
@@ -37,11 +38,12 @@ const DetailPage = ({ params }: DetailPageProps) => {
   };
   // 뒤로가기
   const uploadPage = () => {
+    setIsUpLoading(true);
     router.push(`/climbList/${climbListid}/upload`);
   };
   //업로드 페이지
 
-  if (isLoading) {
+  if (isLoading || isUpLoading) {
     return <LoadingSpinner />;
   }
   //로딩중 들어가야할 것
