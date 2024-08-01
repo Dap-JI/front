@@ -79,6 +79,7 @@ const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
             playsInline
             muted
             className={cn('videoPreview')}
+            controlsList="nodownload"
           />
         )}
       </div>
