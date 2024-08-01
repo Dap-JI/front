@@ -8,17 +8,20 @@ import {
   MarkerIcon,
   MegaPhoneIcon,
 } from '@/public/icon';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
 const FooterBar = () => {
   const path = usePathname();
+  const router = useRouter();
 
   const routerClick = (page: string) => {
-    alert(`${page}페이지 이동`);
+    // alert(`${page}페이지 이동`);
+    router.push(`/${page}`);
   };
-  
+
   if (path === '/' || path.startsWith('/auth')) {
     return null;
   }
@@ -33,7 +36,9 @@ const FooterBar = () => {
         height="30"
         onClick={() => routerClick('공지')}
       />
-      <UserIcon width="30" height="30" onClick={() => routerClick('프로필')} />
+      <Link href="/profile">
+        <UserIcon width="30" height="30" />
+      </Link>
     </div>
   );
 };

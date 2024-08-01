@@ -8,11 +8,15 @@ import {
   DetailType,
   DetailMainContentListProps,
 } from '@/src/utils/type';
+import { useState } from 'react';
+import LoadingSpinner from '@/src/components/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { color, User, clearday, content, post_idx, media, gym_idx } = list;
+  const [isUpLoading, setIsUpLoading] = useState(false);
+
   const router = useRouter();
 
   const postDetailPage = () => {
@@ -30,15 +34,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
-        <video
-          // src="/icon/qoemalsmp4.mp4"
-          // src="https://dapji.s3.ap-northeast-2.amazonaws.com/videos/1722478960503-qoemalsmp4.mp4"
-          src={media}
-          autoPlay
-          muted
-          controls
-          playsInline
-        />
+        <video src={media} autoPlay muted controls playsInline />
       </div>
       <p>{content}</p>
     </div>

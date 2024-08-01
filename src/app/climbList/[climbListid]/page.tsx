@@ -11,6 +11,7 @@ import { useClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
 import { useState } from 'react';
 import LoadingSpinner from '@/src/components/loadingSpinner';
+import Header from '@/src/components/header';
 
 const cn = classNames.bind(styles);
 type DetailPageProps = {
@@ -33,9 +34,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
   const gymName = climbDetailDatas?.gym_name ?? '';
   const noList = climbDetailDatas?.posts.length === 0;
 
-  const backClick = () => {
-    router.back();
-  };
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);
@@ -50,19 +48,15 @@ const DetailPage = ({ params }: DetailPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <div className={cn('header')}>
-        <LeftArrowIcon onClick={backClick} />
-        <h1>{gymName}</h1>
+      <Header title={gymName}>
         <AddIcon onClick={uploadPage} />
-      </div>
-      <div>
+      </Header>
+      <div className={cn('secondContainer')}>
         <Notification />
         <HoldColorList
           activeColor={activeColor}
           setActiveColor={setActiveColor}
         />
-      </div>
-      <div>
         {noList && <NodetailData />}
         <DetailMainContentList lists={lists} />
       </div>
