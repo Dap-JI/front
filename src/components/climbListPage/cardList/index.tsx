@@ -30,6 +30,7 @@ const CardList = ({ list }: CardListProps) => {
               alt="로고이미지"
               width={60}
               height={60}
+              priority
               className={cn('image')}
             />
           ) : (
