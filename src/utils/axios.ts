@@ -4,10 +4,10 @@ export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const instance = axios.create({
   baseURL,
-  // withCredentials: true,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': '*',
   },
 });
 

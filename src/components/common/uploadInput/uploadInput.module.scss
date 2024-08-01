@@ -1,9 +1,5 @@
 .container {
   width: 100%;
-  // @include flex-arrange(center, center);
-  // flex-direction: column;
-
-  // height: 250px;
 
   label {
     width: 100px;
@@ -13,7 +9,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    @include font-style(1.3rem, white, 500);
+    @include font-style(1.5rem, white, 500);
     margin-bottom: 20px;
   }
 
