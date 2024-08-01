@@ -8,11 +8,15 @@ import {
   DetailType,
   DetailMainContentListProps,
 } from '@/src/utils/type';
+import { useState } from 'react';
+import LoadingSpinner from '@/src/components/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { color, User, clearday, content, post_idx, media, gym_idx } = list;
+  const [isUpLoading, setIsUpLoading] = useState(false);
+
   const router = useRouter();
 
   const postDetailPage = () => {
