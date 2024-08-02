@@ -41,8 +41,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
-  console.log(climbDetailData);
-
   const lists = climbDetailData?.pages.flatMap((page) => page.posts) ?? [];
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
   const noList = lists.length === 0;
