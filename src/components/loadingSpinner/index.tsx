@@ -8,6 +8,7 @@ const LoadingSpinner = () => {
         width="50"
         height="50"
         alt="loadingSpinner"
+        priority
       />
     </div>
   );

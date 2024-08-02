@@ -29,3 +29,14 @@ export const useClimbDetailDatas = ({ climbListid }: ClimbDetailProps) => {
 };
 
 //클라이밍장 데이터 업로드 함수
+
+export const ClimbDetailDatas = async (
+  page = 1,
+  climbListid: string,
+  color: string,
+) => {
+  const res = await fetchData({
+    param: `/api/posts/gym/${climbListid}?page=${page}&take=3`,
+  });
+  return res;
+};

@@ -438,7 +438,7 @@ export const contentDetailData = [
 export const BoardDatas = [
   {
     board_idx: 1,
-    user_idx: 1,
+    user_idx: 5,
     title: '이거 진짜 진짜 좋음 왜냐하면',
     category: '장비',
     username: '박지용',
@@ -470,7 +470,7 @@ export const BoardDatas = [
   },
   {
     board_idx: 5,
-    user_idx: 5,
+    user_idx: 1,
     title: '강력 추천하는 아이템',
     category: '용품',
     username: '박서준',
@@ -509,7 +509,7 @@ export const BoardDatas = [
     created_at: '2024-07-30T02:48:05.000Z',
   },
   {
-    board_idx: 1,
+    board_idx: 10,
     user_idx: 10,
     title: '다시 사고 싶은 제품입니다',
     category: '장비',
@@ -520,57 +520,57 @@ export const BoardDatas = [
 
 export const PostDatas = [
   {
-    thumbnailId: 1,
+    thumbnail_idx: 1,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 2,
+    thumbnail_idx: 2,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 3,
+    thumbnail_idx: 3,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 4,
+    thumbnail_idx: 4,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 5,
+    thumbnail_idx: 5,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 6,
+    thumbnail_idx: 6,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 7,
+    thumbnail_idx: 7,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 8,
+    thumbnail_idx: 8,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 9,
+    thumbnail_idx: 9,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 10,
+    thumbnail_idx: 10,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
   {
-    thumbnailId: 11,
+    thumbnail_idx: 11,
     thumbnail:
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },

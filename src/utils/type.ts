@@ -1,3 +1,13 @@
+//메타타입
+export type metaType = {
+  page: number;
+  take: number;
+  totalCount: number;
+  pageCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+};
+
 //클라밍장 리스트 데이터
 
 export type ClimbLIstType = {
@@ -29,6 +39,7 @@ export type DetailType = {
 export type ClimbDetailResponseType = {
   gym_name: string; // 체육관 이름
   posts: DetailType[]; // 게시물 목록
+  meta: metaType;
   length?: number;
 };
 
