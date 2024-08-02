@@ -5,7 +5,7 @@ import { PostDatas } from '@/src/utils/dummy';
 const cn = classNames.bind(styles);
 
 type PostType = {
-  thumbnailId: number;
+  thumbnail_idx: number;
   thumbnail: string;
 };
 
@@ -14,7 +14,7 @@ type ProfilePostDataProps = {
 };
 
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
-  const { thumbnailId, thumbnail } = list;
+  const { thumbnail } = list;
   return (
     <div className={cn('container')}>
       <Image src={thumbnail} alt="postImage" width="120" height="120" />
@@ -26,7 +26,7 @@ const ProfilePostDatas = ({ lists }: any) => {
   return (
     <div className={cn('outerContainer')}>
       {PostDatas.map((list) => (
-        <ProfilePostData key={list.thumbnailId} list={list} />
+        <ProfilePostData key={list.thumbnail_idx} list={list} />
       ))}
     </div>
   );
