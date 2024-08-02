@@ -57,10 +57,7 @@ export type DetailMainContentListProps = {
 export type useFormProps = {
   clearday: string;
   content: string;
-  video: any;
+  media: string | null;
   color: string | null;
-  // passwordconfirm?: FieldError;
+  gym_idx: string | number;
 };
-
-//디테일 업로드 props타입
-// gymId

@@ -43,7 +43,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
 
   const lists = climbDetailData?.pages.flatMap((page) => page.posts) ?? [];
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
-  const noList = lists.length === 0;
 
   // 뒤로가기
   const uploadPage = () => {

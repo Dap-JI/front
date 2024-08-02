@@ -7,12 +7,8 @@ const instance = axios.create({
   withCredentials: true,
   headers: {
     Accept: 'application/json',
-    // 'Access-Control-Allow-Origin': '*',
   },
 });
 
 export default instance;
 
-//만약 쿠키나 토큰을 사용해서 사용자의 정보를 이요하는 경우 withCredentials: true, 사용
-//그리고    'Access-Control-Allow-Origin': '*',는 사용할 수 없다.
-//

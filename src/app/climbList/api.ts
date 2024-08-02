@@ -45,8 +45,8 @@ export const useDetailUploadDatas = () => {
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormProps) => axios.post('/api/posts', formData),
-    onSuccess: (response) => {
-      console.log('성공적으로 업로드됨:', response);
+    onSuccess: () => {
+      console.log('성공적으로 업로드됨:');
     },
     onError: (error) => {
       console.error('업로드 실패:', error);

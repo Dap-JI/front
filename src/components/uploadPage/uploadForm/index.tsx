@@ -11,7 +11,11 @@ import { useDetailUploadDatas } from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
 
-const UploadForm = () => {
+type UploadFormProps = {
+  gymId: string | number;
+};
+
+const UploadForm = ({ gymId }: UploadFormProps) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   //비디오 파일 url
   const [activeColor, setActiveColor] = useState<string | null>(null);
@@ -33,7 +37,7 @@ const UploadForm = () => {
       ...data,
       media: videoUrl,
       color: activeColor,
-      // gym_idx: gymId,
+      gym_idx: Number(gymId),
     };
     detailUploadDatas(formData);
     console.log(formData);

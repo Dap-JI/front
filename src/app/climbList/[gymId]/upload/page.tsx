@@ -4,14 +4,16 @@ import styles from './detailUploadPage.module.scss';
 import UploadForm from '@/src/components/uploadPage/uploadForm';
 
 const cn = classNames.bind(styles);
+
 type DetailPageProps = {
-  params: { gymId: string };
+  params: { gymId:  string | number };
 };
-const DetailUploadPage = () => {
-  // const { gymId } = params;
+const DetailUploadPage = ({ params }: DetailPageProps) => {
+  const { gymId } = params;
+  console.log(gymId);
   return (
     <div className={cn('container')}>
-      <UploadForm />
+      <UploadForm gymId={gymId} />
     </div>
   );
 };
