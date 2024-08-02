@@ -5,10 +5,15 @@ import UploadForm from '@/src/components/uploadPage/uploadForm';
 
 const cn = classNames.bind(styles);
 
-const DetailUploadPage = () => {
+type DetailPageProps = {
+  params: { gymId:  string | number };
+};
+const DetailUploadPage = ({ params }: DetailPageProps) => {
+  const { gymId } = params;
+  console.log(gymId);
   return (
     <div className={cn('container')}>
-      <UploadForm />
+      <UploadForm gymId={gymId} />
     </div>
   );
 };

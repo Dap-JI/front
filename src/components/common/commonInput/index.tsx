@@ -5,11 +5,12 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 const cn = classNames.bind(styles);
 
 type inputProps = {
-  placeholder: string;
+  placeholder?: string;
   label?: string;
   id?: string;
   register?: UseFormRegisterReturn;
   suffix?: React.ReactNode;
+  type: string;
 };
 
 const CommonInput = ({
@@ -18,6 +19,7 @@ const CommonInput = ({
   id,
   suffix,
   register,
+  type = 'text',
   ...rest
 }: inputProps) => {
   return (
@@ -26,6 +28,7 @@ const CommonInput = ({
       <input
         className={cn('input')}
         id={id}
+        type={type}
         placeholder={placeholder}
         {...register}
         {...rest}

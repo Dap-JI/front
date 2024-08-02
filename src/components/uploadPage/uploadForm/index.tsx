@@ -5,17 +5,21 @@ import React, { useState } from 'react';
 import HoldColorList from '../../climbListDetailPage/holdColorList';
 import CommonInput from '../../common/commonInput';
 import { useForm } from 'react-hook-form';
-import { date_reg } from '@/src/utils/regex';
+// import { date_reg } from '@/src/utils/regex';
 import { useFormProps } from '@/src/utils/type';
+import { useDetailUploadDatas } from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
 
-const UploadForm = () => {
+type UploadFormProps = {
+  gymId: string | number;
+};
+
+const UploadForm = ({ gymId }: UploadFormProps) => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   //비디오 파일 url
   const [activeColor, setActiveColor] = useState<string | null>(null);
   //난이도 색
-
   const maxLength = 100;
   const {
     register,
@@ -24,29 +28,35 @@ const UploadForm = () => {
     formState: { errors },
   } = useForm<useFormProps>();
 
-  const text = watch('text', '');
+  const text = watch('content', '');
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { mutate: detailUploadDatas } = useDetailUploadDatas();
+
+  const onSubmit = (data: useFormProps) => {
+    const formData = {
+      ...data,
+      media: videoUrl,
+      color: activeColor,
+      gym_idx: Number(gymId),
+    };
+    detailUploadDatas(formData);
+    console.log(formData);
   };
 
+  //data에는 react-hook-form으로만 만든게 들어감(date,text)
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <UploadInput videoUrl={videoUrl} setVideoUrl={setVideoUrl} />
       <CommonInput
-        id="date"
-        placeholder="완등 날짜를 입력해주세요"
-        register={register('date', {
-          required: '날짜를 입력해주세요',
-          pattern: {
-            value: date_reg,
-            message: '날짜 사이에 - 를 포함해서 입력해주세요',
-          },
+        id="clearday"
+        type="date"
+        register={register('clearday', {
+          required: '날짜를 선택해주세요',
         })}
       />
       <div className={styles.error_text_wrapper}>
-        {errors.date && (
-          <small className={styles.error_text}>{errors.date.message}</small>
+        {errors.clearday && (
+          <small className={styles.error_text}>{errors.clearday.message}</small>
         )}
       </div>
       <HoldColorList
@@ -57,7 +67,7 @@ const UploadForm = () => {
         <textarea
           className={cn('limitedTextarea')}
           maxLength={maxLength}
-          {...register('text', {
+          {...register('content', {
             maxLength: {
               value: 100,
               message: '최대 100자까지 가능합니다. ',

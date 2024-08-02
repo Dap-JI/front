@@ -53,10 +53,11 @@ export type DetailMainContentListProps = {
   lists: DetailType[];
 };
 
-//업로드 폼 타입
-export interface useFormProps {
-  date: string;
-  text: string;
-  video: any;
-  // passwordconfirm?: FieldError;
-}
+//디테일 업로드 폼 타입
+export type useFormProps = {
+  clearday: string;
+  content: string;
+  media: string | null;
+  color: string | null;
+  gym_idx: string | number;
+};
