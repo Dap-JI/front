@@ -8,8 +8,7 @@ import {
 
 type UseInfiniteScrollProps<T> = {
   queryKey: (string | number | null)[];
-  // fetchFunction: (page: number) => Promise<T>;
-  fetchFunction: any;
+  fetchFunction: (page: number) => Promise<T>;
   getNextPageParam: (lastPage: T) => number | undefined;
   onError?: (error: unknown) => void;
   initialData?:
