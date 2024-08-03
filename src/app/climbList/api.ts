@@ -2,6 +2,7 @@ import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { ClimbLIstType, useFormProps } from '@/src/utils/type';
 import axios from '@/src/utils/axios';
+import { useRouter } from 'next/navigation';
 
 type ClimbDetailProps = {
   gymId: string;
@@ -41,15 +42,19 @@ export const ClimbDetailDatas = async ({
 };
 
 //클라이밍장 디테일 데이터 업로드 함수
-export const useDetailUploadDatas = () => {
+export const useDetailUploadDatas = (gymId: string | number) => {
+  const router = useRouter();
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormProps) => axios.post('/api/posts', formData),
     onSuccess: () => {
-      console.log('성공적으로 업로드됨:');
+      router.push(`/climbList/${gymId}`);
     },
     onError: (error) => {
       console.error('업로드 실패:', error);
+      alert('동영상,등반일, 난이도 선택은 필수입니다.');
     },
   });
 };
+
+//데이터 시간기준 최신순

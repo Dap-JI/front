@@ -40,10 +40,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
-
   const lists = climbDetailData?.pages.flatMap((page) => page.posts) ?? [];
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
-
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);

@@ -60,4 +60,5 @@ export type useFormProps = {
   media: string | null;
   color: string | null;
   gym_idx: string | number;
+  thumbnailUrl: string | null;
 };
