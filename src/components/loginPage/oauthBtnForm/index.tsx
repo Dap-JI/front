@@ -22,7 +22,7 @@ const OauthBtnForm = () => {
       <OauthBtnStyle
         icon={<NaverIcon width="50" height="50" />}
         text="네이버 아이디로 로그인"
-        color="#03c75a;"
+        color="#03c75a"
         onClick={NaverLogin}
       />
       <OauthBtnStyle
