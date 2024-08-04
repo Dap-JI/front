@@ -1,6 +1,7 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import { ProfileType } from '@/src/utils/type';
+import { useProfileStore } from '@/src/utils/store/useProfileStore';
 
 // export const useProfileDatas = () => {
 //   return useQuery<ProfileType>({
@@ -20,3 +21,4 @@ export const useProfileDatas = (userId?: string) => {
     },
   });
 };
+
