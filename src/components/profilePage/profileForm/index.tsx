@@ -35,7 +35,14 @@ const ProfileForm = ({ lists }: ProfileFormProps) => {
           )}
           <span>{provider}</span>
         </div>
-        <div className={cn('profileEdit')}>프로필 편집</div>
+        <div className={cn('profileEdit')}>
+          <Link
+            href={'/profile/edit'}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
+            프로필 편집
+          </Link>
+        </div>
       </div>
       <div className={cn('textWrapper')}>{introduce}</div>
     </div>
