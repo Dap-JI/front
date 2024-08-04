@@ -1,6 +1,6 @@
 'use client';
 import classNames from 'classnames/bind';
-import styles from './ProfilePage.module.scss';
+import styles from './userProfilePage.module.scss';
 import ProfileAllData from '@/src/components/profilePage/profileAllData';
 import ProfileForm from '@/src/components/profilePage/profileForm';
 import Header from '@/src/components/common/header';
@@ -13,7 +13,7 @@ type ProfilePageProps = {
   params: { userId: string };
 };
 
-const ProfilePage = ({ params }: ProfilePageProps) => {
+const UserProfilePage = ({ params }: ProfilePageProps) => {
   const { userId } = params;
 
   const { data: profileData } = useProfileDatas(userId);
@@ -38,7 +38,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   );
 };
 
-export default ProfilePage;
+export default UserProfilePage;
 
 //프로필 편집에 프로필 이미지랑 닉네임 수정하기 만들기
 //세션 사용하는거는 자기 자신 세션 확인해서 서버에서 내려줘야할듯
