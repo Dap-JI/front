@@ -63,7 +63,6 @@ export type useFormPostUploadProps = {
   thumbnailUrl: string | null;
 };
 
-
 //프로필 타입들
 
 export type ProfilePostType = {
@@ -85,10 +84,6 @@ export type ProfileType = {
 
 //프로필 수정 폼
 export type useFormProfileEditProps = {
-  clearday: string;
-  content: string;
-  media: string | null;
-  color: string | null;
-  gym_idx: string | number;
-  thumbnailUrl: string | null;
+  nickname: string;
+  introduce: string;
 };
