@@ -1,6 +1,6 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { ClimbLIstType, useFormProps } from '@/src/utils/type';
+import { ClimbLIstType, useFormPostUploadProps } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';
 
@@ -46,7 +46,7 @@ export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   return useMutation({
     mutationKey: ['detailUpload'],
-    mutationFn: (formData: useFormProps) =>
+    mutationFn: (formData: useFormPostUploadProps) =>
       instance.post('/api/posts', formData),
     onSuccess: () => {
       router.push(`/climbList/${gymId}`);

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './ProfilePage.module.scss';
 import ProfileAllData from '@/src/components/profilePage/profileAllData';
 import ProfileForm from '@/src/components/profilePage/profileForm';
-import Header from '@/src/components/header';
+import Header from '@/src/components/common/header';
 import { useProfileDatas } from './api';
 
 const cn = classNames.bind(styles);

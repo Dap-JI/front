@@ -10,8 +10,8 @@ import { useRouter } from 'next/navigation';
 import { ClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
 import { useState, useEffect } from 'react';
-import LoadingSpinner from '@/src/components/loadingSpinner';
-import Header from '@/src/components/header';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import Header from '@/src/components/common/header';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ClimbDetailResponseType } from '@/src/utils/type';
 
@@ -76,7 +76,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
 
 export default DetailPage;
 
-//게시물마다 각자 고유의 url을가지고 있음 
+//게시물마다 각자 고유의 url을가지고 있음
 //http://localhost:3000/api/posts/gym/
-//현재 /api/posts/postid는 모든 gym들의 posts를 볼 수 있음 
-//-> 클라이밍장 리스트-> 목록 디테일 -> 디테일 상세 페이지 
+//현재 /api/posts/postid는 모든 gym들의 posts를 볼 수 있음
+//-> 클라이밍장 리스트-> 목록 디테일 -> 디테일 상세 페이지

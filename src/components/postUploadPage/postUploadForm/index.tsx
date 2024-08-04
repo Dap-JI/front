@@ -1,16 +1,17 @@
 import classNames from 'classnames/bind';
 import styles from './uploadForm.module.scss';
-import UploadInput from '@/src/components/common/uploadInput';
+import VideoInput from '@/src/components/common/videoInput';
 import React, { useState } from 'react';
 import HoldColorList from '../../climbListDetailPage/holdColorList';
 import CommonInput from '../../common/commonInput';
 import { useForm } from 'react-hook-form';
-import { useFormProps } from '@/src/utils/type';
+import { useFormPostUploadProps } from '@/src/utils/type';
 import { useDetailUploadDatas } from '@/src/app/climbList/api';
+import CommonButton from '../../common/commonButton';
 
 const cn = classNames.bind(styles);
 
-type UploadFormProps = {
+type PostUploadFormProps = {
   gymId: string | number;
 };
 
@@ -19,7 +20,7 @@ type MediaUrlType = {
   thumbnailUrl: string | null;
 };
 
-const UploadForm = ({ gymId }: UploadFormProps) => {
+const PostUploadForm = ({ gymId }: PostUploadFormProps) => {
   const [mediaUrl, setMediaUrl] = useState<MediaUrlType>({
     videoUrl: null,
     thumbnailUrl: null,
@@ -31,15 +32,14 @@ const UploadForm = ({ gymId }: UploadFormProps) => {
     register,
     handleSubmit,
     watch,
-    setError,
     formState: { errors },
-  } = useForm<useFormProps>();
+  } = useForm<useFormPostUploadProps>();
 
   const text = watch('content', '');
 
   const { mutate: detailUploadDatas } = useDetailUploadDatas(gymId);
 
-  const onSubmit = (data: useFormProps) => {
+  const onSubmit = (data: useFormPostUploadProps) => {
     const formData = {
       ...data,
       media: mediaUrl.videoUrl,
@@ -62,14 +62,15 @@ const UploadForm = ({ gymId }: UploadFormProps) => {
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
-      <UploadInput mediaUrl={mediaUrl} setMediaUrl={setMediaUrl} />
+      <VideoInput mediaUrl={mediaUrl} setMediaUrl={setMediaUrl} />
       <CommonInput
         id="clearday"
         type="date"
         register={register('clearday', {
           required: '날짜를 선택해주세요',
           validate: (value) =>
-            value <= getTodayDate() || '날짜는 오늘 또는 이전 날짜로만 설정할 수 있어요!.',
+            value <= getTodayDate() ||
+            '날짜는 오늘 또는 이전 날짜로만 설정할 수 있어요!.',
         })}
       />
       <div className={styles.error_text_wrapper}>
@@ -96,9 +97,9 @@ const UploadForm = ({ gymId }: UploadFormProps) => {
           {text.length}/{maxLength}
         </div>
       </div>
-      <button className={cn('uploadBtn')}>답지 올리기</button>
+      <CommonButton name="답지 올리기" />
     </form>
   );
 };
 
-export default UploadForm;
+export default PostUploadForm;

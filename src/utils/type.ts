@@ -54,7 +54,7 @@ export type DetailMainContentListProps = {
 };
 
 //디테일 업로드 폼 타입
-export type useFormProps = {
+export type useFormPostUploadProps = {
   clearday: string;
   content: string;
   media: string | null;
@@ -62,6 +62,7 @@ export type useFormProps = {
   gym_idx: string | number;
   thumbnailUrl: string | null;
 };
+
 
 //프로필 타입들
 
@@ -80,4 +81,14 @@ export type ProfileUserType = {
 export type ProfileType = {
   user: ProfileUserType;
   posts: ProfilePostType[];
+};
+
+//프로필 수정 폼
+export type useFormProfileEditProps = {
+  clearday: string;
+  content: string;
+  media: string | null;
+  color: string | null;
+  gym_idx: string | number;
+  thumbnailUrl: string | null;
 };

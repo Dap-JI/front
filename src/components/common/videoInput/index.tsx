@@ -1,15 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './uploadInput.module.scss';
+import styles from './VideoInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
-import axios from '@/src/utils/axios';
-import LoadingSpinner from '@/src/components/loadingSpinner';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import instance from '@/src/utils/axios';
 
 const cn = classNames.bind(styles);
 
-type UploadInputProps = {
+type VideoInputProps = {
   mediaUrl: {
     videoUrl: string | null;
     thumbnailUrl: string | null;
@@ -22,7 +21,7 @@ type UploadInputProps = {
   >;
 };
 
-const UploadInput = ({ mediaUrl, setMediaUrl }: UploadInputProps) => {
+const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
 
   const { mutate: videoUpload, isPending } = useMutation({
@@ -101,4 +100,4 @@ const UploadInput = ({ mediaUrl, setMediaUrl }: UploadInputProps) => {
   );
 };
 
-export default UploadInput;
+export default VideoInput;

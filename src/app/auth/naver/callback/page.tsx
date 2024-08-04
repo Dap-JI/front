@@ -17,7 +17,7 @@ const NaverCallback = () => {
       NaverLogin(code);
       router.push('/climbList');
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className={cn('contaienr')}>

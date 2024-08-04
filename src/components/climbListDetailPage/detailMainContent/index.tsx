@@ -9,7 +9,7 @@ import {
   DetailMainContentListProps,
 } from '@/src/utils/type';
 import { useState } from 'react';
-import LoadingSpinner from '@/src/components/loadingSpinner';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
