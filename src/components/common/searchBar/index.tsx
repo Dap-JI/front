@@ -11,6 +11,7 @@ const SearchBar = () => {
       <CommonInput
         placeholder="검색어를 입력하세요"
         suffix={<GlassIcon width="15" height="15" className={cn('glass')} />}
+        type="text"
       />
     </form>
   );
