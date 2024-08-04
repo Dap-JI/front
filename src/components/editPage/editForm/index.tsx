@@ -4,15 +4,21 @@ import classNames from 'classnames/bind';
 import CommonInput from '@/src/components/common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
 import ImageInput from '@/src/components/common/imageInput';
-import { useState } from 'react';
-import { useProfileDatas } from '@/src/app/profile/api';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useProfileDatas, useProfileUpdate } from '@/src/app/profile/api';
 import { useForm } from 'react-hook-form';
+import { useFormProfileEditProps } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 const EditForm = () => {
-  const { register, handleSubmit, setValue, getValues, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       nickname: '',
       introduce: '',
@@ -20,6 +26,7 @@ const EditForm = () => {
   });
   const [fileUrl, setFileUrl] = useState<string | ArrayBuffer | null>(null);
   const { data: profileData } = useProfileDatas();
+  const { mutate: profileUpdate } = useProfileUpdate();
   const text = watch('introduce', '');
   const maxLength = 100;
 
@@ -31,11 +38,12 @@ const EditForm = () => {
     }
   }, [profileData, setValue]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: useFormProfileEditProps) => {
     const formData = {
       ...data,
       img: fileUrl,
     };
+    profileUpdate(formData);
     console.log(formData);
   };
 
@@ -47,10 +55,15 @@ const EditForm = () => {
           type="text"
           register={register('nickname', {
             required: '닉네임을 입력해주세요',
+            maxLength: {
+              value: 10,
+              message: '최대 10자까지 가능합니다.',
+            },
           })}
           placeholder={profileData?.user.nickname}
         />
       </div>
+      {errors.nickname && <span>{errors.nickname.message}</span>}
       <div className={cn('textareaContainer')}>
         <textarea
           className={cn('limitedTextarea')}

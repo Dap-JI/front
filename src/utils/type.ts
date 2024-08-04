@@ -84,7 +84,6 @@ export type ProfileType = {
 
 //프로필 수정 폼
 export type useFormProfileEditProps = {
-  fileUrl: any;
   nickname: string;
   introduce: string;
 };
