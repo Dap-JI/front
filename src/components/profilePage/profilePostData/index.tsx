@@ -1,32 +1,41 @@
 import classNames from 'classnames/bind';
 import styles from './profilePostData.module.scss';
 import Image from 'next/image';
-import { PostDatas } from '@/src/utils/dummy';
+import Link from 'next/link';
+import { ProfilePostType } from '@/src/utils/type';
+
 const cn = classNames.bind(styles);
 
-type PostType = {
-  thumbnail_idx: number;
-  thumbnail: string;
-};
-
 type ProfilePostDataProps = {
-  list: PostType;
+  list: ProfilePostType;
 };
+//api/posts/${postsidx}
 
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
-  const { thumbnail } = list;
+  const { thumbnailUrl, post_idx } = list;
   return (
     <div className={cn('container')}>
-      <Image src={thumbnail} alt="postImage" width="120" height="120" />
+      {/* <Link href={`/api/posts/${post_idx}`}> */}
+        <Image
+          src={thumbnailUrl || '/icon/icon.png'}
+          alt="postImage"
+          width="120"
+          height="120"
+        />
+      {/* </Link> */}
     </div>
   );
 };
 
-const ProfilePostDatas = ({ lists }: any) => {
+type ProfilePostDatasProps = {
+  lists: ProfilePostType[];
+};
+
+const ProfilePostDatas = ({ lists }: ProfilePostDatasProps) => {
   return (
     <div className={cn('outerContainer')}>
-      {PostDatas.map((list) => (
-        <ProfilePostData key={list.thumbnail_idx} list={list} />
+      {lists.map((list: ProfilePostType) => (
+        <ProfilePostData key={list.post_idx} list={list} />
       ))}
     </div>
   );

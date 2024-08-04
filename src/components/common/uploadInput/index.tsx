@@ -5,21 +5,30 @@ import styles from './uploadInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import axios from '@/src/utils/axios';
 import LoadingSpinner from '@/src/components/loadingSpinner';
+import instance from '@/src/utils/axios';
 
 const cn = classNames.bind(styles);
 
 type UploadInputProps = {
-  videoUrl: string | null;
-  setVideoUrl: React.Dispatch<React.SetStateAction<string | null>>;
+  mediaUrl: {
+    videoUrl: string | null;
+    thumbnailUrl: string | null;
+  };
+  setMediaUrl: React.Dispatch<
+    React.SetStateAction<{
+      videoUrl: string | null;
+      thumbnailUrl: string | null;
+    }>
+  >;
 };
 
-const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
+const UploadInput = ({ mediaUrl, setMediaUrl }: UploadInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
 
   const { mutate: videoUpload, isPending } = useMutation({
     mutationKey: ['videoFile'],
     mutationFn: async (video: FormData) => {
-      const response = await axios.post('/api/videos', video, {
+      const response = await instance.post('/api/videos', video, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -27,8 +36,11 @@ const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
       return response.data; // API 응답 데이터 반환
     },
     onSuccess: (data) => {
-      // 성공적으로 업로드된 경우 videoUrl을 상태에 저장
-      setVideoUrl(data.videoUrl);
+      // 성공적으로 업로드된 경우 mediaUrl을 상태에 저장
+      setMediaUrl({
+        videoUrl: data.videoUrl,
+        thumbnailUrl: data.thumbnailUrl,
+      });
       setFileUploaded(true);
     },
     onError: (error) => {
@@ -46,17 +58,19 @@ const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
   };
 
   const handleCancel = () => {
-    setVideoUrl(null);
+    setMediaUrl({
+      videoUrl: null,
+      thumbnailUrl: null,
+    });
     setFileUploaded(false);
   };
-
   if (isPending) {
     return <LoadingSpinner />;
   }
 
   return (
     <div className={cn('container')}>
-      {videoUrl ? (
+      {mediaUrl.videoUrl ? (
         <label onClick={handleCancel}>삭제</label>
       ) : (
         <>
@@ -72,9 +86,9 @@ const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
         </>
       )}
       <div className={styles.uploadInput}>
-        {videoUrl && (
+        {mediaUrl.videoUrl && (
           <video
-            src={videoUrl}
+            src={mediaUrl.videoUrl}
             controls
             playsInline
             muted
@@ -88,101 +102,3 @@ const UploadInput = ({ videoUrl, setVideoUrl }: UploadInputProps) => {
 };
 
 export default UploadInput;
-
-// 'use client';
-// import React, { useState } from 'react';
-// import classNames from 'classnames/bind';
-// import styles from './uploadInput.module.scss';
-// import { useMutation } from '@tanstack/react-query';
-// import axios from '@/src/utils/axios';
-// import LoadingSpinner from '@/src/components/loadingSpinner';
-// import { UseFormRegisterReturn } from 'react-hook-form';
-
-// const cn = classNames.bind(styles);
-
-// type UploadInputProps = {
-//   videoUrl: any;
-//   setVideoUrl: any;
-//   register: UseFormRegisterReturn;
-// };
-
-// const UploadInput = ({
-//   videoUrl,
-//   setVideoUrl,
-//   register,
-// }: UploadInputProps) => {
-//   // const [videoUrl, setVideoUrl] = useState<string | null>(null);
-//   const [fileUploaded, setFileUploaded] = useState(false);
-
-//   const { mutate: videoUpload, isPending } = useMutation({
-//     mutationKey: ['videoFile'],
-//     mutationFn: async (video: FormData) => {
-//       const response = await axios.post('/api/videos', video, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-//       return response.data; // API 응답 데이터 반환
-//     },
-//     onSuccess: (data) => {
-//       // 성공적으로 업로드된 경우 videoUrl을 상태에 저장
-//       setVideoUrl(data.videoUrl);
-//       setFileUploaded(true);
-//     },
-//     onError: (error) => {
-//       console.error('파일 업로드 실패:', error);
-//     },
-//   });
-
-//   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const files = event.target.files;
-//     if (files && files.length > 0) {
-//       const formData = new FormData();
-//       formData.append('video', files[0]); // 첫 번째 파일을 'video' 키로 추가
-//       videoUpload(formData); // FormData를 mutate 함수에 전달
-//     }
-//   };
-
-//   const handleCancel = () => {
-//     setVideoUrl(null);
-//     setFileUploaded(false);
-//   };
-
-//   if (isPending) {
-//     return <LoadingSpinner />;
-//   }
-
-//   return (
-//     <div className={cn('container')}>
-//       {videoUrl ? (
-//         <label onClick={handleCancel}>삭제</label>
-//       ) : (
-//         <>
-//           <label htmlFor="fileUpload">업로드</label>
-//           <input
-//             type="file"
-//             id="fileUpload"
-//             className={cn('filetextInput')}
-//             multiple
-//             accept="video/*"
-//             onChange={handleFileUpload}
-//             {...register}
-//           />
-//         </>
-//       )}
-//       <div className={styles.uploadInput}>
-//         {videoUrl && (
-//           <video
-//             src={videoUrl}
-//             controls
-//             playsInline
-//             muted
-//             className={cn('videoPreview')}
-//           />
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UploadInput;
