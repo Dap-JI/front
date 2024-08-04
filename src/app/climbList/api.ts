@@ -1,8 +1,8 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { ClimbLIstType, useFormProps } from '@/src/utils/type';
-import axios from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
+import instance from '@/src/utils/axios';
 
 type ClimbDetailProps = {
   gymId: string;
@@ -32,7 +32,7 @@ export const ClimbDetailDatas = async ({
   gymId,
   color,
 }: ClimbDetailDatasProps) => {
-  const res = await axios(`/api/posts/gym/${gymId}`, {
+  const res = await instance(`/api/posts/gym/${gymId}`, {
     params: {
       page: pageParam,
       color: color,
@@ -46,7 +46,8 @@ export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   return useMutation({
     mutationKey: ['detailUpload'],
-    mutationFn: (formData: useFormProps) => axios.post('/api/posts', formData),
+    mutationFn: (formData: useFormProps) =>
+      instance.post('/api/posts', formData),
     onSuccess: () => {
       router.push(`/climbList/${gymId}`);
     },

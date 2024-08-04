@@ -5,6 +5,7 @@ import styles from './uploadInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import axios from '@/src/utils/axios';
 import LoadingSpinner from '@/src/components/loadingSpinner';
+import instance from '@/src/utils/axios';
 
 const cn = classNames.bind(styles);
 
@@ -27,7 +28,7 @@ const UploadInput = ({ mediaUrl, setMediaUrl }: UploadInputProps) => {
   const { mutate: videoUpload, isPending } = useMutation({
     mutationKey: ['videoFile'],
     mutationFn: async (video: FormData) => {
-      const response = await axios.post('/api/videos', video, {
+      const response = await instance.post('/api/videos', video, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

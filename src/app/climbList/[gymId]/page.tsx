@@ -75,3 +75,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
 };
 
 export default DetailPage;
+
+//게시물마다 각자 고유의 url을가지고 있음 
+//http://localhost:3000/api/posts/gym/
+//현재 /api/posts/postid는 모든 gym들의 posts를 볼 수 있음 
+//-> 클라이밍장 리스트-> 목록 디테일 -> 디테일 상세 페이지 

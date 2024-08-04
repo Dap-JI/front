@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*',
       },
+      {
+        protocol: 'http',
+        hostname: 't1.kakaocdn.net',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

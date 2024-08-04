@@ -62,3 +62,22 @@ export type useFormProps = {
   gym_idx: string | number;
   thumbnailUrl: string | null;
 };
+
+//프로필 타입들
+
+export type ProfilePostType = {
+  post_idx: number;
+  thumbnailUrl: string | null;
+};
+
+export type ProfileUserType = {
+  nickname: string;
+  img: string;
+  introduce: string | null;
+  provider: string;
+};
+
+export type ProfileType = {
+  user: ProfileUserType;
+  posts: ProfilePostType[];
+};
