@@ -1,14 +1,19 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './detailUploadPage.module.scss';
-import UploadForm from '@/src/components/uploadPage/uploadForm';
+import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
 
 const cn = classNames.bind(styles);
 
-const DetailUploadPage = () => {
+type DetailPageProps = {
+  params: { gymId: string | number };
+};
+const DetailUploadPage = ({ params }: DetailPageProps) => {
+  const { gymId } = params;
+  console.log(gymId);
   return (
     <div className={cn('container')}>
-      <UploadForm />
+      <PostUploadForm gymId={gymId} />
     </div>
   );
 };
