@@ -52,6 +52,10 @@ const ImageInput = ({ fileUrl, setFileUrl, foldername }: ImageInputProps) => {
     }
   };
 
+  if (isPending) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className={cn('container')}>
       <label htmlFor="imageUpload">
