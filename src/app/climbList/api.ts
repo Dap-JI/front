@@ -19,7 +19,7 @@ export const useClimbList = () => {
   });
 };
 
-//클라이밍장 디테일 데이터 조회 함수
+//클라이밍장 포스트 데이터 조회 함수
 
 type ClimbDetailDatasProps = {
   pageParam: number;
@@ -41,7 +41,7 @@ export const ClimbDetailDatas = async ({
   return res.data;
 };
 
-//클라이밍장 디테일 데이터 업로드 함수
+//클라이밍장 포스트 데이터 업로드 함수
 export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   return useMutation({
@@ -58,4 +58,31 @@ export const useDetailUploadDatas = (gymId: string | number) => {
   });
 };
 
-//데이터 시간기준 최신순
+// 클라이밍장 포스트의 디테일 함수 `/api/posts/${postId}`
+
+export const usePostDetailDatas = (postid: string) => {
+  return useQuery({
+    queryKey: ['postDetailDatas', postid],
+    queryFn: () => instance.get(`/api/posts/${postid}`),
+    select: (res: any) => res.data,
+  });
+};
+
+//클라이밍장 포스트 수정 함수  `/api/posts/${postid}`
+export const usePostDetailUpdate = (postid: string, gymId: string) => {
+  const router = useRouter();
+
+  return useMutation({
+    mutationKey: ['postDetailUpdate'],
+    mutationFn: (formData: useFormPostUploadProps) =>
+      instance.patch(`/api/posts/${postid}`, formData),
+    onSuccess: () => {
+      router.push(`/climbList/${gymId}`);
+    },
+    onError: (error) => {
+      console.error('수정 실패:', error);
+    },
+  });
+};
+
+//클라이밍장 포스트 삭제 함수 `/api/posts/${postid}`
