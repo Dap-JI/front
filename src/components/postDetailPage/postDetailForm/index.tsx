@@ -6,18 +6,22 @@ import { ShareIcon, DeleteIcon, EditIcon } from '@/public/icon';
 import usePostStore from '@/src/utils/store/usePostStore';
 import LoadingSpinner from '../../common/loadingSpinner';
 import { useRouter } from 'next/navigation';
-import { usePostDetailDatas } from '@/src/app/climbList/api';
+import {
+  usePostDetailDatas,
+  usePostDetailDelete,
+} from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
-  params: { postid: string };
+  params: { postid: string; gymId: string };
 };
 
 const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const router = useRouter();
-  const { postid } = params;
+  const { postid, gymId } = params;
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
+  const { mutate: postDetailDelete } = usePostDetailDelete(postid, gymId);
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
@@ -36,11 +40,16 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
 
+  const deldteClick = () => {
+    postDetailDelete();
+  };
+
   return (
     <div className={cn('container')}>
       <div className={cn('btnStyle')}>
         <EditIcon onClick={editPage} />
         <ShareIcon onClick={shareClick} />
+        <DeleteIcon onClick={deldteClick} />
       </div>
       <div className={cn('videoWrapper')}>
         <video

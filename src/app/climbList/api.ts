@@ -1,6 +1,10 @@
 import fetchData from '@/src/utils/fetchData';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { ClimbLIstType, useFormPostUploadProps } from '@/src/utils/type';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  ClimbLIstType,
+  useFormPostUploadProps,
+  PostDetailDataType,
+} from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';
 
@@ -86,3 +90,19 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
 };
 
 //클라이밍장 포스트 삭제 함수 `/api/posts/${postid}`
+export const usePostDetailDelete = (postid: string, gymId: string) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ['postDetailDelete'],
+    mutationFn: () => instance.delete(`/api/posts/${postid}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['climbList'] });
+      router.push(`/climbList/${gymId}`);
+    },
+    onError: (error) => {
+      console.error('삭제 실패:', error);
+    },
+  });
+};
