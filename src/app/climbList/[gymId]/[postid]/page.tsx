@@ -6,12 +6,17 @@ import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 
 const cn = classNames.bind(styles);
 
-const PostDetailPage = () => {
+type PostDetailPageProps = {
+  params: { postid: string; gymId: string };
+};
+
+const PostDetailPage = ({ params }: PostDetailPageProps) => {
+  console.log(params.postid);
   return (
     <div className={cn('container')}>
       <Header />
       <div className={cn('secondContainer')}>
-        <PostDetailForm />
+        <PostDetailForm params={params} />
       </div>
     </div>
   );

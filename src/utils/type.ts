@@ -29,11 +29,12 @@ export type DetailType = {
   user_idx: number;
   gym_idx: number;
   clearday: any;
-  content: string | null;
   media: string;
+  thumbnailUrl: string;
+  content: string | null;
   color: string;
-  User: UserType;
   createdAt: any;
+  User: UserType;
 };
 
 export type ClimbDetailResponseType = {
@@ -56,7 +57,7 @@ export type DetailMainContentListProps = {
 //디테일 업로드 폼 타입
 export type useFormPostUploadProps = {
   clearday: string;
-  content: string;
+  content: string | null;
   media: string | null;
   color: string | null;
   gym_idx: string | number;
@@ -86,4 +87,23 @@ export type ProfileType = {
 export type useFormProfileEditProps = {
   nickname: string;
   introduce: string;
+};
+
+//포스트 디테일 타입들
+export type PostUserType = {
+  nickname: string;
+  img: string;
+};
+
+export type PostDetailDataType = {
+  post_idx: string;
+  user_idx: number;
+  gym_idx: string;
+  clearday: any;
+  media: string;
+  content: string | null;
+  color: string;
+  createdAt: any;
+  User: PostUserType;
+  thumbnailUrl?: string;
 };
