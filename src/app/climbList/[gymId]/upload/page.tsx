@@ -6,11 +6,11 @@ import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
 const cn = classNames.bind(styles);
 
 type DetailPageProps = {
-  params: { gymId: string | number };
+  params: { gymId: string };
 };
 const DetailUploadPage = ({ params }: DetailPageProps) => {
   const { gymId } = params;
-  console.log(gymId);
+
   return (
     <div className={cn('container')}>
       <PostUploadForm gymId={gymId} />

@@ -1,7 +1,25 @@
 import React from 'react';
+import styles from './PostDetailPage.module.scss';
+import classNames from 'classnames/bind';
+import Header from '@/src/components/common/header';
+import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 
-const PostDetailPage = () => {
-  return <div>PostDetailPage</div>;
+const cn = classNames.bind(styles);
+
+type PostDetailPageProps = {
+  params: { postid: string; gymId: string };
+};
+
+const PostDetailPage = ({ params }: PostDetailPageProps) => {
+  console.log(params.postid);
+  return (
+    <div className={cn('container')}>
+      <Header />
+      <div className={cn('secondContainer')}>
+        <PostDetailForm params={params} />
+      </div>
+    </div>
+  );
 };
 
 export default PostDetailPage;

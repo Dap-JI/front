@@ -9,19 +9,18 @@ const cn = classNames.bind(styles);
 type ProfilePostDataProps = {
   list: ProfilePostType;
 };
-//api/posts/${postsidx}
 
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
   const { thumbnailUrl, post_idx } = list;
   return (
     <div className={cn('container')}>
       {/* <Link href={`/api/posts/${post_idx}`}> */}
-        <Image
-          src={thumbnailUrl || '/icon/icon.png'}
-          alt="postImage"
-          width="120"
-          height="120"
-        />
+      <Image
+        src={thumbnailUrl || '/icon/icon.png'}
+        alt="postImage"
+        width="120"
+        height="120"
+      />
       {/* </Link> */}
     </div>
   );

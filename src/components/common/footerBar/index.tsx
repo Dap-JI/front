@@ -30,7 +30,9 @@ const FooterBar = () => {
     <div className={cn('container')}>
       <MarkerIcon width="30" height="30" onClick={() => routerClick('지도')} />
       <BordIcon width="30" height="30" onClick={() => routerClick('게시판')} />
-      <HomeIcon width="30" height="30" onClick={() => routerClick('홈')} />
+      <Link href="/climbList">
+        <HomeIcon width="30" height="30" />
+      </Link>
       <MegaPhoneIcon
         width="30"
         height="30"

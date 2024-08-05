@@ -10,16 +10,18 @@ import {
 } from '@/src/utils/type';
 import { useState } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import usePostStore from '@/src/utils/store/usePostStore';
 
 const cn = classNames.bind(styles);
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { color, User, clearday, content, post_idx, media, gym_idx } = list;
-  const [isUpLoading, setIsUpLoading] = useState(false);
 
   const router = useRouter();
+  const setPostData = usePostStore((state) => state.setPostData);
 
   const postDetailPage = () => {
+    setPostData(list);
     router.push(`/climbList/${gym_idx}/${post_idx}`);
   };
 
@@ -27,12 +29,6 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
 
   return (
     <div className={cn('container')}>
-      <div className={cn('infoWrapper')}>
-        <div className={cn('color', `color-${color}`)} />
-        <span>{deleteT(clearday)}</span>
-        <span>{User.nickname}</span>
-        <DoubleRightArrowIcon onClick={postDetailPage} />
-      </div>
       <div className={cn('videoWrapper')}>
         <video
           src={media}
@@ -42,6 +38,12 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           playsInline
           controlsList="nodownload"
         />
+      </div>
+      <div className={cn('infoWrapper')}>
+        <div className={cn('color', `color-${color}`)} />
+        <span>{deleteT(clearday)}</span>
+        <span>{User.nickname}</span>
+        <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <p>{content}</p>
     </div>

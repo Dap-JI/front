@@ -14,8 +14,13 @@ export type ClimbLIstType = {
   gym_idx?: number;
   name: string;
   address?: string;
-  logo: string;
+  logo: string | null;
   notice?: string | null;
+};
+
+export type ClimbLIstTypes = {
+  gyms: ClimbLIstType[];
+  meta: metaType;
 };
 
 //클라이밍장 리스트중 상세 데이터
@@ -29,11 +34,12 @@ export type DetailType = {
   user_idx: number;
   gym_idx: number;
   clearday: any;
-  content: string | null;
   media: string;
+  thumbnailUrl: string;
+  content: string | null;
   color: string;
-  User: UserType;
   createdAt: any;
+  User: UserType;
 };
 
 export type ClimbDetailResponseType = {
@@ -56,13 +62,12 @@ export type DetailMainContentListProps = {
 //디테일 업로드 폼 타입
 export type useFormPostUploadProps = {
   clearday: string;
-  content: string;
+  content: string | null;
   media: string | null;
   color: string | null;
   gym_idx: string | number;
   thumbnailUrl: string | null;
 };
-
 
 //프로필 타입들
 
@@ -85,10 +90,25 @@ export type ProfileType = {
 
 //프로필 수정 폼
 export type useFormProfileEditProps = {
-  clearday: string;
-  content: string;
-  media: string | null;
-  color: string | null;
-  gym_idx: string | number;
-  thumbnailUrl: string | null;
+  nickname: string;
+  introduce: string;
+};
+
+//포스트 디테일 타입들
+export type PostUserType = {
+  nickname: string;
+  img: string;
+};
+
+export type PostDetailDataType = {
+  post_idx: string;
+  user_idx: number;
+  gym_idx: string;
+  clearday: any;
+  media: string;
+  content: string | null;
+  color: string;
+  createdAt: any;
+  User: PostUserType;
+  thumbnailUrl?: string;
 };

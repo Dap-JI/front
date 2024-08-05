@@ -15,7 +15,7 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 't1.kakaocdn.net',
+        hostname: '*',
       },
     ],
     formats: ['image/avif', 'image/webp'],
@@ -26,5 +26,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
-// export default withPWA(nextConfig);
-//pwa용
+// export default withPWA(nextConfig); // PWA 설정을 사용하려면 이 줄을 활성화하세요.

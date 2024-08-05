@@ -8,7 +8,7 @@ const cn = classNames.bind(styles);
 
 type HeaderProps = {
   children?: React.ReactNode;
-  title: string;
+  title?: string;
 };
 
 const Header = ({ children, title }: HeaderProps) => {
