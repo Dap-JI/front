@@ -7,7 +7,7 @@ import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 const cn = classNames.bind(styles);
 
 type PostDetailPageProps = {
-  params: { postid: string };
+  params: { postid: string; gymId: string };
 };
 
 const PostDetailPage = ({ params }: PostDetailPageProps) => {
