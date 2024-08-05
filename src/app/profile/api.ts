@@ -16,9 +16,7 @@ export const useProfileDatas = (userId?: string) => {
   return useQuery<ProfileType>({
     queryKey: ['profileDatas', userId],
     queryFn: () => {
-      const apiUrl = userId
-        ? `/api/user/profile/${userId}`
-        : `/api/user/profile`;
+      const apiUrl = userId ? `/api/profile/${userId}` : `/api/profile/me`;
       return fetchData({ param: apiUrl });
     },
   });
@@ -30,7 +28,7 @@ export const useProfileUpdate = () => {
   return useMutation({
     mutationKey: ['profileUpdate'],
     mutationFn: (formData: useFormProfileEditProps) =>
-      instance.patch(`/api/user/profile`, formData),
+      instance.patch(`/api/profile/me`, formData),
     onSuccess: (updatedProfileData) => {
       queryClient.setQueryData(['profileDatas'], updatedProfileData);
       router.push('/profile');
@@ -41,5 +39,5 @@ export const useProfileUpdate = () => {
   });
 };
 
-//setQueryData는 쿼리 키를 사용하여 특정 쿼리의 캐시를 직접 업데이트합니다. 
+//setQueryData는 쿼리 키를 사용하여 특정 쿼리의 캐시를 직접 업데이트합니다.
 //서버에서의 응답을 기다리지 않고 클라이언트에서 즉시 데이터 변경을 반영할 수 있습니다.
