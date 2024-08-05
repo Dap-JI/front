@@ -14,8 +14,13 @@ export type ClimbLIstType = {
   gym_idx?: number;
   name: string;
   address?: string;
-  logo: string;
+  logo: string | null;
   notice?: string | null;
+};
+
+export type ClimbLIstTypes = {
+  gyms: ClimbLIstType[];
+  meta: metaType;
 };
 
 //클라이밍장 리스트중 상세 데이터
