@@ -7,18 +7,21 @@ type CommonButtonProps = {
   name: string;
   onClick?: () => void;
   color?: string;
+  type?: 'submit' | 'reset' | 'button' | undefined;
 };
 
 const CommonButton = ({
   name,
   onClick,
   color = 'white',
+  type,
 }: CommonButtonProps) => {
   return (
     <button
       className={cn('container')}
       style={{ backgroundColor: color }}
       onClick={onClick}
+      type={type}
     >
       {name}
     </button>

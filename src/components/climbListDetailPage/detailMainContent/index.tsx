@@ -43,6 +43,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           controlsList="nodownload"
         />
       </div>
+
       <p>{content}</p>
     </div>
   );

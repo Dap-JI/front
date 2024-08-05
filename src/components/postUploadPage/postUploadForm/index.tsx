@@ -97,7 +97,7 @@ const PostUploadForm = ({ gymId }: PostUploadFormProps) => {
           {text.length}/{maxLength}
         </div>
       </div>
-      <CommonButton name="답지 올리기" />
+      <CommonButton name="답지 올리기" type="submit" />
     </form>
   );
 };

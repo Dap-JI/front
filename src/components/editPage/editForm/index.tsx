@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useProfileDatas, useProfileUpdate } from '@/src/app/profile/api';
 import { useForm } from 'react-hook-form';
 import { useFormProfileEditProps } from '@/src/utils/type';
+import { nickname_reg } from '@/src/utils/regex';
 
 const cn = classNames.bind(styles);
 
@@ -49,7 +50,11 @@ const EditForm = () => {
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
-      <ImageInput fileUrl={fileUrl} setFileUrl={setFileUrl} />
+      <ImageInput
+        fileUrl={fileUrl}
+        setFileUrl={setFileUrl}
+        foldername="profile-picture"
+      />
       <div>
         <CommonInput
           type="text"
@@ -58,6 +63,14 @@ const EditForm = () => {
             maxLength: {
               value: 10,
               message: '최대 10자까지 가능합니다.',
+            },
+            minLength: {
+              value: 2,
+              message: '최소 2글자 이상 입력해주세요.',
+            },
+            pattern: {
+              value: nickname_reg,
+              message: '한글, 소문자, 숫자만 가능합니다',
             },
           })}
           placeholder={profileData?.user.nickname}
@@ -78,7 +91,7 @@ const EditForm = () => {
           {text.length}/{maxLength}
         </div>
       </div>
-      <CommonButton name="수정하기" />
+      <CommonButton name="수정하기" type="submit" />
     </form>
   );
 };
