@@ -2,6 +2,7 @@ import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   ClimbLIstType,
+  ClimbLIstTypes,
   useFormPostUploadProps,
   PostDetailDataType,
 } from '@/src/utils/type';
@@ -14,7 +15,7 @@ type ClimbDetailProps = {
 
 //클라이밍장 리스트 데이터 조회 함수
 export const useClimbList = () => {
-  return useQuery<ClimbLIstType[]>({
+  return useQuery<ClimbLIstTypes>({
     queryKey: ['climbList'],
     queryFn: () =>
       fetchData({
