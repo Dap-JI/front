@@ -1,27 +1,23 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  ClimbLIstType,
-  ClimbLIstTypes,
-  useFormPostUploadProps,
-  PostDetailDataType,
-} from '@/src/utils/type';
+import { useFormPostUploadProps } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';
 
-type ClimbDetailProps = {
-  gymId: string;
+type ClimbListProps = {
+  page: number;
+  search: string;
 };
 
 //클라이밍장 리스트 데이터 조회 함수
-export const useClimbList = () => {
-  return useQuery<ClimbLIstTypes>({
-    queryKey: ['climbList'],
-    queryFn: () =>
-      fetchData({
-        param: `/api/gyms`,
-      }),
+export const ClimbListDatas = async ({ page = 1, search }: ClimbListProps) => {
+  const res = await instance.get(`/api/gyms`, {
+    params: {
+      page,
+      search,
+    },
   });
+  return res.data;
 };
 
 //클라이밍장 포스트 데이터 조회 함수
@@ -40,7 +36,7 @@ export const ClimbDetailDatas = async ({
   const res = await instance(`/api/posts/gym/${gymId}`, {
     params: {
       page: pageParam,
-      color: color,
+      color,
     },
   });
   return res.data;

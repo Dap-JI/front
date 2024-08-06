@@ -1,7 +1,7 @@
 'use client';
 import styles from './cardList.module.scss';
 import classNames from 'classnames/bind';
-import { ClimbLIstType } from '@/src/utils/type';
+import { GymsType } from '@/src/utils/type';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 const cn = classNames.bind(styles);
 
 type CardListProps = {
-  list: ClimbLIstType;
+  list: GymsType;
 };
 
 const CardList = ({ list }: CardListProps) => {

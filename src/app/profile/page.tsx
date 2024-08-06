@@ -19,6 +19,7 @@ const ProfilePage = () => {
     provider: '',
   };
   const profilePost = profileData?.posts ?? [];
+  console.log(profilePost);
 
   return (
     <div className={cn('container')}>

@@ -45,7 +45,6 @@ const EditForm = () => {
       img: fileUrl,
     };
     profileUpdate(formData);
-    console.log(formData);
   };
 
   return (

@@ -34,7 +34,7 @@ export const useProfileUpdate = () => {
       router.push('/profile');
     },
     onError: (e) => {
-      console.log(e, '프로필 수정 에러');
+      console.error(e, '프로필 수정 에러');
     },
   });
 };

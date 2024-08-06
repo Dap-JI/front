@@ -3,13 +3,13 @@ import React from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
 import { ShareIcon, DeleteIcon, EditIcon } from '@/public/icon';
-import usePostStore from '@/src/utils/store/usePostStore';
 import LoadingSpinner from '../../common/loadingSpinner';
 import { useRouter } from 'next/navigation';
 import {
   usePostDetailDatas,
   usePostDetailDelete,
 } from '@/src/app/climbList/api';
+import { useToast } from '@/src/hooks/useToast';
 
 const cn = classNames.bind(styles);
 
@@ -19,6 +19,7 @@ type PostDetailFormProps = {
 
 const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const router = useRouter();
+  const { showToastHandler } = useToast();
   const { postid, gymId } = params;
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   const { mutate: postDetailDelete } = usePostDetailDelete(postid, gymId);
@@ -33,7 +34,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const deleteT = (date: string | null) => date?.split('T')[0];
 
   const shareClick = () => {
-    console.log('공유! 또는 링크 복사!');
+    showToastHandler('링크를 복사했습니다!', 'check');
   };
 
   const editPage = () => {
@@ -43,6 +44,9 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const deldteClick = () => {
     postDetailDelete();
   };
+
+  const url = window.location.href;
+  console.log(url);
 
   return (
     <div className={cn('container')}>
