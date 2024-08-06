@@ -1,19 +1,21 @@
 'use client';
 import SearchBar from '@/src/components/common/searchBar';
 import classNames from 'classnames/bind';
-import styles from './ClimbListPage.module.scss';
-import CardListData from '@/src/components/climbListPage/cardListData';
+import styles from './adminList.module.scss';
+import AdminClimbListDatas from '@/src/components/adminPage/adminClimbListPage/AdminClimbListDatas';
 import { ClimbListDatas } from '@/src/app/climbList/api';
 import { ClimbLIstResponseType } from '@/src/utils/type';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import NodetailData from '@/src/components/common/noDetailData';
 import { useQueryClient } from '@tanstack/react-query';
+import Header from '@/src/components/common/header';
+import { AddIcon } from '@/public/icon';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
-const ClimbListPage = () => {
+const AdminClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
 
   const {
@@ -50,13 +52,25 @@ const ClimbListPage = () => {
 
   return (
     <div className={cn('container')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
-      <CardListData lists={lists} />
+      <Header title={'클라이밍짐 리스트 관리'}>
+        <Link href='/admin/list/upload'>
+          <AddIcon />
+        </Link>
+      </Header>
+      <div className={cn('searchBar')}>
+        <SearchBar
+          searchName={searchName}
+          onSearchChange={handleSearchChange}
+        />
+      </div>
+      <div className={cn('secondContainer')}>
+        <AdminClimbListDatas lists={lists} />
+      </div>
+      <div />
       {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} />
     </div>
   );
 };
 
-export default ClimbListPage;
-//서치네임이 있으면 안보여주고 없을때 보여줌
+export default AdminClimbListPage;

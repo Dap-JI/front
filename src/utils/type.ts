@@ -11,7 +11,7 @@ export type metaType = {
 //클라밍장 리스트 데이터
 
 export type GymsType = {
-  gym_idx?: number;
+  gym_idx: number;
   name: string;
   address?: string;
   logo: string | null;
@@ -21,6 +21,15 @@ export type GymsType = {
 export type ClimbLIstResponseType = {
   gyms: GymsType[];
   meta: metaType;
+};
+//클라이밍장 리스트 업로드 폼 타입
+
+export type useFormListUploadProps = {
+  logo: any;
+  name: string;
+  address: string;
+  notice: string;
+  //notice에 null값 추가해야할드ㅜㅅ
 };
 
 //클라이밍장 리스트중 상세 데이터
