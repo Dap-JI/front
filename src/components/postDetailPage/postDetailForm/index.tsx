@@ -46,7 +46,6 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   };
 
   const url = window.location.href;
-  console.log(url);
 
   return (
     <div className={cn('container')}>

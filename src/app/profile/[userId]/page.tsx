@@ -7,9 +7,7 @@ import Header from '@/src/components/common/header';
 import { ProfileDatas } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ProfileType } from '@/src/utils/type';
-import NodetailData from '@/src/components/common/noDetailData';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import { useEffect, useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -21,28 +19,18 @@ type ProfilePageProps = {
 
 const ProfilePage = ({ params }: ProfilePageProps) => {
   const { userId } = params;
-  console.log(userId);
-
-  const isOwnProfile = userId === undefined || userId === 'me';
-
-  const fetchUserId = isOwnProfile
-    ? 'me'
-    : Array.isArray(userId)
-      ? userId[0]
-      : userId; // 'me'로 설정하거나 userId로 설정
 
   const {
     data: profileData,
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
   } = useInfiniteScroll<ProfileType>({
-    queryKey: ['profileDatas', fetchUserId],
+    queryKey: ['profileDatas', userId],
     fetchFunction: (page = 1) =>
       ProfileDatas({
         page,
-        userId: fetchUserId as string,
+        userId,
       }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
@@ -57,7 +45,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   };
   const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
   const isProfileOwner = profileData?.pages[0]?.isOwnProfile ?? false;
-  console.log(isProfileOwner);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -66,18 +54,13 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     <div className={cn('container')}>
       <Header title={name} />
       <div className={cn('secondContainer')}>
-        <ProfileForm lists={profileInfo} isProfileOwner={isProfileOwner} />
+        <ProfileForm
+          lists={profileInfo}
+          isProfileOwner={isProfileOwner}
+          params={params}
+        />
         <ProfileAllData lists={profilePosts} />
       </div>
-      {isProfileOwner ? (
-        <div className={cn('actions')}>
-          <button>Edit Profile</button>
-        </div>
-      ) : (
-        <div className={cn('actions')}>
-          <button>Follow</button>
-        </div>
-      )}
       {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} />
     </div>

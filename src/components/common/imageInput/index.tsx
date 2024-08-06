@@ -61,11 +61,11 @@ const ImageInput = ({ fileUrl, setFileUrl, foldername }: ImageInputProps) => {
       <label htmlFor="imageUpload">
         {fileUrl ? (
           <Image
-            src={fileUrl}
+            src={fileUrl as string}
             alt="Preview"
             width={150}
             height={150}
-            property="true"
+            priority={true}
             className={cn('previewImage')}
           />
         ) : (

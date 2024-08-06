@@ -10,10 +10,14 @@ const cn = classNames.bind(styles);
 type ProfileFormProps = {
   lists: ProfileUserType;
   isProfileOwner: boolean;
+  params: {
+    userId: string;
+  };
 };
 
-const ProfileForm = ({ lists, isProfileOwner }: ProfileFormProps) => {
+const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
   const { img, introduce, provider } = lists;
+  const { userId } = params;
 
   return (
     <div className={cn('container')}>
@@ -39,7 +43,7 @@ const ProfileForm = ({ lists, isProfileOwner }: ProfileFormProps) => {
           </div>
           <div className={cn('profileEdit')}>
             <Link
-              href={'/profile/edit'}
+              href={`/profile/${userId}/edit`}
               style={{ textDecoration: 'none', color: 'black' }}
             >
               프로필 편집
