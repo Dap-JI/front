@@ -1,4 +1,3 @@
-
 'use client';
 import SearchBar from '@/src/components/common/searchBar';
 import classNames from 'classnames/bind';
@@ -48,17 +47,17 @@ const ClimbListPage = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  console.log('searchName->',searchName)
 
   return (
     <div className={cn('container')}>
-      <SearchBar onSearchChange={handleSearchChange} />
+      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
       <CardListData lists={lists} />
       {isFetchingNextPage && <LoadingSpinner />}
-      {!hasNextPage && <NodetailData />}
+      {/* { !searchName&& !hasNextPage && <NodetailData />} */}
       <div ref={ref} />
     </div>
   );
 };
 
 export default ClimbListPage;
+//서치네임이 있으면 안보여주고 없을때 보여줌
