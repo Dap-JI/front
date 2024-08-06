@@ -1,10 +1,8 @@
 import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  ClimbLIstType,
   ClimbLIstTypes,
   useFormPostUploadProps,
-  PostDetailDataType,
 } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';

@@ -1,0 +1,26 @@
+.container {
+  @include font-style(1.5rem, white, 500);
+  @include flex-arrange(center, center);
+  padding: 18px 8px;
+  background-color: rgba(0, 0, 0, 0.8); // 투명도가 있는 배경색
+  border-radius: 5px;
+  backdrop-filter: blur(0.8px);
+  position: fixed;
+  top: 2%;
+  right: 28%;
+  transform: translateX(50%);
+  animation: fadeout 3s linear;
+  z-index: 100;
+
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

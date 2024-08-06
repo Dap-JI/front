@@ -72,8 +72,9 @@ export type useFormPostUploadProps = {
 //프로필 타입들
 
 export type ProfilePostType = {
-  post_idx: number;
+  post_idx: string;
   thumbnailUrl: string | null;
+  gym_idx?: string;
 };
 
 export type ProfileUserType = {

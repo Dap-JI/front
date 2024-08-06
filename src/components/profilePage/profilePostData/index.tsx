@@ -14,7 +14,7 @@ const ProfilePostData = ({ list }: ProfilePostDataProps) => {
   const { thumbnailUrl, post_idx } = list;
   return (
     <div className={cn('container')}>
-      {/* <Link href={`/api/posts/${post_idx}`}> */}
+      {/* <Link href={`/climbList/${gym_idx}/${post_idx}`}> */}
       <Image
         src={thumbnailUrl || '/icon/icon.png'}
         alt="postImage"

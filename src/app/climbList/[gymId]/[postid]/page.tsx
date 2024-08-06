@@ -11,7 +11,6 @@ type PostDetailPageProps = {
 };
 
 const PostDetailPage = ({ params }: PostDetailPageProps) => {
-  console.log(params.postid);
   return (
     <div className={cn('container')}>
       <Header />
