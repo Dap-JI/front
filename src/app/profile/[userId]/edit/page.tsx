@@ -3,18 +3,21 @@ import classNames from 'classnames/bind';
 import styles from './profileEditPage.module.scss';
 import EditForm from '@/src/components/editPage/editForm';
 import Header from '@/src/components/common/header';
-import { useSearchParams } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
-const ProfileEditPage = () => {
+type ProfileEditPageProps = {
+  params: {
+    userId: string;
+  };
+};
 
-  
+const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
   return (
     <div className={cn('container')}>
       <Header title="프로필 수정할거임" />
       <div className={cn('secondContainer')}>
-        <EditForm />
+        <EditForm params={params} />
       </div>
     </div>
   );

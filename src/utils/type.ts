@@ -85,6 +85,7 @@ export type ProfileUserType = {
 };
 
 export type ProfileType = {
+  data: ProfileType;
   user: ProfileUserType;
   posts: ProfilePostType[];
   meta: metaType;

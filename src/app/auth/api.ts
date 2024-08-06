@@ -1,4 +1,6 @@
+import instance from '@/src/utils/axios';
 import fetchData from '@/src/utils/fetchData';
+import { useQuery } from '@tanstack/react-query';
 
 export const KakaoLogin = async (code: string) => {
   try {
@@ -18,4 +20,12 @@ export const NaverLogin = async (code: string) => {
   } catch (e) {
     console.error(e, '네이버 로그인 에러');
   }
+};
+
+export const useMyInfo = (enabled: boolean) => {
+  return useQuery({
+    queryKey: ['myinfo'],
+    queryFn: () => instance.get('/api/myinfo'),
+    enabled,
+  });
 };

@@ -10,17 +10,34 @@ import {
 } from '@/public/icon';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useMyInfo } from '@/src/app/auth/api';
+import { useState, useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
 const FooterBar = () => {
   const path = usePathname();
   const router = useRouter();
+  const [fetchProfile, setFetchProfile] = useState(false);
+
+  const { data: myInfoData } = useMyInfo(fetchProfile);
+  const userId = myInfoData?.data;
+
+  useEffect(() => {
+    if (userId) {
+      router.push(`/profile/${userId}`);
+    }
+  }, [myInfoData, router]);
 
   const routerClick = (page: string) => {
-    // alert(`${page}페이지 이동`);
     router.push(`/${page}`);
   };
+
+  const profileClick = () => {
+    setFetchProfile(true);
+  };
+
+  // 이 클릭을 했을 때만 myinfo함수 실행 -> useEffect함수 실행 -> 프로필 페이지 이동
 
   if (path === '/' || path.startsWith('/auth')) {
     return null;
@@ -38,11 +55,10 @@ const FooterBar = () => {
         height="30"
         onClick={() => routerClick('공지')}
       />
-      <Link href="/profile">
-        <UserIcon width="30" height="30" />
-      </Link>
+      <UserIcon width="30" height="30" onClick={profileClick} />
     </div>
   );
 };
 
 export default FooterBar;
+//profile/userid
