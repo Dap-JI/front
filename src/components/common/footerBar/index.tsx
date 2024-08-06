@@ -27,7 +27,7 @@ const FooterBar = () => {
     if (userId) {
       router.push(`/profile/${userId}`);
     }
-  }, [myInfoData, router]);
+  }, [userId, router]);
 
   const routerClick = (page: string) => {
     router.push(`/${page}`);
