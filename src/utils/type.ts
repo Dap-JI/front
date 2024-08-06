@@ -74,7 +74,7 @@ export type useFormPostUploadProps = {
 export type ProfilePostType = {
   post_idx: string;
   thumbnailUrl: string | null;
-  gym_idx?: string;
+  gym_idx: string;
 };
 
 export type ProfileUserType = {
@@ -87,9 +87,11 @@ export type ProfileUserType = {
 export type ProfileType = {
   user: ProfileUserType;
   posts: ProfilePostType[];
+  meta: metaType;
+  isOwnProfile: boolean;
 };
 
-//프로필 수정 폼
+//프로필 수정 폼타입
 export type useFormProfileEditProps = {
   nickname: string;
   introduce: string;

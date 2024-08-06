@@ -9,9 +9,10 @@ const cn = classNames.bind(styles);
 
 type ProfileFormProps = {
   lists: ProfileUserType;
+  isProfileOwner: boolean;
 };
 
-const ProfileForm = ({ lists }: ProfileFormProps) => {
+const ProfileForm = ({ lists, isProfileOwner }: ProfileFormProps) => {
   const { img, introduce, provider } = lists;
 
   return (
@@ -26,24 +27,26 @@ const ProfileForm = ({ lists }: ProfileFormProps) => {
           className={cn('image')}
         />
       </div>
-      <div className={cn('infoWrapper')}>
-        <div className={cn('oauth', `oauth-${provider}`)}>
-          {provider === 'kakao' ? (
-            <KakaoIcon width="17" height="17" />
-          ) : (
-            <NaverIcon width="30" height="30" />
-          )}
-          <span>{provider}</span>
+      {isProfileOwner && (
+        <div className={cn('infoWrapper')}>
+          <div className={cn('oauth', `oauth-${provider}`)}>
+            {provider === 'kakao' ? (
+              <KakaoIcon width="17" height="17" />
+            ) : (
+              <NaverIcon width="30" height="30" />
+            )}
+            <span>{provider}</span>
+          </div>
+          <div className={cn('profileEdit')}>
+            <Link
+              href={'/profile/edit'}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              프로필 편집
+            </Link>
+          </div>
         </div>
-        <div className={cn('profileEdit')}>
-          <Link
-            href={'/profile/edit'}
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            프로필 편집
-          </Link>
-        </div>
-      </div>
+      )}
       <div className={cn('textWrapper')}>{introduce}</div>
     </div>
   );

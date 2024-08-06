@@ -5,20 +5,24 @@ import { ProfileType, useFormProfileEditProps } from '@/src/utils/type';
 import instance from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
 
-// export const useProfileDatas = () => {
-//   return useQuery<ProfileType>({
-//     queryKey: ['profileDatas'],
-//     queryFn: () => fetchData({ param: `/api/user/profile` }),
-//   });
-// };
+type ProfileDataProps = {
+  userId: any;
+  page: number;
+};
 
-export const useProfileDatas = (userId?: string) => {
-  return useQuery<ProfileType>({
-    queryKey: ['profileDatas', userId],
-    queryFn: () => {
-      const apiUrl = userId ? `/api/profile/${userId}` : `/api/profile/me`;
-      return fetchData({ param: apiUrl });
+export const ProfileDatas = async ({ userId, page = 1 }: ProfileDataProps) => {
+  const res = await instance.get(`/api/profile/${userId}`, {
+    params: {
+      page,
     },
+  });
+  return res.data;
+};
+
+export const useProfileDatas = (userId: string) => {
+  return useQuery<ProfileType>({
+    queryKey: ['userProfileData'],
+    queryFn: () => instance.get(`/api/profile/${userId}`),
   });
 };
 
