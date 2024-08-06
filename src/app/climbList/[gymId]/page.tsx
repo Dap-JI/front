@@ -9,7 +9,7 @@ import { AddIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import { ClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import Header from '@/src/components/common/header';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';

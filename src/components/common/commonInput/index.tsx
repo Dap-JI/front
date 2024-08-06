@@ -10,7 +10,9 @@ type inputProps = {
   id?: string;
   register?: UseFormRegisterReturn;
   suffix?: React.ReactNode;
-  type: string;
+  type?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const CommonInput = ({
@@ -20,6 +22,8 @@ const CommonInput = ({
   suffix,
   register,
   type = 'text',
+  value,
+  onChange,
   ...rest
 }: inputProps) => {
   return (
@@ -30,6 +34,8 @@ const CommonInput = ({
         id={id}
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         {...register}
         {...rest}
       />

@@ -10,7 +10,7 @@ export type metaType = {
 
 //클라밍장 리스트 데이터
 
-export type ClimbLIstType = {
+export type GymsType = {
   gym_idx?: number;
   name: string;
   address?: string;
@@ -18,8 +18,8 @@ export type ClimbLIstType = {
   notice?: string | null;
 };
 
-export type ClimbLIstTypes = {
-  gyms: ClimbLIstType[];
+export type ClimbLIstResponseType = {
+  gyms: GymsType[];
   meta: metaType;
 };
 
