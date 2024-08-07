@@ -1,0 +1,8 @@
+.container {
+  @include flex-arrange(center, center);
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 100px;
+}

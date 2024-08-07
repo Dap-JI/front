@@ -62,3 +62,4 @@ const FooterBar = () => {
 
 export default FooterBar;
 //profile/userid
+// 유저 종류도 넣어서 권한에 따라 nav바 관리자면 5개로 (관리자페이지)

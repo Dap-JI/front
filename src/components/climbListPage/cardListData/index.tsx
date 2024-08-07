@@ -14,9 +14,7 @@ const CardListData = ({ lists }: CardListProps) => {
   return (
     <div className={cn('container')}>
       {lists.map((list: GymsType) => (
-        <div key={list.gym_idx}>
-          <CardList list={list} />
-        </div>
+        <CardList key={list.gym_idx} list={list} />
       ))}
     </div>
   );
