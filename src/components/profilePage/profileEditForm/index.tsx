@@ -1,5 +1,5 @@
 'use client';
-import styles from './editForm.module.scss';
+import styles from './ProfileEditForm.module.scss';
 import classNames from 'classnames/bind';
 import CommonInput from '@/src/components/common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
@@ -18,7 +18,7 @@ type EditFormProps = {
   };
 };
 
-const EditForm = ({ params }: EditFormProps) => {
+const ProfileEditForm = ({ params }: EditFormProps) => {
   const {
     register,
     handleSubmit,
@@ -102,4 +102,4 @@ const EditForm = ({ params }: EditFormProps) => {
   );
 };
 
-export default EditForm;
+export default ProfileEditForm;

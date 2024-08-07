@@ -4,6 +4,7 @@ import { GymsType } from '@/src/utils/type';
 import Image from 'next/image';
 import { DeleteIcon, EditIcon } from '@/public/icon';
 import { useClimbListDatasDelete } from '@/src/app/climbList/api';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
@@ -12,14 +13,13 @@ type CardListProps = {
 };
 
 const AdminClimbList = ({ list }: CardListProps) => {
-  const { logo, name, gym_idx } = list;
+  const { logo, name, gym_idx, address } = list;
 
   const { mutate: ClimbListDatasDelete } = useClimbListDatasDelete(gym_idx);
 
   const handleDeleteList = () => {
     ClimbListDatasDelete();
   };
-
   return (
     <li className={cn('innercontainer')}>
       <div className={cn('image')}>
@@ -33,8 +33,11 @@ const AdminClimbList = ({ list }: CardListProps) => {
         />
       </div>
       <span>{name}</span>
+      <span>{address}</span>
       <div className={cn('actionBtn')}>
-        <EditIcon />
+        <Link href={`/admin/list/${gym_idx}/edit`}>
+          <EditIcon />
+        </Link>
         <DeleteIcon onClick={handleDeleteList} />
       </div>
     </li>

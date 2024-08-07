@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   useFormPostUploadProps,
   useFormListUploadProps,
+  GymsType,
 } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';
@@ -22,15 +23,25 @@ export const ClimbListDatas = async ({ page = 1, search }: ClimbListProps) => {
   });
   return res.data;
 };
+//클라이밍장 리스트 디테일 조회 함수
+export const useClimbListDetails = (gymId: string) => {
+  return useQuery({
+    queryKey: ['climbListDetails', gymId],
+    queryFn: () => instance.get(`/api/gyms/${gymId}`),
+    select: (res: any) => res.data,
+  });
+};
 
 //클라이밍장 리스트 업로드 함수
 export const useClimbListDatasUpload = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['climbListUpload'],
     mutationFn: (formData: useFormListUploadProps) =>
       instance.post(`/api/gyms`, formData),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['climbList'] });
       router.push(`/admin/list`);
     },
     onError: (error) => {
@@ -50,6 +61,24 @@ export const useClimbListDatasDelete = (gymId: number) => {
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
+    },
+  });
+};
+//클라이밍장 리스트 수정 함수
+export const useClimbListDataUpdate = (gymId: string) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  return useMutation({
+    mutationKey: ['climbListUpdate'],
+    mutationFn: (formData: useFormListUploadProps) =>
+      instance.patch(`/api/gyms/${gymId}`, formData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['climbList'] });
+      router.push(`/admin/list`);
+    },
+    onError: (error) => {
+      console.error('수정 실패:', error);
     },
   });
 };

@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './profileEditPage.module.scss';
-import EditForm from '@/src/components/editPage/editForm';
+import ProfileEditForm from '@/src/components/profilePage/profileEditForm';
 import Header from '@/src/components/common/header';
 
 const cn = classNames.bind(styles);
@@ -17,7 +17,7 @@ const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
     <div className={cn('container')}>
       <Header title="프로필 수정할거임" />
       <div className={cn('secondContainer')}>
-        <EditForm params={params} />
+        <ProfileEditForm params={params} />
       </div>
     </div>
   );

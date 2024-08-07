@@ -1,33 +1,47 @@
 'use client';
 import { useState, useEffect } from 'react';
-import styles from './adminClimbListUploadForm.module.scss';
+import styles from './adminClimbListEditForm.module.scss';
 import classNames from 'classnames/bind';
 import ImageInput from '@/src/components/common/imageInput';
 import CommonInput from '@/src/components/common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
 import { useForm } from 'react-hook-form';
-import {
-  useClimbListDatasUpload,
-} from '@/src/app/climbList/api';
+import { useClimbListDataUpdate } from '@/src/app/climbList/api';
 import { useFormListUploadProps } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
-const AdminClimbListUploadForm = () => {
-  const [fileUrl, setFileUrl] = useState<string | ArrayBuffer | null>('');
-  const { mutate: climbListDatasUpload } = useClimbListDatasUpload();
-  //리스트 업로드
+type AdminClimbListEditFormProps = {
+  climbListDetail: useFormListUploadProps;
+  params: {
+    gymId: string;
+  };
+};
+
+const AdminClimbListEditForm = ({
+  params,
+  climbListDetail,
+}: AdminClimbListEditFormProps) => {
+  const { gymId } = params;
+  //gymId값
+  const { logo, name, address, notice } = climbListDetail;
+  //리스트 데이터
+  const { mutate: climbListDatasUpdate } = useClimbListDataUpdate(gymId);
+  //리스트 업데이트 함수
+  const [fileUrl, setFileUrl] = useState<string>(logo);
+  //이미지 파일 url
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
       name: '',
+      logo: '',
       address: '',
       notice: '',
-      logo: '',
     },
   });
 
@@ -36,9 +50,17 @@ const AdminClimbListUploadForm = () => {
       ...data,
       logo: fileUrl,
     };
-
-    climbListDatasUpload(formData);
+    climbListDatasUpdate(formData);
   };
+
+  useEffect(() => {
+    if (climbListDetail) {
+      setValue('name', name);
+      setValue('address', address);
+      setValue('notice', notice);
+      setFileUrl(logo);
+    }
+  }, [climbListDetail, setValue]);
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -67,6 +89,4 @@ const AdminClimbListUploadForm = () => {
   );
 };
 
-export default AdminClimbListUploadForm;
-
-//notice에 null값 추가해야할듯
+export default AdminClimbListEditForm;
