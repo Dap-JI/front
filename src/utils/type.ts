@@ -10,17 +10,25 @@ export type metaType = {
 
 //클라밍장 리스트 데이터
 
-export type ClimbLIstType = {
-  gym_idx?: number;
+export type GymsType = {
+  gym_idx: number;
   name: string;
   address?: string;
   logo: string | null;
   notice?: string | null;
 };
 
-export type ClimbLIstTypes = {
-  gyms: ClimbLIstType[];
+export type ClimbLIstResponseType = {
+  gyms: GymsType[];
   meta: metaType;
+};
+
+//클라이밍장 리스트 업로드 폼 타입
+export type useFormListUploadProps = {
+  logo: any;
+  name: string;
+  address: string;
+  notice: string;
 };
 
 //클라이밍장 리스트중 상세 데이터
@@ -72,8 +80,9 @@ export type useFormPostUploadProps = {
 //프로필 타입들
 
 export type ProfilePostType = {
-  post_idx: number;
+  post_idx: string;
   thumbnailUrl: string | null;
+  gym_idx: string;
 };
 
 export type ProfileUserType = {
@@ -84,11 +93,15 @@ export type ProfileUserType = {
 };
 
 export type ProfileType = {
+  data: ProfileType;
   user: ProfileUserType;
   posts: ProfilePostType[];
+  meta: metaType;
+  isOwnProfile: boolean;
+  userRole: string;
 };
 
-//프로필 수정 폼
+//프로필 수정 폼타입
 export type useFormProfileEditProps = {
   nickname: string;
   introduce: string;

@@ -11,17 +11,17 @@ type ProfilePostDataProps = {
 };
 
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
-  const { thumbnailUrl, post_idx } = list;
+  const { thumbnailUrl, post_idx, gym_idx } = list;
   return (
     <div className={cn('container')}>
-      {/* <Link href={`/api/posts/${post_idx}`}> */}
-      <Image
-        src={thumbnailUrl || '/icon/icon.png'}
-        alt="postImage"
-        width="120"
-        height="120"
-      />
-      {/* </Link> */}
+      <Link href={`/climbList/${gym_idx}/${post_idx}`}>
+        <Image
+          src={thumbnailUrl || '/icon/icon.png'}
+          alt="postImage"
+          width="120"
+          height="120"
+        />
+      </Link>
     </div>
   );
 };

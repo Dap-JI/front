@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import '@/src/styles/globals.css';
 import QueryProvider from '@/src/utils/QueryProvider';
 import FooterBar from '../components/common/footerBar';
+import Toast from '../components/common/toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -248,6 +249,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <QueryProvider>
+          <Toast />
           {children}
           <FooterBar />
         </QueryProvider>

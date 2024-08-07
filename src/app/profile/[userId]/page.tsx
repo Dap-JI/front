@@ -4,42 +4,67 @@ import styles from './userProfilePage.module.scss';
 import ProfileAllData from '@/src/components/profilePage/profileAllData';
 import ProfileForm from '@/src/components/profilePage/profileForm';
 import Header from '@/src/components/common/header';
-import { useProfileDatas } from '../api';
-import { useRouter } from 'next/navigation';
+import { ProfileDatas } from '@/src/app/profile/api';
+import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
+import { ProfileType } from '@/src/utils/type';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
 type ProfilePageProps = {
-  params: { userId: string };
+  params: {
+    userId: string;
+  };
 };
 
-const UserProfilePage = ({ params }: ProfilePageProps) => {
+const ProfilePage = ({ params }: ProfilePageProps) => {
   const { userId } = params;
 
-  const { data: profileData } = useProfileDatas(userId);
+  const {
+    data: profileData,
+    ref,
+    isLoading,
+    isFetchingNextPage,
+  } = useInfiniteScroll<ProfileType>({
+    queryKey: ['profileDatas', userId],
+    fetchFunction: (page = 1) =>
+      ProfileDatas({
+        page,
+        userId,
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
 
-  const title = profileData?.user.nickname ?? '';
-  const profileInfo = profileData?.user ?? {
+  const name = profileData?.pages[0]?.user.nickname ?? '';
+  const profileInfo = profileData?.pages[0]?.user ?? {
     nickname: '',
     img: '',
     introduce: null,
     provider: '',
   };
-  const profilePost = profileData?.posts ?? [];
+  const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
+  const isProfileOwner = profileData?.pages[0]?.isOwnProfile ?? false;
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className={cn('container')}>
-      <Header title={title} />
+      <Header title={name} />
       <div className={cn('secondContainer')}>
-        <ProfileForm lists={profileInfo} />
-        <ProfileAllData lists={profilePost} />
+        <ProfileForm
+          lists={profileInfo}
+          isProfileOwner={isProfileOwner}
+          params={params}
+        />
+        <ProfileAllData lists={profilePosts} />
       </div>
+      {isFetchingNextPage && <LoadingSpinner />}
+      <div ref={ref} />
     </div>
   );
 };
 
-export default UserProfilePage;
-
-//프로필 편집에 프로필 이미지랑 닉네임 수정하기 만들기
-//세션 사용하는거는 자기 자신 세션 확인해서 서버에서 내려줘야할듯
-//userId를 프론트에서 패스파람으로 받는건 프론트에서 자기 세션 id확인할 수 없어서 못함
+export default ProfilePage;

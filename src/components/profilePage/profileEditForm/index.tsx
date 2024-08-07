@@ -1,5 +1,5 @@
 'use client';
-import styles from './editForm.module.scss';
+import styles from './ProfileEditForm.module.scss';
 import classNames from 'classnames/bind';
 import CommonInput from '@/src/components/common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
@@ -12,7 +12,13 @@ import { nickname_reg } from '@/src/utils/regex';
 
 const cn = classNames.bind(styles);
 
-const EditForm = () => {
+type EditFormProps = {
+  params: {
+    userId: string;
+  };
+};
+
+const ProfileEditForm = ({ params }: EditFormProps) => {
   const {
     register,
     handleSubmit,
@@ -25,9 +31,10 @@ const EditForm = () => {
       introduce: '',
     },
   });
+  const { userId } = params;
   const [fileUrl, setFileUrl] = useState<string | ArrayBuffer | null>(null);
-  const { data: profileData } = useProfileDatas();
-  const { mutate: profileUpdate } = useProfileUpdate();
+  const { data: profileData } = useProfileDatas(userId);
+  const { mutate: profileUpdate } = useProfileUpdate(userId);
   const text = watch('introduce', '');
   const maxLength = 100;
 
@@ -45,7 +52,6 @@ const EditForm = () => {
       img: fileUrl,
     };
     profileUpdate(formData);
-    console.log(formData);
   };
 
   return (
@@ -73,7 +79,7 @@ const EditForm = () => {
               message: '한글, 소문자, 숫자만 가능합니다',
             },
           })}
-          placeholder={profileData?.user.nickname}
+          placeholder={profileData?.user?.nickname}
         />
       </div>
       {errors.nickname && <span>{errors.nickname.message}</span>}
@@ -96,4 +102,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default ProfileEditForm;
