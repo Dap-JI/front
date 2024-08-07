@@ -8,7 +8,7 @@ import { ProfileDatas } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ProfileType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import { AdminIcon } from '@/public/icon';
+import { AdminIcon, SettingIcon } from '@/public/icon';
 import Link from 'next/link';
 
 const cn = classNames.bind(styles);
@@ -58,7 +58,8 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
       <Header title={name}>
         {role && (
           <Link href={'/admin/list'}>
-            <AdminIcon fill="black" />
+            <AdminIcon />
+            <SettingIcon className={cn('setIcon')} />
           </Link>
         )}
       </Header>
