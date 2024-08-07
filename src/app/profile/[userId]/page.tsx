@@ -8,6 +8,8 @@ import { ProfileDatas } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ProfileType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import { AdminIcon, SettingIcon } from '@/public/icon';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
@@ -44,7 +46,8 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     provider: '',
   };
   const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
-  const isProfileOwner = profileData?.pages[0]?.isOwnProfile ?? false;
+  const isProfileOwner = profileData?.pages[0]?.isOwnProfile === true;
+  const role = profileData?.pages[0]?.userRole === 'admin';
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -52,7 +55,14 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 
   return (
     <div className={cn('container')}>
-      <Header title={name} />
+      <Header title={name}>
+        {role && (
+          <Link href={'/admin/list'}>
+            <AdminIcon />
+            <SettingIcon className={cn('setIcon')} />
+          </Link>
+        )}
+      </Header>
       <div className={cn('secondContainer')}>
         <ProfileForm
           lists={profileInfo}

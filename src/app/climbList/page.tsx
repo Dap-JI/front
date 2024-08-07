@@ -8,7 +8,6 @@ import { ClimbLIstResponseType } from '@/src/utils/type';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import NodetailData from '@/src/components/common/noDetailData';
 import { useQueryClient } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
@@ -51,7 +50,9 @@ const ClimbListPage = () => {
   return (
     <div className={cn('container')}>
       <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
-      <CardListData lists={lists} />
+      <div className={cn('secondContainer')}>
+        <CardListData lists={lists} />
+      </div>
       {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} />
     </div>
@@ -59,4 +60,3 @@ const ClimbListPage = () => {
 };
 
 export default ClimbListPage;
-//서치네임이 있으면 안보여주고 없을때 보여줌

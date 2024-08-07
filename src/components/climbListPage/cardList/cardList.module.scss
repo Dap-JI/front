@@ -1,17 +1,33 @@
 .container {
-  width: 101px;
-  height: 150px;
-  border-radius: 5px;
-  background: white;
-  @include flex-arrange(center, center);
-  flex-direction: column;
-  padding: 10px;
+  @include flex-arrange(flex-start, center);
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 5px 5px;
+  margin-bottom: 10px;
   gap: 20px;
-  cursor: pointer;
-  .image {
+  border-radius: 5px;
+
+  .textWrapper {
+    display: flex;
+    flex-direction: column;
+    text-decoration-line: none;
+    span:nth-child(1) {
+      @include font-style(1.6rem, black, 600);
+      margin-bottom: 5px;
+    }
+    span:nth-child(2) {
+      @include font-style(1.1rem, grey, 400);
+    }
+  }
+
+  img {
     border-radius: 5px;
   }
-  span {
-    @include font-style(1.3rem, black, 400);
+
+  .actionBtn {
+    margin-left: auto;
+    @include flex-arrange(flex-start, center);
+    gap: 20px;
   }
 }
