@@ -145,6 +145,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
     },
     onError: (error) => {
       console.error('수정 실패:', error);
+      alert('동영상,등반일, 난이도 선택은 필수입니다.');
     },
   });
 };

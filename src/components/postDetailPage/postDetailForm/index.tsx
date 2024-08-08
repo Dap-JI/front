@@ -10,7 +10,9 @@ import {
   usePostDetailDelete,
 } from '@/src/app/climbList/api';
 import { useToast } from '@/src/hooks/useToast';
-
+import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
+import Image from 'next/image';
+import Link from 'next/link';
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
@@ -23,13 +25,15 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const { postid, gymId } = params;
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   const { mutate: postDetailDelete } = usePostDetailDelete(postid, gymId);
+  const { userId } = useMyInfoStore();
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
   }
-
-  const { gym_idx, post_idx, media, color, clearday, User, content } =
+  const { gym_idx, post_idx, media, color, clearday, User, content, user_idx } =
     postDetailDatas;
+
+  const isNotMyUserId = userId !== user_idx;
 
   const deleteT = (date: string | null) => date?.split('T')[0];
 
@@ -41,18 +45,24 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
 
-  const deldteClick = () => {
+  const deleteClick = () => {
     postDetailDelete();
+  };
+  const profileClick = () => {
+    router.push(`/profile/${user_idx}`);
   };
 
   const url = window.location.href;
-
   return (
     <div className={cn('container')}>
       <div className={cn('btnStyle')}>
-        <EditIcon onClick={editPage} />
+        {!isNotMyUserId && (
+          <>
+            <EditIcon onClick={editPage} />
+            <DeleteIcon onClick={deleteClick} />
+          </>
+        )}
         <ShareIcon onClick={shareClick} />
-        <DeleteIcon onClick={deldteClick} />
       </div>
       <div className={cn('videoWrapper')}>
         <video
@@ -67,7 +77,10 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
       <div className={cn('infoWrapper')}>
         <div className={cn('color', `color-${color}`)} />
         <span>{deleteT(clearday)}</span>
-        <span>{User.nickname}</span>
+        <div className={cn('userWrapper')} onClick={profileClick}>
+          <Image src={User.img} width="24" height="24" alt="userImg" />
+          <span>{User.nickname}</span>
+        </div>
       </div>
       <p>{content}</p>
     </div>
@@ -78,3 +91,4 @@ export default PostDetailForm;
 
 //다른사람이 볼때 수정 삭제는 안보임
 // 수정페이지 안에 삭제 넣기
+//myinfo랑 비교하기

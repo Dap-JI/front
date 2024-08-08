@@ -18,7 +18,7 @@ type ImageInputProps = {
 
 const ImageInput = ({ fileUrl, setFileUrl, foldername }: ImageInputProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+  const [error, setError] = useState<string | null>(null);
   const { mutate: imageUpload, isPending } = useMutation({
     mutationKey: ['profileImageUpload'],
     mutationFn: async (image: FormData) => {
@@ -36,8 +36,16 @@ const ImageInput = ({ fileUrl, setFileUrl, foldername }: ImageInputProps) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file); // 선택된 파일 상태 업데이트
+      const validExtensions = ['jpg', 'jpeg', 'png'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
 
+      if (!fileExtension || !validExtensions.includes(fileExtension)) {
+        setError('지원하지 않는 파일 형식입니다.');
+        return;
+      }
+
+      setSelectedFile(file); // 선택된 파일 상태 업데이트
+      setError(null);
       // 미리보기 URL을 설정
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -78,8 +86,9 @@ const ImageInput = ({ fileUrl, setFileUrl, foldername }: ImageInputProps) => {
         id="imageUpload"
         className={cn('fileInput')}
         onChange={handleFileChange}
-        accept="image/*" // 이미지 파일만 허용
+        accept=".jpg,.jpeg,.png" // 이미지 파일만 허용
       />
+      {error && <p className={cn('error')}>{error}</p>}
     </div>
   );
 };

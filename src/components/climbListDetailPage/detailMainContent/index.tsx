@@ -8,15 +8,17 @@ import {
   DetailType,
   DetailMainContentListProps,
 } from '@/src/utils/type';
-import { useState } from 'react';
-import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import usePostStore from '@/src/utils/store/usePostStore';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
-  const { color, User, clearday, content, post_idx, media, gym_idx } = list;
+  const { color, User, clearday, content, post_idx, media, gym_idx, user_idx } =
+    list;
 
+  console.log(list);
   const router = useRouter();
   const setPostData = usePostStore((state) => state.setPostData);
 
@@ -26,6 +28,10 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   };
 
   const deleteT = (date: string | null) => date?.split('T')[0];
+
+  const profileClick = () => {
+    router.push(`/profile/${user_idx}`);
+  };
 
   return (
     <div className={cn('container')}>
@@ -42,7 +48,10 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
       <div className={cn('infoWrapper')}>
         <div className={cn('color', `color-${color}`)} />
         <span>{deleteT(clearday)}</span>
-        <span>{User.nickname}</span>
+        <div className={cn('userWrapper')} onClick={profileClick}>
+            <Image src={User.img} width="24" height="24" alt="userImg" />
+            <span>{User.nickname}</span>
+        </div>
         <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <p>{content}</p>
