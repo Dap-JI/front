@@ -20,7 +20,6 @@ const ClimbListPage = () => {
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
     fetchNextPage,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
