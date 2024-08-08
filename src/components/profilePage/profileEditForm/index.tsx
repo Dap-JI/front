@@ -9,7 +9,8 @@ import { useProfileDatas, useProfileUpdate } from '@/src/app/profile/api';
 import { useForm } from 'react-hook-form';
 import { useFormProfileEditProps } from '@/src/utils/type';
 import { nickname_reg } from '@/src/utils/regex';
-
+import { useModal } from '@/src/hooks/useModal';
+import ModalChoice from '../../common/moadlChoice';
 const cn = classNames.bind(styles);
 
 type EditFormProps = {
@@ -37,6 +38,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
   const { mutate: profileUpdate } = useProfileUpdate(userId);
   const text = watch('introduce', '');
   const maxLength = 100;
+  const { showModalHandler } = useModal();
 
   useEffect(() => {
     if (profileData?.user) {
@@ -51,7 +53,10 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
       ...data,
       img: fileUrl,
     };
-    profileUpdate(formData);
+    const confirmAction = () => {
+      profileUpdate(formData);
+    };
+    showModalHandler('choice', '프로필을 수정하시겠어요?', confirmAction);
   };
 
   return (
@@ -98,6 +103,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
         </div>
       </div>
       <CommonButton name="수정하기" type="submit" />
+      <ModalChoice />
     </form>
   );
 };
