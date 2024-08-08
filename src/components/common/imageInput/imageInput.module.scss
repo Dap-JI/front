@@ -20,10 +20,15 @@
   }
   .previewImage {
     border-radius: 50%;
-    object-fit: cover; // 이미지를 컨테이너에 맞게 자르기
+    object-fit: cover;
   }
 
   input {
     display: none;
+  }
+  .error {
+    width: 100%;
+
+    @include font-style(1rem, black, 600);
   }
 }
