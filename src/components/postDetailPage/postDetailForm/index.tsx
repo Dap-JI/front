@@ -12,7 +12,8 @@ import {
 import { useToast } from '@/src/hooks/useToast';
 import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useModal } from '@/src/hooks/useModal';
+import ModalChoice from '../../common/moadlChoice';
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
@@ -26,6 +27,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   const { mutate: postDetailDelete } = usePostDetailDelete(postid, gymId);
   const { userId } = useMyInfoStore();
+  const { showModalHandler } = useModal();
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
@@ -46,8 +48,12 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   };
 
   const deleteClick = () => {
-    postDetailDelete();
+    const confirmAction = () => {
+      postDetailDelete();
+    };
+    showModalHandler('choice', '정말 삭제하시겠어요?', confirmAction);
   };
+
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
@@ -83,6 +89,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
         </div>
       </div>
       <p>{content}</p>
+      <ModalChoice />
     </div>
   );
 };

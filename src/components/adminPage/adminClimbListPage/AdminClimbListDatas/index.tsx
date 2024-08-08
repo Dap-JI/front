@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { DeleteIcon, EditIcon } from '@/public/icon';
 import { useClimbListDatasDelete } from '@/src/app/climbList/api';
 import Link from 'next/link';
-
+import { useModal } from '@/src/hooks/useModal';
+import ModalChoice from '@/src/components/common/moadlChoice';
 const cn = classNames.bind(styles);
 
 type CardListProps = {
@@ -16,10 +17,15 @@ const AdminClimbList = ({ list }: CardListProps) => {
   const { logo, name, gym_idx, address } = list;
 
   const { mutate: ClimbListDatasDelete } = useClimbListDatasDelete(gym_idx);
+  const { showModalHandler } = useModal();
 
-  const handleDeleteList = () => {
-    ClimbListDatasDelete();
+  const deleteClick = () => {
+    const confirmAction = () => {
+      ClimbListDatasDelete();
+    };
+    showModalHandler('choice', '진짜 삭제할거야? 잘못눌렀지?', confirmAction);
   };
+
   return (
     <li className={cn('innercontainer')}>
       <div className={cn('image')}>
@@ -38,7 +44,7 @@ const AdminClimbList = ({ list }: CardListProps) => {
         <Link href={`/admin/list/${gym_idx}/edit`}>
           <EditIcon />
         </Link>
-        <DeleteIcon onClick={handleDeleteList} />
+        <DeleteIcon onClick={deleteClick} />
       </div>
     </li>
   );
@@ -54,6 +60,7 @@ const AdminClimbListDatas = ({ lists }: AdminClimbListDatasProps) => {
       {lists.map((list: GymsType) => (
         <AdminClimbList key={list.gym_idx} list={list} />
       ))}
+      <ModalChoice />
     </div>
   );
 };

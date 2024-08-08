@@ -9,18 +9,21 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
+import ModalChoice from '@/src/components/common/moadlChoice';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
 
+  const { showModalHandler } = useModal();
+
   const {
     data: climbListData,
     ref,
     isLoading,
     isFetchingNextPage,
-    fetchNextPage,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
     fetchFunction: (page = 1) => ClimbListDatas({ page, search: searchName }),

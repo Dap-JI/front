@@ -18,7 +18,6 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { color, User, clearday, content, post_idx, media, gym_idx, user_idx } =
     list;
 
-  console.log(list);
   const router = useRouter();
   const setPostData = usePostStore((state) => state.setPostData);
 
@@ -49,8 +48,8 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <div className={cn('color', `color-${color}`)} />
         <span>{deleteT(clearday)}</span>
         <div className={cn('userWrapper')} onClick={profileClick}>
-            <Image src={User.img} width="24" height="24" alt="userImg" />
-            <span>{User.nickname}</span>
+          <Image src={User.img} width="24" height="24" alt="userImg" />
+          <span>{User.nickname}</span>
         </div>
         <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
