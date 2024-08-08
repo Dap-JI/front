@@ -18,8 +18,9 @@ const ProfilePostData = ({ list }: ProfilePostDataProps) => {
         <Image
           src={thumbnailUrl || '/icon/icon.png'}
           alt="postImage"
-          width="120"
-          height="120"
+          width="150"
+          height="150"
+          className={cn('image')}
         />
       </Link>
     </div>

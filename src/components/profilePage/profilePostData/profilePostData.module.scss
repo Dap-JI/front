@@ -1,9 +1,12 @@
 .container {
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+
   img {
     width: 100%;
-    height: auto;
-    max-width: 150px;
-    max-height: 150px;
+    height: 100%;
     object-fit: cover;
   }
 }

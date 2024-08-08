@@ -29,6 +29,14 @@
         box-shadow 0.2s ease;
       cursor: pointer;
     }
+    .userWrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      img {
+        border-radius: 50%;
+      }
+    }
 
     .color-red {
       background-color: red;

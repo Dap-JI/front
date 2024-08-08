@@ -35,6 +35,7 @@ export type useFormListUploadProps = {
 
 export type UserType = {
   nickname: string;
+  img: string;
 };
 
 export type DetailType = {
@@ -108,10 +109,6 @@ export type useFormProfileEditProps = {
 };
 
 //포스트 디테일 타입들
-export type PostUserType = {
-  nickname: string;
-  img: string;
-};
 
 export type PostDetailDataType = {
   post_idx: string;
@@ -122,6 +119,6 @@ export type PostDetailDataType = {
   content: string | null;
   color: string;
   createdAt: any;
-  User: PostUserType;
+  User: UserType;
   thumbnailUrl?: string;
 };

@@ -11,7 +11,8 @@ import {
 } from '@/src/app/climbList/api';
 import { useToast } from '@/src/hooks/useToast';
 import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
-
+import Image from 'next/image';
+import Link from 'next/link';
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
@@ -47,9 +48,11 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const deleteClick = () => {
     postDetailDelete();
   };
+  const profileClick = () => {
+    router.push(`/profile/${user_idx}`);
+  };
 
   const url = window.location.href;
-
   return (
     <div className={cn('container')}>
       <div className={cn('btnStyle')}>
@@ -74,7 +77,10 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
       <div className={cn('infoWrapper')}>
         <div className={cn('color', `color-${color}`)} />
         <span>{deleteT(clearday)}</span>
-        <span>{User.nickname}</span>
+        <div className={cn('userWrapper')} onClick={profileClick}>
+          <Image src={User.img} width="24" height="24" alt="userImg" />
+          <span>{User.nickname}</span>
+        </div>
       </div>
       <p>{content}</p>
     </div>
