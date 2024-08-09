@@ -46,3 +46,12 @@ export const useProfileUpdate = (userId: string) => {
     },
   });
 };
+
+export const useLogout = (enabled: boolean) => {
+  return useQuery<void>({
+    queryKey: ['userLogout'],
+    queryFn: () => instance.get(`/api/auth/logout`),
+    enabled,
+  });
+};
+//void는 성공도는 실패만 나타냄

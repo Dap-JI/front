@@ -4,12 +4,16 @@ import styles from './userProfilePage.module.scss';
 import ProfileAllData from '@/src/components/profilePage/profileAllData';
 import ProfileForm from '@/src/components/profilePage/profileForm';
 import Header from '@/src/components/common/header';
-import { ProfileDatas } from '@/src/app/profile/api';
+import { ProfileDatas, useLogout } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ProfileType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import { AdminIcon, SettingIcon } from '@/public/icon';
+import { AdminIcon, LogoutIcon } from '@/public/icon';
 import Link from 'next/link';
+import ModalChoice from '@/src/components/common/moadlChoice';
+import { useModal } from '@/src/hooks/useModal';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -20,8 +24,11 @@ type ProfilePageProps = {
 };
 
 const ProfilePage = ({ params }: ProfilePageProps) => {
+  const [enabled, setEnabled] = useState(false);
   const { userId } = params;
-
+  const { data: logout, isSuccess } = useLogout(enabled);
+  const { showModalHandler } = useModal();
+  const router = useRouter();
   const {
     data: profileData,
     ref,
@@ -49,6 +56,20 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   const isProfileOwner = profileData?.pages[0]?.isOwnProfile === true;
   const role = profileData?.pages[0]?.userRole === 'admin';
 
+  const handleLogoutClick = () => {
+    const confirmAction = () => {
+      setEnabled(true);
+      logout;
+    };
+    showModalHandler('choice', '로그아웃 하시겠어요?', confirmAction);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push('/');
+    }
+  }, [isSuccess, router]);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -56,14 +77,14 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   return (
     <div className={cn('container')}>
       <Header title={name}>
-        {role && (
-          <div className={cn('BtnStyles')}>
+        <div className={cn('BtnStyles')}>
+          {role && (
             <Link href={'/admin/list'}>
               <AdminIcon />
             </Link>
-            <SettingIcon className={cn('setIcon')} />
-          </div>
-        )}
+          )}
+          <LogoutIcon className={cn('setIcon')} onClick={handleLogoutClick} />
+        </div>
       </Header>
       <div className={cn('secondContainer')}>
         <ProfileForm
@@ -74,6 +95,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
         <ProfileAllData lists={profilePosts} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
+      <ModalChoice />
       <div ref={ref} />
     </div>
   );

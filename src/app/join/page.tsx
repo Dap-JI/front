@@ -5,11 +5,12 @@ import CommonInput from '@/src/components/common/commonInput';
 import { useForm } from 'react-hook-form';
 import { nickname_reg } from '@/src/utils/regex';
 import CommonButton from '@/src/components/common/commonButton';
-import { useNicknameCheck } from './api';
+import { useNicknameCheck, useInitializeNickname } from './api';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
+import { initializeNicknameType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -22,6 +23,7 @@ type onSubmitType = {
 const JoinPage = () => {
   const router = useRouter();
   const { showModalHandler } = useModal();
+  const { mutate: initializeNickname } = useInitializeNickname();
 
   const {
     register,
@@ -38,13 +40,18 @@ const JoinPage = () => {
 
   const { refetch } = useNicknameCheck(nickname, false);
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: initializeNicknameType) => {
+    const formData = {
+      ...data,
+    };
     try {
       const { data: nicknameCheck } = await refetch();
-      console.log(nicknameCheck);
       if (nicknameCheck?.data.available) {
-        router.push('/climbList');
-        showModalHandler('alert', '답지를 즐겨보세요');
+        initializeNickname(formData);
+        showModalHandler('alert', '답지를 즐겨보세요🔥');
+        setTimeout(() => {
+          router.push('/climbList');
+        }, 1300);
         return;
       }
       showModalHandler('alert', '닉네임이 중복되었어요');

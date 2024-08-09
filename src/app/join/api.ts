@@ -1,5 +1,8 @@
 import instance from '@/src/utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useModal } from '@/src/hooks/useModal';
+import { initializeNicknameType } from '@/src/utils/type';
 
 type UseNicknameCheckResponse = {
   data: {
@@ -17,3 +20,20 @@ export const useNicknameCheck = (nickname: string, enabled: boolean) => {
   });
 };
 
+export const useInitializeNickname = () => {
+  const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
+
+  return useMutation({
+    mutationKey: ['saveNickname'],
+    mutationFn: (formData: initializeNicknameType) =>
+      instance.patch(`/api/profile/me`, formData),
+    onSuccess: (updatedProfileData) => {
+      queryClient.setQueryData(['profileDatas'], updatedProfileData);
+    },
+    onError: (e) => {
+      console.error(e, '닉네임 설정 에러');
+      showModalHandler('alert', '닉네임 설정에 실패햇어요 ');
+    },
+  });
+};

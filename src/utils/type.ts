@@ -1,3 +1,19 @@
+export type LoginUserType = {
+  user_idx: number;
+  nickname: string | null;
+  email: string;
+  img: string;
+  introduce: string;
+  isDelete: boolean;
+  createdAt: any;
+  provider: string;
+  role: string;
+};
+
+export type initializeNicknameType = {
+  nickname: string;
+};
+
 //메타타입
 export type metaType = {
   page: number;

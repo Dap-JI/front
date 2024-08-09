@@ -42,6 +42,12 @@ export const metadata: Metadata = {
   },
 };
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export const viewport: Viewport = {
   themeColor: '#F5F5DC',
 };
