@@ -3,7 +3,7 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 import { useEffect } from 'react';
 
-export const KakaoLogin = async (code: string) => {
+export const KakaoLogin = async (code: string | null) => {
   try {
     const res = await instance.get(`/api/auth/kakao/callback`, {
       params: {

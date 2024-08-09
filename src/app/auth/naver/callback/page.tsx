@@ -14,26 +14,26 @@ const NaverCallback = () => {
   const router = useRouter();
   const code = new URLSearchParams(window.location.search).get('code');
   const [hasRedirected, setHasRedirected] = useState(false);
+  const [userNaver, setUserNaver] = useState<LoginUserType | null>(null);
 
-  const { data: userNaver, isSuccess } = useQuery({
-    queryKey: ['naverLogin ', code],
-    queryFn: () => NaverLogin(code!),
-    enabled: !!code && !hasRedirected,
-    select: (res: LoginUserType) => res,
-  });
-
-  const userNickname = userNaver?.nickname;
-  console.log(userNaver);
   useEffect(() => {
-    if (isSuccess && !hasRedirected) {
-      setHasRedirected(true);
-      if (userNickname === null || userNickname === undefined) {
-        router.push('/join');
-        return;
+    const fetchUserKakao = async () => {
+      if (code && !hasRedirected) {
+        const data = await NaverLogin(code);
+        if (data) {
+          setUserNaver(data);
+          if (!data.nickname) {
+            router.push('/join');
+          } else {
+            router.push('/climbList');
+          }
+          setHasRedirected(true);
+        }
       }
-      router.push('/climbList');
-    }
-  }, [isSuccess, hasRedirected, userNickname, router]);
+    };
+
+    fetchUserKakao();
+  }, [code, hasRedirected, router]);
 
   return (
     <div className={cn('contaienr')}>
