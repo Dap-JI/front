@@ -16,7 +16,7 @@ export const KakaoLogin = async (code: string | null) => {
   }
 };
 
-export const NaverLogin = async (code: string | null) => {
+export const NaverLogin = async (code: string ) => {
   try {
     const res = await instance.get(`/api/auth/naver/callback`, {
       params: {

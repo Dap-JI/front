@@ -1,39 +1,33 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { NaverLogin } from '@/src/app/auth/api';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import styles from './naverCallBack.module.scss';
-import { useQuery } from '@tanstack/react-query';
-import { LoginUserType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 const NaverCallback = () => {
   const router = useRouter();
-  const code = new URLSearchParams(window.location.search).get('code');
-  const [hasRedirected, setHasRedirected] = useState(false);
-  const [userNaver, setUserNaver] = useState<LoginUserType | null>(null);
 
   useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get('code');
     const fetchUserKakao = async () => {
-      if (code && !hasRedirected) {
+      if (code) {
         const data = await NaverLogin(code);
         if (data) {
-          setUserNaver(data);
           if (!data.nickname) {
             router.push('/join');
-          } else {
-            router.push('/climbList');
+            return;
           }
-          setHasRedirected(true);
+          router.push('/climbList');
         }
       }
     };
 
     fetchUserKakao();
-  }, [code, hasRedirected, router]);
+  }, [router]);
 
   return (
     <div className={cn('contaienr')}>
