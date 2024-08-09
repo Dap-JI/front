@@ -15,7 +15,7 @@ type ProfileEditPageProps = {
 const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
   return (
     <div className={cn('container')}>
-      <Header title="프로필 수정할거임" />
+      <Header title="프로필 수정할거임" back={true} />
       <div className={cn('secondContainer')}>
         <ProfileEditForm params={params} />
       </div>

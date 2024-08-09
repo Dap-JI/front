@@ -57,10 +57,12 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     <div className={cn('container')}>
       <Header title={name}>
         {role && (
-          <Link href={'/admin/list'}>
-            <AdminIcon />
+          <div className={cn('BtnStyles')}>
+            <Link href={'/admin/list'}>
+              <AdminIcon />
+            </Link>
             <SettingIcon className={cn('setIcon')} />
-          </Link>
+          </div>
         )}
       </Header>
       <div className={cn('secondContainer')}>

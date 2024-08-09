@@ -3,9 +3,13 @@
   height: 100vh;
   background: beige;
   overflow-y: scroll;
-  .setIcon {
-    margin-left: 15px;
-    margin-right: 5px;
+  // .setIcon {
+  //   margin-left: 15px;
+  //   margin-right: 5px;
+  // }
+  .BtnStyles{
+    display: flex;
+    gap: 10px;
   }
 
   .secondContainer {

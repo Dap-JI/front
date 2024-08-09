@@ -2,6 +2,7 @@
 import classNames from 'classnames/bind';
 import styles from './detailUploadPage.module.scss';
 import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
+import Header from '@/src/components/common/header';
 
 const cn = classNames.bind(styles);
 
@@ -13,7 +14,10 @@ const DetailUploadPage = ({ params }: DetailPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <PostUploadForm gymId={gymId} />
+      <Header back={true} />
+      <div className={cn('secondContainer')}>
+        <PostUploadForm gymId={gymId} />
+      </div>
     </div>
   );
 };

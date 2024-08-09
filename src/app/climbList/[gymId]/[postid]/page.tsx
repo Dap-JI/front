@@ -13,7 +13,7 @@ type PostDetailPageProps = {
 const PostDetailPage = ({ params }: PostDetailPageProps) => {
   return (
     <div className={cn('container')}>
-      <Header />
+      <Header back={true} />
       <div className={cn('secondContainer')}>
         <PostDetailForm params={params} />
       </div>
