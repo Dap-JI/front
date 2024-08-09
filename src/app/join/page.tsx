@@ -41,10 +41,11 @@ const JoinPage = () => {
   const onSubmit = async () => {
     try {
       const { data: nicknameCheck } = await refetch();
-      console.log(nicknameCheck);
       if (nicknameCheck?.data.available) {
-        router.push('/climbList');
-        showModalHandler('alert', '답지를 즐겨보세요');
+        showModalHandler('alert', '답지를 즐겨보세요🔥');
+        setTimeout(() => {
+          router.push('/climbList');
+        }, 2000);
         return;
       }
       showModalHandler('alert', '닉네임이 중복되었어요');

@@ -15,7 +15,7 @@ const NaverCallback = () => {
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
       NaverLogin(code);
-      router.push('/climbList');
+      router.push('/join');
     }
   }, [router]);
 

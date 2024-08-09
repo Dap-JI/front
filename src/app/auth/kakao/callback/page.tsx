@@ -15,7 +15,7 @@ const KakaoCallback = () => {
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
       KakaoLogin(code);
-      router.push('/climbList');
+      router.push('/join');
     }
   }, [router]);
 
