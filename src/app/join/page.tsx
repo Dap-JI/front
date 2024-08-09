@@ -45,7 +45,7 @@ const JoinPage = () => {
         showModalHandler('alert', '답지를 즐겨보세요🔥');
         setTimeout(() => {
           router.push('/climbList');
-        }, 2000);
+        }, 1300);
         return;
       }
       showModalHandler('alert', '닉네임이 중복되었어요');
@@ -53,6 +53,7 @@ const JoinPage = () => {
       showModalHandler('alert', '닉네임 확인 중 문제가 발생했습니다.');
     }
   };
+  
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>

@@ -14,6 +14,8 @@ import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
+import KakaoShare from '../../common/kakaoShare';
+import newKakao from '@/src/components/common/kakaoShare/newKakao';
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
@@ -39,10 +41,6 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
 
   const deleteT = (date: string | null) => date?.split('T')[0];
 
-  const shareClick = () => {
-    showToastHandler('링크를 복사했습니다!', 'check');
-  };
-
   const editPage = () => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
@@ -58,7 +56,24 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     router.push(`/profile/${user_idx}`);
   };
 
-  const url = window.location.href;
+  const url =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/climbList/${gym_idx}/${post_idx}`
+      : '';
+
+  const copyToClipboard = async (text: any) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToastHandler('링크를 복사했습니다!', 'check');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCopyClick = () => {
+    copyToClipboard(url);
+  };
+
   return (
     <div className={cn('container')}>
       <div className={cn('btnStyle')}>
@@ -68,7 +83,8 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
             <DeleteIcon onClick={deleteClick} />
           </>
         )}
-        <ShareIcon onClick={shareClick} />
+        {/* <KakaoShare url={url} /> */}
+        <ShareIcon onClick={handleCopyClick} />
       </div>
       <div className={cn('videoWrapper')}>
         <video
