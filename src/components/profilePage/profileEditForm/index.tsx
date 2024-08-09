@@ -11,6 +11,8 @@ import { useFormProfileEditProps } from '@/src/utils/type';
 import { nickname_reg } from '@/src/utils/regex';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
+import { useNicknameCheck } from '@/src/app/join/api';
+
 const cn = classNames.bind(styles);
 
 type EditFormProps = {
@@ -37,8 +39,10 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
   const { data: profileData } = useProfileDatas(userId);
   const { mutate: profileUpdate } = useProfileUpdate(userId);
   const text = watch('introduce', '');
+  const nickname = watch('nickname', '');
   const maxLength = 100;
   const { showModalHandler } = useModal();
+  const { refetch } = useNicknameCheck(nickname, false);
 
   useEffect(() => {
     if (profileData?.user) {
@@ -48,15 +52,41 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
     }
   }, [profileData, setValue]);
 
-  const onSubmit = (data: useFormProfileEditProps) => {
+  const onSubmit = async (data: useFormProfileEditProps) => {
+    // 1. 닉네임이 변경되지 않은 경우: 닉네임 체크를 건너뛰고 수정 진행
+
     const formData = {
       ...data,
       img: fileUrl,
     };
-    const confirmAction = () => {
-      profileUpdate(formData);
-    };
-    showModalHandler('choice', '프로필을 수정하시겠어요?', confirmAction);
+
+    if (nickname === profileData?.user.nickname) {
+      const confirmAction = () => {
+        profileUpdate(formData);
+      };
+      showModalHandler('choice', '프로필을 수정하시겠어요?', confirmAction);
+      return;
+    }
+
+    try {
+      // 2. 닉네임이 변경되었을 경우: 중복 체크 후 처리
+
+      const { data: checkResult } = await refetch();
+      if (!checkResult?.data.available) {
+        showModalHandler('alert', '닉네임이 중복되었습니다.');
+        return;
+      }
+
+      // 3. 닉네임이 중복되지 않은 경우: 수정 진행
+
+      const confirmAction = () => {
+        profileUpdate(formData);
+      };
+
+      showModalHandler('choice', '프로필을 수정하시겠어요?', confirmAction);
+    } catch (error) {
+      showModalHandler('alert', '닉네임 확인 중 문제가 발생했습니다.');
+    }
   };
 
   return (
