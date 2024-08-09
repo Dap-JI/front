@@ -5,7 +5,7 @@ import CommonInput from '@/src/components/common/commonInput';
 import { useForm } from 'react-hook-form';
 import { nickname_reg } from '@/src/utils/regex';
 import CommonButton from '@/src/components/common/commonButton';
-import { useNicknameCheck } from './api';
+import { useNicknameCheck, useInitializeNickname } from './api';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
@@ -22,6 +22,7 @@ type onSubmitType = {
 const JoinPage = () => {
   const router = useRouter();
   const { showModalHandler } = useModal();
+  const { mutate: initializeNickname } = useInitializeNickname();
 
   const {
     register,
@@ -38,10 +39,14 @@ const JoinPage = () => {
 
   const { refetch } = useNicknameCheck(nickname, false);
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: any) => {
+    const formData = {
+      ...data,
+    };
     try {
       const { data: nicknameCheck } = await refetch();
       if (nicknameCheck?.data.available) {
+        initializeNickname(formData);
         showModalHandler('alert', '답지를 즐겨보세요🔥');
         setTimeout(() => {
           router.push('/climbList');
@@ -53,7 +58,6 @@ const JoinPage = () => {
       showModalHandler('alert', '닉네임 확인 중 문제가 발생했습니다.');
     }
   };
-  
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
