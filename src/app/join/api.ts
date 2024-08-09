@@ -2,6 +2,7 @@ import instance from '@/src/utils/axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useModal } from '@/src/hooks/useModal';
+import { initializeNicknameType } from '@/src/utils/type';
 
 type UseNicknameCheckResponse = {
   data: {
@@ -25,7 +26,8 @@ export const useInitializeNickname = () => {
 
   return useMutation({
     mutationKey: ['saveNickname'],
-    mutationFn: (formData) => instance.patch(`/api/profile/me`, formData),
+    mutationFn: (formData: initializeNicknameType) =>
+      instance.patch(`/api/profile/me`, formData),
     onSuccess: (updatedProfileData) => {
       queryClient.setQueryData(['profileDatas'], updatedProfileData);
     },

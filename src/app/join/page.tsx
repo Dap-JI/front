@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
+import { initializeNicknameType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -39,7 +40,7 @@ const JoinPage = () => {
 
   const { refetch } = useNicknameCheck(nickname, false);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: initializeNicknameType) => {
     const formData = {
       ...data,
     };

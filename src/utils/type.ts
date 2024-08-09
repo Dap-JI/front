@@ -10,6 +10,10 @@ export type LoginUserType = {
   role: string;
 };
 
+export type initializeNicknameType = {
+  nickname: string;
+};
+
 //메타타입
 export type metaType = {
   page: number;
