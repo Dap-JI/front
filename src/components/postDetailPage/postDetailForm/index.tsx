@@ -83,7 +83,6 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
             <DeleteIcon onClick={deleteClick} />
           </>
         )}
-        {/* <KakaoShare url={url} /> */}
         <ShareIcon onClick={handleCopyClick} />
       </div>
       <div className={cn('videoWrapper')}>

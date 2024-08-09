@@ -77,14 +77,14 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   return (
     <div className={cn('container')}>
       <Header title={name}>
-        {role && (
-          <div className={cn('BtnStyles')}>
+        <div className={cn('BtnStyles')}>
+          {role && (
             <Link href={'/admin/list'}>
               <AdminIcon />
             </Link>
-            <LogoutIcon className={cn('setIcon')} onClick={handleLogoutClick} />
-          </div>
-        )}
+          )}
+          <LogoutIcon className={cn('setIcon')} onClick={handleLogoutClick} />
+        </div>
       </Header>
       <div className={cn('secondContainer')}>
         <ProfileForm

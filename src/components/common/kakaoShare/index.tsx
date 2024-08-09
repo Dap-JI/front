@@ -4,15 +4,15 @@ import styles from './kakaoShare.module.scss';
 import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
-const KakaoShare = ({ url }: any) => {
-  // const url = typeof window !== 'undefined' ? window.location.href : '';
+const KakaoShare = () => {
+  const url = typeof window !== 'undefined' ? window.location.href : '';
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const { Kakao } = window;
 
-      if (!Kakao.isInitialized()) {
-        Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+      if (Kakao?.isInitialized()) {
+        Kakao?.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
       }
     }
   }, []);
