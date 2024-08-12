@@ -11,7 +11,7 @@ const KakaoShare = () => {
     if (typeof window !== 'undefined') {
       const { Kakao } = window;
 
-      if (Kakao?.isInitialized()) {
+      if (!Kakao.isInitialized()) {
         Kakao?.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
       }
     }
@@ -47,3 +47,5 @@ const KakaoShare = () => {
 };
 
 export default KakaoShare;
+
+

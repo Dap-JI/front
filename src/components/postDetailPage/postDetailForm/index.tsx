@@ -2,20 +2,19 @@
 import React from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
-import { ShareIcon, DeleteIcon, EditIcon } from '@/public/icon';
+import { DeleteIcon, EditIcon } from '@/public/icon';
 import LoadingSpinner from '../../common/loadingSpinner';
 import { useRouter } from 'next/navigation';
 import {
   usePostDetailDatas,
   usePostDetailDelete,
 } from '@/src/app/climbList/api';
-import { useToast } from '@/src/hooks/useToast';
 import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
 import KakaoShare from '../../common/kakaoShare';
-import newKakao from '@/src/components/common/kakaoShare/newKakao';
+import LinkAndKakaoShare from '@/src/components/common/linkAndkakaoShare';
 const cn = classNames.bind(styles);
 
 type PostDetailFormProps = {
@@ -24,7 +23,6 @@ type PostDetailFormProps = {
 
 const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const router = useRouter();
-  const { showToastHandler } = useToast();
   const { postid, gymId } = params;
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   const { mutate: postDetailDelete } = usePostDetailDelete(postid, gymId);
@@ -44,6 +42,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const editPage = () => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
+  //수정페이지
 
   const deleteClick = () => {
     const confirmAction = () => {
@@ -51,27 +50,10 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     };
     showModalHandler('choice', '정말 삭제하시겠어요?', confirmAction);
   };
+  //삭제페이지
 
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
-  };
-
-  const url =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/climbList/${gym_idx}/${post_idx}`
-      : '';
-
-  const copyToClipboard = async (text: any) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      showToastHandler('링크를 복사했습니다!', 'check');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleCopyClick = () => {
-    copyToClipboard(url);
   };
 
   return (
@@ -83,7 +65,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
             <DeleteIcon onClick={deleteClick} />
           </>
         )}
-        <ShareIcon onClick={handleCopyClick} />
+        <LinkAndKakaoShare params={params} />
       </div>
       <div className={cn('videoWrapper')}>
         <video
