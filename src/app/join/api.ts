@@ -1,6 +1,5 @@
 import instance from '@/src/utils/axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import { useModal } from '@/src/hooks/useModal';
 import { initializeNicknameType } from '@/src/utils/type';
 

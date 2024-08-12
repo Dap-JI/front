@@ -13,6 +13,8 @@ const APP_TITLE_TEMPLATE = '%s - Dap Ji';
 const APP_DESCRIPTION = 'Dap Ji';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
+  //이거 url바꾸기
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
@@ -31,6 +33,14 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [
+      {
+        url: '/icon/icon.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dap Ji',
+      },
+    ],
   },
   twitter: {
     card: 'summary',
@@ -39,6 +49,12 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [
+      {
+        url: '/icon/icon.png',
+        alt: 'Dap Ji',
+      },
+    ],
   },
 };
 
@@ -49,6 +65,10 @@ declare global {
 }
 
 export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: '#F5F5DC',
 };
 
@@ -62,6 +82,39 @@ export default function RootLayout({
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#F5F5DC" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        {/* <!-- Open Graph 메타 태그 --> */}
+        {/* <meta property="og:type" content="website" /> */}
+        {/* <meta
+          property="og:title"
+          content="Dap Ji - 당신의 클라이밍 영상을 공유해보세요!"
+        />
+        <meta
+          property="og:description"
+          content="Dap Ji - 클라이밍 정답지를 찾아보고 공유해보세요"
+        />
+        <meta property="og:image" content="/icon/icon.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://climbdapji.kr" />
+        <meta property="og:site_name" content="Dap Ji" /> */}
+
+        {/* <!-- Twitter 메타 태그 --> */}
+        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Dap Ji - 당신의 클라이밍 영상을 공유해보세요!"
+        />
+        <meta
+          name="twitter:description"
+          content="Dap Ji - Y클라이밍 정답지를 찾아보고 공유해보세요"
+        />
+        <meta name="twitter:image" content="/icon/icon.png" />
+        <meta name="twitter:image:alt" content="Dap Ji" /> */}
+
+        {/* 파비콘 */}
+        <link rel="icon" href="/icon/icon.png" sizes="any" />
+        {/* <!-- pwa스플래시 이미지 --> */}
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
