@@ -5,6 +5,8 @@ import styles from './VideoInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import instance from '@/src/utils/axios';
+import ModalChoice from '../moadlChoice';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
@@ -23,6 +25,7 @@ type VideoInputProps = {
 
 const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
+  const { showModalHandler } = useModal();
 
   const { mutate: videoUpload, isPending } = useMutation({
     mutationKey: ['videoFile'],
@@ -43,15 +46,26 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
       setFileUploaded(true);
     },
     onError: (error) => {
+      showModalHandler('alert', '영상을 1분 이하로 업로드 해주세요');
       console.error('파일 업로드 실패:', error);
     },
   });
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
+    const maxSize = 500 * 1024 * 1024;
+
     if (files && files.length > 0) {
+      const file = files[0];
+      console.log(`파일 크기: ${file.size}, 최대 허용 크기: ${maxSize}`);
+
+      if (file.size > maxSize) {
+        showModalHandler('alert', '영상을 500MB 이하로 업로드 해주세요');
+        return;
+      }
+
       const formData = new FormData();
-      formData.append('video', files[0]); // 첫 번째 파일을 'video' 키로 추가
+      formData.append('video', file); // 첫 번째 파일을 'video' 키로 추가
       videoUpload(formData); // FormData를 mutate 함수에 전달
     }
   };
@@ -96,6 +110,7 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
           />
         )}
       </div>
+      <ModalChoice />
     </div>
   );
 };
