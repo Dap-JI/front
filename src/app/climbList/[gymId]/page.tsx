@@ -66,10 +66,10 @@ const DetailPage = ({ params }: DetailPageProps) => {
           setActiveColor={setActiveColor}
         />
         <DetailMainContentList lists={lists} />
+        <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
       {!hasNextPage && <NodetailData />}
-      <div ref={ref} />
     </div>
   );
 };
