@@ -16,17 +16,4 @@
   .filetextInput {
     display: none;
   }
-
-  .uploadInput {
-    width: 100%;
-    max-width: 600px;
-    position: relative;
-    @include flex-arrange(center, center);
-
-    .videoPreview {
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-  }
 }

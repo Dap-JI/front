@@ -59,7 +59,7 @@ export type DetailType = {
   user_idx: number;
   gym_idx: number;
   clearday: any;
-  media: string;
+  media: string[];
   thumbnailUrl: string;
   content: string | null;
   color: string;
@@ -88,7 +88,7 @@ export type DetailMainContentListProps = {
 export type useFormPostUploadProps = {
   clearday: string;
   content: string | null;
-  media: string | null;
+  media: string[];
   color: string | null;
   gym_idx: string | number;
   thumbnailUrl: string | null;
