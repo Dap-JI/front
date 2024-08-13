@@ -11,35 +11,28 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useMyInfo } from '@/src/app/auth/api';
-import { useState, useEffect } from 'react';
+import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 
 const cn = classNames.bind(styles);
 
 const FooterBar = () => {
   const path = usePathname();
   const router = useRouter();
-  const [fetchProfile, setFetchProfile] = useState(false);
+  const { userId } = useMyInfoStore();
 
-  const { data: myInfoData } = useMyInfo(fetchProfile);
-  const userId = myInfoData?.data;
-
-  useEffect(() => {
-    if (userId) {
-      router.push(`/profile/${userId}`);
-    }
-  }, [userId, router]);
+  useMyInfo();
 
   const routerClick = (page: string) => {
     router.push(`/${page}`);
   };
 
   const profileClick = () => {
-    setFetchProfile(true);
+    if (userId) {
+      router.push(`/profile/${userId}`);
+    }
   };
 
-  // 이 클릭을 했을 때만 myinfo함수 실행 -> useEffect함수 실행 -> 프로필 페이지 이동
-
-  if (path === '/' || path.startsWith('/auth')) {
+  if (path === '/' || path === '/join' || path.startsWith('/auth')) {
     return null;
   }
 

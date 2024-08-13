@@ -8,21 +8,22 @@ import { ClimbLIstResponseType } from '@/src/utils/type';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import NodetailData from '@/src/components/common/noDetailData';
 import { useQueryClient } from '@tanstack/react-query';
+import ModalChoice from '@/src/components/common/moadlChoice';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
 
+  const { showModalHandler } = useModal();
+
   const {
     data: climbListData,
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
     fetchFunction: (page = 1) => ClimbListDatas({ page, search: searchName }),
@@ -51,7 +52,9 @@ const ClimbListPage = () => {
   return (
     <div className={cn('container')}>
       <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
-      <CardListData lists={lists} />
+      <div className={cn('secondContainer')}>
+        <CardListData lists={lists} />
+      </div>
       {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} />
     </div>
@@ -59,4 +62,3 @@ const ClimbListPage = () => {
 };
 
 export default ClimbListPage;
-//서치네임이 있으면 안보여주고 없을때 보여줌

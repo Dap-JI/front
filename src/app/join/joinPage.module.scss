@@ -1,0 +1,13 @@
+.container {
+  padding: 10px;
+  @include flex-arrange(center, center);
+  flex-direction: column;
+  width: 100%;
+  background-color: beige;
+  height: 100vh;
+  gap: 20px;
+
+  h1 {
+    @include font-style(3rem, black, 400);
+  }
+}

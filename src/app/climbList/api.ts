@@ -1,12 +1,11 @@
-import fetchData from '@/src/utils/fetchData';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   useFormPostUploadProps,
   useFormListUploadProps,
-  GymsType,
 } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import instance from '@/src/utils/axios';
+import { useModal } from '@/src/hooks/useModal';
 
 type ClimbListProps = {
   page: number;
@@ -36,6 +35,7 @@ export const useClimbListDetails = (gymId: string) => {
 export const useClimbListDatasUpload = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
   return useMutation({
     mutationKey: ['climbListUpload'],
     mutationFn: (formData: useFormListUploadProps) =>
@@ -46,6 +46,7 @@ export const useClimbListDatasUpload = () => {
     },
     onError: (error) => {
       console.error('업로드 실패:', error);
+      showModalHandler('alert', '업로드에 실패했어요');
     },
   });
 };
@@ -53,6 +54,8 @@ export const useClimbListDatasUpload = () => {
 //클라이밍장 리스트 삭제 함수
 export const useClimbListDatasDelete = (gymId: number) => {
   const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
+
   return useMutation({
     mutationKey: ['climbListDelete'],
     mutationFn: () => instance.delete(`/api/gyms/${gymId}`),
@@ -61,6 +64,7 @@ export const useClimbListDatasDelete = (gymId: number) => {
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
+      showModalHandler('alert', '삭제에 실패했어요');
     },
   });
 };
@@ -68,6 +72,7 @@ export const useClimbListDatasDelete = (gymId: number) => {
 export const useClimbListDataUpdate = (gymId: string) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { showModalHandler } = useModal();
 
   return useMutation({
     mutationKey: ['climbListUpdate'],
@@ -79,6 +84,7 @@ export const useClimbListDataUpdate = (gymId: string) => {
     },
     onError: (error) => {
       console.error('수정 실패:', error);
+      showModalHandler('alert', '수정에 실패했어요');
     },
   });
 };
@@ -108,6 +114,8 @@ export const ClimbDetailDatas = async ({
 //클라이밍장 포스트 데이터 업로드 함수
 export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
+  const { showModalHandler } = useModal();
+
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormPostUploadProps) =>
@@ -115,9 +123,8 @@ export const useDetailUploadDatas = (gymId: string | number) => {
     onSuccess: () => {
       router.push(`/climbList/${gymId}`);
     },
-    onError: (error) => {
-      console.error('업로드 실패:', error);
-      alert('동영상,등반일, 난이도 선택은 필수입니다.');
+    onError: () => {
+      showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');
     },
   });
 };
@@ -135,6 +142,7 @@ export const usePostDetailDatas = (postid: string) => {
 //클라이밍장 포스트 수정 함수  `/api/posts/${postid}`
 export const usePostDetailUpdate = (postid: string, gymId: string) => {
   const router = useRouter();
+  const { showModalHandler } = useModal();
 
   return useMutation({
     mutationKey: ['postDetailUpdate'],
@@ -143,8 +151,8 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
     onSuccess: () => {
       router.push(`/climbList/${gymId}`);
     },
-    onError: (error) => {
-      console.error('수정 실패:', error);
+    onError: () => {
+      showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');
     },
   });
 };
@@ -153,6 +161,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
 export const usePostDetailDelete = (postid: string, gymId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
 
   return useMutation({
     mutationKey: ['postDetailDelete'],
@@ -163,6 +172,7 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
+      showModalHandler('alert', '삭제가 되지 않았어요');
     },
   });
 };

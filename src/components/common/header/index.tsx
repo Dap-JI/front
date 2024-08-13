@@ -9,9 +9,10 @@ const cn = classNames.bind(styles);
 type HeaderProps = {
   children?: React.ReactNode;
   title?: string;
+  back?: boolean;
 };
 
-const Header = ({ children, title }: HeaderProps) => {
+const Header = ({ children, title, back }: HeaderProps) => {
   const router = useRouter();
 
   const backClick = () => {
@@ -19,7 +20,7 @@ const Header = ({ children, title }: HeaderProps) => {
   };
   return (
     <div className={cn('container')}>
-      <LeftArrowIcon onClick={backClick} />
+      {back === true ? <LeftArrowIcon onClick={backClick} /> : ''}
       <h1>{title}</h1>
       {children}
     </div>

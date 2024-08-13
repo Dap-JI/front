@@ -48,14 +48,14 @@ const AdminClimbListUploadForm = () => {
         foldername="gym-logo"
       />
       <CommonInput
-        label="클라이밍짐 이름"
+        placeholder='클라이밍장 이름을 입력해주세요'
         register={register('name', {
           required: '클라이밍짐 이름을 입력해 주세요',
         })}
       />
       {errors.name && <span>{errors.name.message}</span>}
       <CommonInput
-        label="주소"
+        placeholder='주소를 입력해주세요'
         register={register('address', {
           required: '주소를 입력해 주세요',
         })}

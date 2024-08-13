@@ -1,8 +1,12 @@
 .container {
-  padding: 10px;
-  background: beige;
+  width: 100%;
   height: 100vh;
+  background: beige;
   overflow-y: scroll;
+  .secondContainer {
+    margin-top: 80px;
+    padding: 0 10px 10px 10px;
+  }
 }
 
 .container::-webkit-scrollbar {

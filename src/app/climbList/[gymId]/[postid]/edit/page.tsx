@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { usePostDetailDatas } from '@/src/app/climbList/api';
+import Header from '@/src/components/common/header';
 
 const cn = classNames.bind(styles);
 
@@ -21,7 +22,10 @@ const PostDetailEditPage = ({ params }: PostDetailEditPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <PostUploadForm gymId={gymId} initialData={postDetailDatas} />
+      <Header back={true} />
+      <div className={cn('secondContainer')}>
+        <PostUploadForm gymId={gymId} initialData={postDetailDatas} />
+      </div>
     </div>
   );
 };

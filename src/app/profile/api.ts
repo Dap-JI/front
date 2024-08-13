@@ -1,11 +1,9 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  ProfileType,
-  useFormProfileEditProps,
-} from '@/src/utils/type';
+import { ProfileType, useFormProfileEditProps } from '@/src/utils/type';
 import instance from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
+import { useModal } from '@/src/hooks/useModal';
 
 type ProfileDataProps = {
   userId: any;
@@ -32,6 +30,8 @@ export const useProfileDatas = (userId: string) => {
 export const useProfileUpdate = (userId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
+
   return useMutation({
     mutationKey: ['profileUpdate'],
     mutationFn: (formData: useFormProfileEditProps) =>
@@ -42,6 +42,16 @@ export const useProfileUpdate = (userId: string) => {
     },
     onError: (e) => {
       console.error(e, '프로필 수정 에러');
+      showModalHandler('alert', '수정에 실패했어요');
     },
   });
 };
+
+export const useLogout = (enabled: boolean) => {
+  return useQuery<void>({
+    queryKey: ['userLogout'],
+    queryFn: () => instance.get(`/api/auth/logout`),
+    enabled,
+  });
+};
+//void는 성공도는 실패만 나타냄

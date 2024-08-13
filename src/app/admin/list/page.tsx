@@ -23,8 +23,6 @@ const AdminClimbListPage = () => {
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
     fetchFunction: (page = 1) => ClimbListDatas({ page, search: searchName }),
@@ -53,20 +51,22 @@ const AdminClimbListPage = () => {
   return (
     <div className={cn('container')}>
       <Header title={'클라이밍짐 리스트 관리'}>
-        <Link href='/admin/list/upload'>
+        <Link href="/admin/list/upload">
           <AddIcon />
         </Link>
       </Header>
+
       <div className={cn('searchBar')}>
         <SearchBar
           searchName={searchName}
           onSearchChange={handleSearchChange}
         />
       </div>
+
       <div className={cn('secondContainer')}>
         <AdminClimbListDatas lists={lists} />
       </div>
-      <div />
+
       {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} />
     </div>

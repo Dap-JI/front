@@ -13,10 +13,20 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
-    if (code) {
-      KakaoLogin(code);
-      router.push('/climbList');
-    }
+    const fetchUserKakao = async () => {
+      if (code) {
+        const data = await KakaoLogin(code);
+        if (data) {
+          if (!data.nickname) {
+            router.push('/join');
+            return;
+          }
+          router.push('/climbList');
+        }
+      }
+    };
+
+    fetchUserKakao();
   }, [router]);
 
   return (

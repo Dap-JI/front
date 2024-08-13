@@ -11,6 +11,8 @@ import {
   usePostDetailUpdate,
 } from '@/src/app/climbList/api';
 import CommonButton from '../../common/commonButton';
+import { useModal } from '@/src/hooks/useModal';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -32,6 +34,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
   );
+  const { showModalHandler } = useModal();
+
   //난이도 색
   const maxLength = 100;
   const {
@@ -50,7 +54,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     String(initialData?.post_idx),
     String(gymId),
   );
-
   const onSubmit = (data: useFormPostUploadProps) => {
     const formData = {
       ...data,
@@ -59,11 +62,20 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       color: activeColor,
       gym_idx: Number(gymId),
     };
-    if (initialData) {
-      postDetailUpdate(formData);
-      return;
-    }
-    detailUploadDatas(formData);
+
+    const confirmAction = () => {
+      if (initialData) {
+        postDetailUpdate(formData);
+      } else {
+        detailUploadDatas(formData);
+      }
+    };
+
+    const message = initialData
+      ? '답지를 수정 하시나요?'
+      : '답지를 업로드 하시나요?';
+
+    showModalHandler('choice', message, confirmAction);
   };
 
   const formatDate = (date: Date) => {
@@ -125,6 +137,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         name={initialData ? '수정하기' : '답지 올리기'}
         type="submit"
       />
+      <ModalChoice />
     </form>
   );
 };

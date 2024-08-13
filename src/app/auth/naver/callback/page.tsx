@@ -13,10 +13,20 @@ const NaverCallback = () => {
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
-    if (code) {
-      NaverLogin(code);
-      router.push('/climbList');
-    }
+    const fetchUserKakao = async () => {
+      if (code) {
+        const data = await NaverLogin(code);
+        if (data) {
+          if (!data.nickname) {
+            router.push('/join');
+            return;
+          }
+          router.push('/climbList');
+        }
+      }
+    };
+
+    fetchUserKakao();
   }, [router]);
 
   return (

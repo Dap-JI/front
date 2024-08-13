@@ -1,9 +1,12 @@
 .container {
+  width: 100%;
+  max-width: 165px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+
   img {
     width: 100%;
-    height: auto;
-    max-width: 150px;
-    max-height: 150px;
+    height: 100%;
     object-fit: cover;
   }
 }
@@ -13,5 +16,5 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: 3px;
-  justify-content: center;
+  justify-content: start;
 }
