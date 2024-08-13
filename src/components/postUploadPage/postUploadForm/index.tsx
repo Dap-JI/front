@@ -22,14 +22,18 @@ type PostUploadFormProps = {
 };
 
 type MediaUrlType = {
-  videoUrl: string | null;
-  thumbnailUrl: string | null;
+  videoUrl: string[];
+  thumbnailUrl: null;
 };
 
 const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   const [mediaUrl, setMediaUrl] = useState<MediaUrlType>({
-    videoUrl: initialData?.media || null,
-    thumbnailUrl: initialData?.thumbnailUrl || null,
+    videoUrl: initialData?.media
+      ? Array.isArray(initialData.media)
+        ? initialData.media
+        : [initialData.media] // 단일 문자열인 경우 배열로 변환
+      : [],
+    thumbnailUrl: null, // 업로드 시 썸네일은 없으므로 null로 설정
   });
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
@@ -45,7 +49,14 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     setValue,
     formState: { errors },
   } = useForm<useFormPostUploadProps>({
-    defaultValues: initialData,
+    defaultValues: {
+      ...initialData,
+      media: initialData?.media
+        ? Array.isArray(initialData.media)
+          ? initialData.media
+          : [initialData.media] // 단일 문자열인 경우 배열로 변환
+        : [], // media는 항상 string[] 타입이어야 하므로 기본값을 빈 배열로 설정
+    },
   });
   const text = watch('content', '');
 
@@ -77,6 +88,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 
     showModalHandler('choice', message, confirmAction);
   };
+  console.log('url은 ---> ',mediaUrl.videoUrl);
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
