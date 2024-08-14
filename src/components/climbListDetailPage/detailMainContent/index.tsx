@@ -33,7 +33,6 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
-  console.log(list);
   return (
     <div className={cn('container')}>
       <div className={cn('videoWrapper')}>
@@ -50,7 +49,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           </div>
         ))} */}
         <video
-          src={media}
+          src={media[0]}
           autoPlay
           muted
           controls
