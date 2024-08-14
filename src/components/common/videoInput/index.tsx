@@ -12,6 +12,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import { CircleXIcon } from '@/public/icon';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const cn = classNames.bind(styles);
 
@@ -54,6 +56,7 @@ type VideoInputProps = {
 const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
   const { showModalHandler } = useModal();
+  const [progress, setProgress] = useState(0);
 
   const { mutate: videoUpload, isPending } = useMutation({
     mutationKey: ['videoFile'],
@@ -62,15 +65,23 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            );
+            setProgress(percentCompleted);
+          }
+        },
       });
       return response.data; // API 응답 데이터 반환
     },
     onSuccess: (data) => {
       // 성공적으로 업로드된 경우 mediaUrl을 상태에 저장
-      setMediaUrl({
-        videoUrl: data.videoUrls,
+      setMediaUrl((prev) => ({
+        videoUrl: [...prev.videoUrl, ...data.videoUrls],
         thumbnailUrl: data.thumbnailUrl,
-      });
+      }));
       setFileUploaded(true);
     },
     onError: (error) => {
@@ -126,7 +137,17 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   };
 
   if (isPending) {
-    return <LoadingSpinner />;
+    return (
+      <div style={{ width: '100px', marginTop: '10px' }}>
+        <CircularProgressbar
+          value={progress}
+          text={`${progress}%`}
+          styles={buildStyles({
+            trailColor: '#d6d6d6',
+          })}
+        />
+      </div>
+    );
   }
 
   return (
@@ -168,3 +189,10 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
 };
 
 export default VideoInput;
+
+//CircularProgressbar props
+//value는 진행도를 나타냄
+//text는 가운데 원형 안에 들어가는 숫자, value랑 같게 하면 될듯
+//maxvalue는 원형을 최대로 채울 수 있는 크기 value를 10으로 하고 maxvalue가 11이면 90%만 채워짐
+//minvalue는 원형의 최솟값 10으로 설정하면 value가 10일때 파란색 선이 0이다
+//strokeWidth 선 두께
