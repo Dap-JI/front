@@ -88,7 +88,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 
     showModalHandler('choice', message, confirmAction);
   };
-  console.log('url은 ---> ',mediaUrl.videoUrl);
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();

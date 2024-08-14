@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  position: relative;
 
   label {
     width: 100px;
@@ -16,13 +17,28 @@
   .filetextInput {
     display: none;
   }
-  .video {
-    position: relative;
-    .close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 2px;
+
+  .videoWrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+
+    .videoBox {
+      position: relative;
+      padding-top: 40px;
+
+      .close {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+        z-index: 3;
+      }
+
+      .video {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 10px;
+      }
     }
   }
 }

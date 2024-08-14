@@ -10,7 +10,9 @@ import {
 } from '@/src/utils/type';
 import usePostStore from '@/src/utils/store/usePostStore';
 import Image from 'next/image';
-import Link from 'next/link';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const cn = classNames.bind(styles);
 
@@ -31,12 +33,23 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
-
   return (
     <div className={cn('container')}>
       <div className={cn('videoWrapper')}>
+        {/* {media?.map((mideaUrl, index) => (
+          <div key={index} className={cn('videoBox')}>
+            <video
+              src={mideaUrl}
+              autoPlay
+              muted
+              controls
+              playsInline
+              controlsList="nodownload"
+            />
+          </div>
+        ))} */}
         <video
-          src={media}
+          src={media[0]}
           autoPlay
           muted
           controls
@@ -57,6 +70,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     </div>
   );
 };
+//여기도 비디오 배열로 , react-slick
 
 const DetailMainContentList = ({ lists }: DetailMainContentListProps) => {
   return (
