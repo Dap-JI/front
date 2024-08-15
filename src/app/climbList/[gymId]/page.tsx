@@ -69,7 +69,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
         <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
-      {!hasNextPage && <NodetailData />}
     </div>
   );
 };

@@ -23,7 +23,7 @@ type PostUploadFormProps = {
 
 type MediaUrlType = {
   videoUrl: string[];
-  thumbnailUrl: null;
+  thumbnailUrl: string[];
 };
 
 const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
@@ -33,8 +33,13 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         ? initialData.media
         : [initialData.media] // 단일 문자열인 경우 배열로 변환
       : [],
-    thumbnailUrl: null, // 업로드 시 썸네일은 없으므로 null로 설정
+    thumbnailUrl: initialData?.thumbnailUrl
+      ? Array.isArray(initialData.thumbnailUrl)
+        ? initialData.thumbnailUrl
+        : [initialData.thumbnailUrl] // 단일 문자열인 경우 배열로 변환
+      : [], // 업로드 시 썸네일은 없으므로 null로 설정
   });
+  console.log(initialData);
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
   );
