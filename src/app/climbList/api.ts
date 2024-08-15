@@ -115,12 +115,15 @@ export const ClimbDetailDatas = async ({
 export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   const { showModalHandler } = useModal();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.post('/api/posts', formData),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
+
       router.push(`/climbList/${gymId}`);
     },
     onError: () => {
@@ -180,11 +183,14 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
 //클라이밍장 동영상 개별 삭제 함수 `videos/delete` 바디에 url
 
 export const useVideoDelete = () => {
+  const queryClient = useQueryClient();
   const videoDelete = useMutation({
     mutationKey: ['videoDelete'],
     mutationFn: (url: { videoUrl: string; thumbnailUrl: string }) =>
       instance.post(`/api/videos/delete`, url),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
+      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
       console.log('삭제 성공');
     },
     onError: (error) => {
