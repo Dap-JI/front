@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { CircleXIcon } from '@/public/icon';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useVideoDelete } from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
 
@@ -52,6 +53,7 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState(0);
+  const { mutate: videoDelete } = useVideoDelete();
 
   const settings = {
     dots: true,

@@ -98,7 +98,7 @@ export type useFormPostUploadProps = {
 
 export type ProfilePostType = {
   post_idx: string;
-  thumbnailUrl: string[];
+  thumbnailUrl: any;
   gym_idx: string;
 };
 
