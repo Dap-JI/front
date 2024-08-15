@@ -47,9 +47,14 @@ type VideoInputProps = {
       thumbnailUrl: string[];
     }>
   >;
+  setDeletedVideos: any;
 };
 
-const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
+const VideoInput = ({
+  mediaUrl,
+  setMediaUrl,
+  setDeletedVideos,
+}: VideoInputProps) => {
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState(0);
   const { mutate: videoDelete } = useVideoDelete();
@@ -120,22 +125,25 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
     }
   };
   const handleRemoveVideo = (index: number) => {
-    const videoToDelete = {
-      videoUrl: mediaUrl.videoUrl[index],
-      thumbnailUrl: mediaUrl.thumbnailUrl[index],
-    };
+    const videoToRemove = mediaUrl.videoUrl[index];
+    const thumbnailToRemove = mediaUrl.thumbnailUrl[index];
 
+    // 삭제할 동영상과 썸네일 URL을 deletedVideos 배열에 추가
+    setDeletedVideos((prev: string[]) => [
+      ...prev,
+      { videoUrl: videoToRemove, thumbnailUrl: thumbnailToRemove },
+    ]);
+
+    // 브라우저에서 동영상 제거
     const updatedVideos = mediaUrl.videoUrl.filter((_, i) => i !== index);
-    const updatedthumbnailUrl = mediaUrl.thumbnailUrl.filter(
+    const updatedThumbnailUrl = mediaUrl.thumbnailUrl.filter(
       (_, i) => i !== index,
     );
 
     setMediaUrl({
       videoUrl: updatedVideos,
-      thumbnailUrl: updatedthumbnailUrl,
+      thumbnailUrl: updatedThumbnailUrl,
     });
-
-    videoDelete(videoToDelete);
   };
 
   if (isPending) {

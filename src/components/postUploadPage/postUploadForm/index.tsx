@@ -13,6 +13,7 @@ import {
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
+import { useVideoDelete } from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
 
@@ -27,6 +28,10 @@ type MediaUrlType = {
 };
 
 const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
+  const [deletedVideos, setDeletedVideos] = useState<
+    { videoUrl: string; thumbnailUrl: string }[]
+  >([]);
+
   const [mediaUrl, setMediaUrl] = useState<MediaUrlType>({
     videoUrl: initialData?.media
       ? Array.isArray(initialData.media)
@@ -39,7 +44,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         : [initialData.thumbnailUrl] // 단일 문자열인 경우 배열로 변환
       : [], // 업로드 시 썸네일은 없으므로 null로 설정
   });
-  console.log(initialData);
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
   );
@@ -70,7 +74,10 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     String(initialData?.post_idx),
     String(gymId),
   );
+  const { mutate: videoDelete } = useVideoDelete();
+
   const onSubmit = (data: useFormPostUploadProps) => {
+    //폼데이터에 들어갈 데이터들
     const formData = {
       ...data,
       media: mediaUrl.videoUrl,
@@ -79,14 +86,30 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       gym_idx: Number(gymId),
     };
 
+    // 동영상 삭제 처리 함수
+    const handleVideoDeletion = () => {
+      deletedVideos.forEach(({ videoUrl, thumbnailUrl }) => {
+        const videoToDelete = {
+          videoUrl: videoUrl,
+          thumbnailUrl: thumbnailUrl,
+        };
+        videoDelete(videoToDelete);
+      });
+    };
+
     const confirmAction = () => {
       if (initialData) {
         postDetailUpdate(formData);
+        handleVideoDeletion(); // 수정 후 동영상 삭제 처리
       } else {
         detailUploadDatas(formData);
       }
+
+      // 삭제된 동영상 리스트 초기화
+      setDeletedVideos([]);
     };
 
+    // 모달을 표시하고, 사용자가 확인 버튼을 눌렀을 때 `confirmAction` 실행
     const message = initialData
       ? '답지를 수정 하시나요?'
       : '답지를 업로드 하시나요?';
@@ -112,9 +135,15 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   }, [initialData, setValue]);
 
+  console.log(deletedVideos);
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
-      <VideoInput mediaUrl={mediaUrl} setMediaUrl={setMediaUrl} />
+      <VideoInput
+        mediaUrl={mediaUrl}
+        setMediaUrl={setMediaUrl}
+        setDeletedVideos={setDeletedVideos}
+      />
       <CommonInput
         id="clearday"
         type="date"
