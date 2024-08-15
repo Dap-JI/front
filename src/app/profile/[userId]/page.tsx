@@ -93,10 +93,10 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
           params={params}
         />
         <ProfileAllData lists={profilePosts} />
+        <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
       <ModalChoice />
-      <div ref={ref} />
     </div>
   );
 };

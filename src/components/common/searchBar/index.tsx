@@ -27,7 +27,6 @@ const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
     setInputValue(searchName);
   }, [searchName]);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -36,7 +35,14 @@ const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
     <div className={cn('container')}>
       <CommonInput
         placeholder="검색어를 입력하세요"
-        suffix={<GlassIcon width="15" height="15" className={cn('glass')} />}
+        suffix={
+          <GlassIcon
+            width="15"
+            height="15"
+            className={cn('glass')}
+            fill="black"
+          />
+        }
         type="text"
         value={inputValue}
         onChange={handleChange}

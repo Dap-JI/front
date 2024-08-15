@@ -15,8 +15,32 @@ import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
 import KakaoShare from '../../common/kakaoShare';
 import LinkAndKakaoShare from '@/src/components/common/linkAndkakaoShare';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+
 const cn = classNames.bind(styles);
 
+export const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    opacity: 0.5;
+    padding: 0 15px;
+  }
+
+  .slick-center {
+    opacity: 1 !important;
+  }
+
+  .slick-track {
+    display: flex;
+    justify-content: center;
+  }
+`;
 type PostDetailFormProps = {
   params: { postid: string; gymId: string };
 };
@@ -29,9 +53,22 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const { userId } = useMyInfoStore();
   const { showModalHandler } = useModal();
 
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '0px',
+    draggable: true,
+  };
+
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
   }
+  
   const { gym_idx, post_idx, media, color, clearday, User, content, user_idx } =
     postDetailDatas;
 
@@ -68,14 +105,20 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
         <LinkAndKakaoShare params={params} />
       </div>
       <div className={cn('videoWrapper')}>
-        <video
-          src={media}
-          autoPlay
-          muted
-          controls
-          playsInline
-          controlsList="nodownload"
-        />
+        <StyledSlider {...settings}>
+          {media?.map((url: string, index: number) => (
+            <div key={index} className={cn('videoBox')}>
+              <video
+                src={url}
+                autoPlay
+                muted
+                controls
+                playsInline
+                controlsList="nodownload"
+              />
+            </div>
+          ))}
+        </StyledSlider>
       </div>
       <div className={cn('infoWrapper')}>
         <div className={cn('color', `color-${color}`)} />

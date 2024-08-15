@@ -12,6 +12,7 @@ type ProfilePostDataProps = {
 
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
   const { thumbnailUrl, post_idx, gym_idx } = list;
+
   return (
     <div className={cn('container')}>
       <Link href={`/climbList/${gym_idx}/${post_idx}`}>

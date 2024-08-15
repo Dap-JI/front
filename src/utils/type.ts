@@ -59,8 +59,8 @@ export type DetailType = {
   user_idx: number;
   gym_idx: number;
   clearday: any;
-  media: string;
-  thumbnailUrl: string;
+  media: string[];
+  thumbnailUrl: string[];
   content: string | null;
   color: string;
   createdAt: any;
@@ -88,17 +88,17 @@ export type DetailMainContentListProps = {
 export type useFormPostUploadProps = {
   clearday: string;
   content: string | null;
-  media: string | null;
+  media: string[];
   color: string | null;
   gym_idx: string | number;
-  thumbnailUrl: string | null;
+  thumbnailUrl: string[];
 };
 
 //프로필 타입들
 
 export type ProfilePostType = {
   post_idx: string;
-  thumbnailUrl: string | null;
+  thumbnailUrl: any;
   gym_idx: string;
 };
 
@@ -131,10 +131,10 @@ export type PostDetailDataType = {
   user_idx: number;
   gym_idx: string;
   clearday: any;
-  media: string;
+  media: string[];
   content: string | null;
   color: string;
   createdAt: any;
   User: UserType;
-  thumbnailUrl?: string;
+  thumbnailUrl?: string[];
 };

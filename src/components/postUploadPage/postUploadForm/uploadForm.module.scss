@@ -2,7 +2,7 @@
   width: 100%;
   @include flex-arrange;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   margin-top: 50px;
   margin-bottom: 100px;
 
@@ -16,7 +16,7 @@
     height: 150px;
     padding: 10px;
     box-sizing: border-box;
-    resize: none; /* 사용자가 크기 조절 못하게 */
+    resize: none;
     border-radius: 5px;
   }
 
