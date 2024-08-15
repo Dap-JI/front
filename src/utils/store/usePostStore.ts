@@ -11,7 +11,7 @@ interface PostData {
   media: string[];
   gym_idx: string | number;
   createdAt?: string;
-  thumbnailUrl?: string;
+  thumbnailUrl?: string[];
   user_idx?: number;
 }
 

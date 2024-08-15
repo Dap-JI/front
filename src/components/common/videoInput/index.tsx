@@ -38,12 +38,12 @@ export const StyledSlider = styled(Slider)`
 type VideoInputProps = {
   mediaUrl: {
     videoUrl: string[];
-    thumbnailUrl: string | null;
+    thumbnailUrl: string[];
   };
   setMediaUrl: React.Dispatch<
     React.SetStateAction<{
       videoUrl: string[];
-      thumbnailUrl: null;
+      thumbnailUrl: string[];
     }>
   >;
 };
@@ -52,6 +52,18 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
   const [fileUploaded, setFileUploaded] = useState(false);
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState(0);
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '0px',
+    draggable: true,
+  };
 
   const { mutate: videoUpload, isPending } = useMutation({
     mutationKey: ['videoFile'],
@@ -84,6 +96,8 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
       console.error('파일 업로드 실패:', error);
     },
   });
+  console.log('videoUrl', mediaUrl.videoUrl);
+  console.log('thumbnailUrl', mediaUrl.thumbnailUrl);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -110,25 +124,16 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
 
   const handleRemoveVideo = (index: number) => {
     const updatedVideos = mediaUrl.videoUrl.filter((_, i) => i !== index);
+    const updatedthumbnailUrl = mediaUrl.thumbnailUrl.filter(
+      (_, i) => i !== index,
+    );
     setMediaUrl({
       videoUrl: updatedVideos,
-      thumbnailUrl: null,
+      thumbnailUrl: updatedthumbnailUrl,
     });
     if (updatedVideos.length === 0) {
       setFileUploaded(false);
     }
-  };
-
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    centerMode: true,
-    centerPadding: '0px',
-    draggable: true,
   };
 
   if (isPending) {
