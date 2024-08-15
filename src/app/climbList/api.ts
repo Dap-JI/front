@@ -176,3 +176,18 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
     },
   });
 };
+
+//클라이밍장 동영상 개별 삭제 함수 `videos/delete` 바디에 url
+export const useVideoDelete = () => {
+  return useMutation({
+    mutationKey: ['videoDelete'],
+    mutationFn: (url: { videoUrl: string; thumbnailUrl: string }) =>
+      instance.post(`/api/videos/delete`, url),
+    onSuccess: () => {
+      console.log('삭제 성공');
+    },
+    onError: (error) => {
+      console.error('삭제 실패:', error);
+    },
+  });
+};
