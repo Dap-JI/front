@@ -50,7 +50,6 @@ type VideoInputProps = {
 };
 
 const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
-  const [fileUploaded, setFileUploaded] = useState(false);
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState(0);
   const { mutate: videoDelete } = useVideoDelete();
@@ -91,15 +90,12 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
         videoUrl: [...prev.videoUrl, ...data.videoUrls],
         thumbnailUrl: data.thumbnailUrl,
       }));
-      setFileUploaded(true);
     },
     onError: (error) => {
       showModalHandler('alert', '영상을 1분 이하로 업로드 해주세요');
       console.error('파일 업로드 실패:', error);
     },
   });
-  console.log('videoUrl', mediaUrl.videoUrl);
-  console.log('thumbnailUrl', mediaUrl.thumbnailUrl);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -123,19 +119,23 @@ const VideoInput = ({ mediaUrl, setMediaUrl }: VideoInputProps) => {
       videoUpload(formData);
     }
   };
-
   const handleRemoveVideo = (index: number) => {
+    const videoToDelete = {
+      videoUrl: mediaUrl.videoUrl[index],
+      thumbnailUrl: mediaUrl.thumbnailUrl[index],
+    };
+
     const updatedVideos = mediaUrl.videoUrl.filter((_, i) => i !== index);
     const updatedthumbnailUrl = mediaUrl.thumbnailUrl.filter(
       (_, i) => i !== index,
     );
+
     setMediaUrl({
       videoUrl: updatedVideos,
       thumbnailUrl: updatedthumbnailUrl,
     });
-    if (updatedVideos.length === 0) {
-      setFileUploaded(false);
-    }
+
+    videoDelete(videoToDelete);
   };
 
   if (isPending) {
