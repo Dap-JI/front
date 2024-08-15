@@ -19,25 +19,32 @@
   }
 
   .videoWrapper {
-    margin: 0 auto;
     width: 100%;
     max-width: 900px;
-
+    margin: 0 auto;
     .videoBox {
       position: relative;
-      padding-top: 40px;
+      width: 100%;
+      max-width: 900px;
+      padding-top: calc((4 / 3) * 100%);
+      overflow: visible;
+      margin-top: 50px;
 
       .close {
         position: absolute;
-        top: 5px;
+        top: -35px;
         right: 0px;
-        z-index: 3;
+        z-index: 6;
       }
 
-      .video {
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        max-width: 280px;
-        border-radius: 10px;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
       }
     }
   }

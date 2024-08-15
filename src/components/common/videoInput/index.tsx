@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './VideoInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
-import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import instance from '@/src/utils/axios';
 import ModalChoice from '../moadlChoice';
 import { useModal } from '@/src/hooks/useModal';
@@ -17,15 +16,12 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const cn = classNames.bind(styles);
 
-const StyledSlider = styled(Slider)`
+export const StyledSlider = styled(Slider)`
   .slick-list {
     overflow: hidden;
   }
 
   .slick-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     opacity: 0.5;
     padding: 0 15px;
   }
@@ -39,7 +35,6 @@ const StyledSlider = styled(Slider)`
     justify-content: center;
   }
 `;
-
 type VideoInputProps = {
   mediaUrl: {
     videoUrl: string[];

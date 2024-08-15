@@ -131,7 +131,7 @@ export type PostDetailDataType = {
   user_idx: number;
   gym_idx: string;
   clearday: any;
-  media: string;
+  media: string[];
   content: string | null;
   color: string;
   createdAt: any;
