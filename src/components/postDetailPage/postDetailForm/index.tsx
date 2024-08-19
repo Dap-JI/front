@@ -1,8 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
-import { DeleteIcon, EditIcon } from '@/public/icon';
+import { DeleteIcon, EditIcon, KakaoIcon } from '@/public/icon';
 import LoadingSpinner from '../../common/loadingSpinner';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,7 +13,6 @@ import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
-import KakaoShare from '../../common/kakaoShare';
 import LinkAndKakaoShare from '@/src/components/common/linkAndkakaoShare';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -68,7 +67,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
   }
-  
+
   const { gym_idx, post_idx, media, color, clearday, User, content, user_idx } =
     postDetailDatas;
 
@@ -92,6 +91,7 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
+  //프로필 페이지 클릭
 
   return (
     <div className={cn('container')}>

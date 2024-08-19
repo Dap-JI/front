@@ -57,7 +57,6 @@ const VideoInput = ({
 }: VideoInputProps) => {
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState(0);
-  const { mutate: videoDelete } = useVideoDelete();
 
   const settings = {
     dots: true,

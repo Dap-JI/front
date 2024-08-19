@@ -13,11 +13,17 @@ type ProfilePostDataProps = {
 const ProfilePostData = ({ list }: ProfilePostDataProps) => {
   const { thumbnailUrl, post_idx, gym_idx } = list;
 
+  // thumbnailUrl이 배열일 경우 0번째 요소를 사용하고, 배열이 아니면 기본 아이콘을 사용
+  const imageUrl =
+    Array.isArray(thumbnailUrl) && thumbnailUrl.length > 0
+      ? thumbnailUrl[0]
+      : '/icon/icon.png';
+
   return (
     <div className={cn('container')}>
       <Link href={`/climbList/${gym_idx}/${post_idx}`}>
         <Image
-          src={thumbnailUrl || '/icon/icon.png'}
+          src={imageUrl}
           alt="postImage"
           width="165"
           height="165"
