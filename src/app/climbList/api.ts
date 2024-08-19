@@ -190,7 +190,7 @@ export const useVideoDelete = () => {
       instance.post(`/api/videos/delete`, url),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
-      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
+      // queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
       console.log('삭제 성공');
     },
     onError: (error) => {

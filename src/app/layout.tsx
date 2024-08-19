@@ -4,7 +4,6 @@ import '@/src/styles/globals.css';
 import QueryProvider from '@/src/utils/QueryProvider';
 import FooterBar from '../components/common/footerBar';
 import Toast from '../components/common/toast';
-import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -306,12 +305,6 @@ export default function RootLayout({
           media="screen and (device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
           href="splash_screens/8.3__iPad_Mini_portrait.png"
         />
-
-        {/* <Script
-          src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
-          integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
-          crossOrigin="anonymous"
-        /> */}
       </head>
       <body className={inter.className}>
         <QueryProvider>
