@@ -4,8 +4,6 @@ import '@/src/styles/globals.css';
 import QueryProvider from '@/src/utils/QueryProvider';
 import FooterBar from '../components/common/footerBar';
 import Toast from '../components/common/toast';
-import Script from 'next/script';
-import KakaoScript from '../utils/kakaoScript';
 
 const inter = Inter({ subsets: ['latin'] });
 
