@@ -575,3 +575,13 @@ export const PostDatas = [
       'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc2ylrC%2FbtsIN5ctoTf%2FS8UYJxhMxoQfuN3YjSBiik%2Fimg.jpg',
   },
 ];
+
+export const categoryListData = [
+  { category_idx: 1, category: '전체' },
+  { category_idx: 2, category: '장비' },
+  { category_idx: 3, category: '부상' },
+  { category_idx: 4, category: '암장 리뷰' },
+  { category_idx: 5, category: '잡담' },
+];
+
+export const boardListData = [{ board_idx: 1 }];

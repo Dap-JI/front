@@ -138,3 +138,10 @@ export type PostDetailDataType = {
   User: UserType;
   thumbnailUrl?: string[];
 };
+
+//게시판 타입들
+
+export type CategroyListType = {
+  category_idx: number;
+  category: string;
+};
