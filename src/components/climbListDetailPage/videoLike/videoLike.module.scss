@@ -1,0 +1,4 @@
+.container {
+  @include flex-arrange(center, center);
+  gap: 5px;
+}

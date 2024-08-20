@@ -1,0 +1,29 @@
+.linkPreview {
+  width: 100%;
+  height: 85px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 10px;
+  border-radius: 5px;
+
+  .linkpreviewimage {
+    width: 100%;
+    height: 85px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .linkContentWrapper {
+    @include flex-arrange(space-between, flex-start);
+    flex-direction: column;
+    padding: 10px;
+    background: rgb(205, 198, 198, 0.5);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    gap: 5px;
+    p {
+      @include font-style(1.2rem, black, 600);
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -74,6 +74,11 @@ export type ClimbDetailResponseType = {
   length?: number;
 };
 
+//클라이밍장별 영상 좋아요 타입
+export type VideoLikeType = {
+  likeCount: number;
+};
+
 // DetailMainContentProps 타입
 export type DetailMainContentProps = {
   list: DetailType;
@@ -137,4 +142,11 @@ export type PostDetailDataType = {
   createdAt: any;
   User: UserType;
   thumbnailUrl?: string[];
+};
+
+//게시판 타입들
+
+export type CategroyListType = {
+  category_idx: number;
+  category: string;
 };
