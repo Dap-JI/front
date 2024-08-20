@@ -46,6 +46,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { color, User, clearday, content, post_idx, media, gym_idx, user_idx } =
     list;
   //리스트 데이터들
+  console.log(list)
 
   const [likeToggle, setLikeToggle] = useState(false);
   const [likeCount, setLikeCount] = useState(0);

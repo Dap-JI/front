@@ -5,8 +5,9 @@ import Header from '@/src/components/common/header';
 import { AddIcon } from '@/public/icon';
 import Link from 'next/link';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
-import { categoryListData } from '@/src/utils/dummy';
+import { categoryListData, boardListData } from '@/src/utils/dummy';
 import { useState } from 'react';
+import BoardListDatas from '@/src/components/boardPage/boardListDatas';
 
 const cn = classNames.bind(styles);
 
@@ -29,7 +30,7 @@ const BoardPage = () => {
           selectCategory={selectCategory}
           onCategorySelect={handleSelectCategory}
         />
-        <div>게시물 카드 리스트들들</div>
+        <BoardListDatas lists={boardListData} />
       </div>
     </div>
   );
