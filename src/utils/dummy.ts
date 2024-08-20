@@ -1,4 +1,5 @@
 import { title } from 'process';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export const climbLists = [
   {
@@ -594,7 +595,7 @@ export type UserType = {
 export type LinkPreviewType = {
   title: string | null;
   img: string | null;
-  description: string | null;
+  link?: string | null;
 };
 
 export type BoardListDataType = {
@@ -608,7 +609,6 @@ export type BoardListDataType = {
   boardImg: string[];
   title: string;
   content: string;
-  link?: string | null;
   linkPreview?: LinkPreviewType;
 };
 
@@ -631,12 +631,11 @@ export const boardListData = [
     title: '여러분 답지를 사용하는게 얼마나 이득이냐면요',
     content:
       '20일 정부와 의료계 등에 따르면 코로나19 입원환자는 7월 둘째 주 148명에서 이달 둘째 주 1천359명으로 9배로 불었다.방역 당국은 이달 말까지 코로나19 유행 속도가 빨라질 가능성이 큰 것으로 본다.홍정익 질병관리청 코로나19 대책반 상황대응단장은 전날 "지금 환자 수는 작년 8월의 절반 수준이지만, 최근 2년간의 여름철 유행 동향과 추세를 분석했을 때 월말에는 작년 최고 유행 수준인 주당 35만명까지 갈 수 있다"고 예상했다.',
-    link: 'https://www.naver.com',
     linkPreview: {
       title:
         '네이버 매출 구글 턱밑까지 쫓아왔다! 글로벌 기업 1위 네이버의 근황',
       img: 'https://dapji.s3.ap-northeast-2.amazonaws.com/profile-pictures/1723018625125-%C3%AB%C2%A7%C2%9D%C3%AB%C2%82%C2%98%C3%AB%C2%87%C2%BD2.jpg',
-      description: '여긴 네이버랍니당~',
+      link: 'https://www.naver.com',
     },
   },
   {
@@ -658,11 +657,10 @@ export const boardListData = [
     title: '여러분 답지를 사용하는게 얼마나 이득이냐면요',
     content:
       '20일 정부와 의료계 등에 따르면 코로나19 입원환자는 7월 둘째 주 148명에서 이달 둘째 주 1천359명으로 9배로 불었다.방역 당국은 이달 말까지 코로나19 유행 속도가 빨라질 가능성이 큰 것으로 본다.홍정익 질병관리청 코로나19 대책반 상황대응단장은 전날 "지금 환자 수는 작년 8월의 절반 수준이지만, 최근 2년간의 여름철 유행 동향과 추세를 분석했을 때 월말에는 작년 최고 유행 수준인 주당 35만명까지 갈 수 있다"고 예상했다.',
-    link: null,
     linkPreview: {
       title: null,
       img: null,
-      description: null,
+      link: null,
     },
   },
   {
@@ -676,17 +674,14 @@ export const boardListData = [
     create_At: '2024-08-15T11:33:41.000Z',
     likeCount: 20,
     commentCount: 5,
-    boardImg: [
-      'https://dapji.s3.ap-northeast-2.amazonaws.com/profile-pictures/1723018625125-%C3%AB%C2%A7%C2%9D%C3%AB%C2%82%C2%98%C3%AB%C2%87%C2%BD2.jpg',
-    ],
-    title: '여러분 답지를 사용하는게 얼마나 이득이냐면요',
+    boardImg: [],
+    title: '한혜진, 엄마가 반대한 연인 있었다엄마가 반대한 연인 있었다(연참)',
     content:
       '20일 정부와 의료계 등에 따르면 코로나19 입원환자는 7월 둘째 주 148명에서 이달 둘째 주 1천359명으로 9배로 불었다.방역 당국은 이달 말까지 코로나19 유행 속도가 빨라질 가능성이 큰 것으로 본다.홍정익 질병관리청 코로나19 대책반 상황대응단장은 전날 "지금 환자 수는 작년 8월의 절반 수준이지만, 최근 2년간의 여름철 유행 동향과 추세를 분석했을 때 월말에는 작년 최고 유행 수준인 주당 35만명까지 갈 수 있다"고 예상했다.',
-    link: null,
     linkPreview: {
       title: null,
       img: null,
-      description: null,
+      link: null,
     },
   },
 ];
