@@ -22,7 +22,7 @@ export const ClimbListDatas = async ({ page = 1, search }: ClimbListProps) => {
   });
   return res.data;
 };
-//클라이밍장 리스트 디테일 조회 함수
+//클라이밍장 리스트 상세 조회 함수
 export const useClimbListDetails = (gymId: string) => {
   return useQuery({
     queryKey: ['climbListDetails', gymId],
@@ -198,4 +198,10 @@ export const useVideoDelete = () => {
     },
   });
   return videoDelete;
+};
+
+//클라이밍장 영상 좋아요 함수 /api/posts/${post_idx}/like
+export const VideoLikeRequest = async (post_idx: number) => {
+  const res = await instance.post(`/api/posts/${post_idx}/like`);
+  return res.data;
 };
