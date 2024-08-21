@@ -13,6 +13,7 @@ interface PostData {
   createdAt?: string;
   thumbnailUrl?: string[];
   user_idx?: number;
+  like_count: number;
 }
 
 interface PostStore {

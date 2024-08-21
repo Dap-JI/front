@@ -65,6 +65,7 @@ export type DetailType = {
   color: string;
   createdAt: any;
   User: UserType;
+  like_count: number;
 };
 
 export type ClimbDetailResponseType = {

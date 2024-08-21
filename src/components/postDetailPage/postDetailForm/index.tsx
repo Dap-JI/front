@@ -69,16 +69,17 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   };
 
   const [likeToggle, setLikeToggle] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(postDetailDatas?.like_count || 0);
 
   // like state
   const queryClient = useQueryClient();
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', postid], // mutationKey에서 post_idx를 postid로 변경
     mutationFn: () => VideoLikeRequest(postid), // post_idx를 postid로 변경
-    onSuccess: (data: VideoLikeType) => {
+    onSuccess: () => {
       setLikeToggle((prev) => !prev);
-      setLikeCount(data.likeCount);
+      setLikeCount((prev: number) => (likeToggle ? prev - 1 : prev + 1));
+      queryClient.invalidateQueries({ queryKey: ['postDetailDatas'] });
       queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
     },
     onError: (e) => {

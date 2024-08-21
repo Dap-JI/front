@@ -54,25 +54,38 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     gym_idx,
     user_idx,
     createdAt,
+    like_count,
   } = list;
   //리스트 데이터들
 
   const timeAgo = useTimeAgo(createdAt);
 
   const [likeToggle, setLikeToggle] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(like_count);
   // like state
   const queryClient = useQueryClient();
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', post_idx],
     mutationFn: () => VideoLikeRequest(post_idx),
-    onSuccess: (data: VideoLikeType) => {
+    onMutate: async () => {
+      //서버에 요청되기 전에 실행되는 코드
+      await queryClient.cancelQueries({ queryKey: ['climbDetail'] });
+      //서버에서 데이터를 가져오는 중이라면 취소, 데이터 중첩 안되도록
+      const previousData = queryClient.getQueryData(['climbDetail']);
+
       setLikeToggle((prev) => !prev);
-      setLikeCount(data.likeCount);
-      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
+      setLikeCount((prev) => (likeToggle ? prev - 1 : prev + 1));
+      return { previousData };
     },
-    onError: (e) => {
-      console.error(e, 'like에러');
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(['climbDetail'], context.previousData);
+      }
+    },
+    onSettled: () => {
+      //성공해도, 실패해도 해당 쿼리키를 최신화
+      queryClient.invalidateQueries({ queryKey: ['postDetailDatas'] });
+      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
     },
   });
 
