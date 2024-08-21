@@ -11,12 +11,21 @@
   gap: 10px;
 
   .userWrapper {
-    @include font-style(1.3rem, black, 400);
     width: 100%;
     @include flex-arrange(space-between, center);
     .userInfo {
-      @include flex-arrange(center, center);
+      @include flex-arrange(center, flex-start);
       gap: 5px;
+      .dateWrapper {
+        @include flex-arrange(center, flex-start);
+        flex-direction: column;
+        span:nth-child(1) {
+          @include font-style(1.4rem, black, 600);
+        }
+        span:nth-child(2) {
+          @include font-style(1rem, gray, 400);
+        }
+      }
     }
     img {
       border-radius: 50%;
@@ -27,63 +36,69 @@
     width: 100%;
     height: 30px;
     @include flex-arrange(space-between, center);
-    @include font-style(1.5rem, black, 600);
+    @include font-style(1.2rem, black, 400);
     margin-top: 15px;
-    .color {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.1),
-        0 10px 20px rgba(0, 0, 0, 0.1);
-    }
+    .difficultyWrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
 
-    .color-red {
-      background-color: red;
-    }
+      .color {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow:
+          0 4px 6px rgba(0, 0, 0, 0.1),
+          0 10px 20px rgba(0, 0, 0, 0.1);
+      }
 
-    .color-orange {
-      background-color: orange;
-    }
+      .color-red {
+        background-color: red;
+      }
 
-    .color-yellow {
-      background-color: yellow;
-    }
+      .color-orange {
+        background-color: orange;
+      }
 
-    .color-green {
-      background-color: green;
-    }
+      .color-yellow {
+        background-color: yellow;
+      }
 
-    .color-blue {
-      background-color: blue;
-    }
+      .color-green {
+        background-color: green;
+      }
 
-    .color-indigo {
-      background-color: indigo;
-    }
+      .color-blue {
+        background-color: blue;
+      }
 
-    .color-purple {
-      background-color: purple;
-    }
+      .color-indigo {
+        background-color: indigo;
+      }
 
-    .color-white {
-      background-color: white;
-      border: 1px solid black;
-    }
+      .color-purple {
+        background-color: purple;
+      }
 
-    .color-gray {
-      background-color: gray;
-    }
+      .color-white {
+        background-color: white;
+        border: 1px solid black;
+      }
 
-    .color-black {
-      background-color: black;
-    }
+      .color-gray {
+        background-color: gray;
+      }
 
-    .color-pink {
-      background-color: pink;
-    }
-    .color-brown {
-      background-color: brown;
+      .color-black {
+        background-color: black;
+      }
+
+      .color-pink {
+        background-color: pink;
+      }
+      .color-brown {
+        background-color: brown;
+      }
     }
   }
   .videoWrapper {

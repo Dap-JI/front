@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LikeIcon, LikedIcon, PeopleLikeIcon } from '@/public/icon';
 import classNames from 'classnames/bind';
 import styles from './videoLike.module.scss';

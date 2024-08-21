@@ -55,7 +55,7 @@ export type UserType = {
 };
 
 export type DetailType = {
-  post_idx: number;
+  post_idx: string;
   user_idx: number;
   gym_idx: number;
   clearday: any;
@@ -65,6 +65,7 @@ export type DetailType = {
   color: string;
   createdAt: any;
   User: UserType;
+  like_count: number;
 };
 
 export type ClimbDetailResponseType = {

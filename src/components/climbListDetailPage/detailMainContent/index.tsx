@@ -19,6 +19,7 @@ import VideoLike from '@/src/components/climbListDetailPage/videoLike';
 import { useState } from 'react';
 import { VideoLikeRequest } from '@/src/app/climbList/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useTimeAgo from '@/src/hooks/useTimeAgo';
 
 const cn = classNames.bind(styles);
 
@@ -43,30 +44,52 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
-  const { color, User, clearday, content, post_idx, media, gym_idx, user_idx } =
-    list;
+  const {
+    color,
+    User,
+    clearday,
+    content,
+    post_idx,
+    media,
+    gym_idx,
+    user_idx,
+    createdAt,
+    like_count,
+  } = list;
   //리스트 데이터들
-  console.log(list)
+
+  const timeAgo = useTimeAgo(createdAt);
 
   const [likeToggle, setLikeToggle] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(like_count);
   // like state
   const queryClient = useQueryClient();
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', post_idx],
     mutationFn: () => VideoLikeRequest(post_idx),
-    onSuccess: (data:VideoLikeType) => {
+    onMutate: async () => {
+      //서버에 요청되기 전에 실행되는 코드
+      await queryClient.cancelQueries({ queryKey: ['climbDetail'] });
+      //서버에서 데이터를 가져오는 중이라면 취소, 데이터 중첩 안되도록
+      const previousData = queryClient.getQueryData(['climbDetail']);
+
       setLikeToggle((prev) => !prev);
-      setLikeCount(data.likeCount);
-      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
+      setLikeCount((prev) => (likeToggle ? prev - 1 : prev + 1));
+      return { previousData };
     },
-    onError: (e) => {
-      console.error(e, 'like에러');
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(['climbDetail'], context.previousData);
+      }
+    },
+    onSettled: () => {
+      //성공해도, 실패해도 해당 쿼리키를 최신화
+      queryClient.invalidateQueries({ queryKey: ['postDetailDatas'] });
+      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
     },
   });
 
   //like post 요청 query
-  console.log(likeCount);
 
   const settings = {
     dots: true,
@@ -105,14 +128,15 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
 
   return (
     <div className={cn('container')}>
-      <div className={cn('userWrapper')} onClick={profileClick}>
-        <div className={cn('userInfo')}>
-          <Image src={User.img} width="24" height="24" alt="userImg" />
-          <span>{User.nickname}</span>
+      <div className={cn('userWrapper')}>
+        <div className={cn('userInfo')} onClick={profileClick}>
+          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <div className={cn('dateWrapper')}>
+            <span>{User.nickname}</span>
+            <span>{timeAgo}</span>
+          </div>
         </div>
-        <div>
-          <DoubleRightArrowIcon onClick={postDetailPage} />
-        </div>
+        <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>
@@ -131,8 +155,11 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         </StyledSlider>
       </div>
       <div className={cn('contentWrapper')}>
-        <div className={cn('color', `color-${color}`)} />
-        <span>{deleteT(clearday)}</span>
+        <div className={cn('difficultyWrapper')}>
+          <span>난이도 :</span>
+          <div className={cn('color', `color-${color}`)} />
+        </div>
+        <span className={cn('clearday')}>등반일 : {deleteT(clearday)}</span>
         <VideoLike
           likeToggle={likeToggle}
           likeCount={likeCount}

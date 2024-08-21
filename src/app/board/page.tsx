@@ -17,6 +17,8 @@ const BoardPage = () => {
     setSelectCategory(category);
   };
 
+  const boardData = boardListData?.boards ?? [];
+
   return (
     <div className={cn('container')}>
       <Header title="게시판임">
@@ -30,7 +32,7 @@ const BoardPage = () => {
           selectCategory={selectCategory}
           onCategorySelect={handleSelectCategory}
         />
-        <BoardListDatas lists={boardListData} />
+        <BoardListDatas lists={boardData} />
       </div>
     </div>
   );
