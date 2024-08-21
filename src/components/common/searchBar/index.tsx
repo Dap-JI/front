@@ -2,18 +2,20 @@
 import classNames from 'classnames/bind';
 import styles from './searchBar.module.scss';
 import CommonInput from '@/src/components/common/commonInput';
-import { GlassIcon } from '@/public/icon';
+import { GlassIcon, AddIcon } from '@/public/icon';
 import { useState, useEffect } from 'react';
 import useDebounce from '@/src/hooks/useDebounce';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
 type SearchBarProps = {
   onSearchChange: (value: string) => void;
   searchName: string;
+  showAdd?: boolean;
 };
 
-const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
+const SearchBar = ({ onSearchChange, searchName, showAdd }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(searchName);
   const debouncedSearchTerm = useDebounce(inputValue, 500); // 0.6초 지연
 
@@ -47,6 +49,11 @@ const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
         value={inputValue}
         onChange={handleChange}
       />
+      {showAdd && (
+        <Link href={'/board/upload'}>
+          <AddIcon width="30" height="30" />
+        </Link>
+      )}
     </div>
   );
 };

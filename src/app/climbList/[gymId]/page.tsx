@@ -57,7 +57,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   return (
     <div className={cn('container')}>
       <Header title={gymName} back={true}>
-        <AddIcon onClick={uploadPage} />
+        <AddIcon onClick={uploadPage} width='30' height='30'/>
       </Header>
       <div className={cn('secondContainer')}>
         <Notification />

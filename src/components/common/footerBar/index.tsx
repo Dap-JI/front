@@ -19,7 +19,7 @@ const cn = classNames.bind(styles);
 const FooterBar = () => {
   const path = usePathname();
   const router = useRouter();
-  const { userId } = useMyInfoStore();
+  const { myId } = useMyInfoStore();
 
   useMyInfo();
 
@@ -28,8 +28,8 @@ const FooterBar = () => {
   };
 
   const profileClick = () => {
-    if (userId) {
-      router.push(`/profile/${userId}`);
+    if (myId) {
+      router.push(`/profile/${myId}`);
     }
   };
 

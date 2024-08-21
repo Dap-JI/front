@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
 type MyInfoState = {
-  userId: string | null;
-  setUserId: (userId: string) => void;
+  myId: any;
+  setmyId: (myId: string) => void;
 };
 
 export const useMyInfoStore = create<MyInfoState>((set) => ({
-  userId: null,
-  setUserId: (userId) => set({ userId }),
+  myId: null,
+  setmyId: (myId) => set({ myId }),
 }));
