@@ -66,6 +66,7 @@ export type DetailType = {
   createdAt: any;
   User: UserType;
   like_count: number;
+  is_like: boolean;
 };
 
 export type ClimbDetailResponseType = {
@@ -143,6 +144,8 @@ export type PostDetailDataType = {
   createdAt: any;
   User: UserType;
   thumbnailUrl?: string[];
+  like_count: number;
+  is_liked: boolean;
 };
 
 //게시판 타입들

@@ -8,24 +8,31 @@ import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { categoryListData, boardListData } from '@/src/utils/dummy';
 import { useState } from 'react';
 import BoardListDatas from '@/src/components/boardPage/boardListDatas';
+import SearchBar from '@/src/components/common/searchBar';
 
 const cn = classNames.bind(styles);
 
 const BoardPage = () => {
   const [selectCategory, setSelectCategory] = useState<string | null>(null);
+  const [searchName, setSearchName] = useState('');
+
   const handleSelectCategory = (category: string) => {
     setSelectCategory(category);
   };
 
   const boardData = boardListData?.boards ?? [];
 
+  const handleSearchChange = (value: string) => {
+    setSearchName(value);
+  };
+
   return (
     <div className={cn('container')}>
-      <Header title="게시판임">
-        <Link href={'/board/upload'}>
-          <AddIcon />
-        </Link>
-      </Header>
+      <SearchBar
+        showAdd={true}
+        searchName={searchName}
+        onSearchChange={handleSearchChange}
+      />
       <div className={cn('secondContainer')}>
         <CategoryLists
           lists={categoryListData}

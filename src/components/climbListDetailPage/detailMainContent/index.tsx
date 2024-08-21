@@ -55,12 +55,13 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     user_idx,
     createdAt,
     like_count,
+    is_like,
   } = list;
   //리스트 데이터들
 
   const timeAgo = useTimeAgo(createdAt);
 
-  const [likeToggle, setLikeToggle] = useState(false);
+  const [likeToggle, setLikeToggle] = useState(is_like);
   const [likeCount, setLikeCount] = useState(like_count);
   // like state
   const queryClient = useQueryClient();

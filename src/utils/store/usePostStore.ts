@@ -14,6 +14,7 @@ interface PostData {
   thumbnailUrl?: string[];
   user_idx?: number;
   like_count: number;
+  is_like: boolean;
 }
 
 interface PostStore {
