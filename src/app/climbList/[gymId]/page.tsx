@@ -65,7 +65,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
           activeColor={activeColor}
           setActiveColor={setActiveColor}
         />
-
         {lists.length === 0 ? (
           <NodetailData />
         ) : (

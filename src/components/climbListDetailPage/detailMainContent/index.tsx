@@ -19,6 +19,7 @@ import VideoLike from '@/src/components/climbListDetailPage/videoLike';
 import { useState } from 'react';
 import { VideoLikeRequest } from '@/src/app/climbList/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useTimeAgo from '@/src/hooks/useTimeAgo';
 
 const cn = classNames.bind(styles);
 
@@ -43,10 +44,20 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const DetailMainContent = ({ list }: DetailMainContentProps) => {
-  const { color, User, clearday, content, post_idx, media, gym_idx, user_idx } =
-    list;
+  const {
+    color,
+    User,
+    clearday,
+    content,
+    post_idx,
+    media,
+    gym_idx,
+    user_idx,
+    createdAt,
+  } = list;
   //리스트 데이터들
-  console.log(list)
+
+  const timeAgo = useTimeAgo(createdAt);
 
   const [likeToggle, setLikeToggle] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -55,7 +66,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', post_idx],
     mutationFn: () => VideoLikeRequest(post_idx),
-    onSuccess: (data:VideoLikeType) => {
+    onSuccess: (data: VideoLikeType) => {
       setLikeToggle((prev) => !prev);
       setLikeCount(data.likeCount);
       queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
@@ -66,7 +77,6 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   });
 
   //like post 요청 query
-  console.log(likeCount);
 
   const settings = {
     dots: true,
@@ -105,14 +115,15 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
 
   return (
     <div className={cn('container')}>
-      <div className={cn('userWrapper')} onClick={profileClick}>
-        <div className={cn('userInfo')}>
-          <Image src={User.img} width="24" height="24" alt="userImg" />
-          <span>{User.nickname}</span>
+      <div className={cn('userWrapper')}>
+        <div className={cn('userInfo')} onClick={profileClick}>
+          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <div className={cn('dateWrapper')}>
+            <span>{User.nickname}</span>
+            <span>{timeAgo}</span>
+          </div>
         </div>
-        <div>
-          <DoubleRightArrowIcon onClick={postDetailPage} />
-        </div>
+        <DoubleRightArrowIcon onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>
@@ -131,8 +142,11 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         </StyledSlider>
       </div>
       <div className={cn('contentWrapper')}>
-        <div className={cn('color', `color-${color}`)} />
-        <span>{deleteT(clearday)}</span>
+        <div className={cn('difficultyWrapper')}>
+          <span>난이도 :</span>
+          <div className={cn('color', `color-${color}`)} />
+        </div>
+        <span className={cn('clearday')}>등반일 : {deleteT(clearday)}</span>
         <VideoLike
           likeToggle={likeToggle}
           likeCount={likeCount}

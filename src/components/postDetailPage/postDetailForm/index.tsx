@@ -1,8 +1,8 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
-import { DeleteIcon, EditIcon, KakaoIcon } from '@/public/icon';
+import { DeleteIcon, EditIcon } from '@/public/icon';
 import LoadingSpinner from '../../common/loadingSpinner';
 import { useRouter } from 'next/navigation';
 import {
@@ -18,7 +18,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-
+import useTimeAgo from '@/src/hooks/useTimeAgo';
+import VideoLike from '../../climbListDetailPage/videoLike';
+import { VideoLikeRequest } from '@/src/app/climbList/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { VideoLikeType } from '@/src/utils/type';
 const cn = classNames.bind(styles);
 
 export const StyledSlider = styled(Slider)`
@@ -28,7 +32,7 @@ export const StyledSlider = styled(Slider)`
 
   .slick-slide {
     opacity: 0.5;
-    padding: 0 15px;
+    padding: 0;
   }
 
   .slick-center {
@@ -64,21 +68,48 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     draggable: true,
   };
 
+  const [likeToggle, setLikeToggle] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+  // like state
+  const queryClient = useQueryClient();
+  const { mutate: likeRequest } = useMutation({
+    mutationKey: ['videoLiked', postid], // mutationKey에서 post_idx를 postid로 변경
+    mutationFn: () => VideoLikeRequest(postid), // post_idx를 postid로 변경
+    onSuccess: (data: VideoLikeType) => {
+      setLikeToggle((prev) => !prev);
+      setLikeCount(data.likeCount);
+      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
+    },
+    onError: (e) => {
+      console.error(e, 'like에러');
+    },
+  });
+
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
   }
 
-  const { gym_idx, post_idx, media, color, clearday, User, content, user_idx } =
-    postDetailDatas;
+  const {
+    gym_idx,
+    post_idx,
+    media,
+    color,
+    clearday,
+    User,
+    content,
+    user_idx,
+    createdAt,
+  } = postDetailDatas;
 
   const isNotMyUserId = userId !== user_idx;
 
   const deleteT = (date: string | null) => date?.split('T')[0];
+  const timeAgo = useTimeAgo(createdAt);
 
   const editPage = () => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
-  //수정페이지
 
   const deleteClick = () => {
     const confirmAction = () => {
@@ -86,24 +117,36 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     };
     showModalHandler('choice', '정말 삭제하시겠어요?', confirmAction);
   };
-  //삭제페이지
 
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
-  //프로필 페이지 클릭
+
+  const handleLikeClick = () => {
+    likeRequest();
+  };
 
   return (
     <div className={cn('container')}>
-      <div className={cn('btnStyle')}>
-        {!isNotMyUserId && (
-          <>
-            <EditIcon onClick={editPage} />
-            <DeleteIcon onClick={deleteClick} />
-          </>
-        )}
-        <LinkAndKakaoShare params={params} />
+      <div className={cn('userWrapper')}>
+        <div className={cn('userInfo')} onClick={profileClick}>
+          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <div className={cn('dateWrapper')}>
+            <span>{User.nickname}</span>
+            <span>{timeAgo}</span>
+          </div>
+        </div>
+        <div className={cn('btnStyle')}>
+          {!isNotMyUserId && (
+            <>
+              <EditIcon onClick={editPage} />
+              <DeleteIcon onClick={deleteClick} />
+            </>
+          )}
+          <LinkAndKakaoShare params={params} />
+        </div>
       </div>
+
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>
           {media?.map((url: string, index: number) => (
@@ -120,14 +163,20 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
           ))}
         </StyledSlider>
       </div>
-      <div className={cn('infoWrapper')}>
-        <div className={cn('color', `color-${color}`)} />
-        <span>{deleteT(clearday)}</span>
-        <div className={cn('userWrapper')} onClick={profileClick}>
-          <Image src={User.img} width="24" height="24" alt="userImg" />
-          <span>{User.nickname}</span>
+
+      <div className={cn('contentWrapper')}>
+        <div className={cn('difficultyWrapper')}>
+          <span>난이도 :</span>
+          <div className={cn('color', `color-${color}`)} />
         </div>
+        <span className={cn('clearday')}>등반일 : {deleteT(clearday)}</span>
+        <VideoLike
+          likeToggle={likeToggle}
+          likeCount={likeCount}
+          onClick={handleLikeClick}
+        />
       </div>
+
       <p>{content}</p>
       <ModalChoice />
     </div>

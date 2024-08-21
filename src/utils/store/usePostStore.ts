@@ -7,7 +7,7 @@ interface PostData {
   };
   clearday: string;
   content: string | null;
-  post_idx: number;
+  post_idx: string;
   media: string[];
   gym_idx: string | number;
   createdAt?: string;

@@ -201,7 +201,7 @@ export const useVideoDelete = () => {
 };
 
 //클라이밍장 영상 좋아요 함수 /api/posts/${post_idx}/like
-export const VideoLikeRequest = async (post_idx: number) => {
+export const VideoLikeRequest = async (post_idx: string) => {
   const res = await instance.post(`/api/posts/${post_idx}/like`);
   return res.data;
 };

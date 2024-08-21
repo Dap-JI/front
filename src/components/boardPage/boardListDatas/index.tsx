@@ -5,6 +5,7 @@ import { CommentIcon, LikeIcon } from '@/public/icon';
 import Image from 'next/image';
 import useTruncateString from '@/src/hooks/useTruncateString';
 import LinkPreview from '@/src/components/common/linkPreview';
+import useTimeAgo from '@/src/hooks/useTimeAgo';
 
 const cn = classNames.bind(styles);
 
@@ -22,7 +23,10 @@ const BoardListData = ({ list }: BoardListDataProps) => {
     content,
     linkPreview,
     boardImg,
+    create_At,
   } = list;
+  const timeAgo = useTimeAgo(create_At);
+  //시간대 표시
 
   const truncateString = useTruncateString();
   //글자수 제한한
@@ -30,10 +34,10 @@ const BoardListData = ({ list }: BoardListDataProps) => {
   //이미지 갯수 표시
 
   return (
-    <div className={cn('container')}>
+    <article className={cn('container')}>
       <div className={cn('containerWrapper')}>
-        <div className={cn('contentWrapper')}>
-          <div className={cn('userInfo')}>
+        <section className={cn('contentWrapper')}>
+          <header className={cn('userInfo')}>
             <Image
               src={user.img}
               width={30}
@@ -45,15 +49,14 @@ const BoardListData = ({ list }: BoardListDataProps) => {
               <span className={cn('category')}>{category}</span>
               <div className={cn('dataInfo')}>
                 <span>{user.nickname}</span>
-                <span>10분 전</span>
+                <span>{timeAgo}</span>
               </div>
             </div>
-          </div>
+          </header>
           <h1>{truncateString(title, 15)}</h1>
           <span className={cn('content')}>{truncateString(content, 50)}</span>
-        </div>
-
-        <div className={cn('boardImageWrapper')}>
+        </section>
+        <section className={cn('boardImageWrapper')}>
           {boardImg.length > 0 ? (
             <>
               <Image
@@ -78,12 +81,12 @@ const BoardListData = ({ list }: BoardListDataProps) => {
               <span>{likeCount}</span>
             </div>
           </div>
-        </div>
+        </section>
       </div>
       {linkPreview && (linkPreview.img || linkPreview.title) && (
         <LinkPreview linkPreview={linkPreview} />
       )}
-    </div>
+    </article>
   );
 };
 
