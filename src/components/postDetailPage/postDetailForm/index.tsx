@@ -86,6 +86,8 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
     },
   });
 
+  const timeAgo = useTimeAgo(postDetailDatas?.createdAt || '');
+
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
   }
@@ -105,7 +107,6 @@ const PostDetailForm = ({ params }: PostDetailFormProps) => {
   const isNotMyUserId = userId !== user_idx;
 
   const deleteT = (date: string | null) => date?.split('T')[0];
-  const timeAgo = useTimeAgo(createdAt);
 
   const editPage = () => {
     router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
