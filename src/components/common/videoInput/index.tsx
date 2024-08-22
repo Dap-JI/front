@@ -92,7 +92,7 @@ const VideoInput = ({
       // 성공적으로 업로드된 경우 mediaUrl을 상태에 저장
       setMediaUrl((prev) => ({
         videoUrl: [...prev.videoUrl, ...data.videoUrls],
-        thumbnailUrl: data.thumbnailUrl,
+        thumbnailUrl: [...prev.thumbnailUrl, ...data.thumbnailUrlS],
       }));
     },
     onError: (error) => {

@@ -6,8 +6,10 @@ import { categoryListData, boardListData } from '@/src/utils/dummy';
 import { useState } from 'react';
 import BoardListDatas from '@/src/components/boardPage/boardListDatas';
 import SearchBar from '@/src/components/common/searchBar';
-1;
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import { boardListDatas } from './api';
+import { useQuery } from '@tanstack/react-query';
+import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 
 const cn = classNames.bind(styles);
 

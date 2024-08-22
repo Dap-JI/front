@@ -179,3 +179,11 @@ export type BoardResponseType = {
   boards: BoardListDataType[];
   meta: metaType;
 };
+
+//게시판 업로드 타입
+export type useFormBoardUploadType = {
+  title: string;
+  content: string;
+  category: string;
+  img: string[];
+};

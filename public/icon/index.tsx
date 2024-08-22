@@ -479,3 +479,45 @@ export const CommentIcon = ({ ...props }: IconPropsType) => {
     </IconTemplate>
   );
 };
+export const PictureIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fill="black"
+        d="M19,0H5A5.006,5.006,0,0,0,0,5V19a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V5A5.006,5.006,0,0,0,19,0ZM5,2H19a3,3,0,0,1,3,3V19a2.951,2.951,0,0,1-.3,1.285l-9.163-9.163a5,5,0,0,0-7.072,0L2,14.586V5A3,3,0,0,1,5,2ZM5,22a3,3,0,0,1-3-3V17.414l4.878-4.878a3,3,0,0,1,4.244,0L20.285,21.7A2.951,2.951,0,0,1,19,22Z"
+      />
+      <path
+        fill="black"
+        d="M16,10.5A3.5,3.5,0,1,0,12.5,7,3.5,3.5,0,0,0,16,10.5Zm0-5A1.5,1.5,0,1,1,14.5,7,1.5,1.5,0,0,1,16,5.5Z"
+      />
+    </IconTemplate>
+  );
+};
+export const PlusIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <g id="_01_align_center" data-name="01 align center">
+        <polygon
+          fill="black"
+          points="24 11 13 11 13 0 11 0 11 11 0 11 0 13 11 13 11 24 13 24 13 13 24 13 24 11"
+        />
+      </g>
+    </IconTemplate>
+  );
+};
+export const DownloadIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <g id="_01_align_center" data-name="01 align center">
+        <path
+          fill="black"
+          d="M12.032,19a2.991,2.991,0,0,0,2.122-.878L18.073,14.2,16.659,12.79l-3.633,3.634L13,0,11,0l.026,16.408-3.62-3.62L5.992,14.2l3.919,3.919A2.992,2.992,0,0,0,12.032,19Z"
+        />
+        <path
+          fill="black"
+          d="M22,16v5a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V16H0v5a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V16Z"
+        />
+      </g>
+    </IconTemplate>
+  );
+};
