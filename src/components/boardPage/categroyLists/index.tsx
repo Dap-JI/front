@@ -49,3 +49,4 @@ export default CategoryLists;
 
 // selectCategory = { selectCategory };
 // onCategorySelect = { handleCategorySelect };
+// 업로드 페이지에서는 카테고리 전체 안나오도록

@@ -76,8 +76,15 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   );
   const { mutate: videoDelete } = useVideoDelete();
 
+  const emptyVideoUrl = mediaUrl.videoUrl.length === 0;
+
   const onSubmit = (data: useFormPostUploadProps) => {
     //폼데이터에 들어갈 데이터들
+    if (emptyVideoUrl) {
+      showModalHandler('alert', '동영상, 등반일, 난이도 선택은 필수에요.');
+      return;
+    }
+
     const formData = {
       ...data,
       media: mediaUrl.videoUrl,
@@ -135,8 +142,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   }, [initialData, setValue]);
 
-  console.log(deletedVideos);
-
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <VideoInput
@@ -167,12 +172,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         <textarea
           className={cn('limitedTextarea')}
           maxLength={maxLength}
-          {...register('content', {
-            maxLength: {
-              value: 100,
-              message: '최대 100자까지 가능합니다. ',
-            },
-          })}
+          {...register('content')}
         />
         <div className={cn('charCount')}>
           {text?.length}/{maxLength}

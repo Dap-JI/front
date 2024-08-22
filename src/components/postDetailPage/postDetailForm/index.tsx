@@ -200,7 +200,3 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
 };
 
 export default PostDetailForm;
-
-//다른사람이 볼때 수정 삭제는 안보임
-// 수정페이지 안에 삭제 넣기
-//myinfo랑 비교하기

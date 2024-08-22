@@ -14,11 +14,9 @@ type PostDetailPageProps = {
 };
 
 const PostDetailPage = ({ params }: PostDetailPageProps) => {
-  const { postid, gymId } = params;
+  const { postid } = params;
 
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
-
-  // const postDetailData = postDetailDatas;
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
