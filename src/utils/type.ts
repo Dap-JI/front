@@ -154,3 +154,28 @@ export type CategroyListType = {
   category_idx: number;
   category: string;
 };
+
+export type LinkPreviewType = {
+  title: string | null;
+  img: string | null;
+  link?: string | null;
+};
+
+export type BoardListDataType = {
+  board_idx: number;
+  user_idx: number;
+  user: UserType;
+  category: string;
+  create_At: any;
+  likeCount: number;
+  commentCount: number;
+  boardImg: string[];
+  title: string;
+  content: string;
+  linkPreview?: LinkPreviewType;
+};
+
+export type BoardResponseType = {
+  boards: BoardListDataType[];
+  meta: metaType;
+};

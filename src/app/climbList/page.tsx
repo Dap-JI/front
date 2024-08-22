@@ -9,14 +9,15 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
-import { useModal } from '@/src/hooks/useModal';
 import { Suspense } from 'react';
 import Loading from '@/src/app/climbList/loading';
+import useScrollDirection from '@/src/hooks/useScrollDirection';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
+  const [scrollDirection] = useScrollDirection('up');
 
   const {
     data: climbListData,
@@ -45,7 +46,17 @@ const ClimbListPage = () => {
 
   return (
     <div className={cn('container')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <div
+        className={cn('header-container', {
+          up: scrollDirection === 'up',
+          down: scrollDirection === 'down',
+        })}
+      >
+        <SearchBar
+          searchName={searchName}
+          onSearchChange={handleSearchChange}
+        />
+      </div>
       <div className={cn('secondContainer')}>
         <Suspense fallback={<Loading />}>
           <CardListData lists={lists} />

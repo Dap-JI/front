@@ -1,20 +1,20 @@
 'use client';
 import styles from './boardPage.module.scss';
 import classNames from 'classnames/bind';
-import Header from '@/src/components/common/header';
-import { AddIcon } from '@/public/icon';
-import Link from 'next/link';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { categoryListData, boardListData } from '@/src/utils/dummy';
 import { useState } from 'react';
 import BoardListDatas from '@/src/components/boardPage/boardListDatas';
 import SearchBar from '@/src/components/common/searchBar';
+1;
+import useScrollDirection from '@/src/hooks/useScrollDirection';
 
 const cn = classNames.bind(styles);
 
 const BoardPage = () => {
   const [selectCategory, setSelectCategory] = useState<string | null>(null);
   const [searchName, setSearchName] = useState('');
+  const [scrollDirection] = useScrollDirection('up');
 
   const handleSelectCategory = (category: string) => {
     setSelectCategory(category);
@@ -28,17 +28,24 @@ const BoardPage = () => {
 
   return (
     <div className={cn('container')}>
-      <SearchBar
-        showAdd={true}
-        searchName={searchName}
-        onSearchChange={handleSearchChange}
-      />
-      <div className={cn('secondContainer')}>
+      <div
+        className={cn('header-container', {
+          up: scrollDirection === 'up',
+          down: scrollDirection === 'down',
+        })}
+      >
+        <SearchBar
+          showAdd={true}
+          searchName={searchName}
+          onSearchChange={handleSearchChange}
+        />
         <CategoryLists
           lists={categoryListData}
           selectCategory={selectCategory}
           onCategorySelect={handleSelectCategory}
         />
+      </div>
+      <div className={cn('secondContainer')}>
         <BoardListDatas lists={boardData} />
       </div>
     </div>
