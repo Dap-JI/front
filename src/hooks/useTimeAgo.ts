@@ -1,4 +1,4 @@
-const useTimeAgo = (create_At: string) => {
+const useTimeAgo = (create_At: any) => {
   const date = new Date(create_At); // create_At 시간을 Date 객체로 변환
   const now = new Date(); // 현재 시간을 Date 객체로 생성 (한국 시간 기준)
 
