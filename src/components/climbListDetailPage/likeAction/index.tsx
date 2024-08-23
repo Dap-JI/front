@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { LikeIcon, LikedIcon, PeopleLikeIcon } from '@/public/icon';
 import classNames from 'classnames/bind';
-import styles from './videoLike.module.scss';
+import styles from './likeAction.module.scss';
 
 const cn = classNames.bind(styles);
 
@@ -11,7 +11,7 @@ type VideoLikeProps = {
   likeCount: any;
 };
 
-const VideoLike = ({ likeToggle, onClick, likeCount }: VideoLikeProps) => {
+const LikeAction = ({ likeToggle, onClick, likeCount }: VideoLikeProps) => {
   return (
     <div className={cn('container')}>
       {likeToggle ? (
@@ -24,4 +24,4 @@ const VideoLike = ({ likeToggle, onClick, likeCount }: VideoLikeProps) => {
   );
 };
 
-export default VideoLike;
+export default LikeAction;

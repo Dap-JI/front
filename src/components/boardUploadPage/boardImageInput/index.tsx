@@ -7,6 +7,8 @@ import { useMutation } from '@tanstack/react-query';
 import instance from '@/src/utils/axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { isServerError } from '@/src/utils/axiosError';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
@@ -23,7 +25,7 @@ const BoardImageInput = ({
 }: BoardImageInputProps) => {
   const [progress, setProgress] = useState(0);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]); // 미리보기 상태 추가
-
+  const { showModalHandler } = useModal();
   const { mutate: boardImageUpload, isPending } = useMutation({
     mutationKey: ['boardImageUpload'],
     mutationFn: async (image: FormData) => {
@@ -50,8 +52,10 @@ const BoardImageInput = ({
         prev.map((url, index) => data.imageUrls[index] || url),
       );
     },
-    onError: (error) => {
-      console.error('파일 업로드 실패:', error);
+    onError: (e) => {
+      if (isServerError(e) && e.response && e.response.status === 500) {
+        showModalHandler('alert', '최대 3개까지 업로드가 가능해요');
+      }
     },
   });
 
@@ -98,17 +102,24 @@ const BoardImageInput = ({
   }
   return (
     <div className={cn('container')}>
-      <label htmlFor="boardImageFile" className={cn('boardUploadLabel')}>
-        <PlusIcon />
-      </label>
-      <input
-        type="file"
-        id="boardImageFile"
-        multiple
-        accept="image/*"
-        className={cn('boardImageInput')}
-        onChange={handleFileUpload}
-      />
+      {fileUrl.length === 3 ? (
+        <span className={cn('maxImage')}>최대 3개까지 업로드가 가능해요</span>
+      ) : (
+        <>
+          <label htmlFor="boardImageFile" className={cn('boardUploadLabel')}>
+            <PlusIcon />
+          </label>
+          <input
+            type="file"
+            id="boardImageFile"
+            multiple
+            accept="image/*"
+            className={cn('boardImageInput')}
+            onChange={handleFileUpload}
+          />
+        </>
+      )}
+
       <div className={styles.uploadInput}>
         {previewUrls?.map((url: string, index: number) => (
           <div key={index} className={cn('imageBox')}>

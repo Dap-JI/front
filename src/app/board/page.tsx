@@ -3,13 +3,14 @@ import styles from './boardPage.module.scss';
 import classNames from 'classnames/bind';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { categoryListData } from '@/src/utils/dummy';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BoardLists from '@/src/components/boardPage/boardLists';
 import SearchBar from '@/src/components/common/searchBar';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 import { boardListGetDatas } from './api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { BoardResponseType } from '@/src/utils/type';
+import { useQueryClient } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ const BoardPage = () => {
   const [selectCategory, setSelectCategory] = useState<string | null>(null);
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
+  const queryClient = useQueryClient();
 
   const { data: boardListGetData } = useInfiniteScroll<BoardResponseType>({
     queryKey: ['boardListData'],
@@ -36,6 +38,12 @@ const BoardPage = () => {
   const handleSearchChange = (value: string) => {
     setSearchName(value);
   };
+
+  useEffect(() => {
+    if (searchName !== '') {
+      queryClient.invalidateQueries({ queryKey: ['boardListData'] });
+    }
+  }, [searchName, queryClient]);
 
   return (
     <div className={cn('container')}>
