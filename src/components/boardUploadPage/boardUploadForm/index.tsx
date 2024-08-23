@@ -44,14 +44,19 @@ const BoardUploadForm = () => {
     },
   });
 
-  const fieldLength = (fieldName: 'content' | 'title', maxLength: number) => {
-    const value = useWatch({ control, name: fieldName }) || '';
-    return { length: value.length, maxLength };
-  };
+  const titleValue = useWatch({ control, name: 'title' }) || '';
+  const contentValue = useWatch({ control, name: 'content' }) || '';
 
-  const title = fieldLength('title', 50);
-  const content = fieldLength('content', 5000);
-  //글자수 조회
+  // fieldLength 함수를 단순화
+  const fieldLength = (value: string, maxLength: number) => ({
+    length: value.length,
+    maxLength,
+  });
+
+  const title = fieldLength(titleValue, 50);
+  const content = fieldLength(contentValue, 5000);
+  
+  //글자수 조회, 이렇게 할거면 그냥 단순하게 하는게 나을듯
 
   //카테고리 선택
   const uploadCategory = categoryListData.filter(
