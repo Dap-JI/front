@@ -2,14 +2,14 @@
 import styles from './boardPage.module.scss';
 import classNames from 'classnames/bind';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
-import { categoryListData, boardListData } from '@/src/utils/dummy';
+import { categoryListData } from '@/src/utils/dummy';
 import { useState } from 'react';
-import BoardListDatas from '@/src/components/boardPage/boardListDatas';
+import BoardLists from '@/src/components/boardPage/boardLists';
 import SearchBar from '@/src/components/common/searchBar';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
-import { boardListDatas } from './api';
-import { useQuery } from '@tanstack/react-query';
+import { boardListGetDatas } from './api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
+import { BoardResponseType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -18,11 +18,20 @@ const BoardPage = () => {
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
 
+  const { data: boardListGetData } = useInfiniteScroll<BoardResponseType>({
+    queryKey: ['boardListData'],
+    fetchFunction: (page = 1) =>
+      boardListGetDatas({ page, search: searchName }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+
+  const boardData =
+    boardListGetData?.pages.flatMap((page) => page.boards) ?? [];
+
   const handleSelectCategory = (category: string) => {
     setSelectCategory(category);
   };
-
-  const boardData = boardListData?.boards ?? [];
 
   const handleSearchChange = (value: string) => {
     setSearchName(value);
@@ -48,7 +57,7 @@ const BoardPage = () => {
         />
       </div>
       <div className={cn('secondContainer')}>
-        <BoardListDatas lists={boardData} />
+        <BoardLists lists={boardData} />
       </div>
     </div>
   );

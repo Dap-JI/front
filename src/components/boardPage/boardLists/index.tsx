@@ -1,6 +1,6 @@
-import styles from './boardListDatas.module.scss';
+import styles from './boardLists.module.scss';
 import classNames from 'classnames/bind';
-import { BoardListDataType } from '@/src/utils/dummy';
+import { BoardListDataType } from '@/src/utils/type';
 import { CommentIcon, LikeIcon } from '@/public/icon';
 import Image from 'next/image';
 import useTruncateString from '@/src/hooks/useTruncateString';
@@ -9,28 +9,28 @@ import useTimeAgo from '@/src/hooks/useTimeAgo';
 
 const cn = classNames.bind(styles);
 
-type BoardListDataProps = {
+type BoardListProps = {
   list: BoardListDataType;
 };
 
-const BoardListData = ({ list }: BoardListDataProps) => {
+const BoardList = ({ list }: BoardListProps) => {
   const {
-    user,
+    User,
     category,
-    likeCount,
-    commentCount,
+    like_count,
+    comment_count,
     title,
     content,
-    linkPreview,
-    boardImg,
-    create_At,
+    // linkPreview,
+    img,
+    createAt,
   } = list;
-  const timeAgo = useTimeAgo(create_At);
+  const timeAgo = useTimeAgo(createAt);
   //시간대 표시
 
   const truncateString = useTruncateString();
   //글자수 제한한
-  const imageLeghth = boardImg.length;
+  const imageLeghth = img.length;
   //이미지 갯수 표시
 
   return (
@@ -39,7 +39,7 @@ const BoardListData = ({ list }: BoardListDataProps) => {
         <section className={cn('contentWrapper')}>
           <header className={cn('userInfo')}>
             <Image
-              src={user.img}
+              src={User.img}
               width={30}
               height={30}
               alt="유저 이미지"
@@ -48,7 +48,7 @@ const BoardListData = ({ list }: BoardListDataProps) => {
             <div className={cn('dateWrapper')}>
               <span className={cn('category')}>{category}</span>
               <div className={cn('dataInfo')}>
-                <span>{user.nickname}</span>
+                <span>{User.nickname}</span>
                 <span>{timeAgo}</span>
               </div>
             </div>
@@ -57,10 +57,10 @@ const BoardListData = ({ list }: BoardListDataProps) => {
           <span className={cn('content')}>{truncateString(content, 50)}</span>
         </section>
         <section className={cn('boardImageWrapper')}>
-          {boardImg.length > 0 ? (
+          {img.length > 0 ? (
             <>
               <Image
-                src={boardImg[0]}
+                src={img[0]}
                 width="100"
                 height="100"
                 alt="게시물 이미지"
@@ -74,34 +74,34 @@ const BoardListData = ({ list }: BoardListDataProps) => {
           <div className={cn('iconWrapper')}>
             <div className={cn('like')}>
               <LikeIcon width="20" height="20" />
-              <span>{commentCount}</span>
+              <span>{comment_count}</span>
             </div>
             <div className={cn('comment')}>
               <CommentIcon width="20" height="20" />
-              <span>{likeCount}</span>
+              <span>{like_count}</span>
             </div>
           </div>
         </section>
       </div>
-      {linkPreview && (linkPreview.img || linkPreview.title) && (
+      {/* {linkPreview && (linkPreview.img || linkPreview.title) && (
         <LinkPreview linkPreview={linkPreview} />
-      )}
+      )} */}
     </article>
   );
 };
 
-type BoardListDatasProps = {
+type BoardListsProps = {
   lists: BoardListDataType[];
 };
 
-const BoardListDatas = ({ lists }: BoardListDatasProps) => {
+const BoardLists = ({ lists }: BoardListsProps) => {
   return (
     <div className={cn('outerContainer')}>
       {lists.map((list: BoardListDataType) => (
-        <BoardListData key={list.board_idx} list={list} />
+        <BoardList key={list.board_idx} list={list} />
       ))}
     </div>
   );
 };
 
-export default BoardListDatas;
+export default BoardLists;

@@ -1,8 +1,21 @@
 import instance from '@/src/utils/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const boardListDatas = async () => {
-  const res = await instance.get(`/api/boards`);
+type boardListGetDatasProps = {
+  page: number;
+  search: string;
+};
+
+export const boardListGetDatas = async ({
+  page,
+  search,
+}: boardListGetDatasProps) => {
+  const res = await instance.get(`/api/boards`, {
+    params: {
+      page,
+      search,
+    },
+  });
   return res.data;
 };
 

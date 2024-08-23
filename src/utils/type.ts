@@ -164,15 +164,18 @@ export type LinkPreviewType = {
 export type BoardListDataType = {
   board_idx: number;
   user_idx: number;
-  user: UserType;
-  category: string;
-  create_At: any;
-  likeCount: number;
-  commentCount: number;
-  boardImg: string[];
   title: string;
   content: string;
-  linkPreview?: LinkPreviewType;
+  category: string;
+  createAt: any;
+  updateAt: any;
+  img: string[];
+  like_count: number;
+  User: UserType;
+  BoardLikes: string[];
+  is_like: boolean;
+  comment_count: number;
+  // linkPreview?: LinkPreviewType;
 };
 
 export type BoardResponseType = {
