@@ -6,8 +6,6 @@ import Header from '@/src/components/common/header';
 import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 import { usePostDetailDatas } from '@/src/app/climbList/api';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import { LeftArrowIcon } from '@/public/icon';
-import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -35,5 +33,3 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 };
 
 export default PostDetailPage;
-
-//업로드는 리스트페이지에서 뒤로가기 하면 클라이밍장 목록 가도록

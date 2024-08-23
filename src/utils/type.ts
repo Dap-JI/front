@@ -24,7 +24,7 @@ export type metaType = {
   hasNextPage: boolean;
 };
 
-//클라밍장 리스트 데이터
+//////////////////////////클라밍장 리스트 데이터//////////////////////////
 
 export type GymsType = {
   gym_idx: number;
@@ -47,7 +47,11 @@ export type useFormListUploadProps = {
   notice: string;
 };
 
-//클라이밍장 리스트중 상세 데이터
+//////////////////////////클라이밍장별 영상 데이터//////////////////////////
+
+type likeType = {
+  likes_idx: number;
+};
 
 export type UserType = {
   nickname: string;
@@ -67,6 +71,7 @@ export type DetailType = {
   User: UserType;
   like_count: number;
   is_like: boolean;
+  Likes: likeType[];
 };
 
 export type ClimbDetailResponseType = {
@@ -101,7 +106,7 @@ export type useFormPostUploadProps = {
   thumbnailUrl: string[];
 };
 
-//프로필 타입들
+//////////////////////////프로필 타입들//////////////////////////
 
 export type ProfilePostType = {
   post_idx: string;
@@ -131,7 +136,7 @@ export type useFormProfileEditProps = {
   introduce: string;
 };
 
-//포스트 디테일 타입들
+//////////////////////////포스트 디테일 타입들//////////////////////////
 
 export type PostDetailDataType = {
   post_idx: string;
@@ -148,7 +153,11 @@ export type PostDetailDataType = {
   is_liked: boolean;
 };
 
-//게시판 타입들
+//////////////////////////게시판 타입들//////////////////////////
+
+type BoardlikeType = {
+  board_like_idx: number;
+};
 
 export type CategroyListType = {
   category_idx: number;
@@ -171,10 +180,10 @@ export type BoardListDataType = {
   updatedAt: any;
   img: string[];
   like_count: number;
-  User: UserType;
-  BoardLikes: string[];
-  is_like: boolean;
   comment_count: number;
+  User: UserType;
+  board_like: BoardlikeType[];
+  is_like: boolean;
   // linkPreview?: LinkPreviewType;
 };
 
@@ -189,4 +198,42 @@ export type useFormBoardUploadType = {
   content: string;
   category: string;
   img: string[];
+};
+
+//////////////////////////게시판 상세 타입들//////////////////////////
+
+export type BoardDetailDataType = {
+  board_idx: number;
+  user_idx: number;
+  title: string;
+  content: string;
+  category: string;
+  createdAt: any;
+  updatedAt: any;
+  img: string[];
+  like_count: number;
+  comment_count: number;
+  User: UserType;
+  board_like: BoardlikeType[];
+  is_like: boolean;
+  // linkPreview?: LinkPreviewType;
+};
+
+//게시판 상세 댓글 타입
+
+export type BoardCommentDetailType = {
+  User: UserType;
+  board_idx: number;
+  comment_idx: number;
+  content: string;
+  createdAt: any;
+  is_like: boolean;
+  like_count: number;
+  updatedAt: any;
+  user_idx: number;
+};
+
+export type BoardCommentType = {
+  comments: [];
+  user_idx: number;
 };

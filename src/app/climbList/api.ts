@@ -200,15 +200,12 @@ export const useVideoDelete = () => {
   return videoDelete;
 };
 
-type VideoLikeRequestProps = {
+type LikeRequestProps = {
   category: string;
   post_idx: string;
 };
 
-export const VideoLikeRequest = async ({
-  category,
-  post_idx,
-}: VideoLikeRequestProps) => {
+export const LikeRequest = async ({ category, post_idx }: LikeRequestProps) => {
   const res = await instance.post(`/api/${category}/${post_idx}/like`);
   return res.data;
 };

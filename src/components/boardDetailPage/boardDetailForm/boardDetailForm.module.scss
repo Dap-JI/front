@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  .boardDetailHeader {
+    @include flex-arrange(space-between, center);
+
+    .userInfo {
+      @include flex-arrange(center, center);
+      @include font-style(1.3rem, black, 500);
+      gap: 10px;
+
+      .profileImage {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+    .editIcon {
+      margin-right: 15px;
+    }
+  }
+
+  .mainWrapper {
+    margin-top: 30px;
+    .textWrapper {
+      margin-bottom: 30px;
+
+      h1 {
+        @include font-style(1.8rem, black, 700);
+        margin-bottom: 20px;
+      }
+      .contentWrapper {
+        @include font-style(1.3rem, black, 400);
+      }
+    }
+  }
+}
