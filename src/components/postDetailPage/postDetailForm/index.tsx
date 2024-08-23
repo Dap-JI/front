@@ -15,8 +15,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
-import LikeAction from '../../climbListDetailPage/likeAction';
-import { VideoLikeRequest } from '@/src/app/climbList/api';
+import LikeAction from '../../common/likeAction';
+import { LikeRequest } from '@/src/app/climbList/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostDetailDataType } from '@/src/utils/type';
 
@@ -90,7 +90,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
 
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', post_idx],
-    mutationFn: () => VideoLikeRequest({ category: 'posts', post_idx }),
+    mutationFn: () => LikeRequest({ category: 'posts', post_idx }),
     onMutate: async () => {
       //서버에 요청되기 전에 실행되는 코드
       await queryClient.cancelQueries({ queryKey: ['postDetailDatas'] });

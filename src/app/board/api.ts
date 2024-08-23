@@ -43,3 +43,14 @@ export const useBoardImageDelete = () => {
   return imageDelete;
 };
 // /api/images/board-image/delete ,  바디에 url
+
+//게시판 상세 데이터
+export const boardDetailGetDatas = async (boardId: string) => {
+  const res = await instance.get(`api/board/${boardId}`);
+  return res.data;
+};
+
+export const boardDetailCommentGetDatas = async (boardId: string) => {
+  const res = await instance.get(`api/comment/${boardId}`);
+  return res.data;
+};

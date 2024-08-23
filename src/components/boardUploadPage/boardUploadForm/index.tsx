@@ -54,7 +54,7 @@ const BoardUploadForm = () => {
   });
 
   const title = fieldLength(titleValue, 50);
-  const content = fieldLength(contentValue, 5000);
+  const content = fieldLength(contentValue, 2000);
   
   //글자수 조회, 이렇게 할거면 그냥 단순하게 하는게 나을듯
 
