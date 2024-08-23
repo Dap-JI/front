@@ -6,6 +6,8 @@ import Image from 'next/image';
 import useTruncateString from '@/src/hooks/useTruncateString';
 import LinkPreview from '@/src/components/common/linkPreview';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
+import LikeAction from '../../climbListDetailPage/likeAction';
+import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -23,15 +25,24 @@ const BoardList = ({ list }: BoardListProps) => {
     content,
     // linkPreview,
     img,
-    createAt,
+    createdAt,
+    is_like,
   } = list;
-  const timeAgo = useTimeAgo(createAt);
+
+  const [likeToggle, setLikeToggle] = useState(is_like);
+  const [likeCount, setLikeCount] = useState(like_count);
+
+  const timeAgo = useTimeAgo(createdAt);
   //시간대 표시
 
   const truncateString = useTruncateString();
   //글자수 제한한
   const imageLeghth = img.length;
   //이미지 갯수 표시
+
+  const handleLikeClick = () => {
+    // likeRequest();
+  };
 
   return (
     <article className={cn('container')}>
@@ -65,6 +76,7 @@ const BoardList = ({ list }: BoardListProps) => {
                 height="100"
                 alt="게시물 이미지"
                 className={cn('boardImage')}
+                priority
               />
               <span className={cn('imageLength')}>+ {imageLeghth}</span>
             </>
@@ -73,6 +85,11 @@ const BoardList = ({ list }: BoardListProps) => {
           )}
           <div className={cn('iconWrapper')}>
             <div className={cn('like')}>
+              {/* <LikeAction
+                likeToggle={likeToggle}
+                likeCount={likeCount}
+                onClick={handleLikeClick}
+              /> */}
               <LikeIcon width="20" height="20" />
               <span>{comment_count}</span>
             </div>

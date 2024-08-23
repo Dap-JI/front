@@ -10,17 +10,26 @@ type HeaderProps = {
   children?: React.ReactNode;
   title?: string;
   back?: boolean;
+  page?: string;
 };
 
-const Header = ({ children, title, back }: HeaderProps) => {
+const Header = ({ children, title, back, page }: HeaderProps) => {
   const router = useRouter();
 
   const backClick = () => {
     router.back();
   };
+
+  const pageMove = () => {
+    if (page) {
+      router.push(page);
+    }
+  };
+
   return (
     <div className={cn('container')}>
       {back === true ? <LeftArrowIcon onClick={backClick} /> : ''}
+      {page ? <LeftArrowIcon onClick={pageMove} /> : ''}
       <h1>{title}</h1>
       {children}
     </div>

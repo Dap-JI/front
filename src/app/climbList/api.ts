@@ -152,7 +152,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.patch(`/api/posts/${postid}`, formData),
     onSuccess: () => {
-      router.push(`/climbList/${gymId}`);
+      router.push(`/climbList/${gymId}/${postid}`);
     },
     onError: () => {
       showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');
@@ -200,8 +200,15 @@ export const useVideoDelete = () => {
   return videoDelete;
 };
 
-//클라이밍장 영상 좋아요 함수 /api/posts/${post_idx}/like
-export const VideoLikeRequest = async (post_idx: string) => {
-  const res = await instance.post(`/api/posts/${post_idx}/like`);
+type VideoLikeRequestProps = {
+  category: string;
+  post_idx: string;
+};
+
+export const VideoLikeRequest = async ({
+  category,
+  post_idx,
+}: VideoLikeRequestProps) => {
+  const res = await instance.post(`/api/${category}/${post_idx}/like`);
   return res.data;
 };

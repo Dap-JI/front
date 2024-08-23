@@ -1,6 +1,11 @@
 .container {
   margin-right: auto;
 
+  .maxImage {
+    margin-left: 5px;
+    @include font-style(1.2rem, black, 500);
+  }
+
   .boardUploadLabel {
     display: block;
     @include flex-arrange(center, center);
@@ -19,7 +24,7 @@
     margin-bottom: 30px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(60px, 250px));
     gap: 10px;
 
     .imageBox {

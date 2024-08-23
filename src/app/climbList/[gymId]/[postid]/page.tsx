@@ -6,6 +6,8 @@ import Header from '@/src/components/common/header';
 import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 import { usePostDetailDatas } from '@/src/app/climbList/api';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import { LeftArrowIcon } from '@/public/icon';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -14,7 +16,7 @@ type PostDetailPageProps = {
 };
 
 const PostDetailPage = ({ params }: PostDetailPageProps) => {
-  const { postid } = params;
+  const { postid, gymId } = params;
 
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
 
@@ -24,7 +26,7 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <Header back={true} />
+      <Header page={`/climbList/${gymId}`} />
       <div className={cn('secondContainer')}>
         <PostDetailForm params={params} postDetailDatas={postDetailDatas} />
       </div>
@@ -34,4 +36,4 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 
 export default PostDetailPage;
 
-//여기서 공유하고 수정할거임
+//업로드는 리스트페이지에서 뒤로가기 하면 클라이밍장 목록 가도록

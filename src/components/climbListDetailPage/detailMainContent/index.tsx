@@ -15,7 +15,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
-import VideoLike from '@/src/components/climbListDetailPage/videoLike';
+import LikeAction from '@/src/components/climbListDetailPage/likeAction';
 import { useState } from 'react';
 import { VideoLikeRequest } from '@/src/app/climbList/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -67,7 +67,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const queryClient = useQueryClient();
   const { mutate: likeRequest } = useMutation({
     mutationKey: ['videoLiked', post_idx],
-    mutationFn: () => VideoLikeRequest(post_idx),
+    mutationFn: () => VideoLikeRequest({ category: 'posts', post_idx }),
     onMutate: async () => {
       //서버에 요청되기 전에 실행되는 코드
       await queryClient.cancelQueries({ queryKey: ['climbDetail'] });
@@ -161,7 +161,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           <div className={cn('color', `color-${color}`)} />
         </div>
         <span className={cn('clearday')}>등반일 : {deleteT(clearday)}</span>
-        <VideoLike
+        <LikeAction
           likeToggle={likeToggle}
           likeCount={likeCount}
           onClick={handleLikeClick}
