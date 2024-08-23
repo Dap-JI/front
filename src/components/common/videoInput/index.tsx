@@ -10,10 +10,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
-import { CircleXIcon } from '@/public/icon';
+import { CircleXIcon, PlusIcon } from '@/public/icon';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useVideoDelete } from '@/src/app/climbList/api';
+import { isServerError } from '@/src/utils/axiosError';
 
 const cn = classNames.bind(styles);
 
@@ -92,12 +93,19 @@ const VideoInput = ({
       // 성공적으로 업로드된 경우 mediaUrl을 상태에 저장
       setMediaUrl((prev) => ({
         videoUrl: [...prev.videoUrl, ...data.videoUrls],
-        thumbnailUrl: [...prev.thumbnailUrl, ...data.thumbnailUrlS],
+        thumbnailUrl: [...prev.thumbnailUrl, ...data.thumbnailUrls],
       }));
     },
-    onError: (error) => {
-      showModalHandler('alert', '영상을 1분 이하로 업로드 해주세요');
-      console.error('파일 업로드 실패:', error);
+    onError: (e) => {
+      if (isServerError(e) && e.response && e.response.status === 401) {
+        showModalHandler('alert', '답지를 1분 이하로 업로드 해주세요');
+        return;
+      }
+
+      if (isServerError(e) && e.response && e.response.status === 500) {
+        showModalHandler('alert', '최대 10개까지 업로드가 가능해요');
+        return;
+      }
     },
   });
 
@@ -110,7 +118,6 @@ const VideoInput = ({
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        console.log(`파일 크기: ${file.size}, 최대 허용 크기: ${maxSize}`);
 
         if (file.size > maxSize) {
           showModalHandler('alert', '영상을 500MB 이하로 업로드 해주세요');
@@ -161,15 +168,23 @@ const VideoInput = ({
 
   return (
     <div className={cn('container')}>
-      <label htmlFor="fileUpload">업로드</label>
-      <input
-        type="file"
-        id="fileUpload"
-        className={cn('filetextInput')}
-        multiple
-        accept="video/*"
-        onChange={handleFileUpload}
-      />
+      {mediaUrl.videoUrl.length === 10 ? (
+        <span className={cn('maxVideo')}>최대 10개까지 업로드가 가능해요</span>
+      ) : (
+        <>
+          <label htmlFor="fileUpload">
+            <PlusIcon />
+          </label>
+          <input
+            type="file"
+            id="fileUpload"
+            className={cn('filetextInput')}
+            multiple
+            accept="video/*"
+            onChange={handleFileUpload}
+          />
+        </>
+      )}
       <div className={styles.uploadInput}>
         <div className={cn('videoWrapper')}>
           <StyledSlider {...settings}>
@@ -198,10 +213,3 @@ const VideoInput = ({
 };
 
 export default VideoInput;
-
-//CircularProgressbar props
-//value는 진행도를 나타냄
-//text는 가운데 원형 안에 들어가는 숫자, value랑 같게 하면 될듯
-//maxvalue는 원형을 최대로 채울 수 있는 크기 value를 10으로 하고 maxvalue가 11이면 90%만 채워짐
-//minvalue는 원형의 최솟값 10으로 설정하면 value가 10일때 파란색 선이 0이다
-//strokeWidth 선 두께

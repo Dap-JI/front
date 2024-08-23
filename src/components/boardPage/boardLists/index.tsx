@@ -23,9 +23,9 @@ const BoardList = ({ list }: BoardListProps) => {
     content,
     // linkPreview,
     img,
-    createAt,
+    createdAt,
   } = list;
-  const timeAgo = useTimeAgo(createAt);
+  const timeAgo = useTimeAgo(createdAt);
   //시간대 표시
 
   const truncateString = useTruncateString();
@@ -65,6 +65,7 @@ const BoardList = ({ list }: BoardListProps) => {
                 height="100"
                 alt="게시물 이미지"
                 className={cn('boardImage')}
+                priority
               />
               <span className={cn('imageLength')}>+ {imageLeghth}</span>
             </>

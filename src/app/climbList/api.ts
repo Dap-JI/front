@@ -152,7 +152,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.patch(`/api/posts/${postid}`, formData),
     onSuccess: () => {
-      router.push(`/climbList/${gymId}`);
+      router.push(`/climbList/${gymId}/${postid}`);
     },
     onError: () => {
       showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');

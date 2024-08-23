@@ -167,8 +167,8 @@ export type BoardListDataType = {
   title: string;
   content: string;
   category: string;
-  createAt: any;
-  updateAt: any;
+  createdAt: any;
+  updatedAt: any;
   img: string[];
   like_count: number;
   User: UserType;

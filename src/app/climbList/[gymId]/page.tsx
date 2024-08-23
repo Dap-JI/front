@@ -56,8 +56,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
   //로딩중 들어가야할 것
   return (
     <div className={cn('container')}>
-      <Header title={gymName} back={true}>
-        <AddIcon onClick={uploadPage} width='30' height='30'/>
+      <Header title={gymName} page={'/climbList'}>
+        <AddIcon onClick={uploadPage} width="30" height="30" />
       </Header>
       <div className={cn('secondContainer')}>
         <Notification />
