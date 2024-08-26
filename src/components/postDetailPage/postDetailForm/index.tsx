@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { DeleteIcon, EditIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import { usePostDetailDelete } from '@/src/app/climbList/api';
-import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
@@ -117,7 +117,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
 
   const timeAgo = useTimeAgo(createdAt);
   //시간 ~~전 표기하는 함수
-  const isNotMyUserId = myId !== user_idx;
+  const isNotMyId = myId !== user_idx;
   //내 유저 id랑 게시물 유저 id비교
   const deleteT = (date: string | null) => date?.split('T')[0];
   //시간 가공하는 함수
@@ -153,7 +153,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           </div>
         </div>
         <div className={cn('btnStyle')}>
-          {!isNotMyUserId && (
+          {!isNotMyId && (
             <>
               <EditIcon onClick={editPage} />
               <DeleteIcon onClick={deleteClick} />

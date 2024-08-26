@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  background: white;
+  padding: 10px 0;
+  @include flex-arrange(space-between, center);
+  .mainWrapper {
+    display: flex;
+    width: 80%;
+
+    .profileImage {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .contentWrapper {
+      margin-left: 10px;
+      .userInfo {
+        display: block;
+        margin-bottom: 10xp;
+      }
+    }
+  }
+}
+
+// .userInfo {
+//   @include flex-arrange(flex-start, center);
+//   gap: 10px;
+
+.profileImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+//   // span:nth-child(1) {
+//   //   @include font-style(1rem, gray, 400);
+//   // }
+// }

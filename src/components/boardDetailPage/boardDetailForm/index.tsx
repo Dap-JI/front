@@ -3,6 +3,8 @@ import styles from './boardDetailForm.module.scss';
 import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
 import Image from 'next/image';
 import { DeleteIcon, EditIcon } from '@/public/icon';
+import { useMyInfo } from '@/src/app/auth/api';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 
 const cn = classNames.bind(styles);
 
@@ -27,7 +29,8 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
     board_like,
   } = boardDetailData;
 
-  console.log(content);
+  const { myId } = useMyInfoStore();
+  const isMyId = myId === user_idx;
 
   return (
     <div className={cn('container')}>
@@ -40,12 +43,17 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
             alt="게시물 작성자 프로필 이미지"
             className={cn('profileImage')}
           />
-          <span>{User.nickname}</span>
+          <div className={cn('userText')}>
+            <span>{category}</span>
+            <span>{User.nickname}</span>
+          </div>
         </div>
-        <div className={cn('iconWrapper')}>
-          <EditIcon className={cn('editIcon')} />
-          <DeleteIcon />
-        </div>
+        {isMyId && (
+          <div className={cn('iconWrapper')}>
+            <EditIcon className={cn('editIcon')} />
+            <DeleteIcon />
+          </div>
+        )}
       </header>
       <main className={cn('mainWrapper')}>
         <div className={cn('textWrapper')}>

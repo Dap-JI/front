@@ -32,8 +32,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
     queryFn: () => boardDetailCommentGetDatas(boardId),
   });
 
-  // console.log(boardDetailData);
-  // console.log(boardDetaiCommentlData);
+  const commentDatas = boardDetaiCommentlData?.comments ?? [];
 
   if (isLoading || !boardDetailData) {
     return <LoadingSpinner />;
@@ -46,7 +45,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           <BoardDetailForm boardDetailData={boardDetailData} />
         </section>
         <section>
-          <CommentLists />
+          <CommentLists lists={commentDatas} />
         </section>
       </main>
     </div>
