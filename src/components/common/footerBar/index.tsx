@@ -11,7 +11,7 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useMyInfo } from '@/src/app/auth/api';
-import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { GlassIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
