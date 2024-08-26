@@ -1,8 +1,10 @@
 .container {
   width: 100%;
-  position: fixed;
-  padding: 20px;
+  padding: 20px 10px;
   background: beige;
+  @include flex-arrange(center, center);
+  gap: 10px;
+  top: 0;
   .glass {
     position: absolute;
     top: 13px;

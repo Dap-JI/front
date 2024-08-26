@@ -7,12 +7,14 @@ interface PostData {
   };
   clearday: string;
   content: string | null;
-  post_idx: number;
-  media: string;
+  post_idx: string;
+  media: string[];
   gym_idx: string | number;
   createdAt?: string;
-  thumbnailUrl?: string;
+  thumbnailUrl?: string[];
   user_idx?: number;
+  like_count: number;
+  is_like: boolean;
 }
 
 interface PostStore {

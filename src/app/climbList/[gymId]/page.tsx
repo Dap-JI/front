@@ -56,8 +56,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
   //로딩중 들어가야할 것
   return (
     <div className={cn('container')}>
-      <Header title={gymName} back={true}>
-        <AddIcon onClick={uploadPage} />
+      <Header title={gymName} page={'/climbList'}>
+        <AddIcon onClick={uploadPage} width="30" height="30" />
       </Header>
       <div className={cn('secondContainer')}>
         <Notification />
@@ -65,11 +65,14 @@ const DetailPage = ({ params }: DetailPageProps) => {
           activeColor={activeColor}
           setActiveColor={setActiveColor}
         />
-        <DetailMainContentList lists={lists} />
+        {lists.length === 0 ? (
+          <NodetailData />
+        ) : (
+          <DetailMainContentList lists={lists} />
+        )}
+        <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
-      {!hasNextPage && <NodetailData />}
-      <div ref={ref} />
     </div>
   );
 };

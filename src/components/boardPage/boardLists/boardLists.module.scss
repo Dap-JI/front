@@ -1,0 +1,97 @@
+.container {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+
+  .containerWrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    .contentWrapper {
+      width: 100%;
+      @include flex-arrange(flex-start, flex-start);
+      flex-direction: column;
+      .userInfo {
+        @include flex-arrange(flex-start, center);
+        gap: 10px;
+        width: 100%;
+        .profileImage {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .dateWrapper {
+          @include flex-arrange(center, flex-start);
+          flex-direction: column;
+          gap: 2px;
+          .category {
+            @include font-style(1rem, gray, 400);
+          }
+          .dataInfo {
+            text-align: center;
+            span:nth-child(1) {
+              @include font-style(1.4rem, black, 600);
+              margin-right: 5px;
+            }
+            span:nth-child(2) {
+              @include font-style(1rem, gray, 400);
+            }
+          }
+        }
+      }
+
+      h1 {
+        @include font-style(1.6rem, black, 600);
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
+      .content {
+        @include font-style(1.1rem, gray, 400);
+      }
+    }
+
+    .boardImageWrapper {
+      margin-left: auto;
+      position: relative;
+      .boardImage {
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+      }
+
+      .imageLength {
+        @include font-style(1.4rem, white, 600);
+        position: absolute;
+        right: 6px;
+        top: 5px;
+        padding: 2px 3px;
+        background: rgb(78, 77, 77, 0.5);
+        border-radius: 4px;
+      }
+      .noBoardImage {
+        width: 100px;
+        height: 100px;
+        background: white;
+      }
+
+      .iconWrapper {
+        @include flex-arrange(space-around, center);
+        gap: 10px;
+        margin-top: 5px;
+        .like,
+        .comment {
+          @include flex-arrange(center);
+          @include font-style(1.4rem, black, 400);
+          gap: 5px;
+        }
+      }
+    }
+  }
+}
+
+.outerContainer {
+  @include flex-arrange(center, center);
+  flex-direction: column;
+  gap: 5px;
+}

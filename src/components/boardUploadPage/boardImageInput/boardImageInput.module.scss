@@ -1,0 +1,49 @@
+.container {
+  margin-right: auto;
+
+  .maxImage {
+    margin-left: 5px;
+    @include font-style(1.2rem, black, 500);
+  }
+
+  .boardUploadLabel {
+    display: block;
+    @include flex-arrange(center, center);
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  .boardImageInput {
+    display: none;
+  }
+
+  .uploadInput {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(60px, 250px));
+    gap: 10px;
+
+    .imageBox {
+      width: 100%;
+      position: relative;
+      padding-top: 30px;
+
+      .boardImage {
+        width: 90%;
+        height: 90%;
+        border-radius: 10px;
+        aspect-ratio: 1/1;
+      }
+
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}

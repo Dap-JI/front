@@ -1,0 +1,5 @@
+.container {
+  @include flex-arrange(center, center);
+  gap: 5px;
+  @include font-style(1.3rem, black, 400);
+}

@@ -9,20 +9,19 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
-import ModalChoice from '@/src/components/common/moadlChoice';
-import { useModal } from '@/src/hooks/useModal';
+import { Suspense } from 'react';
+import Loading from '@/src/app/climbList/loading';
+import useScrollDirection from '@/src/hooks/useScrollDirection';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
-
-  const { showModalHandler } = useModal();
+  const [scrollDirection] = useScrollDirection('up');
 
   const {
     data: climbListData,
     ref,
-    isLoading,
     isFetchingNextPage,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
@@ -45,18 +44,26 @@ const ClimbListPage = () => {
     }
   }, [searchName, queryClient]);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className={cn('container')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <div
+        className={cn('header-container', {
+          up: scrollDirection === 'up',
+          down: scrollDirection === 'down',
+        })}
+      >
+        <SearchBar
+          searchName={searchName}
+          onSearchChange={handleSearchChange}
+        />
+      </div>
       <div className={cn('secondContainer')}>
-        <CardListData lists={lists} />
+        <Suspense fallback={<Loading />}>
+          <CardListData lists={lists} />
+          <div ref={ref} />
+        </Suspense>
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
-      <div ref={ref} />
     </div>
   );
 };

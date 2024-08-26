@@ -11,14 +11,15 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useMyInfo } from '@/src/app/auth/api';
-import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
+import { GlassIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
 
 const FooterBar = () => {
   const path = usePathname();
   const router = useRouter();
-  const { userId } = useMyInfoStore();
+  const { myId } = useMyInfoStore();
 
   useMyInfo();
 
@@ -27,8 +28,8 @@ const FooterBar = () => {
   };
 
   const profileClick = () => {
-    if (userId) {
-      router.push(`/profile/${userId}`);
+    if (myId) {
+      router.push(`/profile/${myId}`);
     }
   };
 
@@ -38,15 +39,16 @@ const FooterBar = () => {
 
   return (
     <div className={cn('container')}>
-      <MarkerIcon width="30" height="30" onClick={() => routerClick('지도')} />
-      <BordIcon width="30" height="30" onClick={() => routerClick('게시판')} />
+      <MarkerIcon width="30" height="30" onClick={() => routerClick('map')} />
+      <BordIcon width="30" height="30" onClick={() => routerClick('board')} />
       <Link href="/climbList">
         <HomeIcon width="30" height="30" />
       </Link>
-      <MegaPhoneIcon
+      <GlassIcon
         width="30"
         height="30"
-        onClick={() => routerClick('공지')}
+        onClick={() => routerClick('search')}
+        fill="white"
       />
       <UserIcon width="30" height="30" onClick={profileClick} />
     </div>

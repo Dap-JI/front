@@ -65,10 +65,10 @@ const AdminClimbListPage = () => {
 
       <div className={cn('secondContainer')}>
         <AdminClimbListDatas lists={lists} />
+        <div ref={ref} />
       </div>
 
       {isFetchingNextPage && <LoadingSpinner />}
-      <div ref={ref} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import instance from '@/src/utils/axios';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { useMyInfoStore } from '@/src/hooks/useMyImfoStore';
+import { useQuery } from '@tanstack/react-query';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { useEffect } from 'react';
 
 export const KakaoLogin = async (code: string | null) => {
@@ -16,7 +16,7 @@ export const KakaoLogin = async (code: string | null) => {
   }
 };
 
-export const NaverLogin = async (code: string ) => {
+export const NaverLogin = async (code: string) => {
   try {
     const res = await instance.get(`/api/auth/naver/callback`, {
       params: {
@@ -30,7 +30,7 @@ export const NaverLogin = async (code: string ) => {
 };
 
 export const useMyInfo = () => {
-  const { setUserId } = useMyInfoStore();
+  const { setmyId } = useMyInfoStore();
 
   const query = useQuery({
     queryKey: ['myinfo'],
@@ -39,9 +39,9 @@ export const useMyInfo = () => {
 
   useEffect(() => {
     if (query.isSuccess && query.data) {
-      setUserId(query.data.data);
+      setmyId(query.data.data);
     }
-  }, [query.isSuccess, query.data, setUserId]);
+  }, [query.isSuccess, query.data, setmyId]);
 
   return query;
 };

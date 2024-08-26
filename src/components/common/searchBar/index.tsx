@@ -2,18 +2,20 @@
 import classNames from 'classnames/bind';
 import styles from './searchBar.module.scss';
 import CommonInput from '@/src/components/common/commonInput';
-import { GlassIcon } from '@/public/icon';
+import { GlassIcon, AddIcon } from '@/public/icon';
 import { useState, useEffect } from 'react';
 import useDebounce from '@/src/hooks/useDebounce';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
 type SearchBarProps = {
   onSearchChange: (value: string) => void;
   searchName: string;
+  showAdd?: boolean;
 };
 
-const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
+const SearchBar = ({ onSearchChange, searchName, showAdd }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(searchName);
   const debouncedSearchTerm = useDebounce(inputValue, 500); // 0.6초 지연
 
@@ -27,7 +29,6 @@ const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
     setInputValue(searchName);
   }, [searchName]);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -36,11 +37,23 @@ const SearchBar = ({ onSearchChange, searchName }: SearchBarProps) => {
     <div className={cn('container')}>
       <CommonInput
         placeholder="검색어를 입력하세요"
-        suffix={<GlassIcon width="15" height="15" className={cn('glass')} />}
+        suffix={
+          <GlassIcon
+            width="15"
+            height="15"
+            className={cn('glass')}
+            fill="black"
+          />
+        }
         type="text"
         value={inputValue}
         onChange={handleChange}
       />
+      {showAdd && (
+        <Link href={'/board/upload'}>
+          <AddIcon width="30" height="30" />
+        </Link>
+      )}
     </div>
   );
 };
