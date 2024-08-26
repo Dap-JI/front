@@ -10,6 +10,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import CommentInput from '@/src/components/boardDetailPage/commentInput';
 
 const cn = classNames.bind(styles);
 
@@ -48,6 +49,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           <CommentLists lists={commentDatas} />
         </section>
       </main>
+      <CommentInput />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
 import { useState } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
+import CommentInput from '@/src/components/boardDetailPage/commentInput';
 
 const cn = classNames.bind(styles);
 
@@ -48,6 +49,7 @@ const CommentList = ({ list }: CommentListProps) => {
             <span>{timeAgo}</span>
           </div>
           <span>{content}</span>
+          <span className={cn('replyButton')}>ㅡ 답글 달기</span>
         </div>
       </div>
       <LikeAction
@@ -65,7 +67,7 @@ type CommentListsProps = {
 
 const CommentLists = ({ lists }: CommentListsProps) => {
   return (
-    <div>
+    <div className={cn('outerContainer')}>
       {lists.map((list) => (
         <CommentList key={list.comment_idx} list={list} />
       ))}
@@ -74,3 +76,5 @@ const CommentLists = ({ lists }: CommentListsProps) => {
 };
 
 export default CommentLists;
+
+//댓글에 보드id, 내id,
