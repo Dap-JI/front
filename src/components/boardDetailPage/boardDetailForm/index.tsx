@@ -2,9 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './boardDetailForm.module.scss';
 import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
 import Image from 'next/image';
-import { DeleteIcon, EditIcon } from '@/public/icon';
+import { DeleteIcon, EditIcon, CommentIcon } from '@/public/icon';
 import { useMyInfo } from '@/src/app/auth/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
+import LikeAction from '../../common/likeAction';
 
 const cn = classNames.bind(styles);
 
@@ -76,7 +77,13 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
           <div className={cn('noBoardImage')}></div>
         )}
       </main>
-      <div></div>
+      <div className={cn('iconWrapper')}>
+        {/* <LikeAction /> */}
+        <div className={cn('comment')}>
+          <CommentIcon width="20" height="20" />
+          <span>{comment_count}</span>
+        </div>
+      </div>
     </div>
   );
 };

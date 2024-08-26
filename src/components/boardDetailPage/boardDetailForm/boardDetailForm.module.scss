@@ -1,7 +1,9 @@
 .container {
   width: 100%;
   background: white;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 1px solid rgb(160, 154, 154, 0.5);
   padding: 10px;
   .boardDetailHeader {
     @include flex-arrange(space-between, center);
@@ -52,6 +54,17 @@
       height: auto;
       border-radius: 10px;
       margin-bottom: 10px;
+    }
+  }
+
+  .iconWrapper {
+    @include flex-arrange(flex-start, center);
+    gap: 12px;
+    margin-top: 5px;
+    .comment {
+      @include flex-arrange(center);
+      @include font-style(1.3rem, black, 400);
+      gap: 5px;
     }
   }
 }

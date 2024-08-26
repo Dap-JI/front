@@ -3,6 +3,8 @@ import classNames from 'classnames/bind';
 import { BoardCommentDetailType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
+import { useState } from 'react';
+import useTimeAgo from '@/src/hooks/useTimeAgo';
 
 const cn = classNames.bind(styles);
 
@@ -21,7 +23,15 @@ const CommentList = ({ list }: CommentListProps) => {
     like_count,
     user_idx,
   } = list;
+  const [likeToggle, setLikeToggle] = useState(false);
+  const [likeCount, setLikeCount] = useState(like_count);
 
+  const timeAgo = useTimeAgo(createdAt);
+
+  const handleLikeClick = () => {
+    // likeRequest();
+    console.log('좋아요~');
+  };
   return (
     <div className={cn('container')}>
       <div className={cn('mainWrapper')}>
@@ -35,12 +45,16 @@ const CommentList = ({ list }: CommentListProps) => {
         <div className={cn('contentWrapper')}>
           <div className={cn('userInfo')}>
             <span>{User.nickname}</span>
-            <span>{createdAt}</span>
+            <span>{timeAgo}</span>
           </div>
           <span>{content}</span>
         </div>
       </div>
-      {/* <LikeAction /> */}
+      <LikeAction
+        likeCount={likeCount}
+        likeToggle={likeToggle}
+        onClick={handleLikeClick}
+      />
     </div>
   );
 };

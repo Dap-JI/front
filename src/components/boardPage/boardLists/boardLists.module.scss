@@ -82,6 +82,7 @@
         .like,
         .comment {
           @include flex-arrange(center);
+          @include font-style(1.4rem, black, 400);
           gap: 5px;
         }
       }
