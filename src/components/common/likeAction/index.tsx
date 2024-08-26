@@ -15,9 +15,9 @@ const LikeAction = ({ likeToggle, onClick, likeCount }: VideoLikeProps) => {
   return (
     <div className={cn('container')}>
       {likeToggle ? (
-        <LikedIcon onClick={onClick} />
+        <LikedIcon width='20' height='20' onClick={onClick} />
       ) : (
-        <LikeIcon onClick={onClick} />
+        <LikeIcon width='20' height='20' onClick={onClick} />
       )}
       <span>{likeCount}</span>
     </div>

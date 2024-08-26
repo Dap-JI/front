@@ -521,3 +521,27 @@ export const DownloadIcon = ({ ...props }: IconPropsType) => {
     </IconTemplate>
   );
 };
+export const UploadIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fill="black"
+        d="M11.007,2.578,11,18.016a1,1,0,0,0,1,1h0a1,1,0,0,0,1-1l.007-15.421,2.912,2.913a1,1,0,0,0,1.414,0h0a1,1,0,0,0,0-1.414L14.122.879a3,3,0,0,0-4.244,0L6.667,4.091a1,1,0,0,0,0,1.414h0a1,1,0,0,0,1.414,0Z"
+      />
+      <path
+        fill="black"
+        d="M22,17v4a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V17a1,1,0,0,0-1-1H1a1,1,0,0,0-1,1v4a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V17a1,1,0,0,0-1-1h0A1,1,0,0,0,22,17Z"
+      />
+    </IconTemplate>
+  );
+};
+export const UpIcon = ({ ...props }: IconPropsType) => {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fill="black"
+        d="M17.71,9.88l-4.3-4.29a2,2,0,0,0-2.82,0L6.29,9.88a1,1,0,0,0,0,1.41,1,1,0,0,0,1.42,0L11,8V19a1,1,0,0,0,2,0V8l3.29,3.29a1,1,0,1,0,1.42-1.41Z"
+      />
+    </IconTemplate>
+  );
+};

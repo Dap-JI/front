@@ -13,6 +13,7 @@ type inputProps = {
   type?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string; // 추가
 };
 
 const CommonInput = ({
@@ -24,10 +25,11 @@ const CommonInput = ({
   type = 'text',
   value,
   onChange,
+  className, // 추가
   ...rest
 }: inputProps) => {
   return (
-    <div className={cn('container')}>
+    <div className={cn('container', className)}>
       <label htmlFor={id}>{label}</label>
       <input
         className={cn('input')}

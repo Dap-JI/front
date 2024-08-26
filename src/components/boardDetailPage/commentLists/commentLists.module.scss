@@ -1,8 +1,9 @@
 .container {
   width: 100%;
+
   background: white;
   padding: 10px 10px;
-  @include flex-arrange(space-between, center);
+  @include flex-arrange(space-between, flex-start);
   .mainWrapper {
     display: flex;
     width: 80%;
@@ -30,12 +31,11 @@
           margin-left: 5px;
         }
       }
+      .replyButton {
+        display: block;
+        margin-top: 8px;
+        @include font-style(1rem, gray, 400);
+      }
     }
   }
 }
-
-// .userInfo {
-//   @include flex-arrange(flex-start, center);
-//   gap: 10px;
-
-// }

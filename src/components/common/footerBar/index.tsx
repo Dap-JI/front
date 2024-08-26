@@ -33,7 +33,12 @@ const FooterBar = () => {
     }
   };
 
-  if (path === '/' || path === '/join' || path.startsWith('/auth')) {
+  if (
+    path === '/' ||
+    path === '/join' ||
+    path.startsWith('/auth') ||
+    (path.startsWith('/board') && path !== '/board')
+  ) {
     return null;
   }
 
