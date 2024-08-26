@@ -71,7 +71,7 @@ export type DetailType = {
   User: UserType;
   like_count: number;
   is_like: boolean;
-  Likes: likeType[];
+  post_like: likeType[];
 };
 
 export type ClimbDetailResponseType = {

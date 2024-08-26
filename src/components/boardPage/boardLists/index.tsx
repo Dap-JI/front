@@ -49,6 +49,7 @@ const BoardList = ({ list }: BoardListProps) => {
     // likeRequest();
   };
   //좋아요 클릭
+
   const profilePage = () => {
     router.push(`/profile/${user_idx}`);
   };
@@ -106,11 +107,11 @@ const BoardList = ({ list }: BoardListProps) => {
                 onClick={handleLikeClick}
               /> */}
                 <LikeIcon width="20" height="20" />
-                <span>{comment_count}</span>
+                <span>{like_count}</span>
               </div>
               <div className={cn('comment')}>
                 <CommentIcon width="20" height="20" />
-                <span>{like_count}</span>
+                <span>{comment_count}</span>
               </div>
             </div>
           </section>
