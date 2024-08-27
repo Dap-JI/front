@@ -14,6 +14,7 @@ type inputProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string; // 추가
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const CommonInput = ({
@@ -26,6 +27,7 @@ const CommonInput = ({
   value,
   onChange,
   className, // 추가
+  onKeyDown,
   ...rest
 }: inputProps) => {
   return (

@@ -11,6 +11,8 @@ import { useQuery } from '@tanstack/react-query';
 import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import CommentInput from '@/src/components/boardDetailPage/commentInput';
+import { useRef, useEffect } from 'react';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -23,17 +25,31 @@ type BoardDetailPageProps = {
 const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   const { boardId } = params;
 
+  //게시판 상세 내용데이터
   const { data: boardDetailData, isLoading } = useQuery<BoardDetailDataType>({
     queryKey: ['boardDetailData'],
     queryFn: () => boardDetailGetDatas(boardId),
   });
 
+  //게시판 댓글 데이터
   const { data: boardDetaiCommentlData } = useQuery<BoardCommentType>({
     queryKey: ['boardDetaiCommentlData'],
     queryFn: () => boardDetailCommentGetDatas(boardId),
   });
 
   const commentDatas = boardDetaiCommentlData?.comments ?? [];
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // useEffect(() => {
+  //   // 댓글 목록이 업데이트된 후 스크롤을 하단으로 이동
+  //   if (containerRef.current) {
+  //     containerRef.current.scrollTo({
+  //       top: containerRef.current.scrollHeight,
+  //       behavior: 'smooth', // 부드러운 스크롤을 위해
+  //     });
+  //   }
+  // }, [commentDatas]); // 댓글 리스트가 변경될 때마다 스크롤 이동
 
   if (isLoading || !boardDetailData) {
     return <LoadingSpinner />;
@@ -45,11 +61,12 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
         <section>
           <BoardDetailForm boardDetailData={boardDetailData} />
         </section>
-        <section>
+        <section ref={containerRef}>
           <CommentLists lists={commentDatas} />
         </section>
       </main>
-      <CommentInput />
+      <CommentInput params={params} />
+      <ModalChoice />
     </div>
   );
 };

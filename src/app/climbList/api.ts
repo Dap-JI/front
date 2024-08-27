@@ -191,7 +191,6 @@ export const useVideoDelete = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
       // queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
-      console.log('삭제 성공');
     },
     onError: (error) => {
       console.error('삭제 실패:', error);

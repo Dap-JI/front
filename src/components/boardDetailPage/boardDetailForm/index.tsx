@@ -1,12 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './boardDetailForm.module.scss';
-import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
+import { BoardDetailDataType } from '@/src/utils/type';
 import Image from 'next/image';
 import { DeleteIcon, EditIcon, CommentIcon } from '@/public/icon';
-import { useMyInfo } from '@/src/app/auth/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import LikeAction from '../../common/likeAction';
-
+import { boardDeleteData } from '@/src/app/board/api';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useModal } from '@/src/hooks/useModal';
 const cn = classNames.bind(styles);
 
 type BoardDetailFormProps = {
@@ -30,8 +32,29 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
     board_like,
   } = boardDetailData;
 
+  const router = useRouter();
+  const { showModalHandler } = useModal();
+
+  const { mutate: boardDelete } = useMutation({
+    mutationKey: ['boardDelete'],
+    mutationFn: () => boardDeleteData(board_idx),
+    onSuccess: () => {
+      router.push(`/board`);
+    },
+    onError: () => {
+      showModalHandler('alert', '게시글 삭제에 실패했어요');
+    },
+  });
+
   const { myId } = useMyInfoStore();
   const isMyId = myId === user_idx;
+
+  const handleBoardDelete = () => {
+    const confirmAction = () => {
+      boardDelete();
+    };
+    showModalHandler('choice', '게시글을 삭제하시겠어요?', confirmAction);
+  };
 
   return (
     <div className={cn('container')}>
@@ -51,8 +74,8 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         </div>
         {isMyId && (
           <div className={cn('iconWrapper')}>
-            <EditIcon className={cn('editIcon')} />
-            <DeleteIcon />
+            <EditIcon />
+            <DeleteIcon onClick={handleBoardDelete} />
           </div>
         )}
       </header>

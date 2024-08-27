@@ -202,6 +202,7 @@ export type useFormBoardUploadType = {
 
 //////////////////////////게시판 상세 타입들//////////////////////////
 
+//게시판 상세 타입
 export type BoardDetailDataType = {
   board_idx: number;
   user_idx: number;
@@ -218,6 +219,12 @@ export type BoardDetailDataType = {
   is_like: boolean;
   // linkPreview?: LinkPreviewType;
 };
+
+//게시판 상세 수정 타입
+
+
+//게시판 상세 삭제 타입
+
 
 //게시판 상세 댓글 타입
 
@@ -237,3 +244,15 @@ export type BoardCommentType = {
   comments: [];
   user_idx: number;
 };
+
+//게시판 댓글 생성 타입
+
+export type BoardCommentUploadType = {
+  board_idx: string;
+  content: string;
+};
+
+//게시판 대댓글 생성 타입
+
+
+//게시판 대댓글 삭제 타입
