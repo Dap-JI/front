@@ -30,6 +30,9 @@
           @include font-style(1rem, gray, 400);
           margin-left: 5px;
         }
+        .deleteIcon {
+          margin-left: 5px;
+        }
       }
       .replyButton {
         display: block;
@@ -39,3 +42,8 @@
     }
   }
 }
+
+// .outerContainer {
+//   max-height: 400px; /* 필요에 따라 최대 높이를 설정하세요 */
+//   overflow-y: auto; /* 스크롤 가능하게 설정 */
+// }

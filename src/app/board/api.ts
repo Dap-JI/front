@@ -35,7 +35,6 @@ export const useBoardImageDelete = () => {
       instance.post(`/api/images/board-image/delete`, imageUrl),
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
-      console.log('삭제 성공');
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
@@ -52,6 +51,14 @@ export const boardDetailGetDatas = async (boardId: string) => {
   return res.data;
 };
 
+//게시판 상세 수정 데이터
+
+//게시판 삭제 데이터
+export const boardDeleteData = async (board_idx: number) => {
+  const res = await instance.delete(`/api/board/${board_idx}`);
+  return res.data;
+};
+
 //게시판  댓글 데이터
 export const boardDetailCommentGetDatas = async (boardId: string) => {
   const res = await instance.get(`api/comment/${boardId}`);
@@ -63,5 +70,11 @@ export const boardCommentUploadData = async (
   formData: BoardCommentUploadType,
 ) => {
   const res = await instance.post(`/api/comment`, formData);
+  return res.data;
+};
+
+//게시판 댓글 삭제 데이터
+export const boardCommentDeleteData = async (comment_idx: number) => {
+  const res = await instance.delete(`/api/comment/${comment_idx}`);
   return res.data;
 };

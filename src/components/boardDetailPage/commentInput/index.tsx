@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { boardCommentUploadData } from '@/src/app/board/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { BoardCommentUploadType } from '@/src/utils/type';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
@@ -17,8 +18,9 @@ type CommentInputProps = {
 };
 
 const CommentInput = ({ params }: CommentInputProps) => {
-  const { register, handleSubmit } = useForm<BoardCommentUploadType>();
+  const { register, handleSubmit, reset } = useForm<BoardCommentUploadType>();
   const { boardId } = params;
+  const { showModalHandler } = useModal();
   const queryClient = useQueryClient();
 
   const { mutate: boardCommentUpload } = useMutation({
@@ -28,6 +30,9 @@ const CommentInput = ({ params }: CommentInputProps) => {
     onSuccess: () => [
       queryClient.invalidateQueries({ queryKey: ['boardDetaiCommentlData'] }),
     ],
+    onError: () => {
+      showModalHandler('alert', '댓글 생성에 실패했어요');
+    },
   });
 
   const onSubmit = (data: BoardCommentUploadType) => {
@@ -36,7 +41,7 @@ const CommentInput = ({ params }: CommentInputProps) => {
       board_idx: boardId,
     };
     boardCommentUpload(formData);
-    console.log(data);
+    reset();
   };
 
   return (
