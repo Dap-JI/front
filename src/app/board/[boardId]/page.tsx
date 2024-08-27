@@ -13,6 +13,7 @@ import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import CommentInput from '@/src/components/boardDetailPage/commentInput';
 import { useRef, useEffect } from 'react';
 import ModalChoice from '@/src/components/common/moadlChoice';
+import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 
 const cn = classNames.bind(styles);
 
@@ -32,24 +33,22 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   });
 
   //게시판 댓글 데이터
-  const { data: boardDetaiCommentlData } = useQuery<BoardCommentType>({
-    queryKey: ['boardDetaiCommentlData'],
-    queryFn: () => boardDetailCommentGetDatas(boardId),
+
+  const {
+    data: boardDetailCommentlData,
+    ref,
+    isFetchingNextPage,
+  } = useInfiniteScroll<BoardCommentType>({
+    queryKey: ['boardDetailCommentlData'],
+    fetchFunction: (page = 1) => boardDetailCommentGetDatas({ page, boardId }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
-  const commentDatas = boardDetaiCommentlData?.comments ?? [];
+  const commentDatas =
+    boardDetailCommentlData?.pages.flatMap((page) => page.comments) ?? [];
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // useEffect(() => {
-  //   // 댓글 목록이 업데이트된 후 스크롤을 하단으로 이동
-  //   if (containerRef.current) {
-  //     containerRef.current.scrollTo({
-  //       top: containerRef.current.scrollHeight,
-  //       behavior: 'smooth', // 부드러운 스크롤을 위해
-  //     });
-  //   }
-  // }, [commentDatas]); // 댓글 리스트가 변경될 때마다 스크롤 이동
 
   if (isLoading || !boardDetailData) {
     return <LoadingSpinner />;
@@ -63,6 +62,8 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
         </section>
         <section ref={containerRef}>
           <CommentLists lists={commentDatas} />
+          <div ref={ref} />
+          {isFetchingNextPage && <LoadingSpinner />}
         </section>
       </main>
       <CommentInput params={params} />

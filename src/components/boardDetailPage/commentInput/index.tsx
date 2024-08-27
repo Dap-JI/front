@@ -28,7 +28,7 @@ const CommentInput = ({ params }: CommentInputProps) => {
     mutationFn: (formData: BoardCommentUploadType) =>
       boardCommentUploadData(formData),
     onSuccess: () => [
-      queryClient.invalidateQueries({ queryKey: ['boardDetaiCommentlData'] }),
+      queryClient.invalidateQueries({ queryKey: ['boardDetailCommentlData'] }),
     ],
     onError: () => {
       showModalHandler('alert', '댓글 생성에 실패했어요');

@@ -1,12 +1,16 @@
 import instance from '@/src/utils/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { BoardCommentUploadType } from '@/src/utils/type';
+import {
+  BoardCommentUploadType,
+  BoardRecommentUploadType,
+} from '@/src/utils/type';
 
 type boardListGetDatasProps = {
   page: number;
   search: string;
 };
 
+//게시판 전체 조회
 export const boardListGetDatas = async ({
   page,
   search,
@@ -43,29 +47,39 @@ export const useBoardImageDelete = () => {
   return imageDelete;
 };
 
-// /api/images/board-image/delete ,  바디에 url
-
-//게시판 상세 데이터
+//게시판 상세 조회
 export const boardDetailGetDatas = async (boardId: string) => {
   const res = await instance.get(`api/board/${boardId}`);
   return res.data;
 };
 
-//게시판 상세 수정 데이터
+//게시판 상세 수정
 
-//게시판 삭제 데이터
+//게시판 상세 삭제
 export const boardDeleteData = async (board_idx: number) => {
   const res = await instance.delete(`/api/board/${board_idx}`);
   return res.data;
 };
 
-//게시판  댓글 데이터
-export const boardDetailCommentGetDatas = async (boardId: string) => {
-  const res = await instance.get(`api/comment/${boardId}`);
+type boardDetailCommentGetDatasProps = {
+  boardId: string;
+  page: number;
+};
+
+//게시판  댓글 조회
+export const boardDetailCommentGetDatas = async ({
+  boardId,
+  page,
+}: boardDetailCommentGetDatasProps) => {
+  const res = await instance.get(`api/comment/${boardId}`, {
+    params: {
+      page,
+    },
+  });
   return res.data;
 };
 
-//게시판 댓글 셍성 데이터
+//게시판 댓글 셍성
 export const boardCommentUploadData = async (
   formData: BoardCommentUploadType,
 ) => {
@@ -73,8 +87,40 @@ export const boardCommentUploadData = async (
   return res.data;
 };
 
-//게시판 댓글 삭제 데이터
+//게시판 댓글 삭제
 export const boardCommentDeleteData = async (comment_idx: number) => {
   const res = await instance.delete(`/api/comment/${comment_idx}`);
+  return res.data;
+};
+
+//게시판 대댓글 조회
+type boardRecommentDatasProps = {
+  comment_idx: number;
+  page: any;
+};
+
+export const boardRecommentDatas = async ({
+  comment_idx,
+  page,
+}: boardRecommentDatasProps) => {
+  const res = await instance.get(`/api/recomment/${comment_idx}`, {
+    params: {
+      page,
+    },
+  });
+  return res.data;
+};
+
+//게시판 대댓글 생성
+export const boardRecommentUploadDatas = async (
+  formData: BoardRecommentUploadType,
+) => {
+  const res = await instance.post(`/api/recomment`, formData);
+  return res.data;
+};
+
+//게시판 대댓글 삭제
+export const boardReommentDeleteData = async (recomment_idx: number) => {
+  const res = await instance.delete(`/api/recomment/${recomment_idx}`);
   return res.data;
 };
