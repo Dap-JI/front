@@ -1,15 +1,25 @@
+// 'use client';
 import styles from './commentLists.module.scss';
 import classNames from 'classnames/bind';
-import { BoardCommentDetailType } from '@/src/utils/type';
+import { BoardCommentDetailType, BoardRecommentType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
 import { useState, useRef, useEffect } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { DeleteIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
-import { boardCommentDeleteData } from '@/src/app/board/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  boardCommentDeleteData,
+  boardRecommentDatas,
+} from '@/src/app/board/api';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
+import RecommnetLists from '../recommnetLists';
 
 const cn = classNames.bind(styles);
 
@@ -30,16 +40,49 @@ const CommentList = ({ list }: CommentListProps) => {
   } = list;
 
   const queryClient = useQueryClient();
+  //댓글 삭제
   const { mutate: boardCommentDelete } = useMutation({
     mutationKey: ['boardCommentDelete'],
     mutationFn: () => boardCommentDeleteData(comment_idx),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['boardDetaiCommentlData'] });
+      queryClient.invalidateQueries({ queryKey: ['boardDetailCommentlData'] });
     },
     onError: () => {
       showModalHandler('alert', '댓글 삭제에 실패했어요');
     },
   });
+
+  const [showRecomments, setShowRecomments] = useState(false);
+
+  //대댓글 조회
+  // const { data: boardRcommentData } = useQuery<BoardRecommentType>({
+  //   queryKey: ['boardRecomment'],
+  //   queryFn: () => boardRecommentDatas({ page, comment_idx }),
+  //   // enabled: !!showRecomments,
+  // });
+
+  const {
+    data: boardRcommentData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<BoardRecommentType>({
+    queryKey: ['boardRecomment', comment_idx],
+    queryFn: ({ pageParam = 1 }) =>
+      boardRecommentDatas({ page: pageParam, comment_idx }),
+    // enabled: !!showRecomments,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.meta.hasNextPage) {
+        return lastPage.meta.page + 1; // 다음 페이지 번호 반환
+      }
+      return undefined; // 더 이상 페이지가 없으면 undefined 반환
+    },
+    initialPageParam: 1, // 초기 페이지를 1로 설정
+  });
+
+  console.log(boardRcommentData);
+  const boardRcomments = boardRcommentData ?? [];
+  // console.log(boardRcommentData);
 
   const [likeToggle, setLikeToggle] = useState(false);
   const [likeCount, setLikeCount] = useState(like_count);
@@ -58,6 +101,10 @@ const CommentList = ({ list }: CommentListProps) => {
       boardCommentDelete();
     };
     showModalHandler('choice', '댓글을 삭제하시겠어요?', confirmAction);
+  };
+
+  const showRecommentClick = () => {
+    setShowRecomments((prev) => !prev);
   };
 
   return (
@@ -84,7 +131,18 @@ const CommentList = ({ list }: CommentListProps) => {
             )}
           </div>
           <span>{content}</span>
-          <span className={cn('replyButton')}>ㅡ 답글 달기</span>
+          <span className={cn('replyButton')}>답글 달기</span>
+          <span className={cn('replyButton')} onClick={showRecommentClick}>
+            {showRecomments ? (
+              <>
+                {/* <RecommnetLists boardRcomments={boardRcomments} /> */}
+                <span>ㅡ 답글 몇개 더보기</span>
+              </>
+            ) : (
+              'ㅡ 답글 보기 '
+            )}
+          </span>
+          {/* {showRecomments && <RecommnetLists boardRcomments={boardRcomments} />} */}
         </div>
       </div>
       <LikeAction
@@ -101,20 +159,7 @@ type CommentListsProps = {
 };
 
 const CommentLists = ({ lists }: CommentListsProps) => {
-  // const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // useEffect(() => {
-  //   // 댓글 목록이 업데이트된 후 스크롤을 하단으로 이동
-  //   if (containerRef.current) {
-  //     containerRef.current.scrollTo({
-  //       top: containerRef.current.scrollHeight,
-  //       behavior: 'smooth', // 부드러운 스크롤을 위해
-  //     });
-  //   }
-  // }, [lists]); // 댓글 리스트가 변경될 때마다 스크롤 이동
-
   return (
-    // <div className={cn('outerContainer')} ref={containerRef}>
     <div className={cn('outerContainer')}>
       {lists.map((list) => (
         <CommentList key={list.comment_idx} list={list} />

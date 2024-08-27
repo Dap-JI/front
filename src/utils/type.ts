@@ -222,11 +222,7 @@ export type BoardDetailDataType = {
 
 //게시판 상세 수정 타입
 
-
-//게시판 상세 삭제 타입
-
-
-//게시판 상세 댓글 타입
+//게시판 상세 댓글 조회 타입
 
 export type BoardCommentDetailType = {
   User: UserType;
@@ -242,7 +238,7 @@ export type BoardCommentDetailType = {
 
 export type BoardCommentType = {
   comments: [];
-  user_idx: number;
+  meta: metaType;
 };
 
 //게시판 댓글 생성 타입
@@ -252,7 +248,27 @@ export type BoardCommentUploadType = {
   content: string;
 };
 
-//게시판 대댓글 생성 타입
+//게시판 대댓글  조회 타입
 
+export type RecommentType = {
+  User: UserType;
+  comment_idx: number;
+  content: string;
+  createdAt: any;
+  recomment_idx: number;
+  updateAt: any;
+  user_idx: number;
+};
+
+export type BoardRecommentType = {
+  recomments: RecommentType[];
+  meta: metaType;
+};
+
+//게시판 대댓글 생성 타입
+export type BoardRecommentUploadType = {
+  comment_idx: number;
+  content: string;
+};
 
 //게시판 대댓글 삭제 타입
