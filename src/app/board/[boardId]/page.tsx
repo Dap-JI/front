@@ -23,11 +23,13 @@ type BoardDetailPageProps = {
 const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   const { boardId } = params;
 
+  //게시판 상세 내용데이터
   const { data: boardDetailData, isLoading } = useQuery<BoardDetailDataType>({
     queryKey: ['boardDetailData'],
     queryFn: () => boardDetailGetDatas(boardId),
   });
 
+  //게시판 댓글 데이터 
   const { data: boardDetaiCommentlData } = useQuery<BoardCommentType>({
     queryKey: ['boardDetaiCommentlData'],
     queryFn: () => boardDetailCommentGetDatas(boardId),
@@ -49,7 +51,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           <CommentLists lists={commentDatas} />
         </section>
       </main>
-      <CommentInput />
+      <CommentInput params={params} />
     </div>
   );
 };

@@ -33,6 +33,7 @@ const CommentList = ({ list }: CommentListProps) => {
     // likeRequest();
     console.log('좋아요~');
   };
+  
   return (
     <div className={cn('container')}>
       <div className={cn('mainWrapper')}>

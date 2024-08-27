@@ -1,5 +1,6 @@
 import instance from '@/src/utils/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { BoardCommentUploadType } from '@/src/utils/type';
 
 type boardListGetDatasProps = {
   page: number;
@@ -51,8 +52,16 @@ export const boardDetailGetDatas = async (boardId: string) => {
   return res.data;
 };
 
-//게시판 상세 댓글 데이터
+//게시판  댓글 데이터
 export const boardDetailCommentGetDatas = async (boardId: string) => {
   const res = await instance.get(`api/comment/${boardId}`);
+  return res.data;
+};
+
+//게시판 댓글 셍성 데이터
+export const boardCommentUploadData = async (
+  formData: BoardCommentUploadType,
+) => {
+  const res = await instance.post(`/api/comment`, formData);
   return res.data;
 };

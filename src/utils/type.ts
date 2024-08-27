@@ -237,3 +237,10 @@ export type BoardCommentType = {
   comments: [];
   user_idx: number;
 };
+
+//게시판 댓글 생성 타입
+
+export type BoardCommentUploadType = {
+  board_idx: string;
+  content: string;
+};
