@@ -114,6 +114,11 @@ const VideoInput = ({
     const maxSize = 500 * 1024 * 1024;
 
     if (files && files.length > 0) {
+      // 현재 업로드된 동영상 개수와 새로 추가하려는 동영상 개수 확인
+      if (mediaUrl.videoUrl.length + files.length > 10) {
+        showModalHandler('alert', '최대 10개까지 업로드가 가능해요.');
+        return;
+      }
       const formData = new FormData();
 
       for (let i = 0; i < files.length; i++) {
