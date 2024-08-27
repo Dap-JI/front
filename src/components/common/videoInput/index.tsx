@@ -123,7 +123,6 @@ const VideoInput = ({
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-
         if (file.size > maxSize) {
           showModalHandler('alert', '영상을 500MB 이하로 업로드 해주세요');
           return;
