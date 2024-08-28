@@ -1,10 +1,9 @@
-// 'use client';
 import styles from './commentLists.module.scss';
 import classNames from 'classnames/bind';
 import { BoardCommentDetailType, BoardRecommentType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { DeleteIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
@@ -15,11 +14,11 @@ import {
 import {
   useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import RecommnetLists from '../recommnetLists';
+import { useLikeAction } from '@/src/hooks/useLikeAction';
 
 const cn = classNames.bind(styles);
 
@@ -37,6 +36,7 @@ const CommentList = ({ list }: CommentListProps) => {
     is_like,
     like_count,
     user_idx,
+    recomment_count,
   } = list;
 
   const queryClient = useQueryClient();
@@ -53,13 +53,6 @@ const CommentList = ({ list }: CommentListProps) => {
   });
 
   const [showRecomments, setShowRecomments] = useState(false);
-
-  //대댓글 조회
-  // const { data: boardRcommentData } = useQuery<BoardRecommentType>({
-  //   queryKey: ['boardRecomment'],
-  //   queryFn: () => boardRecommentDatas({ page, comment_idx }),
-  //   // enabled: !!showRecomments,
-  // });
 
   const {
     data: boardRcommentData,
@@ -83,17 +76,23 @@ const CommentList = ({ list }: CommentListProps) => {
   const boardRcomments =
     boardRcommentData?.pages.flatMap((page) => page.recomments) ?? [];
 
-  const [likeToggle, setLikeToggle] = useState(false);
-  const [likeCount, setLikeCount] = useState(like_count);
+  const totalCount = boardRcommentData?.pages[0]?.meta.totalCount;
+  console.log(totalCount);
+  const nextCount = boardRcommentData?.pages[0]?.meta.take;
+
+  const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
+    category: 'comments',
+    content_id: comment_idx,
+    initalLikeCount: like_count,
+    initalLikeToggle: is_like,
+    firQueryKeyName: 'boardDetailCommentlData',
+  });
+
   const { myId } = useMyInfoStore();
   const { showModalHandler } = useModal();
   const isMyId = myId === user_idx;
 
   const timeAgo = useTimeAgo(createdAt);
-
-  const handleLikeClick = () => {
-    // likeRequest();
-  };
 
   const handleCommentDelete = () => {
     const confirmAction = () => {
@@ -117,7 +116,7 @@ const CommentList = ({ list }: CommentListProps) => {
           src={User.img}
           width="30"
           height="30"
-          alt="게시물 작성자 프로필 이미지"
+          alt="댓글 작성자 프로필 이미지"
           className={cn('profileImage')}
         />
         <div className={cn('contentWrapper')}>
@@ -139,14 +138,22 @@ const CommentList = ({ list }: CommentListProps) => {
             {showRecomments ? (
               <>
                 <RecommnetLists boardRcomments={boardRcomments} />
-                {hasNextPage ? (
-                  <span onClick={nextRecomments}>ㅡ 답글 몇개 더보기</span>
+                {hasNextPage &&
+                totalCount !== undefined &&
+                nextCount !== undefined ? (
+                  <span onClick={nextRecomments}>
+                    ㅡ 답글 {totalCount - boardRcomments.length}개 더보기
+                  </span>
                 ) : (
                   <span onClick={showRecommentClick}>ㅡ 답글 닫기</span>
                 )}
               </>
             ) : (
-              <span onClick={showRecommentClick}>ㅡ 답글몇개 보기</span>
+              recomment_count > 0 && (
+                <span onClick={showRecommentClick}>
+                  ㅡ 답글 {recomment_count}개 보기
+                </span>
+              )
             )}
           </div>
         </div>

@@ -9,6 +9,9 @@ import { boardDeleteData } from '@/src/app/board/api';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
+import { useLikeAction } from '@/src/hooks/useLikeAction';
+import Link from 'next/link';
+
 const cn = classNames.bind(styles);
 
 type BoardDetailFormProps = {
@@ -31,6 +34,15 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
     is_like,
     board_like,
   } = boardDetailData;
+
+  const { likeToggle, likeCount, handleLikeClick } = useLikeAction({
+    category: 'boards',
+    content_id: board_idx,
+    initalLikeCount: like_count,
+    initalLikeToggle: is_like,
+    firQueryKeyName: 'boardDetailData',
+    secQueryKeyName: 'boardListData',
+  });
 
   const router = useRouter();
   const { showModalHandler } = useModal();
@@ -74,7 +86,9 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         </div>
         {isMyId && (
           <div className={cn('iconWrapper')}>
-            <EditIcon />
+            <Link href={`/board/${board_idx}/edit`}>
+              <EditIcon />
+            </Link>
             <DeleteIcon onClick={handleBoardDelete} />
           </div>
         )}
@@ -101,7 +115,11 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         )}
       </main>
       <div className={cn('iconWrapper')}>
-        {/* <LikeAction /> */}
+        <LikeAction
+          likeCount={likeCount}
+          likeToggle={likeToggle}
+          onClick={handleLikeClick}
+        />
         <div className={cn('comment')}>
           <CommentIcon width="20" height="20" />
           <span>{comment_count}</span>

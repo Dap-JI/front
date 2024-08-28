@@ -77,7 +77,6 @@
 
       .iconWrapper {
         @include flex-arrange(space-around, center);
-        gap: 10px;
         margin-top: 5px;
         .like,
         .comment {

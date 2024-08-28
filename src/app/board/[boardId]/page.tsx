@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import CommentInput from '@/src/components/boardDetailPage/commentInput';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 

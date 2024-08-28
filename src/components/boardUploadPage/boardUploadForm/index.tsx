@@ -17,13 +17,21 @@ import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
-const BoardUploadForm = () => {
+type BoardUploadFormProps = {
+  params: {
+    boardId: string;
+  };
+};
+
+const BoardUploadForm = ({ params }: BoardUploadFormProps) => {
   const [fileUrl, setFileUrl] = useState<string[]>([]);
   const [deleteUrl, setDeleteUrl] = useState<string[]>([]);
   const [selectCategory, setSelectCategory] = useState<string | null>(null);
   const { showModalHandler } = useModal();
   const router = useRouter();
   const { mutate: imageDelete } = useBoardImageDelete();
+  const { boardId } = params;
+  console.log(boardId);
 
   const {
     register,
@@ -55,7 +63,7 @@ const BoardUploadForm = () => {
 
   const title = fieldLength(titleValue, 50);
   const content = fieldLength(contentValue, 2000);
-  
+
   //글자수 조회, 이렇게 할거면 그냥 단순하게 하는게 나을듯
 
   //카테고리 선택
