@@ -8,17 +8,20 @@ import {
 type boardListGetDatasProps = {
   page: number;
   search: string;
+  category: string | null;
 };
 
 //게시판 전체 조회
 export const boardListGetDatas = async ({
   page,
   search,
+  category,
 }: boardListGetDatasProps) => {
   const res = await instance.get(`/api/boards`, {
     params: {
       page,
       search,
+      category,
     },
   });
   return res.data;

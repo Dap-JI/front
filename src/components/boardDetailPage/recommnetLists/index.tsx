@@ -48,6 +48,7 @@ const RecommnetList = ({ recomment }: RecommnetListProps) => {
     content_id: recomment_idx,
     initalLikeCount: like_count,
     initalLikeToggle: is_like,
+    firQueryKeyName: 'boardRecomment',
   });
 
   const timeAgo = useTimeAgo(createdAt);

@@ -35,18 +35,18 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   //게시판 댓글 데이터
 
   const {
-    data: boardDetailCommentlData,
+    data: boardDetailCommentData,
     ref,
     isFetchingNextPage,
   } = useInfiniteScroll<BoardCommentType>({
-    queryKey: ['boardDetailCommentlData'],
+    queryKey: ['boardDetailComment'],
     fetchFunction: (page = 1) => boardDetailCommentGetDatas({ page, boardId }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
   const commentDatas =
-    boardDetailCommentlData?.pages.flatMap((page) => page.comments) ?? [];
+    boardDetailCommentData?.pages.flatMap((page) => page.comments) ?? [];
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
