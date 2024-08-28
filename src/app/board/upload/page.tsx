@@ -12,9 +12,10 @@ type BoardUploadPageProsp = {
 };
 
 const BoardUploadPage = ({ params }: BoardUploadPageProsp) => {
+
   return (
     <div className={cn('container')}>
-      <Header back={true}></Header>
+      <Header page={`/board`}></Header>
       <div className={cn('secondContainer')}>
         <BoardUploadForm params={params} />
       </div>

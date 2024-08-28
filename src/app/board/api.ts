@@ -4,6 +4,7 @@ import {
   BoardCommentUploadType,
   BoardRecommentUploadType,
 } from '@/src/utils/type';
+import { useModal } from '@/src/hooks/useModal';
 
 type boardListGetDatasProps = {
   page: number;
@@ -36,6 +37,7 @@ export const boardUploadData = async (formData: any) => {
 //게시판 이미지 삭제
 export const useBoardImageDelete = () => {
   const queryClient = useQueryClient();
+  const { showModalHandler } = useModal();
   const imageDelete = useMutation({
     mutationKey: ['boardImageDelete'],
     mutationFn: (imageUrl: string) =>
@@ -44,6 +46,7 @@ export const useBoardImageDelete = () => {
       // queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
     },
     onError: (error) => {
+      showModalHandler('alert', '이미지 삭제를 다시 시도해 주세요');
       console.error('삭제 실패:', error);
     },
   });
@@ -57,6 +60,10 @@ export const boardDetailGetDatas = async (boardId: string) => {
 };
 
 //게시판 상세 수정
+export const boardUpdateData = async (board_idx: string, formData: any) => {
+  const res = await instance.patch(`/api/board/${board_idx}`, formData);
+  return res.data;
+};
 
 //게시판 상세 삭제
 export const boardDeleteData = async (board_idx: string) => {

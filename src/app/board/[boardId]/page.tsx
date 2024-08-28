@@ -14,6 +14,7 @@ import CommentInput from '@/src/components/boardDetailPage/commentInput';
 import { useRef } from 'react';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
+import Header from '@/src/components/common/header';
 
 const cn = classNames.bind(styles);
 
@@ -56,6 +57,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
 
   return (
     <div className={cn('container')}>
+      <Header page={`/board`} />
       <main className={cn('secondContainer')}>
         <section>
           <BoardDetailForm boardDetailData={boardDetailData} />
