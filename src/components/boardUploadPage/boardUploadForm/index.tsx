@@ -1,15 +1,19 @@
 'use client';
 import styles from './boardUploadForm.module.scss';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
-import { categoryListData } from '@/src/utils/dummy';
+import { useState, useEffect } from 'react';
+import { categoryListData } from '@/src/utils/categoryListDatas';
 import CategoryLists from '../../boardPage/categroyLists';
 import CommonInput from '../../common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
 import { useForm, useWatch } from 'react-hook-form';
 import { useFormBoardUploadType } from '@/src/utils/type';
 import BoardImageInput from '@/src/components/boardUploadPage/boardImageInput';
-import { boardUploadData, useBoardImageDelete } from '@/src/app/board/api';
+import {
+  boardUploadData,
+  useBoardImageDelete,
+  boardUpdateData,
+} from '@/src/app/board/api';
 import { useMutation } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
@@ -21,9 +25,10 @@ type BoardUploadFormProps = {
   params: {
     boardId: string;
   };
+  initialData?: any;
 };
 
-const BoardUploadForm = ({ params }: BoardUploadFormProps) => {
+const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
   const [fileUrl, setFileUrl] = useState<string[]>([]);
   const [deleteUrl, setDeleteUrl] = useState<string[]>([]);
   const [selectCategory, setSelectCategory] = useState<string | null>(null);
@@ -31,12 +36,12 @@ const BoardUploadForm = ({ params }: BoardUploadFormProps) => {
   const router = useRouter();
   const { mutate: imageDelete } = useBoardImageDelete();
   const { boardId } = params;
-  console.log(boardId);
 
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     control,
     formState: { errors },
   } = useForm<useFormBoardUploadType>();
@@ -48,7 +53,20 @@ const BoardUploadForm = ({ params }: BoardUploadFormProps) => {
       router.push('/board');
     },
     onError: (e) => {
-      console.error(e, '게시물 업로드 에러러');
+      showModalHandler('alert', '업로드를  다시 시도해 주세요');
+      console.error(e, '게시물 업로드 에러');
+    },
+  });
+
+  const { mutate: boardUpdate } = useMutation<useFormBoardUploadType>({
+    mutationKey: ['boardUpdate'],
+    mutationFn: (formData) => boardUpdateData(boardId, formData),
+    onSuccess: () => {
+      router.push(`/board/${boardId}`);
+    },
+    onError: (e) => {
+      showModalHandler('alert', '수정을 다시 시도해 주세요');
+      console.error(e, '게시물 수정 에러');
     },
   });
 
@@ -90,17 +108,30 @@ const BoardUploadForm = ({ params }: BoardUploadFormProps) => {
     };
 
     const confirmAction = () => {
+      if (initialData) {
+        boardUpdate(formData);
+        handleVideoDeletion();
+        return;
+      }
       boardUpload(formData);
       handleVideoDeletion();
-    }; // 데이터와 함께 호출
+    };
 
-    // const message = initialData
-    //   ? '답지를 수정 하시나요?'
-    //   : '답지를 업로드 하시나요?';
+    const message = initialData
+      ? '게시물을 수정 하시나요?'
+      : '게시물을 업로드 하시나요?';
 
-    // showModalHandler('choice', message, confirmAction);
-    showModalHandler('choice', '게시물을 업로드하시겠어요?', confirmAction);
+    showModalHandler('choice', message, confirmAction);
   };
+
+  useEffect(() => {
+    if (initialData) {
+      setValue('title', initialData?.title);
+      setValue('content', initialData?.content);
+      setFileUrl(initialData.img);
+      setSelectCategory(initialData.category);
+    }
+  }, [initialData, setValue]);
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>

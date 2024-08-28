@@ -94,7 +94,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     };
 
     // 동영상 삭제 처리 함수
-    const handleVideoDeletion = () => {
+    const handleVideoDelete = () => {
       deletedVideos.forEach(({ videoUrl, thumbnailUrl }) => {
         const videoToDelete = {
           videoUrl: videoUrl,
@@ -107,9 +107,10 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     const confirmAction = () => {
       if (initialData) {
         postDetailUpdate(formData);
-        handleVideoDeletion(); // 수정 후 동영상 삭제 처리
+        handleVideoDelete(); // 수정 후 동영상 삭제 처리
       } else {
         detailUploadDatas(formData);
+        handleVideoDelete(); // 수정 후 동영상 삭제 처리
       }
 
       // 삭제된 동영상 리스트 초기화
