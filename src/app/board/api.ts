@@ -56,7 +56,7 @@ export const boardDetailGetDatas = async (boardId: string) => {
 //게시판 상세 수정
 
 //게시판 상세 삭제
-export const boardDeleteData = async (board_idx: number) => {
+export const boardDeleteData = async (board_idx: string) => {
   const res = await instance.delete(`/api/board/${board_idx}`);
   return res.data;
 };
@@ -88,14 +88,14 @@ export const boardCommentUploadData = async (
 };
 
 //게시판 댓글 삭제
-export const boardCommentDeleteData = async (comment_idx: number) => {
+export const boardCommentDeleteData = async (comment_idx: string) => {
   const res = await instance.delete(`/api/comment/${comment_idx}`);
   return res.data;
 };
 
 //게시판 대댓글 조회
 type boardRecommentDatasProps = {
-  comment_idx: number;
+  comment_idx: string;
   page: any;
 };
 
@@ -120,7 +120,7 @@ export const boardRecommentUploadDatas = async (
 };
 
 //게시판 대댓글 삭제
-export const boardReommentDeleteData = async (recomment_idx: number) => {
+export const boardReommentDeleteData = async (recomment_idx: string) => {
   const res = await instance.delete(`/api/recomment/${recomment_idx}`);
   return res.data;
 };

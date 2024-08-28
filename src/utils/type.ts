@@ -171,7 +171,7 @@ export type LinkPreviewType = {
 };
 
 export type BoardListDataType = {
-  board_idx: number;
+  board_idx: string;
   user_idx: number;
   title: string;
   content: string;
@@ -204,7 +204,7 @@ export type useFormBoardUploadType = {
 
 //게시판 상세 타입
 export type BoardDetailDataType = {
-  board_idx: number;
+  board_idx: string;
   user_idx: number;
   title: string;
   content: string;
@@ -227,13 +227,14 @@ export type BoardDetailDataType = {
 export type BoardCommentDetailType = {
   User: UserType;
   board_idx: number;
-  comment_idx: number;
+  comment_idx: string;
   content: string;
   createdAt: any;
   is_like: boolean;
   like_count: number;
   updatedAt: any;
   user_idx: number;
+  recomment_count: number;
 };
 
 export type BoardCommentType = {
@@ -252,12 +253,14 @@ export type BoardCommentUploadType = {
 
 export type RecommentType = {
   User: UserType;
-  comment_idx: number;
+  comment_idx: string;
   content: string;
   createdAt: any;
-  recomment_idx: number;
+  recomment_idx: string;
   updateAt: any;
   user_idx: number;
+  like_count: number;
+  is_like: boolean;
 };
 
 export type BoardRecommentType = {

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
 import { DeleteIcon, EditIcon } from '@/public/icon';
@@ -16,8 +16,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import LikeAction from '../../common/likeAction';
-import { LikeRequest } from '@/src/hooks/useLikeRequest';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useLikeAction } from '@/src/hooks/useLikeAction';
 import { PostDetailDataType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
@@ -74,6 +73,15 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     is_liked,
   } = postDetailDatas;
 
+  const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
+    category: 'posts',
+    content_id: post_idx,
+    initalLikeCount: like_count,
+    initalLikeToggle: is_liked,
+    firQueryKeyName: 'postDetailDatas',
+    secQueryKeyName: 'climbDetail',
+  });
+
   const router = useRouter();
 
   const { mutate: postDetailDelete } = usePostDetailDelete(post_idx, gym_idx);
@@ -81,39 +89,6 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
   const { myId } = useMyInfoStore();
 
   const { showModalHandler } = useModal();
-
-  const [likeToggle, setLikeToggle] = useState(is_liked);
-
-  const [likeCount, setLikeCount] = useState(like_count);
-
-  const queryClient = useQueryClient();
-
-  const { mutate: likeRequest } = useMutation({
-    mutationKey: ['videoLiked', post_idx],
-    mutationFn: () => LikeRequest({ category: 'posts', content_id: post_idx }),
-    onMutate: async () => {
-      //서버에 요청되기 전에 실행되는 코드
-      await queryClient.cancelQueries({ queryKey: ['postDetailDatas'] });
-      //서버에서 데이터를 가져오는 중이라면 취소, 데이터 중첩 안되도록
-      const previousData = queryClient.getQueryData(['postDetailDatas']);
-      //현재 캐시된 데이터
-      setLikeToggle((prev) => !prev);
-      setLikeCount((prev) => (likeToggle ? prev - 1 : prev + 1));
-      return { previousData };
-    },
-    onError: (error, variables, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData(['postDetailDatas'], context.previousData);
-      }
-      //onMutate에서 반환된 previousData를 사용하여 실패한 요청 이전의 상태로 롤백.
-      //이 작업을 통해 사용자는 서버 요청이 실패하더라도 이전의 정확한 상태를 볼 수 있게 된다..
-    },
-    onSettled: () => {
-      //성공해도, 실패해도 해당 쿼리키를 최신화
-      queryClient.invalidateQueries({ queryKey: ['postDetailDatas'] });
-      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
-    },
-  });
 
   const timeAgo = useTimeAgo(createdAt);
   //시간 ~~전 표기하는 함수
@@ -136,11 +111,6 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     router.push(`/profile/${user_idx}`);
   };
   //프로필 이동
-
-  const handleLikeClick = () => {
-    likeRequest();
-  };
-  //좋아요 클릭
 
   return (
     <div className={cn('container')}>
