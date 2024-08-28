@@ -85,7 +85,7 @@ const CommentList = ({ list }: CommentListProps) => {
     content_id: comment_idx,
     initalLikeCount: like_count,
     initalLikeToggle: is_like,
-    firQueryKeyName: 'boardDetailCommentlData',
+    firQueryKeyName: 'boardDetailComment',
   });
 
   const { myId } = useMyInfoStore();
