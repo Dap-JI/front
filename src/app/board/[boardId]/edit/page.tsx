@@ -23,4 +23,3 @@ const BoardEditPage = ({ params }: BoardEditPageProps) => {
 };
 
 export default BoardEditPage;
- 

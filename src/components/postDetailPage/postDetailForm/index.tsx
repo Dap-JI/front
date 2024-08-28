@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './postDetailForm.module.scss';
 import classNames from 'classnames/bind';
 import { DeleteIcon, EditIcon } from '@/public/icon';
@@ -16,8 +16,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import LikeAction from '../../common/likeAction';
-import { LikeRequestData, useLikeAction } from '@/src/hooks/useLikeAction';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useLikeAction } from '@/src/hooks/useLikeAction';
 import { PostDetailDataType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);

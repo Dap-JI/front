@@ -5,12 +5,18 @@ import BoardUploadForm from '@/src/components/boardUploadPage/boardUploadForm';
 
 const cn = classNames.bind(styles);
 
-const BoardUploadPage = () => {
+type BoardUploadPageProsp = {
+  params: {
+    boardId: string;
+  };
+};
+
+const BoardUploadPage = ({ params }: BoardUploadPageProsp) => {
   return (
     <div className={cn('container')}>
       <Header back={true}></Header>
       <div className={cn('secondContainer')}>
-        <BoardUploadForm />
+        <BoardUploadForm params={params} />
       </div>
     </div>
   );
