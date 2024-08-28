@@ -70,7 +70,7 @@ const CommentList = ({ list }: CommentListProps) => {
     queryKey: ['boardRecomment', comment_idx],
     queryFn: ({ pageParam = 1 }) =>
       boardRecommentDatas({ page: pageParam, comment_idx }),
-    // enabled: !!showRecomments,
+    enabled: !!showRecomments,
     getNextPageParam: (lastPage) => {
       if (lastPage.meta.hasNextPage) {
         return lastPage.meta.page + 1; // 다음 페이지 번호 반환
@@ -80,9 +80,8 @@ const CommentList = ({ list }: CommentListProps) => {
     initialPageParam: 1, // 초기 페이지를 1로 설정
   });
 
-  console.log(boardRcommentData);
-  const boardRcomments = boardRcommentData ?? [];
-  // console.log(boardRcommentData);
+  const boardRcomments =
+    boardRcommentData?.pages.flatMap((page) => page.recomments) ?? [];
 
   const [likeToggle, setLikeToggle] = useState(false);
   const [likeCount, setLikeCount] = useState(like_count);
@@ -105,6 +104,10 @@ const CommentList = ({ list }: CommentListProps) => {
 
   const showRecommentClick = () => {
     setShowRecomments((prev) => !prev);
+  };
+
+  const nextRecomments = () => {
+    fetchNextPage();
   };
 
   return (
@@ -132,17 +135,20 @@ const CommentList = ({ list }: CommentListProps) => {
           </div>
           <span>{content}</span>
           <span className={cn('replyButton')}>답글 달기</span>
-          <span className={cn('replyButton')} onClick={showRecommentClick}>
+          <div className={cn('replyButton')}>
             {showRecomments ? (
               <>
-                {/* <RecommnetLists boardRcomments={boardRcomments} /> */}
-                <span>ㅡ 답글 몇개 더보기</span>
+                <RecommnetLists boardRcomments={boardRcomments} />
+                {hasNextPage ? (
+                  <span onClick={nextRecomments}>ㅡ 답글 몇개 더보기</span>
+                ) : (
+                  <span onClick={showRecommentClick}>ㅡ 답글 닫기</span>
+                )}
               </>
             ) : (
-              'ㅡ 답글 보기 '
+              <span onClick={showRecommentClick}>ㅡ 답글몇개 보기</span>
             )}
-          </span>
-          {/* {showRecomments && <RecommnetLists boardRcomments={boardRcomments} />} */}
+          </div>
         </div>
       </div>
       <LikeAction
