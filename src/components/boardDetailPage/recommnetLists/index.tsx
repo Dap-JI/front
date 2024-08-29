@@ -6,11 +6,10 @@ import LikeAction from '../../common/likeAction';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { DeleteIcon } from '@/public/icon';
-import { boardReommentDeleteData } from '@/src/app/board/api';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
 import { useRef, useEffect, useState } from 'react';
+import { useRecommentDeleteData } from '@/src/hooks/useCommentDatas';
 
 const cn = classNames.bind(styles);
 
@@ -29,18 +28,14 @@ const RecommnetList = ({ recomment }: RecommnetListProps) => {
     is_like,
   } = recomment;
 
-  const queryClient = useQueryClient();
   const { showModalHandler } = useModal();
 
-  const { mutate: boardReCommentDelete } = useMutation({
-    mutationKey: ['boardReCommentDelete'],
-    mutationFn: () => boardReommentDeleteData(recomment_idx),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['boardRecomment'] });
-    },
-    onError: () => {
-      showModalHandler('alert', '댓글 삭제에 실패했어요');
-    },
+  const { mutate: boardReCommentDelete } = useRecommentDeleteData({
+    category: 'recomment',
+    content_id: recomment_idx,
+    mainKey: 'boardReCommentDelete',
+    firKey: 'boardRecomment',
+    secKey: 'boardDetailComment',
   });
 
   const { likeCount, likeToggle, handleLikeClick } = useLikeAction({

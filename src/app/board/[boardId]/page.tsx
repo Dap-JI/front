@@ -3,10 +3,8 @@ import styles from './boardDetailPage.module.scss';
 import classNames from 'classnames/bind';
 import BoardDetailForm from '@/src/components/boardDetailPage/boardDetailForm';
 import CommentLists from '@/src/components/boardDetailPage/commentLists';
-import {
-  boardDetailGetDatas,
-  boardDetailCommentGetDatas,
-} from '@/src/app/board/api';
+import { boardDetailGetDatas } from '@/src/app/board/api';
+import { CommentDatas } from '@/src/hooks/useCommentDatas';
 import { useQuery } from '@tanstack/react-query';
 import {
   BoardCommentType,
@@ -47,7 +45,12 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
     ref,
   } = useInfiniteScroll<BoardCommentType>({
     queryKey: ['boardDetailComment'],
-    fetchFunction: (page = 1) => boardDetailCommentGetDatas({ page, boardId }),
+    fetchFunction: (page = 1) =>
+      CommentDatas({
+        page,
+        content_id: boardId,
+        category: 'comment',
+      }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });

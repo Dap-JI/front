@@ -3,23 +3,21 @@ import classNames from 'classnames/bind';
 import { BoardCommentDetailType, BoardRecommentType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
-import { useState, memo, useRef, useEffect } from 'react';
+import { useState, memo, useRef } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { DeleteIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
-import {
-  boardCommentDeleteData,
-  boardRecommentDatas,
-} from '@/src/app/board/api';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
+// import { boardRecommentDatas } from '@/src/app/board/api';
+
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import RecommnetLists from '../recommnetLists';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
 import Link from 'next/link';
+import {
+  useCommentDeleteData,
+  useRecommentData,
+} from '@/src/hooks/useCommentDatas';
 
 const cn = classNames.bind(styles);
 
@@ -45,17 +43,11 @@ const CommentList = memo(
 
     const commentRef = useRef<HTMLDivElement | null>(null); // 댓글에 대한 ref 설정
 
-    const queryClient = useQueryClient();
-    //댓글 삭제
-    const { mutate: boardCommentDelete } = useMutation({
-      mutationKey: ['boardCommentDelete'],
-      mutationFn: () => boardCommentDeleteData(comment_idx),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['boardDetailComment'] });
-      },
-      onError: () => {
-        showModalHandler('alert', '댓글 삭제에 실패했어요');
-      },
+    const { mutate: boardCommentDelete } = useCommentDeleteData({
+      category: 'comment',
+      content_id: comment_idx,
+      mainKey: 'boardCommentDelete',
+      firKey: 'boardDetailComment',
     });
 
     const [showRecomments, setShowRecomments] = useState(false);
@@ -65,18 +57,11 @@ const CommentList = memo(
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
-    } = useInfiniteQuery<BoardRecommentType>({
-      queryKey: ['boardRecomment', comment_idx],
-      queryFn: ({ pageParam = 1 }) =>
-        boardRecommentDatas({ page: pageParam, comment_idx }),
+    } = useRecommentData({
+      content_id: comment_idx,
       enabled: !!showRecomments,
-      getNextPageParam: (lastPage) => {
-        if (lastPage.meta.hasNextPage) {
-          return lastPage.meta.page + 1; // 다음 페이지 번호 반환
-        }
-        return undefined; // 더 이상 페이지가 없으면 undefined 반환
-      },
-      initialPageParam: 1, // 초기 페이지를 1로 설정
+      category: 'recomment',
+      mainKey: 'boardRecomment',
     });
 
     const boardRcomments =

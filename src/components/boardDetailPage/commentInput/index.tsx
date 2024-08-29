@@ -5,15 +5,10 @@ import styles from './commentInput.module.scss';
 import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import {
-  boardCommentUploadData,
-  boardRecommentUploadData,
-} from '@/src/app/board/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  BoardCommentUploadType,
-  BoardRecommentUploadType,
-} from '@/src/utils/type';
-import { useModal } from '@/src/hooks/useModal';
+  useCommentUploadData,
+  useRecommentUploadData,
+} from '@/src/hooks/useCommentDatas';
+import { BoardCommentUploadType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -35,32 +30,18 @@ const CommentInput = ({
   const { register, handleSubmit, reset, setValue } =
     useForm<BoardCommentUploadType>();
   const { boardId } = params;
-  const { showModalHandler } = useModal();
-  const queryClient = useQueryClient();
 
-  const { mutate: boardCommentUpload } = useMutation({
-    mutationKey: ['boardCommentUpload'],
-    mutationFn: (formData: BoardCommentUploadType) =>
-      boardCommentUploadData(formData),
-    onSuccess: (data: any) => [
-      queryClient.invalidateQueries({ queryKey: ['boardDetailComment'] }),
-    ],
-    onError: () => {
-      showModalHandler('alert', '댓글을 다시 업로드해 주세요');
-    },
+  const { mutate: boardCommentUpload } = useCommentUploadData({
+    category: 'comment',
+    mainKey: 'boardCommentUpload',
+    firKey: 'boardDetailComment',
   });
 
-  const { mutate: boardReCommentUpload } = useMutation({
-    mutationKey: ['boardReCommentUpload'],
-    mutationFn: (formData: BoardRecommentUploadType) =>
-      boardRecommentUploadData(formData),
-    onSuccess: () => [
-      queryClient.invalidateQueries({ queryKey: ['boardRecomment'] }),
-      queryClient.invalidateQueries({ queryKey: ['boardDetailComment'] }),
-    ],
-    onError: () => {
-      showModalHandler('alert', '답글을 다시 업로드해 주세요');
-    },
+  const { mutate: boardReCommentUpload } = useRecommentUploadData({
+    category: 'recomment',
+    mainKey: 'boardReCommentUpload',
+    firKey: 'boardRecomment',
+    secKey: 'boardDetailComment',
   });
 
   const onSubmit = (data: any) => {
