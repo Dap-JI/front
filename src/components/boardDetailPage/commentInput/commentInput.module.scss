@@ -34,7 +34,8 @@
     left: 15px;
     span:nth-child(1) {
       display: block;
-      margin-right: 15px;
+      margin-right: 10px;
+      @include font-style(1.1rem, balck, 500);
     }
   }
 }

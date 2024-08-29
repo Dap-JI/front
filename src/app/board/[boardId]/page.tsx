@@ -15,7 +15,7 @@ import {
 } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import CommentInput from '@/src/components/boardDetailPage/commentInput';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import Header from '@/src/components/common/header';
@@ -43,8 +43,8 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
 
   const {
     data: boardDetailCommentData,
-    ref,
     isFetchingNextPage,
+    ref,
   } = useInfiniteScroll<BoardCommentType>({
     queryKey: ['boardDetailComment'],
     fetchFunction: (page = 1) => boardDetailCommentGetDatas({ page, boardId }),
@@ -55,8 +55,6 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   const commentDatas: BoardCommentDetailType[] =
     boardDetailCommentData?.pages.flatMap((page) => page.comments) ?? [];
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
   if (isLoading || !boardDetailData) {
     return <LoadingSpinner />;
   }
@@ -64,11 +62,11 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   return (
     <div className={cn('container')}>
       <Header page={`/board`} />
-      <main className={cn('secondContainer')}>
+      <main className={cn('secondContainer', tagNickname && 'tagNickname')}>
         <section>
           <BoardDetailForm boardDetailData={boardDetailData} />
         </section>
-        <section ref={containerRef}>
+        <section>
           <CommentLists
             lists={commentDatas}
             setTagNickname={setTagNickname}
@@ -90,3 +88,6 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
 };
 
 export default BoardDetailPage;
+
+//댓글 업로드 후 스크롤 내리기
+//답글 업로드 후 해당 답글로 스크롤 가게하기

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { BoardCommentDetailType, BoardRecommentType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
-import { useState, memo } from 'react';
+import { useState, memo, useRef, useEffect } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { DeleteIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
@@ -42,6 +42,8 @@ const CommentList = memo(
       user_idx,
       recomment_count,
     } = list;
+
+    const commentRef = useRef<HTMLDivElement | null>(null); // 댓글에 대한 ref 설정
 
     const queryClient = useQueryClient();
     //댓글 삭제
@@ -105,8 +107,18 @@ const CommentList = memo(
     };
     //댓글 삭제
     const showRecommentClick = () => {
+      if (showRecomments) {
+        // 답글을 닫을 때 댓글로 스크롤 이동
+        if (commentRef.current) {
+          commentRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }
       setShowRecomments((prev) => !prev);
     };
+
     //답글보기
 
     const nextRecomments = () => {
@@ -122,7 +134,7 @@ const CommentList = memo(
     //닉네임 태그하면 태그네임이랑 commentid 설정
 
     return (
-      <div className={cn('container')}>
+      <div className={cn('container')} ref={commentRef}>
         <div className={cn('mainWrapper')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
