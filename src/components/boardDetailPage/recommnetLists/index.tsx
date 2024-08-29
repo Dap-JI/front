@@ -10,6 +10,7 @@ import { boardReommentDeleteData } from '@/src/app/board/api';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
+import { useRef, useEffect, useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -23,7 +24,6 @@ const RecommnetList = ({ recomment }: RecommnetListProps) => {
     User,
     content,
     createdAt,
-    comment_idx,
     user_idx,
     like_count,
     is_like,
@@ -104,8 +104,27 @@ type RecommnetListsProps = {
 };
 
 const RecommnetLists = ({ boardRcomments }: RecommnetListsProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container) {
+      const scrollHeight = container.scrollHeight; // 실제 높이를 가져옴
+      setContentHeight(scrollHeight);
+    }
+  }, [boardRcomments.length]);
+
   return (
-    <div>
+    <div
+      ref={containerRef}
+      className={cn('outercontainer')} // 전달받은 className을 추가
+      style={{
+        height: contentHeight ? `${contentHeight}px` : '0',
+        opacity: contentHeight ? '1' : '0',
+      }}
+    >
       {boardRcomments.map((recomment) => (
         <RecommnetList key={recomment.recomment_idx} recomment={recomment} />
       ))}

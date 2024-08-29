@@ -14,7 +14,6 @@ import {
   BoardRecommentUploadType,
 } from '@/src/utils/type';
 import { useModal } from '@/src/hooks/useModal';
-import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -43,7 +42,7 @@ const CommentInput = ({
     mutationKey: ['boardCommentUpload'],
     mutationFn: (formData: BoardCommentUploadType) =>
       boardCommentUploadData(formData),
-    onSuccess: () => [
+    onSuccess: (data: any) => [
       queryClient.invalidateQueries({ queryKey: ['boardDetailComment'] }),
     ],
     onError: () => {
@@ -57,6 +56,7 @@ const CommentInput = ({
       boardRecommentUploadData(formData),
     onSuccess: () => [
       queryClient.invalidateQueries({ queryKey: ['boardRecomment'] }),
+      queryClient.invalidateQueries({ queryKey: ['boardDetailComment'] }),
     ],
     onError: () => {
       showModalHandler('alert', '답글을 다시 업로드해 주세요');
@@ -72,7 +72,6 @@ const CommentInput = ({
         comment_idx: selectId,
       };
       boardReCommentUpload(formData);
-      return;
     } else {
       formData = {
         ...data,
@@ -81,11 +80,12 @@ const CommentInput = ({
       boardCommentUpload(formData);
     }
 
-    reset();
+    reset(); // 폼 필드를 리셋
   };
 
   const handleTagCloseClick = () => {
     setTagNickname('');
+    setValue('content', '');
   };
 
   return (
@@ -104,7 +104,7 @@ const CommentInput = ({
             </div>
             {tagNickname && (
               <div className={cn('tagNickname')}>
-                <span>{tagNickname}님에게 답글 작성 중...</span>
+                <span>{tagNickname}님에게 답글 작성 하기</span>
                 <CloseIcon
                   width="10"
                   height="10"
