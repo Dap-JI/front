@@ -122,7 +122,7 @@ export const boardRecommentDatas = async ({
 };
 
 //게시판 대댓글 생성
-export const boardRecommentUploadDatas = async (
+export const boardRecommentUploadData = async (
   formData: BoardRecommentUploadType,
 ) => {
   const res = await instance.post(`/api/recomment`, formData);

@@ -72,13 +72,15 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
     <div className={cn('container')}>
       <header className={cn('boardDetailHeader')}>
         <div className={cn('userInfo')}>
-          <Image
-            src={User.img}
-            width="30"
-            height="30"
-            alt="게시물 작성자 프로필 이미지"
-            className={cn('profileImage')}
-          />
+          <Link href={`/profile/${user_idx}`}>
+            <Image
+              src={User.img}
+              width="30"
+              height="30"
+              alt="게시물 작성자 프로필 이미지"
+              className={cn('profileImage')}
+            />
+          </Link>
           <div className={cn('userText')}>
             <span>{category}</span>
             <span>{User.nickname}</span>

@@ -94,6 +94,7 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
   };
   //카테고리 셀렉
 
+  //프로필 클릭
   const onSubmit = (data: any) => {
     const formData = {
       ...data,
