@@ -26,11 +26,11 @@ const cn = classNames.bind(styles);
 type CommentListProps = {
   list: BoardCommentDetailType;
   setTagNickname: React.Dispatch<React.SetStateAction<string>>;
-  onCommentSelect: (comment_idx: string) => void; // 콜백 함수 prop 추가
+  setSelectId: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const CommentList = memo(
-  ({ list, setTagNickname, onCommentSelect }: CommentListProps) => {
+  ({ list, setTagNickname, setSelectId }: CommentListProps) => {
     const {
       User,
       board_idx,
@@ -117,8 +117,9 @@ const CommentList = memo(
 
     const tagNicknameClick = () => {
       setTagNickname(`@${User.nickname}`);
-      onCommentSelect(comment_idx);
+      setSelectId(comment_idx);
     };
+    //닉네임 태그하면 태그네임이랑 commentid 설정
 
     return (
       <div className={cn('container')}>
@@ -182,17 +183,18 @@ const CommentList = memo(
     );
   },
 );
+CommentList.displayName = 'CommentList';
 
 type CommentListsProps = {
   lists: BoardCommentDetailType[];
   setTagNickname: React.Dispatch<React.SetStateAction<string>>;
-  onCommentSelect: (comment_idx: string) => void;
+  setSelectId: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const CommentLists = ({
   lists,
   setTagNickname,
-  onCommentSelect,
+  setSelectId,
 }: CommentListsProps) => {
   return (
     <div className={cn('outerContainer')}>
@@ -201,7 +203,7 @@ const CommentLists = ({
           key={list.comment_idx}
           list={list}
           setTagNickname={setTagNickname}
-          onCommentSelect={onCommentSelect}
+          setSelectId={setSelectId}
         />
       ))}
     </div>
@@ -209,8 +211,3 @@ const CommentLists = ({
 };
 
 export default CommentLists;
-
-// 답글 달기 클릭-> commentInput에 해당 유저의 닉네임이 placeholder로 나오도록 ex) @망나뇽2
-// 해당 유저의 닉네임이 나오면 답글요청  post
-// 태그가 없으면 그냥 댓글
-// 일단 클릭시 이름 태그하도록

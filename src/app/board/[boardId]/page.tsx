@@ -55,8 +55,6 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   const commentDatas: BoardCommentDetailType[] =
     boardDetailCommentData?.pages.flatMap((page) => page.comments) ?? [];
 
-  console.log(selectId);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   if (isLoading || !boardDetailData) {
@@ -74,7 +72,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           <CommentLists
             lists={commentDatas}
             setTagNickname={setTagNickname}
-            onCommentSelect={setSelectId}
+            setSelectId={setSelectId}
           />
           <div ref={ref} />
           {isFetchingNextPage && <LoadingSpinner />}
