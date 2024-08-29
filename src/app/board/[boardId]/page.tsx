@@ -8,10 +8,14 @@ import {
   boardDetailCommentGetDatas,
 } from '@/src/app/board/api';
 import { useQuery } from '@tanstack/react-query';
-import { BoardCommentType, BoardDetailDataType } from '@/src/utils/type';
+import {
+  BoardCommentType,
+  BoardDetailDataType,
+  BoardCommentDetailType,
+} from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import CommentInput from '@/src/components/boardDetailPage/commentInput';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import Header from '@/src/components/common/header';
@@ -26,6 +30,8 @@ type BoardDetailPageProps = {
 
 const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
   const { boardId } = params;
+  const [tagNickname, setTagNickname] = useState('');
+  const [selectId, setSelectId] = useState('');
 
   //게시판 상세 내용데이터
   const { data: boardDetailData, isLoading } = useQuery<BoardDetailDataType>({
@@ -46,8 +52,10 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
-  const commentDatas =
+  const commentDatas: BoardCommentDetailType[] =
     boardDetailCommentData?.pages.flatMap((page) => page.comments) ?? [];
+
+  console.log(selectId);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -63,12 +71,21 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           <BoardDetailForm boardDetailData={boardDetailData} />
         </section>
         <section ref={containerRef}>
-          <CommentLists lists={commentDatas} />
+          <CommentLists
+            lists={commentDatas}
+            setTagNickname={setTagNickname}
+            onCommentSelect={setSelectId}
+          />
           <div ref={ref} />
           {isFetchingNextPage && <LoadingSpinner />}
         </section>
       </main>
-      <CommentInput params={params} />
+      <CommentInput
+        params={params}
+        tagNickname={tagNickname}
+        setTagNickname={setTagNickname}
+        selectId={selectId}
+      />
       <ModalChoice />
     </div>
   );

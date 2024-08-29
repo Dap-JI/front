@@ -22,3 +22,19 @@
     right: 12px;
   }
 }
+
+.tagNameInput {
+  padding-top: 30px;
+  height: 80px;
+  .tagNickname {
+    width: 100%;
+    @include flex-arrange(flex-start, center);
+    position: absolute;
+    top: 7px;
+    left: 15px;
+    span:nth-child(1) {
+      display: block;
+      margin-right: 15px;
+    }
+  }
+}
