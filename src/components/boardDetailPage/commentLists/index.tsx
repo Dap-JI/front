@@ -1,15 +1,12 @@
 import styles from './commentLists.module.scss';
 import classNames from 'classnames/bind';
-import { BoardCommentDetailType, BoardRecommentType } from '@/src/utils/type';
+import { BoardCommentDetailType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
 import { useState, memo, useRef } from 'react';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { DeleteIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
-// import { boardRecommentDatas } from '@/src/app/board/api';
-
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import RecommnetLists from '../recommnetLists';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
