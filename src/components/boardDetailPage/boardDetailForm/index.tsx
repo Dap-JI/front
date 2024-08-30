@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
 import Link from 'next/link';
+import CommentCount from '../../common/commentCount';
 
 const cn = classNames.bind(styles);
 
@@ -122,10 +123,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
           likeToggle={likeToggle}
           onClick={handleLikeClick}
         />
-        <div className={cn('comment')}>
-          <CommentIcon width="20" height="20" />
-          <span>{comment_count}</span>
-        </div>
+        <CommentCount count={comment_count} />
       </div>
     </div>
   );

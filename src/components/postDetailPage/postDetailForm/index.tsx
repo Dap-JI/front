@@ -8,7 +8,6 @@ import { usePostDetailDelete } from '@/src/app/climbList/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
-import ModalChoice from '../../common/moadlChoice';
 import LinkAndKakaoShare from '@/src/components/common/linkAndkakaoShare';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -18,6 +17,7 @@ import useTimeAgo from '@/src/hooks/useTimeAgo';
 import LikeAction from '../../common/likeAction';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
 import { PostDetailDataType } from '@/src/utils/type';
+import CommentCount from '@/src/components/common/commentCount';
 
 const cn = classNames.bind(styles);
 
@@ -149,22 +149,24 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           ))}
         </StyledSlider>
       </div>
-
       <div className={cn('contentWrapper')}>
         <div className={cn('difficultyWrapper')}>
           <span>난이도 :</span>
           <div className={cn('color', `color-${color}`)} />
         </div>
-        <span className={cn('clearday')}>등반일 : {deleteT(clearday)}</span>
-        <LikeAction
-          likeToggle={likeToggle}
-          likeCount={likeCount}
-          onClick={handleLikeClick}
-        />
+        <div className={cn('clearday')}>
+          <span>등반일</span> <span>{deleteT(clearday)}</span>
+        </div>
+        <div className={cn('iconWrapper')}>
+          <LikeAction
+            likeToggle={likeToggle}
+            likeCount={likeCount}
+            onClick={handleLikeClick}
+          />
+          <CommentCount count={1} />
+        </div>
       </div>
-
       <p>{content}</p>
-      <ModalChoice />
     </div>
   );
 };

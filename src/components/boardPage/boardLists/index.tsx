@@ -11,6 +11,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
+import CommentCount from '../../common/commentCount';
 
 const cn = classNames.bind(styles);
 
@@ -109,19 +110,12 @@ const BoardList = ({ list }: BoardListProps) => {
             <div className={cn('noBoardImage')}></div>
           )}
           <div className={cn('iconWrapper')}>
-            <div className={cn('like')}>
-              <LikeAction
-                likeToggle={likeToggle}
-                likeCount={likeCount}
-                onClick={handleLikeClick}
-              />
-              {/* <LikeIcon width="20" height="20" />
-                <span>{like_count}</span> */}
-            </div>
-            <div className={cn('comment')}>
-              <CommentIcon width="20" height="20" />
-              <span>{comment_count}</span>
-            </div>
+            <LikeAction
+              likeToggle={likeToggle}
+              likeCount={likeCount}
+              onClick={handleLikeClick}
+            />
+            <CommentCount count={comment_count} />
           </div>
         </section>
       </div>

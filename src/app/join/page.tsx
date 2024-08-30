@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { nickname_reg } from '@/src/utils/regex';
 import CommonButton from '@/src/components/common/commonButton';
 import { useNicknameCheck, useInitializeNickname } from './api';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';

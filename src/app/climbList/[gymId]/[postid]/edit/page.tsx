@@ -5,6 +5,7 @@ import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { usePostDetailDatas } from '@/src/app/climbList/api';
 import Header from '@/src/components/common/header';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ const PostDetailEditPage = ({ params }: PostDetailEditPageProps) => {
       <div className={cn('secondContainer')}>
         <PostUploadForm gymId={gymId} initialData={postDetailDatas} />
       </div>
+      <ModalChoice />
     </div>
   );
 };

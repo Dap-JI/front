@@ -39,11 +39,16 @@
     @include font-style(1.2rem, black, 400);
     margin-top: 15px;
 
+    .iconWrapper {
+      display: flex;
+      gap: 5px;
+    }
+
     .clearday {
       @include flex-arrange(center, center);
       flex-direction: column;
       gap: 3px;
-      padding-right: 30px;
+      padding-left: 10px;
       span:nth-child(1) {
         @include font-style(1.4rem, black, 400);
       }
@@ -137,8 +142,25 @@
 
   p {
     width: 100%;
-    height: 80px;
+    height: auto;
     @include font-style(1.3rem, black, 500);
+  }
+
+  .allComment {
+    width: 100%;
+    @include font-style(1.2rem, gray, 400);
+  }
+
+  .commentWrapper {
+    width: 100%;
+    span:nth-child(1) {
+      @include comment-nickname;
+    }
+
+    span:nth-child(2) {
+      margin-left: 5px;
+      @include comment-content;
+    }
   }
 }
 

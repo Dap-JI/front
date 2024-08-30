@@ -12,7 +12,6 @@ import {
 } from '@/src/app/climbList/api';
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
-import ModalChoice from '@/src/components/common/moadlChoice';
 import { useVideoDelete } from '@/src/app/climbList/api';
 
 const cn = classNames.bind(styles);
@@ -183,7 +182,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         name={initialData ? '수정하기' : '답지 올리기'}
         type="submit"
       />
-      <ModalChoice />
     </form>
   );
 };

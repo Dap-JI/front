@@ -50,7 +50,12 @@ export type useFormListUploadProps = {
 //////////////////////////클라이밍장별 영상 데이터//////////////////////////
 
 type likeType = {
-  likes_idx: number;
+  post_like_idx: number;
+};
+type postCommentType = {
+  post_comment_idx: number;
+  User: UserType;
+  content: string;
 };
 
 export type UserType = {
@@ -68,10 +73,12 @@ export type DetailType = {
   content: string | null;
   color: string;
   createdAt: any;
-  User: UserType;
   like_count: number;
+  post_comment_count: number;
+  User: UserType;
+  PostLikes: likeType[];
+  post_comment: postCommentType[];
   is_like: boolean;
-  post_like: likeType[];
 };
 
 export type ClimbDetailResponseType = {

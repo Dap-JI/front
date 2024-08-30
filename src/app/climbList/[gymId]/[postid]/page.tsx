@@ -6,6 +6,7 @@ import Header from '@/src/components/common/header';
 import PostDetailForm from '@/src/components/postDetailPage/postDetailForm';
 import { usePostDetailDatas } from '@/src/app/climbList/api';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -28,6 +29,7 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
       <div className={cn('secondContainer')}>
         <PostDetailForm params={params} postDetailDatas={postDetailDatas} />
       </div>
+      <ModalChoice />
     </div>
   );
 };
