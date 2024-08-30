@@ -50,7 +50,7 @@ const CommentList = memo(
     const [showRecomments, setShowRecomments] = useState(false);
 
     const {
-      data: boardRcommentData,
+      data: boardRecommentData,
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
@@ -61,11 +61,11 @@ const CommentList = memo(
       mainKey: 'boardRecomment',
     });
 
-    const boardRcomments =
-      boardRcommentData?.pages.flatMap((page) => page.recomments) ?? [];
+    const boardRecomments =
+      boardRecommentData?.pages.flatMap((page) => page.recomments) ?? [];
 
-    const totalCount = boardRcommentData?.pages[0]?.meta.totalCount;
-    const nextCount = boardRcommentData?.pages[0]?.meta.take;
+    const totalCount = boardRecommentData?.pages[0]?.meta.totalCount;
+    const nextCount = boardRecommentData?.pages[0]?.meta.take;
 
     const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
       category: 'comments',
@@ -147,12 +147,12 @@ const CommentList = memo(
             <div className={cn('replyButton')}>
               {showRecomments ? (
                 <>
-                  <RecommnetLists boardRcomments={boardRcomments} />
+                  <RecommnetLists boardRecomments={boardRecomments} />
                   {hasNextPage &&
                   totalCount !== undefined &&
                   nextCount !== undefined ? (
                     <span onClick={nextRecomments}>
-                      ㅡ 답글 {totalCount - boardRcomments.length}개 더보기
+                      ㅡ 답글 {totalCount - boardRecomments.length}개 더보기
                     </span>
                   ) : (
                     <span onClick={showRecommentClick}>ㅡ 답글 닫기</span>
