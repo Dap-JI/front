@@ -19,7 +19,7 @@ const LikeAction = ({ likeToggle, onClick, likeCount }: LikeActionProps) => {
       ) : (
         <LikeIcon width="20" height="20" onClick={onClick} />
       )}
-      <span>{likeCount}</span>
+      <span className={cn('likeCount')}>{likeCount}</span>
     </div>
   );
 };
