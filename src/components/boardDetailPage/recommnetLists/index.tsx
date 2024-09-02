@@ -8,7 +8,6 @@ import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { DeleteIcon } from '@/public/icon';
 import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
-import { useRef, useEffect, useState } from 'react';
 import { useRecommentDeleteData } from '@/src/hooks/useCommentDatas';
 
 const cn = classNames.bind(styles);
