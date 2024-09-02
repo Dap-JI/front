@@ -1,0 +1,15 @@
+.container {
+  @include flex-arrange(flex-start, center);
+  flex-direction: column;
+  gap: 10px;
+
+  height: 100vh;
+  background: beige;
+  padding: 10px;
+  .signUpForm {
+    width: 100%;
+    @include flex-arrange(center, center);
+    flex-direction: column;
+    gap: 10px;
+  }
+}
