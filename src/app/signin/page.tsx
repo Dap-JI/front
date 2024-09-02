@@ -54,6 +54,13 @@ const SignInPage = () => {
           })}
         />
         {errors.email && <span>{errors.email.message as string}</span>}
+        <CommonInput
+          label="password"
+          register={register('password', {
+            required: '비밀번호 꼭 필요함',
+          })}
+        />
+        {errors.password && <span>{errors.password.message as string}</span>}
         <CommonButton name="로그인" type="submit" />
       </form>
       <span onClick={() => router.push(`/signup`)}>회원가입 ㄱㄱ</span>
