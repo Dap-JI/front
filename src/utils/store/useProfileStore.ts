@@ -1,13 +1,9 @@
 import { create } from 'zustand';
-import {
-  ProfilePostType,
-  ProfileUserType,
-  ProfileType,
-} from '@/src/utils/type';
+import { ProfilePostType } from '@/src/utils/type';
 import fetchData from '../fetchData';
 
 interface ProfileState {
-  profileData: ProfileType | null;
+  profileData: ProfilePostType | null;
   error: Error | null;
   isLoading: boolean;
   loadProfileData: () => Promise<void>;

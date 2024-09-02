@@ -1,6 +1,6 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ProfileType, useFormProfileEditProps } from '@/src/utils/type';
+import { ProfilePostType, useFormProfileEditProps } from '@/src/utils/type';
 import instance from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
@@ -10,6 +10,7 @@ type ProfileDataProps = {
   page: number;
 };
 
+//프로필 유저 정보 및 동영상 썸네일
 export const ProfileDatas = async ({ userId, page = 1 }: ProfileDataProps) => {
   const res = await instance.get(`/api/profile/${userId}`, {
     params: {
@@ -19,14 +20,29 @@ export const ProfileDatas = async ({ userId, page = 1 }: ProfileDataProps) => {
   return res.data;
 };
 
+//프로필 유저 정보 및 동영상 썸네일
 export const useProfileDatas = (userId: string) => {
-  return useQuery<ProfileType>({
+  return useQuery<ProfilePostType>({
     queryKey: ['userProfileData'],
     queryFn: () => instance.get(`/api/profile/${userId}`),
-    select: (res: ProfileType) => res?.data,
+    select: (res: ProfilePostType) => res?.data,
   });
 };
 
+//프로필 유저 정보 및 게시판 정보
+export const ProfileBoardDatas = async ({
+  userId,
+  page = 1,
+}: ProfileDataProps) => {
+  const res = await instance.get(`/api/profile_board/${userId}`, {
+    params: {
+      page,
+    },
+  });
+  return res.data;
+};
+
+//프로필 유저 정보 업데이트
 export const useProfileUpdate = (userId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -46,6 +62,8 @@ export const useProfileUpdate = (userId: string) => {
     },
   });
 };
+
+//로그아웃
 
 export const useLogout = (enabled: boolean) => {
   return useQuery<void>({

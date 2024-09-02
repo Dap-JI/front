@@ -112,7 +112,7 @@ export type useFormPostUploadProps = {
 
 //////////////////////////프로필 페이지 타입들//////////////////////////
 
-export type ProfilePostType = {
+export type ProfilePostDetailType = {
   post_idx: string;
   thumbnailUrl: any;
   gym_idx: string;
@@ -125,10 +125,28 @@ export type ProfileUserType = {
   provider: string;
 };
 
-export type ProfileType = {
-  data: ProfileType;
+export type ProfilePostType = {
+  data: ProfilePostType;
   user: ProfileUserType;
-  posts: ProfilePostType[];
+  posts: ProfilePostDetailType[];
+  meta: metaType;
+  isOwnProfile: boolean;
+  userRole: string;
+};
+
+export type ProfileBoardDetailType = {
+  board_idx: string;
+  title: string;
+  category: string;
+  created_at: any;
+  like_count: number;
+  comment_count: number;
+};
+
+
+export type ProfileBoardType = {
+  user: ProfileUserType;
+  boards: ProfileBoardDetailType[];
   meta: metaType;
   isOwnProfile: boolean;
   userRole: string;

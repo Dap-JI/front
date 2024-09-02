@@ -4,9 +4,13 @@ import styles from './userProfilePage.module.scss';
 import ProfileAllData from '@/src/components/profilePage/profileAllData';
 import ProfileForm from '@/src/components/profilePage/profileForm';
 import Header from '@/src/components/common/header';
-import { ProfileDatas, useLogout } from '@/src/app/profile/api';
+import {
+  ProfileDatas,
+  useLogout,
+  ProfileBoardDatas,
+} from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
-import { ProfileType } from '@/src/utils/type';
+import { ProfilePostType, ProfileBoardType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { AdminIcon, LogoutIcon } from '@/public/icon';
 import Link from 'next/link';
@@ -34,10 +38,21 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     ref,
     isLoading,
     isFetchingNextPage,
-  } = useInfiniteScroll<ProfileType>({
+  } = useInfiniteScroll<ProfilePostType>({
     queryKey: ['profileDatas', userId],
     fetchFunction: (page = 1) =>
       ProfileDatas({
+        page,
+        userId,
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+
+  const { data: profileBoardData } = useInfiniteScroll<ProfileBoardType>({
+    queryKey: ['profileBoardData', userId],
+    fetchFunction: (page = 1) =>
+      ProfileBoardDatas({
         page,
         userId,
       }),
@@ -53,8 +68,15 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     provider: '',
   };
   const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
+  const profileBoards =
+    profileBoardData?.pages.flatMap((page) => page.boards) ?? [];
   const isProfileOwner = profileData?.pages[0]?.isOwnProfile === true;
   const role = profileData?.pages[0]?.userRole === 'admin';
+
+  const profileDataObject = {
+    posts: profilePosts,
+    boards: profileBoards,
+  };
 
   const handleLogoutClick = () => {
     const confirmAction = () => {
@@ -92,7 +114,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
           isProfileOwner={isProfileOwner}
           params={params}
         />
-        <ProfileAllData lists={profilePosts} />
+        <ProfileAllData profileData={profileDataObject} />
         <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}

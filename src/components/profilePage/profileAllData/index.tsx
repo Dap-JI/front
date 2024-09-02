@@ -5,15 +5,20 @@ import { useState } from 'react';
 import ProfileBoardDatas from '../profileBoardData';
 import ProfilePostDatas from '../profilePostData';
 import { PostIcon, BoardIcon } from '@/public/icon';
-import { ProfilePostType } from '@/src/utils/type';
+import {
+  ProfilePostDetailType,
+  ProfileBoardDetailType,
+} from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 type ProfileAllDataProps = {
-  lists: ProfilePostType[];
+  profileData: {
+    posts: ProfilePostDetailType[];
+    boards: ProfileBoardDetailType[];
+  };
 };
-
-const ProfileAllData = ({ lists }: ProfileAllDataProps) => {
+const ProfileAllData = ({ profileData }: ProfileAllDataProps) => {
   const [selectList, setSelectList] = useState<string>('post');
   const [underlineStyle, setUnderlineStyle] = useState({ left: '0%' });
 
@@ -39,12 +44,12 @@ const ProfileAllData = ({ lists }: ProfileAllDataProps) => {
         </div>
         <div className={cn('underline')} style={underlineStyle} />
       </div>
-      {lists.length === 0 ? (
+      {profileData.posts.length === 0 ? (
         <div className={cn('empty-message')}>답지가 없음</div>
       ) : selectList === 'post' ? (
-        <ProfilePostDatas lists={lists} />
+        <ProfilePostDatas lists={profileData.posts} />
       ) : (
-        <ProfileBoardDatas />
+        <ProfileBoardDatas lists={profileData.boards} />
       )}
     </div>
   );
