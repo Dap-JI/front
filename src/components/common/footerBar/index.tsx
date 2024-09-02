@@ -39,7 +39,9 @@ const FooterBar = () => {
     path === '/join' ||
     path.startsWith('/auth') ||
     (path.startsWith('/board') && path !== '/board') ||
-    isClimbListSpecificPostPath // 이 경로에서만 푸터 제외
+    isClimbListSpecificPostPath || // 이 경로에서만 푸터 제외
+    path === '/signup' ||
+    path === '/signin'
   ) {
     return null;
   }

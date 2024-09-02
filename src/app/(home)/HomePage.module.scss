@@ -13,11 +13,13 @@
   }
 
   .loginContaienr {
-   
     h2 {
       @include font-style(1.8rem, black);
       text-align: center;
       margin-bottom: 20px;
     }
+  }
+  .loginClick {
+    margin-top: 10px;
   }
 }
