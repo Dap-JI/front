@@ -14,10 +14,26 @@
 
     .title {
       @include font-style(1.2rem, black, 600);
+      margin: 0;
+      width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .infoWrapper {
       @include flex-arrange(center, space-evenly);
       gap: 20px;
+    }
+  }
+  .iconWrapper {
+    @include flex-arrange(flex-end, center);
+    gap: 10px;
+
+    .like {
+      @include flex-arrange(center);
+      @include font-style(1.3rem, black, 400);
+      gap: 3px;
+      width: 35px;
     }
   }
 }
