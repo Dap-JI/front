@@ -13,7 +13,6 @@ import styled from 'styled-components';
 import { CircleXIcon, PlusIcon } from '@/public/icon';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useVideoDelete } from '@/src/app/climbList/api';
 import { isServerError } from '@/src/utils/axiosError';
 
 const cn = classNames.bind(styles);
@@ -211,7 +210,6 @@ const VideoInput = ({
           </StyledSlider>
         </div>
       </div>
-      <ModalChoice />
     </div>
   );
 };

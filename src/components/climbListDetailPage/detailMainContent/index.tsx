@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './detailMainContent.module.scss';
-import { DoubleRightArrowIcon } from '@/public/icon';
+import { DoubleRightArrowIcon, CommentIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import {
   DetailMainContentProps,
@@ -18,6 +18,8 @@ import LikeAction from '@/src/components/common/likeAction';
 
 import useTimeAgo from '@/src/hooks/useTimeAgo';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
+import CommentCount from '@/src/components/common/commentCount';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
@@ -54,6 +56,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     createdAt,
     like_count,
     is_like,
+    post_comment,
   } = list;
   //리스트 데이터들
 
@@ -133,13 +136,30 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <div className={cn('clearday')}>
           <span>등반일</span> <span>{deleteT(clearday)}</span>
         </div>
-        <LikeAction
-          likeToggle={likeToggle}
-          likeCount={likeCount}
-          onClick={handleLikeClick}
-        />
+        <div className={cn('iconWrapper')}>
+          <LikeAction
+            likeToggle={likeToggle}
+            likeCount={likeCount}
+            onClick={handleLikeClick}
+          />
+          <CommentCount count={1} />
+        </div>
       </div>
       <p>{content}</p>
+      <div className={cn('commentWrapper')}>
+        <span className={cn('allComment')}>
+          <Link
+            href={`/climbList/${gym_idx}/${post_idx}`}
+            style={{ textDecoration: 'none', color: 'gray' }}
+          >
+            댓글 모두 보기
+          </Link>
+        </span>
+        <div className={cn('comment')}>
+          <span>{post_comment[0].User.nickname}</span>
+          <span>{post_comment[0].content}</span>
+        </div>
+      </div>
     </div>
   );
 };

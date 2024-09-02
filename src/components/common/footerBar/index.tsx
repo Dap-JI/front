@@ -32,12 +32,14 @@ const FooterBar = () => {
       router.push(`/profile/${myId}`);
     }
   };
+  const isClimbListSpecificPostPath = path.match(/^\/climbList\/\d+\/\d+$/);
 
   if (
     path === '/' ||
     path === '/join' ||
     path.startsWith('/auth') ||
-    (path.startsWith('/board') && path !== '/board')
+    (path.startsWith('/board') && path !== '/board') ||
+    isClimbListSpecificPostPath // 이 경로에서만 푸터 제외
   ) {
     return null;
   }

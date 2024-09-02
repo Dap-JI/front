@@ -1,6 +1,6 @@
-import styles from './recommnetLists.module.scss';
+import styles from './postRecommentLists.module.scss';
 import classNames from 'classnames/bind';
-import { RecommentType } from '@/src/utils/type';
+import { PostRecommentDetailType } from '@/src/utils/type';
 import Image from 'next/image';
 import LikeAction from '../../common/likeAction';
 import useTimeAgo from '@/src/hooks/useTimeAgo';
@@ -8,51 +8,53 @@ import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { DeleteIcon } from '@/public/icon';
 import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
-import { useRef, useEffect, useState } from 'react';
 import { useRecommentDeleteData } from '@/src/hooks/useCommentDatas';
 
 const cn = classNames.bind(styles);
 
-type RecommnetListProps = {
-  recomment: RecommentType;
+type PostRecommnetListProps = {
+  postRecomment: PostRecommentDetailType;
 };
 
-const RecommnetList = ({ recomment }: RecommnetListProps) => {
+const PostRecommnetList = ({ postRecomment }: PostRecommnetListProps) => {
   const {
-    recomment_idx,
+    post_recomment_idx,
     User,
     content,
     createdAt,
     user_idx,
     like_count,
     is_like,
-  } = recomment;
+  } = postRecomment;
 
   const { showModalHandler } = useModal();
 
-  const { mutate: boardReCommentDelete } = useRecommentDeleteData({
-    category: 'recomment',
-    content_id: recomment_idx,
-    mainKey: 'boardReCommentDelete',
-    firKey: 'boardRecomment',
-    secKey: 'boardDetailComment',
+  //답글 삭제
+  const { mutate: postReCommentDelete } = useRecommentDeleteData({
+    category: 'postRecomment',
+    content_id: post_recomment_idx,
+    mainKey: 'postRecommentDelete',
+    firKey: 'postRecomment',
+    secKey: 'postDetailComment',
   });
 
+  //답글 좋아요
   const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
-    category: 'recomments',
-    content_id: recomment_idx,
+    category: 'postRecomments',
+    content_id: post_recomment_idx,
     initalLikeCount: like_count,
     initalLikeToggle: is_like,
-    firQueryKeyName: 'boardRecomment',
+    firQueryKeyName: 'postRecomment',
   });
 
   const timeAgo = useTimeAgo(createdAt);
   const { myId } = useMyInfoStore();
   const isMyId = myId === user_idx;
 
+  //답글 삭제 버튼
   const handleRecommentDelete = () => {
     const confirmAction = () => {
-      boardReCommentDelete();
+      postReCommentDelete();
     };
     showModalHandler('choice', '답글을 삭제하시겠어요? ', confirmAction);
   };
@@ -94,12 +96,13 @@ const RecommnetList = ({ recomment }: RecommnetListProps) => {
   );
 };
 
-type RecommnetListsProps = {
-  boardRecomments: RecommentType[];
+type PostRecommnetListsProps = {
+  postRecommentData: PostRecommentDetailType[];
 };
 
-const RecommnetLists = ({ boardRecomments }: RecommnetListsProps) => {
+const PostRecommnetLists = ({ postRecommentData }: PostRecommnetListsProps) => {
   // const containerRef = useRef<HTMLDivElement>(null);
+  console.log(postRecommentData);
 
   // useEffect(() => {
   //   const container = containerRef.current;
@@ -108,18 +111,21 @@ const RecommnetLists = ({ boardRecomments }: RecommnetListsProps) => {
   //     container.style.height = `${height}px`;
   //     console.log(height);
   //   }
-  // }, [boardRecomments]);
+  // }, [postRecommentData]);
   return (
     <div
       // ref={containerRef}
       className={cn('outercontainer')}
       // style={{ height: 0, overflow: 'hidden', transition: 'height 0.5s ease' }}
     >
-      {boardRecomments.map((recomment) => (
-        <RecommnetList key={recomment.recomment_idx} recomment={recomment} />
+      {postRecommentData.map((postRecomment) => (
+        <PostRecommnetList
+          key={postRecomment.post_recomment_idx}
+          postRecomment={postRecomment}
+        />
       ))}
     </div>
   );
 };
 
-export default RecommnetLists;
+export default PostRecommnetLists;

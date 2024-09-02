@@ -8,13 +8,17 @@ import {
   useCommentUploadData,
   useRecommentUploadData,
 } from '@/src/hooks/useCommentDatas';
-import { BoardCommentUploadType } from '@/src/utils/type';
+import {
+  BoardCommentUploadType,
+  PostCommentUploadType,
+} from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 type CommentInputProps = {
   params: {
-    boardId: string;
+    boardId?: string; // `boardId`는 선택적
+    postId?: string; // `postId`도 선택적
   };
   tagNickname: string;
   setTagNickname: React.Dispatch<React.SetStateAction<string>>;
@@ -27,9 +31,10 @@ const CommentInput = ({
   setTagNickname,
   selectId,
 }: CommentInputProps) => {
-  const { register, handleSubmit, reset, setValue } =
-    useForm<BoardCommentUploadType>();
-  const { boardId } = params;
+  const { register, handleSubmit, reset, setValue } = useForm<
+    BoardCommentUploadType | PostCommentUploadType
+  >();
+  const { boardId, postId } = params;
 
   const { mutate: boardCommentUpload } = useCommentUploadData({
     category: 'comment',
@@ -44,24 +49,40 @@ const CommentInput = ({
     secKey: 'boardDetailComment',
   });
 
+  const { mutate: postCommentUpload } = useCommentUploadData({
+    category: 'postComment',
+    mainKey: 'postCommentUpload',
+    firKey: 'postDetailComment',
+  });
+
+  const { mutate: postReCommentUpload } = useRecommentUploadData({
+    category: 'postRecomment',
+    mainKey: 'postReCommentUpload',
+    firKey: 'postRecomment',
+    secKey: 'postDetailComment',
+  });
+
+  // 댓글에 id, 답글에 태그네임
   const onSubmit = (data: any) => {
-    let formData;
+    const isBoard = Boolean(boardId); //boardId가 존재하면 true
+    const idKey = isBoard ? 'board_idx' : 'post_idx'; // 댓글에 필요한 id =>  board, post
+    const reCommentIdxKey = isBoard ? 'comment_idx' : 'post_comment_idx'; // 답글에 필요한 id => comment_Idx, post_comment_idx
+    const id = isBoard ? boardId : postId;
+
+    const formData = {
+      ...data, // content
+      [tagNickname ? reCommentIdxKey : idKey]: tagNickname ? selectId : id,
+      //tagNickname이 선택되면 reCommentIdxKey이 키로 선택 아니면 idkey
+      //tagNickname이true면 선택된 id가 false면 id 사용
+      //tagNickname이true면 ...data, comment_idx : selectId
+    };
 
     if (tagNickname) {
-      formData = {
-        ...data,
-        comment_idx: selectId,
-      };
-      boardReCommentUpload(formData);
-    } else {
-      formData = {
-        ...data,
-        board_idx: boardId,
-      };
-      boardCommentUpload(formData);
+      isBoard ? boardReCommentUpload(formData) : postReCommentUpload(formData);
+      return;
     }
-
-    reset(); // 폼 필드를 리셋
+    isBoard ? boardCommentUpload(formData) : postCommentUpload(formData);
+    reset();
   };
 
   const handleTagCloseClick = () => {

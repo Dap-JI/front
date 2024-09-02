@@ -58,10 +58,5 @@
     @include flex-arrange(flex-start, center);
     gap: 12px;
     margin-top: 5px;
-    .comment {
-      @include flex-arrange(center);
-      @include font-style(1.3rem, black, 400);
-      gap: 5px;
-    }
   }
 }

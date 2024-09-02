@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './detailUploadPage.module.scss';
 import PostUploadForm from '@/src/components/postUploadPage/postUploadForm';
 import Header from '@/src/components/common/header';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -18,6 +19,7 @@ const DetailUploadPage = ({ params }: DetailPageProps) => {
       <div className={cn('secondContainer')}>
         <PostUploadForm gymId={gymId} />
       </div>
+      <ModalChoice />
     </div>
   );
 };
