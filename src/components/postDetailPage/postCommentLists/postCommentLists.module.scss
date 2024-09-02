@@ -1,9 +1,13 @@
 .container {
   width: 100%;
-  padding: 10px 10px 10px 0;
+
+  background: white;
+  padding: 10px 10px;
   @include flex-arrange(space-between, flex-start);
+  position: relative;
   .mainWrapper {
     display: flex;
+
     width: 100%;
 
     .profileImage {
@@ -14,14 +18,13 @@
 
     .contentWrapper {
       margin-left: 10px;
-      @include font-style(1.2rem, black, 400);
-      width: 100%;
+      @include comment-content;
       .userInfo {
         display: block;
         margin-bottom: 5px;
 
         span:nth-child(1) {
-          @include font-style(1.2rem, black, 600);
+          @include comment-nickname;
         }
 
         span:nth-child(2) {
@@ -32,14 +35,16 @@
           margin-left: 5px;
         }
       }
+      .replyButton {
+        display: block;
+        margin-top: 8px;
+        @include font-style(1rem, gray, 400);
+      }
     }
   }
-  .likeAction {
-    position: absolute;
-    right: 10px;
-  }
 }
-// .outercontainer {
-//   overflow: hidden;
-//   transition: height 0.5s ease;
+
+// .outerContainer {
+//   max-height: 400px; /* 필요에 따라 최대 높이를 설정하세요 */
+//   overflow-y: auto; /* 스크롤 가능하게 설정 */
 // }

@@ -80,7 +80,7 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
         </section>
       </main>
       <CommentInput
-        params={params}
+        params={{ boardId: boardId }}
         tagNickname={tagNickname}
         setTagNickname={setTagNickname}
         selectId={selectId}

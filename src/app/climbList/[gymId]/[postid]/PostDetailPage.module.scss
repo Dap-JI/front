@@ -3,10 +3,14 @@
   height: 100vh;
   background: beige;
   overflow-y: scroll;
-
+  position: relative;
   .secondContainer {
     margin-top: 80px;
+    margin-bottom: 60px;
     padding: 0 10px 10px 10px;
+  }
+  .tagNickname {
+    margin-bottom: 80px;
   }
 }
 

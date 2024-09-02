@@ -146,20 +146,19 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         </div>
       </div>
       <p>{content}</p>
-
-      <span className={cn('allComment')}>
-        <Link
-          href={`/climbList/${gym_idx}/${post_idx}`}
-          style={{ textDecoration: 'none', color: 'gray' }}
-        >
-          댓글 모두 보기
-        </Link>
-      </span>
-
       <div className={cn('commentWrapper')}>
-        {/* <span>{post_comment[0].User.nickname}</span> */}
-        <span>디옹이잉</span>
-        <span>{post_comment[0].content}</span>
+        <span className={cn('allComment')}>
+          <Link
+            href={`/climbList/${gym_idx}/${post_idx}`}
+            style={{ textDecoration: 'none', color: 'gray' }}
+          >
+            댓글 모두 보기
+          </Link>
+        </span>
+        <div className={cn('comment')}>
+          <span>{post_comment[0].User.nickname}</span>
+          <span>{post_comment[0].content}</span>
+        </div>
       </div>
     </div>
   );
