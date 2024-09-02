@@ -1,14 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './profileBoardData.module.scss';
-import {
-  CommentIcon,
-  LikedIcon,
-  LikeIcon,
-  RightArrowIcon,
-} from '@/public/icon';
+import { LikeIcon } from '@/public/icon';
 import { ProfileBoardDetailType } from '@/src/utils/type';
 import CommentCount from '../../common/commentCount';
 import { useRouter } from 'next/navigation';
+import { fetchProfileBoardDatas } from '@/src/app/profile/api';
+import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
+import { ProfileBoardType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -25,6 +23,7 @@ const ProfileBoardData = ({ list }: ProfileBoardDataProps) => {
   const boardClick = () => {
     router.push(`/board/${board_idx}`);
   };
+  
   return (
     <div className={cn('container')} onClick={boardClick}>
       <div className={cn('dot')}>🔵</div>
@@ -47,15 +46,32 @@ const ProfileBoardData = ({ list }: ProfileBoardDataProps) => {
 };
 
 type ProfileBoardDatasProps = {
-  lists: ProfileBoardDetailType[];
+  params: {
+    userId: string;
+  };
 };
 
-const ProfileBoardDatas = ({ lists }: ProfileBoardDatasProps) => {
+const ProfileBoardDatas = ({ params }: ProfileBoardDatasProps) => {
+  const { userId } = params;
+
+  const { data: profileBoardData, ref } = useInfiniteScroll<ProfileBoardType>({
+    queryKey: ['profileBoardData', userId],
+    fetchFunction: (page = 1) =>
+      fetchProfileBoardDatas({
+        page,
+        userId,
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+  const profileBoards =
+    profileBoardData?.pages.flatMap((page) => page.boards) ?? [];
   return (
     <div className={cn('outerContainer')}>
-      {lists.map((list) => (
+      {profileBoards.map((list) => (
         <ProfileBoardData key={list.board_idx} list={list} />
       ))}
+      <div ref={ref} />
     </div>
   );
 };

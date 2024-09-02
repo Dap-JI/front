@@ -5,20 +5,19 @@ import { useState } from 'react';
 import ProfileBoardDatas from '../profileBoardData';
 import ProfilePostDatas from '../profilePostData';
 import { PostIcon, BoardIcon } from '@/public/icon';
-import {
-  ProfilePostDetailType,
-  ProfileBoardDetailType,
-} from '@/src/utils/type';
+import { ProfilePostDetailType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 type ProfileAllDataProps = {
   profileData: {
     posts: ProfilePostDetailType[];
-    boards: ProfileBoardDetailType[];
+  };
+  params: {
+    userId: string;
   };
 };
-const ProfileAllData = ({ profileData }: ProfileAllDataProps) => {
+const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
   const [selectList, setSelectList] = useState<string>('post');
   const [underlineStyle, setUnderlineStyle] = useState({ left: '0%' });
 
@@ -49,7 +48,7 @@ const ProfileAllData = ({ profileData }: ProfileAllDataProps) => {
       ) : selectList === 'post' ? (
         <ProfilePostDatas lists={profileData.posts} />
       ) : (
-        <ProfileBoardDatas lists={profileData.boards} />
+        <ProfileBoardDatas params={params} />
       )}
     </div>
   );

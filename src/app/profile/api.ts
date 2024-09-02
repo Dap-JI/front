@@ -6,13 +6,30 @@ import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
 
 type ProfileDataProps = {
-  userId: any;
+  userId: string;
   page: number;
 };
 
 //프로필 유저 정보 및 동영상 썸네일
-export const ProfileDatas = async ({ userId, page = 1 }: ProfileDataProps) => {
+export const fethcProfilePostDatas = async ({
+  userId,
+  page = 1,
+}: ProfileDataProps) => {
   const res = await instance.get(`/api/profile/${userId}`, {
+    params: {
+      page,
+    },
+  });
+  return res.data;
+};
+
+//프로필 유저 정보 및 게시판 정보
+
+export const fetchProfileBoardDatas = async ({
+  userId,
+  page = 1,
+}: ProfileDataProps) => {
+  const res = await instance.get(`/api/profile_board/${userId}`, {
     params: {
       page,
     },
@@ -27,19 +44,6 @@ export const useProfileDatas = (userId: string) => {
     queryFn: () => instance.get(`/api/profile/${userId}`),
     select: (res: ProfilePostType) => res?.data,
   });
-};
-
-//프로필 유저 정보 및 게시판 정보
-export const ProfileBoardDatas = async ({
-  userId,
-  page = 1,
-}: ProfileDataProps) => {
-  const res = await instance.get(`/api/profile_board/${userId}`, {
-    params: {
-      page,
-    },
-  });
-  return res.data;
 };
 
 //프로필 유저 정보 업데이트
