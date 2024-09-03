@@ -64,6 +64,11 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
           className={cn('image')}
         />
       </div>
+      <div>
+        <div>총 몇명</div>
+        <div>팔로워</div>
+        <div>팔로잉</div>
+      </div>
       {isProfileOwner && (
         <div className={cn('infoWrapper')}>
           <div className={cn('oauth', `oauth-${provider}`)}>

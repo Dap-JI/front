@@ -1,18 +1,13 @@
 'use client';
 import styles from './footerBar.module.scss';
 import classNames from 'classnames/bind';
-import {
-  HomeIcon,
-  BordIcon,
-  UserIcon,
-  MarkerIcon,
-  MegaPhoneIcon,
-} from '@/public/icon';
+import { HomeIcon, BordIcon, UserIcon, MarkerIcon } from '@/public/icon';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useMyInfo } from '@/src/app/auth/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { GlassIcon } from '@/public/icon';
+import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 

@@ -71,6 +71,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     createdAt,
     like_count,
     is_liked,
+    post_comment_count,
   } = postDetailDatas;
 
   const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
@@ -168,7 +169,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
             likeCount={likeCount}
             onClick={handleLikeClick}
           />
-          <CommentCount count={1} />
+          <CommentCount count={post_comment_count} />
         </div>
       </div>
       <p>{content}</p>
