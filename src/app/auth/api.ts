@@ -35,6 +35,7 @@ export const useMyInfo = () => {
   const query = useQuery({
     queryKey: ['myinfo'],
     queryFn: () => instance.get('/api/myinfo'),
+    retry: 5,
   });
 
   useEffect(() => {

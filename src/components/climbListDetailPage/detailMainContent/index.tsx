@@ -57,6 +57,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     like_count,
     is_like,
     post_comment,
+    post_comment_count,
   } = list;
   //리스트 데이터들
 
@@ -147,7 +148,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
             likeCount={likeCount}
             onClick={handleLikeClick}
           />
-          <CommentCount count={1} />
+          <CommentCount count={post_comment_count} />
         </div>
       </div>
       <p>{content}</p>
