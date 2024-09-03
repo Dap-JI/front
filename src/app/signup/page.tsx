@@ -10,6 +10,7 @@ import ModalChoice from '@/src/components/common/moadlChoice';
 import { useModal } from '@/src/hooks/useModal';
 import { fetchSignUp, fetchSignUpType } from './api';
 import { useMutation } from '@tanstack/react-query';
+import { isServerError } from '@/src/utils/axiosError';
 
 const cn = classNames.bind(styles);
 
@@ -29,8 +30,16 @@ const SignUpPage = () => {
       showModalHandler('alert', '회원가입이 되었습니다. ');
       router.push('signin');
     },
-    onError: () => {
-      showModalHandler('alert', '회원가입 에러');
+    onError: (e) => {
+      if (isServerError(e) && e.response && e.response.status === 401) {
+        showModalHandler('alert', '이메일 중복');
+        return;
+      }
+
+      if (isServerError(e) && e.response && e.response.status === 500) {
+        showModalHandler('alert', '서버에러');
+        return;
+      }
     },
   });
 
@@ -46,6 +55,7 @@ const SignUpPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={cn('signUpForm')}>
         <CommonInput
           placeholder="email"
+          type="email"
           register={register('email', {
             required: '이메일 꼭 필요함',
           })}

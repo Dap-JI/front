@@ -22,17 +22,30 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
   const renderProviderIcon = () => {
     switch (provider) {
       case 'kakao':
-        return <KakaoIcon width="17" height="17" />;
+        return (
+          <>
+            <KakaoIcon width="17" height="17" />
+            <span>Kakao</span>
+          </>
+        );
       case 'naver':
-        return <NaverIcon width="30" height="30" />;
+        return (
+          <>
+            <NaverIcon width="30" height="30" />
+            <span>Naver</span>
+          </>
+        );
       case 'dapji':
         return (
-          <Image
-            src={'/icon/icon.png'}
-            width="30"
-            height="30"
-            alt="provider 기본이미지"
-          />
+          <>
+            <Image
+              src={'/icon/icon.png'}
+              width="30"
+              height="30"
+              alt="provider 기본이미지"
+            />
+            <span>Dap Ji</span>
+          </>
         );
       default:
         return null;
@@ -55,7 +68,6 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
         <div className={cn('infoWrapper')}>
           <div className={cn('oauth', `oauth-${provider}`)}>
             {renderProviderIcon()}
-            <span>{provider}</span>
           </div>
           <div className={cn('profileEdit')}>
             <Link
