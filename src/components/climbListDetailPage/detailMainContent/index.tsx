@@ -104,7 +104,12 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     <div className={cn('container')}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
-          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <Image
+            src={User.img || '/icon/icon.png'}
+            width="30"
+            height="30"
+            alt="userImg"
+          />
           <div className={cn('dateWrapper')}>
             <span>{User.nickname}</span>
             <span>{timeAgo}</span>
@@ -146,20 +151,22 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         </div>
       </div>
       <p>{content}</p>
-      <div className={cn('commentWrapper')}>
-        <span className={cn('allComment')}>
-          <Link
-            href={`/climbList/${gym_idx}/${post_idx}`}
-            style={{ textDecoration: 'none', color: 'gray' }}
-          >
-            댓글 모두 보기
-          </Link>
-        </span>
-        <div className={cn('comment')}>
-          <span>{post_comment[0].User.nickname}</span>
-          <span>{post_comment[0].content}</span>
+      {post_comment[0]?.content && (
+        <div className={cn('commentWrapper')}>
+          <span className={cn('allComment')}>
+            <Link
+              href={`/climbList/${gym_idx}/${post_idx}`}
+              style={{ textDecoration: 'none', color: 'gray' }}
+            >
+              댓글 모두 보기
+            </Link>
+          </span>
+          <div className={cn('comment')}>
+            <span>{post_comment[0].User.nickname}</span>
+            <span>{post_comment[0].content}</span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

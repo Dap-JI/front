@@ -75,7 +75,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         <div className={cn('userInfo')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
-              src={User.img}
+              src={User.img || '/icon/icon.png'}
               width="30"
               height="30"
               alt="게시물 작성자 프로필 이미지"
