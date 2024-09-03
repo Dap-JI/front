@@ -63,7 +63,7 @@ const PostRecommnetList = ({ postRecomment }: PostRecommnetListProps) => {
     <div className={cn('container')}>
       <div className={cn('mainWrapper')}>
         <Image
-          src={User.img}
+          src={User.img || '/icon/icon.png'}
           width="30"
           height="30"
           alt="답글 유저 이미지"

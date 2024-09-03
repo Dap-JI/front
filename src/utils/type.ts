@@ -143,7 +143,6 @@ export type ProfileBoardDetailType = {
   comment_count: number;
 };
 
-
 export type ProfileBoardType = {
   user: ProfileUserType;
   boards: ProfileBoardDetailType[];

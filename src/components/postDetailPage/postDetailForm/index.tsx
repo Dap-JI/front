@@ -116,7 +116,12 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     <div className={cn('container')}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
-          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <Image
+            src={User.img || '/icon/icon.png'}
+            width="30"
+            height="30"
+            alt="userImg"
+          />
           <div className={cn('dateWrapper')}>
             <span>{User.nickname}</span>
             <span>{timeAgo}</span>

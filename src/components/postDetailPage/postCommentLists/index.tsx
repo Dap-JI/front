@@ -121,7 +121,7 @@ const PostCommentList = memo(
         <div className={cn('mainWrapper')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
-              src={User.img}
+              src={User.img || '/icon/icon.png'}
               width="30"
               height="30"
               alt="댓글 작성자 프로필 이미지"
