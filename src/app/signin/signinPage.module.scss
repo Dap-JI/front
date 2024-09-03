@@ -5,7 +5,7 @@
 
   height: 100vh;
   background: beige;
-  padding: 10px;
+  padding: 80px 10px 10px 10px;
   .signInForm {
     width: 100%;
     @include flex-arrange(center, center);
