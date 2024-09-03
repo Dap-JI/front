@@ -10,6 +10,8 @@ import ModalChoice from '@/src/components/common/moadlChoice';
 import { useModal } from '@/src/hooks/useModal';
 import { fetchSignIn, fetchSignInType } from './api';
 import { useMutation } from '@tanstack/react-query';
+import { isServerError } from '@/src/utils/axiosError';
+
 const cn = classNames.bind(styles);
 
 const SignInPage = () => {
@@ -31,8 +33,16 @@ const SignInPage = () => {
       }
       router.push(`/climbList`);
     },
-    onError: () => {
-      showModalHandler('alert', '로그인 에러');
+    onError: (e) => {
+      if (isServerError(e) && e.response && e.response.status === 401) {
+        showModalHandler('alert', '이메일이나 비밀번호가 잘못되었습니다');
+        return;
+      }
+
+      if (isServerError(e) && e.response && e.response.status === 500) {
+        showModalHandler('alert', '서버에러');
+        return;
+      }
     },
   });
 
@@ -49,6 +59,7 @@ const SignInPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={cn('signInForm')}>
         <CommonInput
           placeholder="email"
+          type="email"
           register={register('email', {
             required: '이메일 꼭 필요함',
           })}
@@ -56,6 +67,7 @@ const SignInPage = () => {
         {errors.email && <span>{errors.email.message as string}</span>}
         <CommonInput
           placeholder="password"
+          type="password"
           register={register('password', {
             required: '비밀번호 꼭 필요함',
           })}

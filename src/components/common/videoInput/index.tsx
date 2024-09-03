@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import styles from './VideoInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import instance from '@/src/utils/axios';
-import ModalChoice from '../moadlChoice';
 import { useModal } from '@/src/hooks/useModal';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
