@@ -25,7 +25,7 @@ const SignInPage = () => {
     mutationKey: ['userSignIn'],
     mutationFn: (formData: fetchSignInType) => fetchSignIn(formData),
     onSuccess: (data: any) => {
-      if (data.user.user.nickname === null) {
+      if (data.user.nickname === null) {
         router.push('/join');
         return;
       }
@@ -48,14 +48,14 @@ const SignInPage = () => {
       <h1>로그인</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={cn('signInForm')}>
         <CommonInput
-          label="email"
+          placeholder="email"
           register={register('email', {
             required: '이메일 꼭 필요함',
           })}
         />
         {errors.email && <span>{errors.email.message as string}</span>}
         <CommonInput
-          label="password"
+          placeholder="password"
           register={register('password', {
             required: '비밀번호 꼭 필요함',
           })}

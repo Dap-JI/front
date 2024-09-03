@@ -12,7 +12,6 @@ const Home = () => {
     <div className={cn('container')}>
       <h1>Dap Ji</h1>
       <div className={cn('loginContaienr')}>
-        <h2>답지 보러 가기 👇</h2>
         <OauthBtnForm />
       </div>
       <span className={cn('loginClick')} onClick={() => router.push(`/signin`)}>
