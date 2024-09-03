@@ -5,9 +5,8 @@
   width: 100%;
   background: white;
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 0 4px;
   gap: 10px;
 
   .userWrapper {
@@ -39,11 +38,16 @@
     @include font-style(1.2rem, black, 400);
     margin-top: 15px;
 
+    .iconWrapper {
+      display: flex;
+      gap: 5px;
+    }
+
     .clearday {
       @include flex-arrange(center, center);
       flex-direction: column;
       gap: 3px;
-      padding-right: 30px;
+      padding-left: 10px;
       span:nth-child(1) {
         @include font-style(1.4rem, black, 400);
       }
@@ -137,8 +141,31 @@
 
   p {
     width: 100%;
-    height: 80px;
+    height: auto;
     @include font-style(1.3rem, black, 500);
+  }
+
+  .commentWrapper {
+    width: 100%;
+    .allComment {
+      @include font-style(1.2rem, gray, 400);
+    }
+
+    .comment {
+      margin-top: 5px;
+
+      span:nth-child(1) {
+        @include comment-nickname;
+      }
+
+      span:nth-child(2) {
+        margin-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @include comment-content;
+      }
+    }
   }
 }
 

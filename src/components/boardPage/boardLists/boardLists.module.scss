@@ -77,13 +77,12 @@
 
       .iconWrapper {
         @include flex-arrange(space-around, center);
-        gap: 10px;
         margin-top: 5px;
         .like,
         .comment {
           @include flex-arrange(center);
           @include font-style(1.4rem, black, 400);
-          gap: 5px;
+          gap: 7px;
         }
       }
     }

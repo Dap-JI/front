@@ -1,13 +1,12 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './detailMainContent.module.scss';
-import { DoubleRightArrowIcon } from '@/public/icon';
+import { DoubleRightArrowIcon, CommentIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import {
   DetailMainContentProps,
   DetailType,
   DetailMainContentListProps,
-  VideoLikeType,
 } from '@/src/utils/type';
 import usePostStore from '@/src/utils/store/usePostStore';
 import Image from 'next/image';
@@ -16,10 +15,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import LikeAction from '@/src/components/common/likeAction';
-import { useState } from 'react';
-import { LikeRequest } from '@/src/hooks/useLikeRequest';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import useTimeAgo from '@/src/hooks/useTimeAgo';
+import { useLikeAction } from '@/src/hooks/useLikeAction';
+import CommentCount from '@/src/components/common/commentCount';
+import Link from 'next/link';
 
 const cn = classNames.bind(styles);
 
@@ -56,41 +56,19 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     createdAt,
     like_count,
     is_like,
+    post_comment,
   } = list;
   //리스트 데이터들
 
   const timeAgo = useTimeAgo(createdAt);
-
-  const [likeToggle, setLikeToggle] = useState(is_like);
-  const [likeCount, setLikeCount] = useState(like_count);
-  // like state
-  const queryClient = useQueryClient();
-  const { mutate: likeRequest } = useMutation({
-    mutationKey: ['videoLiked', post_idx],
-    mutationFn: () => LikeRequest({ category: 'posts', content_id: post_idx }),
-    onMutate: async () => {
-      //서버에 요청되기 전에 실행되는 코드
-      await queryClient.cancelQueries({ queryKey: ['climbDetail'] });
-      //서버에서 데이터를 가져오는 중이라면 취소, 데이터 중첩 안되도록
-      const previousData = queryClient.getQueryData(['climbDetail']);
-
-      setLikeToggle((prev) => !prev);
-      setLikeCount((prev) => (likeToggle ? prev - 1 : prev + 1));
-      return { previousData };
-    },
-    onError: (error, variables, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData(['climbDetail'], context.previousData);
-      }
-    },
-    onSettled: () => {
-      //성공해도, 실패해도 해당 쿼리키를 최신화
-      queryClient.invalidateQueries({ queryKey: ['postDetailDatas'] });
-      queryClient.invalidateQueries({ queryKey: ['climbDetail'] });
-    },
+  const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
+    category: 'posts',
+    content_id: post_idx,
+    initalLikeCount: like_count,
+    initalLikeToggle: is_like,
+    firQueryKeyName: 'climbDetail',
+    secQueryKeyName: 'postDetailDatas',
   });
-
-  //like post 요청 query
 
   const settings = {
     dots: true,
@@ -122,16 +100,16 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   };
   // 프로필 클릭
 
-  const handleLikeClick = () => {
-    likeRequest();
-  };
-  //like 클릭
-
   return (
     <div className={cn('container')}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
-          <Image src={User.img} width="30" height="30" alt="userImg" />
+          <Image
+            src={User.img || '/icon/icon.png'}
+            width="30"
+            height="30"
+            alt="userImg"
+          />
           <div className={cn('dateWrapper')}>
             <span>{User.nickname}</span>
             <span>{timeAgo}</span>
@@ -163,13 +141,32 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
         <div className={cn('clearday')}>
           <span>등반일</span> <span>{deleteT(clearday)}</span>
         </div>
-        <LikeAction
-          likeToggle={likeToggle}
-          likeCount={likeCount}
-          onClick={handleLikeClick}
-        />
+        <div className={cn('iconWrapper')}>
+          <LikeAction
+            likeToggle={likeToggle}
+            likeCount={likeCount}
+            onClick={handleLikeClick}
+          />
+          <CommentCount count={1} />
+        </div>
       </div>
       <p>{content}</p>
+      {post_comment[0]?.content && (
+        <div className={cn('commentWrapper')}>
+          <span className={cn('allComment')}>
+            <Link
+              href={`/climbList/${gym_idx}/${post_idx}`}
+              style={{ textDecoration: 'none', color: 'gray' }}
+            >
+              댓글 모두 보기
+            </Link>
+          </span>
+          <div className={cn('comment')}>
+            <span>{post_comment[0].User.nickname}</span>
+            <span>{post_comment[0].content}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  @include flex-arrange(space-between, flex-start);
+  .mainWrapper {
+    display: flex;
+    width: 100%;
+
+    .profileImage {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .contentWrapper {
+      margin-left: 10px;
+      @include font-style(1.2rem, black, 400);
+      width: 100%;
+      .userInfo {
+        display: block;
+        margin-bottom: 5px;
+
+        span:nth-child(1) {
+          @include font-style(1.2rem, black, 600);
+        }
+
+        span:nth-child(2) {
+          @include font-style(1rem, gray, 400);
+          margin-left: 5px;
+        }
+        .deleteIcon {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  .likeAction {
+    position: absolute;
+    right: 10px;
+  }
+}

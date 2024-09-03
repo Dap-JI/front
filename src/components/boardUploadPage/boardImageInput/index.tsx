@@ -24,7 +24,6 @@ const BoardImageInput = ({
   setDeleteUrl,
 }: BoardImageInputProps) => {
   const [progress, setProgress] = useState(0);
-  const [previewUrls, setPreviewUrls] = useState<string[]>([]); // 미리보기 상태 추가
   const { showModalHandler } = useModal();
   const { mutate: boardImageUpload, isPending } = useMutation({
     mutationKey: ['boardImageUpload'],
@@ -47,44 +46,36 @@ const BoardImageInput = ({
     onSuccess: (data) => {
       // 서버에서 받은 최종 URL을 미리보기 URL과 대체
       setFileUrl((prev: string[]) => [...prev, ...data.imageUrls]);
-      //서버에서 받은 url
-      setPreviewUrls((prev) =>
-        prev.map((url, index) => data.imageUrls[index] || url),
-      );
     },
     onError: (e) => {
-      if (isServerError(e) && e.response && e.response.status === 500) {
+      if (isServerError(e) && e.response && e.response.status === 400) {
         showModalHandler('alert', '최대 3개까지 업로드가 가능해요');
       }
     },
   });
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
+      // 현재 파일 URL 개수와 새로 업로드할 파일 개수를 합산하여 3개 초과 여부 확인
+      if (fileUrl.length + files.length > 3) {
+        showModalHandler('alert', '최대 3개까지 업로드가 가능해요');
+        return;
+      }
+
+      const formData = new FormData();
       Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (reader.result) {
-            // 새로운 미리보기 URL을 상태에 추가
-            setPreviewUrls((prev: string[]) => [
-              ...prev,
-              reader.result as string,
-            ]);
-          }
-        };
-        reader.readAsDataURL(file); // 파일을 base64로 인코딩
-        const formData = new FormData(); // 폼데이터 객체 생성
-        formData.append('image', file); // 폼데이터 객체에 키, 값을 추가
-        boardImageUpload(formData); // mutate에 넣어서 전송
+        formData.append('image', file); // 각 파일을 FormData에 추가
       });
+
+      // 서버로 파일 업로드 요청
+      boardImageUpload(formData);
     }
   };
 
   const handleRemoveImage = (index: number) => {
     setDeleteUrl((prev: string[]) => [...prev, fileUrl[index]]);
     setFileUrl((prev: string[]) => prev.filter((_, i) => i !== index));
-    setPreviewUrls((prev: string[]) => prev.filter((_, i) => i !== index)); // 미리보기에서도 삭제
   };
 
   if (isPending) {
@@ -121,7 +112,7 @@ const BoardImageInput = ({
       )}
 
       <div className={styles.uploadInput}>
-        {previewUrls?.map((url: string, index: number) => (
+        {fileUrl?.map((url: string, index: number) => (
           <div key={index} className={cn('imageBox')}>
             <CircleXIcon
               className={cn('close')}

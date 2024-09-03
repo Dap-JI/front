@@ -2,7 +2,7 @@
 import styles from './boardPage.module.scss';
 import classNames from 'classnames/bind';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
-import { categoryListData } from '@/src/utils/dummy';
+import { categoryListData } from '@/src/utils/categoryListDatas';
 import { useState, useEffect } from 'react';
 import BoardLists from '@/src/components/boardPage/boardLists';
 import SearchBar from '@/src/components/common/searchBar';
@@ -21,9 +21,9 @@ const BoardPage = () => {
   const queryClient = useQueryClient();
 
   const { data: boardListGetData } = useInfiniteScroll<BoardResponseType>({
-    queryKey: ['boardListData'],
+    queryKey: ['boardListData', selectCategory],
     fetchFunction: (page = 1) =>
-      boardListGetDatas({ page, search: searchName }),
+      boardListGetDatas({ page, search: searchName, category: selectCategory }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
@@ -43,7 +43,7 @@ const BoardPage = () => {
     if (searchName !== '') {
       queryClient.invalidateQueries({ queryKey: ['boardListData'] });
     }
-  }, [searchName, queryClient]);
+  }, [searchName, selectCategory, queryClient]);
 
   return (
     <div className={cn('container')}>

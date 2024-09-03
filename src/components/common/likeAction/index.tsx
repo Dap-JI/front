@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LikeIcon, LikedIcon, PeopleLikeIcon } from '@/public/icon';
 import classNames from 'classnames/bind';
 import styles from './likeAction.module.scss';
 
 const cn = classNames.bind(styles);
 
-type VideoLikeProps = {
+type LikeActionProps = {
   likeToggle: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   likeCount: any;
 };
 
-const LikeAction = ({ likeToggle, onClick, likeCount }: VideoLikeProps) => {
+const LikeAction = ({ likeToggle, onClick, likeCount }: LikeActionProps) => {
   return (
     <div className={cn('container')}>
       {likeToggle ? (
-        <LikedIcon onClick={onClick} />
+        <LikedIcon width="20" height="20" onClick={onClick} />
       ) : (
-        <LikeIcon onClick={onClick} />
+        <LikeIcon width="20" height="20" onClick={onClick} />
       )}
-      <span>{likeCount}</span>
+      <span className={cn('likeCount')}>{likeCount}</span>
     </div>
   );
 };

@@ -1,21 +1,22 @@
+'use client';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
 import OauthBtnForm from '@/src/components/loginPage/oauthBtnForm';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
 const Home = () => {
+  const router = useRouter();
   return (
     <div className={cn('container')}>
       <h1>Dap Ji</h1>
       <div className={cn('loginContaienr')}>
-        <h2>답지 보러 가기 👇</h2>
         <OauthBtnForm />
       </div>
-      <Link href="/climbList">
-        <button>들어가기</button>
-      </Link>
+      <span className={cn('loginClick')} onClick={() => router.push(`/signin`)}>
+        🤫
+      </span>
     </div>
   );
 };
