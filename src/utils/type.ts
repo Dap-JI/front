@@ -123,6 +123,8 @@ export type ProfileUserType = {
   img: string;
   introduce: string | null;
   provider: string;
+  // followerCount: number;
+  // followingCount: number;
 };
 
 export type ProfilePostType = {
@@ -156,6 +158,10 @@ export type useFormProfileEditProps = {
   nickname: string;
   introduce: string;
 };
+//팔로워타입
+
+
+//팔로잉 타입
 
 //////////////////////////포스트 디테일 페이지 타입들//////////////////////////
 
@@ -341,5 +347,3 @@ export type BoardRecommentUploadType = {
   comment_idx: number;
   content: string;
 };
-
-//게시판 답글 삭제 타입
