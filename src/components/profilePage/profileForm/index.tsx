@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { NaverIcon, KakaoIcon } from '@/public/icon/';
 import { ProfileUserType } from '@/src/utils/type';
 import Link from 'next/link';
+import { text } from 'stream/consumers';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -16,8 +18,9 @@ type ProfileFormProps = {
 };
 
 const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
-  const { img, introduce, provider, nickname } = lists;
+  const { img, introduce, provider } = lists;
   const { userId } = params;
+  const router = useRouter();
 
   const renderProviderIcon = () => {
     switch (provider) {
@@ -52,6 +55,10 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
     }
   };
 
+  const followPageClick = (userId: string, page: string) => {
+    router.push(`/profile/${userId}/${page}`);
+  };
+
   return (
     <div className={cn('container')}>
       <div className={cn('profileWrapper')}>
@@ -70,23 +77,27 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
               <div className={cn('oauth', `oauth-${provider}`)}>
                 {renderProviderIcon()}
               </div>
-              <div className={cn('profileEdit')}>
-                <Link
-                  href={`/profile/${userId}/edit`}
-                  style={{ textDecoration: 'none', color: 'black' }}
-                >
-                  프로필 편집
-                </Link>
+              <div
+                className={cn('profileEdit')}
+                onClick={() => followPageClick(userId, 'edit')}
+              >
+                프로필 편집
               </div>
             </div>
-          )}
-
+          )}  
           <div className={cn('followWrapper')}>
-            <div className={cn('follower')}>
+            <div
+              className={cn('follower')}
+              onClick={() => followPageClick(userId, 'follower')}
+            >
               <span>팔로워</span>
               <span>122</span>
             </div>
-            <div className={cn('following')}>
+
+            <div
+              className={cn('following')}
+              onClick={() => followPageClick(userId, 'following')}
+            >
               <span>팔로잉</span>
               <span>122</span>
             </div>

@@ -56,7 +56,6 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     provider: '',
   };
   const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
-  console.log(profileData);
 
   const isProfileOwner = profileData?.pages[0]?.isOwnProfile === true;
   const role = profileData?.pages[0]?.userRole === 'admin';
