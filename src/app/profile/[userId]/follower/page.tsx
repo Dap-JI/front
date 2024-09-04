@@ -24,7 +24,7 @@ const FollowerPage = ({ params }: FollowerPageProps) => {
   console.log(followerDatas);
   return (
     <div className={cn('container')}>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <div className={cn('secondContainer')}>
         <FollowLists />
       </div>

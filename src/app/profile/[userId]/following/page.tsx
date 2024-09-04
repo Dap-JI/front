@@ -25,7 +25,7 @@ const FollowingPage = ({ params }: FollowingPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <div className={cn('secondContainer')}>
         <FollowLists />
       </div>
