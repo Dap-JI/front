@@ -77,3 +77,17 @@ export const useLogout = (enabled: boolean) => {
   });
 };
 //void는 성공도는 실패만 나타냄
+
+//팔로워 조회
+
+export const fetchFollowerData = async (userId: string) => {
+  const res = await instance.get(`/api/followers/${userId}`);
+  return res.data;
+};
+
+//팔로잉 조회
+
+export const fetchFollowingData = async (userId: string) => {
+  const res = await instance.get(`/api/following/${userId}`);
+  return res.data;
+};

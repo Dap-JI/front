@@ -28,7 +28,7 @@ const SignUpPage = () => {
     mutationFn: (formData: fetchSignUpType) => fetchSignUp(formData),
     onSuccess: () => {
       showModalHandler('alert', '회원가입이 되었습니다. ');
-      router.push('signin');
+      router.push('/signin');
     },
     onError: (e) => {
       if (isServerError(e) && e.response && e.response.status === 401) {
