@@ -14,6 +14,8 @@ import ModalChoice from '@/src/components/common/moadlChoice';
 import { useModal } from '@/src/hooks/useModal';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMyInfo } from '../../auth/api';
+import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 
 const cn = classNames.bind(styles);
 
@@ -29,6 +31,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   const { data: logout, isSuccess } = useLogout(enabled);
   const { showModalHandler } = useModal();
   const router = useRouter();
+  const { myId } = useMyInfoStore();
   const {
     data: profileData,
     ref,
@@ -53,6 +56,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     provider: '',
   };
   const profilePosts = profileData?.pages.flatMap((page) => page.posts) ?? [];
+  console.log(profileData);
 
   const isProfileOwner = profileData?.pages[0]?.isOwnProfile === true;
   const role = profileData?.pages[0]?.userRole === 'admin';
@@ -88,7 +92,9 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
               <AdminIcon />
             </Link>
           )}
-          <LogoutIcon className={cn('setIcon')} onClick={handleLogoutClick} />
+          {isProfileOwner && (
+            <LogoutIcon className={cn('setIcon')} onClick={handleLogoutClick} />
+          )}
         </div>
       </Header>
       <div className={cn('secondContainer')}>

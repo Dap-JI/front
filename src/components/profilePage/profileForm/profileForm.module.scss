@@ -1,61 +1,79 @@
+.btnStyle {
+  width: 100%;
+  height: 30px;
+  background: rgb(230, 222, 222);
+  border-radius: 5px;
+  padding: 0 8px;
+}
+
 .container {
   width: 100%;
-  @include flex-arrange(center, center);
+  display: flex;
   flex-direction: column;
   gap: 20px;
 
-  .imageWrapper {
-    width: 150px;
-    height: 150px;
-    position: relative;
-
-    .image {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-  }
-
-  .infoWrapper {
-    @include flex-arrange(center, center);
-    @include font-style(1.3rem, black 500);
-
-    width: 70%;
+  .profileWrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: 20px;
+    align-items: center;
 
-    .btnStyle {
+    .profileImage {
+      border-radius: 50%;
       width: 100%;
-      height: 30px;
-      background: rgb(230, 222, 222);
-      border-radius: 5px;
-      padding: 0 8px;
+      height: auto;
+      max-width: 150px;
+      max-height: 150px;
+      aspect-ratio: 1/1;
     }
 
-    .profileEdit {
-      @extend .btnStyle;
-      @include flex-arrange(center, center);
-    }
+    .btnWrapper {
+      display: flex;
+      gap: 10px;
 
-    .oauth {
-      @extend .btnStyle;
-      @include flex-arrange(flex-start, center);
-      span {
-        margin: auto;
+      .profileEdit {
+        @extend .btnStyle;
+        @include flex-arrange(center, center);
+      }
+
+      .oauth {
+        @extend .btnStyle;
+        @include flex-arrange(flex-start, center);
+        span {
+          margin: auto;
+        }
+      }
+      .oauth-kakao {
+        background: #f7e600;
+      }
+      .oauth-naver {
+        background: #03c75a;
+        color: white;
+      }
+      .oauth-dapji {
+        background: white;
+        color: #39b8ff;
       }
     }
-    .oauth-kakao {
-      background: #f7e600;
+
+    .followWrapper {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+
+      .follower,
+      .following {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span:nth-child(1) {
+          margin-bottom: 5px;
+          // @include font-style(1.2rem, red 300);
+        }
+        span:nth-child(2) {
+          @include font-style(1.7rem, black 500);
+        }
+      }
     }
-    .oauth-naver {
-      background: #03c75a;
-      color: white;
-    }
-    .oauth-dapji {
-      background: white;
-      color: #39b8ff;
-    }
-  }
-  .textWrapper {
-    width: 70%;
   }
 }

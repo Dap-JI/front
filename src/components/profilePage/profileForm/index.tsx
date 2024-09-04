@@ -16,7 +16,7 @@ type ProfileFormProps = {
 };
 
 const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
-  const { img, introduce, provider } = lists;
+  const { img, introduce, provider, nickname } = lists;
   const { userId } = params;
 
   const renderProviderIcon = () => {
@@ -54,36 +54,46 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
 
   return (
     <div className={cn('container')}>
-      <div className={cn('imageWrapper')}>
+      <div className={cn('profileWrapper')}>
         <Image
           src={img || '/icon/icon.png'}
           alt="profileImage"
-          width="200"
-          height="200"
+          width="120"
+          height="120"
           priority={true}
-          className={cn('image')}
+          className={cn('profileImage')}
         />
-      </div>
-      <div>
-        <div>총 몇명</div>
-        <div>팔로워</div>
-        <div>팔로잉</div>
-      </div>
-      {isProfileOwner && (
+
         <div className={cn('infoWrapper')}>
-          <div className={cn('oauth', `oauth-${provider}`)}>
-            {renderProviderIcon()}
-          </div>
-          <div className={cn('profileEdit')}>
-            <Link
-              href={`/profile/${userId}/edit`}
-              style={{ textDecoration: 'none', color: 'black' }}
-            >
-              프로필 편집
-            </Link>
+          {isProfileOwner && (
+            <div className={cn('btnWrapper')}>
+              <div className={cn('oauth', `oauth-${provider}`)}>
+                {renderProviderIcon()}
+              </div>
+              <div className={cn('profileEdit')}>
+                <Link
+                  href={`/profile/${userId}/edit`}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  프로필 편집
+                </Link>
+              </div>
+            </div>
+          )}
+
+          <div className={cn('followWrapper')}>
+            <div className={cn('follower')}>
+              <span>팔로워</span>
+              <span>122</span>
+            </div>
+            <div className={cn('following')}>
+              <span>팔로잉</span>
+              <span>122</span>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
       <div className={cn('textWrapper')}>{introduce}</div>
     </div>
   );
