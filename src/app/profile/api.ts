@@ -91,3 +91,5 @@ export const fetchFollowingData = async (userId: string) => {
   const res = await instance.get(`/api/following/${userId}`);
   return res.data;
 };
+
+//팔로잉 실행
