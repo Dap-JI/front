@@ -2,31 +2,43 @@ import classNames from 'classnames/bind';
 import styles from './followerLists.module.scss';
 import Image from 'next/image';
 import { DeleteIcon } from '@/public/icon';
-import { FollowerDataType } from '@/src/utils/type';
+import { FollowerType, FollowDetailType } from '@/src/utils/type';
+import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
+import { fetchFollowerData } from '@/src/app/profile/api';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import useScrollDirection from '@/src/hooks/useScrollDirection';
 
 const cn = classNames.bind(styles);
 
 type FollowerListProps = {
-  list: FollowerDataType;
+  list: FollowDetailType;
 };
 
 const FollowerList = ({ list }: FollowerListProps) => {
-  const { following } = list;
+  const { user_idx, nickname, img } = list;
+  const router = useRouter();
+  const [scrollDirection] = useScrollDirection('up');
+
   const handleFollowDelete = () => {
     console.log('팔로워삭제');
   };
+
+  const profilePageClick = () => {
+    router.push(`/profile/${user_idx}`);
+  };
   return (
     <div className={cn('container')}>
-      <div className={cn('infoWrapper')}>
+      <div className={cn('infoWrapper')} onClick={profilePageClick}>
         <Image
-          src="/icon/icon.png"
+          src={img || 'icon/icon.png'}
           width={50}
           height={50}
           className={cn('profileImage')}
           alt="팔로우 페이지 프로필 이미지"
           priority
         />
-        <span>{following.nickname}</span>
+        <span>{nickname}</span>
       </div>
       <DeleteIcon onClick={handleFollowDelete} />
     </div>
@@ -34,15 +46,33 @@ const FollowerList = ({ list }: FollowerListProps) => {
 };
 
 type FollowerListsProps = {
-  lists: FollowerDataType[];
+  params: {
+    userId: string;
+  };
 };
 
-const FollowerLists = ({ lists }: FollowerListsProps) => {
+const FollowerLists = ({ params }: FollowerListsProps) => {
+  const { userId } = params;
+
+  const [searchName, setSearchName] = useState('');
+
+  const { data: followerDatas, ref } = useInfiniteScroll<FollowerType>({
+    queryKey: ['followerDatas'],
+    fetchFunction: (page = 1) =>
+      fetchFollowerData({ page, search: searchName, userId }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+
+  const followerData =
+    followerDatas?.pages.flatMap((page) => page.followers) ?? [];
+
   return (
     <div className={cn('outerContainer')}>
-      {lists.map((list: FollowerDataType) => (
-        <FollowerList key={list.following.user_idx} list={list} />
+      {followerData.map((list: FollowDetailType) => (
+        <FollowerList key={list.user_idx} list={list} />
       ))}
+      <div ref={ref}/>
     </div>
   );
 };
