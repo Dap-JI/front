@@ -29,7 +29,7 @@ const FooterBar = () => {
     if (path !== '/' && !myId) {
       getMyInfo();
     }
-  }, [path, setmyId]);
+  }, [path, setmyId, myId]);
 
   const profileClick = () => {
     if (myId) {

@@ -1,6 +1,10 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ProfilePostType, useFormProfileEditProps } from '@/src/utils/type';
+import {
+  ProfilePostType,
+  useFormProfileEditProps,
+  FollowRequestType,
+} from '@/src/utils/type';
 import instance from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
@@ -115,4 +119,8 @@ export const fetchFollowingData = async ({
   return res.data;
 };
 
-//팔로잉 실행
+//팔로우 요청
+export const fetchFollowPost = async (followIds: FollowRequestType) => {
+  const res = await instance.post(`/api/follow`, followIds);
+  return res.data;
+};

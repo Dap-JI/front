@@ -5,9 +5,11 @@ import { DeleteIcon } from '@/public/icon';
 import { FollowingType, FollowDetailType } from '@/src/utils/type';
 import { fetchFollowingData } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import { useQueryClient } from '@tanstack/react-query';
+import SearchBar from '../../common/searchBar';
 
 const cn = classNames.bind(styles);
 
@@ -17,6 +19,7 @@ type FollowingListProps = {
 
 const FollowingList = ({ list }: FollowingListProps) => {
   const { nickname, user_idx, img } = list;
+
   const [scrollDirection] = useScrollDirection('up');
   const router = useRouter();
 
@@ -52,10 +55,12 @@ type FollowingListsProps = {
 
 const FollowingLists = ({ params }: FollowingListsProps) => {
   const { userId } = params;
+  const queryClient = useQueryClient();
+
   const [searchName, setSearchName] = useState('');
 
   const { data: followingDatas, ref } = useInfiniteScroll<FollowingType>({
-    queryKey: ['followingDatas'],
+    queryKey: ['followingDatas', userId, searchName],
     fetchFunction: (page = 1) =>
       fetchFollowingData({ page, search: searchName, userId }),
     getNextPageParam: (lastPage) =>
@@ -65,8 +70,19 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
   const followingData =
     followingDatas?.pages.flatMap((page) => page.following) ?? [];
 
+  const handleSearchChange = (value: string) => {
+    setSearchName(value);
+  };
+
+  useEffect(() => {
+    if (searchName !== '') {
+      queryClient.invalidateQueries({ queryKey: ['followerDatas'] });
+    }
+  }, [searchName, queryClient]);
+
   return (
     <div className={cn('outerContainer')}>
+      <SearchBar onSearchChange={handleSearchChange} searchName={searchName} />
       {followingData.map((list: FollowDetailType) => (
         <FollowingList key={list.user_idx} list={list} />
       ))}
