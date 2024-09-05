@@ -4,18 +4,16 @@ import classNames from 'classnames/bind';
 import styles from './followAllData.module.scss';
 import FollowerLists from '../followerLists';
 import FollowingLists from '../followingLists';
-import { FollowerDataType, FollowingDataType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 type FollowAllDataProps = {
-  followObject: {
-    followerObject: any;
-    followingObject: any;
+  params: {
+    userId: string;
   };
 };
 
-const FollowAllData = ({ followObject }: FollowAllDataProps) => {
+const FollowAllData = ({ params }: FollowAllDataProps) => {
   const [selectList, setSelectList] = useState<string>('follower');
   const [underlineStyle, setUnderlineStyle] = useState({ left: '0%' });
   const handleIconClick = (type: string, left: string) => {
@@ -46,9 +44,9 @@ const FollowAllData = ({ followObject }: FollowAllDataProps) => {
         <div className={cn('underline')} style={underlineStyle} />
       </nav>
       {selectList === 'follower' ? (
-        <FollowerLists lists={followObject.followerObject} />
+        <FollowerLists params={params} />
       ) : (
-        <FollowingLists lists={followObject.followingObject} />
+        <FollowingLists params={params} />
       )}
     </div>
   );
