@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // margin-top: 10px;
+
+  .iconWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    position: relative;
+    margin-bottom: 10px;
+    @include font-style(1.5rem, rgb(36, 34, 34), 600);
+    p {
+      margin: 5px 0 0 0;
+    }
+    .icon {
+      padding-bottom: 5px;
+    }
+
+    .underline {
+      position: absolute;
+      bottom: -2px;
+      height: 2px;
+      width: 50%;
+      background-color: black;
+      transition: left 0.3s ease;
+    }
+  }
+  .empty-message {
+    @include font-style(1.5rem, black, 500);
+    margin-top: 50px;
+  }
+}

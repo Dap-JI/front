@@ -123,6 +123,8 @@ export type ProfileUserType = {
   img: string;
   introduce: string | null;
   provider: string;
+  // followerCount: number;
+  // followingCount: number;
 };
 
 export type ProfilePostType = {
@@ -157,6 +159,34 @@ export type useFormProfileEditProps = {
   introduce: string;
 };
 
+//팔로워 상세 타입
+export type FollowDetailType = {
+  img: string;
+  nickname: string;
+  user_idx: number;
+};
+
+// 팔로워 오브젝트+상세 타입
+export type FollowerDataType = {
+  following: FollowDetailType;
+};
+
+// 팔로잉 오브젝트+상세 타입
+export type FollowingDataType = {
+  follower: FollowDetailType;
+};
+
+// 팔로워 최상위 타입
+export type FollowerType = {
+  message: string;
+  data: FollowerDataType[]; // 데이터는 배열
+};
+
+// 팔로잉 최상위 타입
+export type FollowingType = {
+  message: string;
+  data: FollowingDataType[]; // 데이터는 배열
+};
 //////////////////////////포스트 디테일 페이지 타입들//////////////////////////
 
 // 포스트 상세페이지  타입
@@ -341,5 +371,3 @@ export type BoardRecommentUploadType = {
   comment_idx: number;
   content: string;
 };
-
-//게시판 답글 삭제 타입

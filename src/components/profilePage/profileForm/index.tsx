@@ -18,7 +18,12 @@ type ProfileFormProps = {
 };
 
 const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
-  const { img, introduce, provider } = lists;
+  const {
+    img,
+    introduce,
+    provider,
+    //  followerCount, followingCount
+  } = lists;
   const { userId } = params;
   const router = useRouter();
 
@@ -72,7 +77,7 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
         />
 
         <div className={cn('infoWrapper')}>
-          {isProfileOwner && (
+          {isProfileOwner ? (
             <div className={cn('btnWrapper')}>
               <div className={cn('oauth', `oauth-${provider}`)}>
                 {renderProviderIcon()}
@@ -84,22 +89,37 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
                 프로필 편집
               </div>
             </div>
-          )}  
+          ) : (
+            <div className={cn('btnWrapper')}>
+              <div className={cn('oauth', `oauth-${provider}`)}>
+                <Image
+                  src={'/icon/icon.png'}
+                  width="30"
+                  height="30"
+                  alt="provider 기본이미지"
+                />
+                <span>Dap Ji</span>
+              </div>
+              <div className={cn('profileEdit')}>클로잉</div>
+            </div>
+          )}
           <div className={cn('followWrapper')}>
             <div
               className={cn('follower')}
-              onClick={() => followPageClick(userId, 'follower')}
+              onClick={() => followPageClick(userId, 'follow')}
             >
               <span>팔로워</span>
               <span>122</span>
+              {/* <span>{followerCount}</span> */}
             </div>
 
             <div
               className={cn('following')}
-              onClick={() => followPageClick(userId, 'following')}
+              onClick={() => followPageClick(userId, 'follow')}
             >
               <span>팔로잉</span>
               <span>122</span>
+              {/* <span>{followingCount}</span> */}
             </div>
           </div>
         </div>

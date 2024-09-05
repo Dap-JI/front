@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  background: beige;
+  min-height: 100vh;
+  padding-bottom: 90px;
+
+  .header-container {
+    position: sticky;
+    top: 60px;
+    z-index: 2;
+    background: linear-gradient(to right, #171a27, #282c3e);
+    transition: top 0.5s ease-in-out;
+
+    &.up {
+      top: 0px;
+    }
+
+    &.down {
+      top: -135px;
+    }
+  }
+  .secondContainer {
+    padding: 0 10px 0 10px;
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
