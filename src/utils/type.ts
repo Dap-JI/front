@@ -131,6 +131,7 @@ export type ProfilePostType = {
   posts: ProfilePostDetailType[];
   meta: metaType;
   isOwnProfile: boolean;
+  isFollowing: boolean;
   userRole: string;
   followerCount: number;
   followingCount: number;
@@ -176,6 +177,12 @@ export type FollowingType = {
 export type FollowerType = {
   followers: FollowDetailType[];
   meta: metaType; // 메타 정보
+};
+
+//팔로우 요청 타입
+export type FollowRequestType = {
+  follower_idx: number;
+  following_idx: string;
 };
 
 //////////////////////////포스트 디테일 페이지 타입들//////////////////////////

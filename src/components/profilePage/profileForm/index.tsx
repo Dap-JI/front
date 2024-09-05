@@ -2,8 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss';
 import Image from 'next/image';
 import { NaverIcon, KakaoIcon } from '@/public/icon/';
-import { ProfileUserType, ProfilePostType } from '@/src/utils/type';
+import { ProfilePostType } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
+import FollowingBtn from '@/src/components/common/followingBtn';
+import useFollowRequest from '@/src/hooks/useFollowRequest';
 
 const cn = classNames.bind(styles);
 
@@ -17,6 +19,10 @@ type ProfileFormProps = {
 const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
   const { userId } = params;
   const router = useRouter();
+  const { handleFollowRequest, isFollow } = useFollowRequest({
+    userId: userId,
+    initalFollowToggle: profileInfo.isFollowing,
+  });
 
   const renderProviderIcon = () => {
     switch (profileInfo.user.provider) {
@@ -95,7 +101,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
                 />
                 <span>Dap Ji</span>
               </div>
-              <div className={cn('profileEdit')}>클로잉</div>
+              <FollowingBtn onClick={handleFollowRequest} isFollow={isFollow} />
             </div>
           )}
           <div className={cn('followWrapper')}>
@@ -103,7 +109,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
               className={cn('follower')}
               onClick={() => followPageClick(userId, 'follow')}
             >
-              <span>팔로워</span>
+              <span>클로워</span>
               <span>{profileInfo.followerCount}</span>
             </div>
 
@@ -111,7 +117,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
               className={cn('following')}
               onClick={() => followPageClick(userId, 'follow')}
             >
-              <span>팔로잉</span>
+              <span>클로잉</span>
               <span>{profileInfo.followingCount}</span>
             </div>
           </div>

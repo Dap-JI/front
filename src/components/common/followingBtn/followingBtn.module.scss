@@ -1,0 +1,13 @@
+.container {
+  @include flex-arrange(center, center);
+  width: 100%;
+  height: 30px;
+  background: rgb(230, 222, 222);
+  border-radius: 5px;
+  padding: 0 8px;
+}
+
+.follow {
+  background: #39b8ff;
+  color: white;
+}
