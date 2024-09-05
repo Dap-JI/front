@@ -15,13 +15,13 @@ import { useQueryClient } from '@tanstack/react-query';
 const cn = classNames.bind(styles);
 
 const BoardPage = () => {
-  const [selectCategory, setSelectCategory] = useState<string | null>(null);
+  const [selectCategory, setSelectCategory] = useState<string | null>('전체');
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
   const queryClient = useQueryClient();
 
   const { data: boardListGetData } = useInfiniteScroll<BoardResponseType>({
-    queryKey: ['boardListData', selectCategory],
+    queryKey: ['boardListData', selectCategory, searchName],
     fetchFunction: (page = 1) =>
       boardListGetDatas({ page, search: searchName, category: selectCategory }),
     getNextPageParam: (lastPage) =>

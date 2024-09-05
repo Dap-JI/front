@@ -68,10 +68,10 @@
         align-items: center;
         span:nth-child(1) {
           margin-bottom: 5px;
-          // @include font-style(1.2rem, red 300);
+          @include font-style(1.3rem, black, 500);
         }
         span:nth-child(2) {
-          @include font-style(1.7rem, black 500);
+          @include font-style(1.8rem, black 500);
         }
       }
     }
