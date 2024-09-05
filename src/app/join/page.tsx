@@ -78,7 +78,7 @@ const JoinPage = () => {
           },
           pattern: {
             value: nickname_reg,
-            message: '한글, 소문자, 숫자만 가능합니다',
+            message: '한글, 소문자, 숫자, _, - 만 가능합니다',
           },
         })}
       />

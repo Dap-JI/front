@@ -2,22 +2,16 @@ import classNames from 'classnames/bind';
 import styles from './followingLists.module.scss';
 import Image from 'next/image';
 import { DeleteIcon } from '@/public/icon';
+import { FollowingDataType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
 type FollowingListProps = {
-  list: any;
+  list: FollowingDataType;
 };
 
 const FollowingList = ({ list }: FollowingListProps) => {
-  const {
-    createdAt,
-    follow_idx,
-    follower,
-    follower_idx,
-    following_idx,
-    updatedAt,
-  } = list;
+  const { follower } = list;
   const handleFollowDelete = () => {
     console.log('팔로워삭제');
   };
@@ -40,16 +34,14 @@ const FollowingList = ({ list }: FollowingListProps) => {
 };
 
 type FollowingListsProps = {
-  lists: any;
+  lists: FollowingDataType[];
 };
 
 const FollowingLists = ({ lists }: FollowingListsProps) => {
-  console.log('following===>', lists);
-
   return (
     <div className={cn('outerContainer')}>
-      {lists.map((list: any) => (
-        <FollowingList key={list.follow_idx} list={list} />
+      {lists.map((list: FollowingDataType) => (
+        <FollowingList key={list.follower.user_idx} list={list} />
       ))}
     </div>
   );

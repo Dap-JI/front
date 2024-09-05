@@ -6,6 +6,7 @@ import { fetchFollowerData, fetchFollowingData } from '@/src/app/profile/api';
 import { useQuery } from '@tanstack/react-query';
 import FollowAllData from '@/src/components/profilePage/followAllData';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import { FollowerType, FollowingType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -20,25 +21,28 @@ const FollowPage = ({ params }: FollowerPageProps) => {
   const [scrollDirection] = useScrollDirection('up');
 
   //팔로워 데이터
-  const { data: followerDatas } = useQuery({
+  const { data: followerDatas } = useQuery<FollowingType>({
     queryKey: ['followerDatas'],
     queryFn: () => fetchFollowerData(userId),
   });
-
   const followerData = followerDatas?.data ?? [];
-  // console.log(followerData);
+  console.log('followerDatas===>', followerDatas);
+  console.log('followerData===>', followerData);
 
   //팔로잉 데이터
-  const { data: followingDatas } = useQuery({
+  const { data: followingDatas } = useQuery<FollowerType>({
     queryKey: ['followingDatas'],
     queryFn: () => fetchFollowingData(userId),
   });
   const followingData = followingDatas?.data ?? [];
+  console.log('followingDatas===>', followingDatas);
+  console.log('followingData===>', followingData);
 
   const followObject = {
-    follower: followerData,
-    following: followingData,
+    followerObject: followerData,
+    followingObject: followingData,
   };
+
   return (
     <div className={cn('container')}>
       <div
