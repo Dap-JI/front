@@ -26,8 +26,7 @@ const FollowPage = ({ params }: FollowerPageProps) => {
     queryFn: () => fetchFollowerData(userId),
   });
   const followerData = followerDatas?.data ?? [];
-  console.log('followerDatas===>', followerDatas);
-  console.log('followerData===>', followerData);
+  console.log(followerDatas);
 
   //팔로잉 데이터
   const { data: followingDatas } = useQuery<FollowerType>({
@@ -35,8 +34,6 @@ const FollowPage = ({ params }: FollowerPageProps) => {
     queryFn: () => fetchFollowingData(userId),
   });
   const followingData = followingDatas?.data ?? [];
-  console.log('followingDatas===>', followingDatas);
-  console.log('followingData===>', followingData);
 
   const followObject = {
     followerObject: followerData,
@@ -51,7 +48,7 @@ const FollowPage = ({ params }: FollowerPageProps) => {
           down: scrollDirection === 'down',
         })}
       >
-        {/* <SearchBar /> */}
+        <SearchBar />
       </div>
       <div className={cn('secondContainer')}>
         <FollowAllData followObject={followObject} />
