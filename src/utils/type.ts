@@ -123,8 +123,6 @@ export type ProfileUserType = {
   img: string;
   introduce: string | null;
   provider: string;
-  // followerCount: number;
-  // followingCount: number;
 };
 
 export type ProfilePostType = {
@@ -134,6 +132,8 @@ export type ProfilePostType = {
   meta: metaType;
   isOwnProfile: boolean;
   userRole: string;
+  followerCount: number;
+  followingCount: number;
 };
 
 export type ProfileBoardDetailType = {
