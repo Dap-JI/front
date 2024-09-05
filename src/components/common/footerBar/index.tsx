@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { HomeIcon, BordIcon, UserIcon, MarkerIcon } from '@/public/icon';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useMyInfo } from '@/src/app/auth/api';
+import { fetchMyInfo } from '@/src/app/auth/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { GlassIcon } from '@/public/icon';
 import { useEffect } from 'react';
@@ -14,18 +14,31 @@ const cn = classNames.bind(styles);
 const FooterBar = () => {
   const path = usePathname();
   const router = useRouter();
-  const { myId } = useMyInfoStore();
+  const { myId, setmyId } = useMyInfoStore();
 
-  useMyInfo();
+  useEffect(() => {
+    const getMyInfo = async () => {
+      try {
+        const data = await fetchMyInfo();
+        setmyId(data);
+      } catch (error) {
+        console.error('my info error', error);
+      }
+    };
 
-  const routerClick = (page: string) => {
-    router.push(`/${page}`);
-  };
+    if (path !== '/' && !myId) {
+      getMyInfo();
+    }
+  }, [path, setmyId]);
 
   const profileClick = () => {
     if (myId) {
       router.push(`/profile/${myId}`);
     }
+  };
+
+  const routerClick = (page: string) => {
+    router.push(`/${page}`);
   };
   const isClimbListSpecificPostPath = path.match(/^\/climbList\/\d+\/\d+$/);
 
@@ -34,7 +47,7 @@ const FooterBar = () => {
     path === '/join' ||
     path.startsWith('/auth') ||
     (path.startsWith('/board') && path !== '/board') ||
-    isClimbListSpecificPostPath || // 이 경로에서만 푸터 제외
+    isClimbListSpecificPostPath ||
     path === '/signup' ||
     path === '/signin'
   ) {
@@ -60,5 +73,3 @@ const FooterBar = () => {
 };
 
 export default FooterBar;
-//profile/userid
-// 유저 종류도 넣어서 권한에 따라 nav바 관리자면 5개로 (관리자페이지)
