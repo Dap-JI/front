@@ -26,7 +26,13 @@ const FooterBar = () => {
       }
     };
 
-    if (path !== '/' && !myId) {
+    if (
+      path !== '/' &&
+      path !== '/join' &&
+      path !== '/signin' &&
+      path !== '/signup' &&
+      !myId
+    ) {
       getMyInfo();
     }
   }, [path, setmyId, myId]);
