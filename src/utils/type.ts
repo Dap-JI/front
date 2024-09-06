@@ -369,3 +369,5 @@ export type BoardRecommentUploadType = {
   comment_idx: number;
   content: string;
 };
+
+//////////////////////////유저 검색 타입//////////////////////////

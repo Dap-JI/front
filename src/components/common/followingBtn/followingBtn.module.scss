@@ -2,9 +2,10 @@
   @include flex-arrange(center, center);
   width: 100%;
   height: 30px;
-  background: rgb(230, 222, 222);
+  background: rgb(223, 220, 220);
   border-radius: 5px;
   padding: 0 8px;
+  @include font-style(1.2rem, black, 400);
 }
 
 .follow {
