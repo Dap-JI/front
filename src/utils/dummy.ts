@@ -1,5 +1,6 @@
 import { title } from 'process';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { link } from 'fs';
 
 export const climbLists = [
   {
@@ -836,3 +837,47 @@ export const boardListData = {
     hasNextPage: false,
   },
 };
+
+export const noticeListData = [
+  {
+    subtitle: '야구선수 황재균과 그룹 티아라 출신 지연의 이혼',
+    contents: [
+      '✅9월 운영 안내',
+      '🤫 엄마 몰래 하는 클라이밍, ',
+      '9월의 강습 확인해보세요',
+    ],
+    links: [
+      'https://www.naver.com',
+      'https://www.google.com',
+      'https://www.youtube.com',
+    ],
+  },
+  {
+    subtitle: '이 위원은 "황재균 이혼한 것 아냐',
+    contents: [
+      'Most core web frameworks do not come with an opinionated way of fetching or updating data in a holistic way. Because of this developers end up building either meta-frameworks which encapsulate strict opinions about data-fetching, or they invent their own ways of fetching data. This usually means cobbling together component-based state and side-effects, or using more general purpose state management libraries to store and',
+    ],
+    link: [],
+  },
+  {
+    subtitle: '#구독자 여러분',
+    contents: [
+      'If youre not overwhelmed by that list, then that must mean that youve probably solved all of your server state problems already and deserve an award. However, if you are like a vast majority of people, you either have yet to tackle all or most of these challenges and were only scratching the surf',
+    ],
+    link: [],
+  },
+  {
+    subtitle: '부탁드린다"라며 "밝은 모습으로 돌아오겠',
+    contents: [
+      'Most core web frameworks do not come with an opinionated way of fetching or updating data in a holistic way. Because of this developers end up building either meta-frameworks which encapsulate strict opinions about data-fetching, or they invent their own ways of fetching data. This usually means cobbling together component-based state and side-effects, or using more general purpose state management libraries to store and',
+    ],
+    link: [],
+  },
+  {
+    subtitle: '세계최고 뉴진스 8월 뉴진스 소식 ',
+    contents: [
+      '5명의 멤버가 모여 어딘가 자유분방하면서도 결합력 있는 독특한 퍼포먼스를 선보인다. 소녀들이 재밌게 즐긴다란 표현이 어울리는 뉴진스만의 청춘 하이틴스러운 컨셉은 자연스럽다라는 느낌을 주어, 뉴진스가 많은 대중들에게 사랑 받는 데에 크게 기여한다.데뷔곡 Attention과 Hype Boy에서부터 대중들의 눈길을 사로잡는 참신한 군무로 자칫하면 어려보이기만 할 수 있는 십대들을 데리고 최적의 컨셉으로 밀고나갔다라는 평을 받으며 그룹의 이미지를 확실하게 각인시켰다. 이후 발매된 Ditto와 Super Shy 등 여러 곡에서 역시 무대를 순수하게 즐기며 뛰노는듯한 멤버들의 모습으로 좋은 평가를 받았다',
+    ],
+    link: [],
+  },
+];
