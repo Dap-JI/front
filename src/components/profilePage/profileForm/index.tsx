@@ -59,7 +59,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
   };
 
   const followPageClick = (userId: string, page: string) => {
-    router.push(`/profile/${userId}/${page}`);
+    router.push(`/profile/${userId}/follow?page=${page}`);
   };
 
   return (
@@ -107,7 +107,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
           <div className={cn('followWrapper')}>
             <div
               className={cn('follower')}
-              onClick={() => followPageClick(userId, 'follow')}
+              onClick={() => followPageClick(userId, 'follower')}
             >
               <span>클로워</span>
               <span>{profileInfo.followerCount}</span>
@@ -115,7 +115,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
 
             <div
               className={cn('following')}
-              onClick={() => followPageClick(userId, 'follow')}
+              onClick={() => followPageClick(userId, 'following')}
             >
               <span>클로잉</span>
               <span>{profileInfo.followingCount}</span>
