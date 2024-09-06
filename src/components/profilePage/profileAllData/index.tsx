@@ -44,7 +44,7 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
         <div className={cn('underline')} style={underlineStyle} />
       </div>
       {profileData.posts.length === 0 ? (
-        <div className={cn('empty-message')}>답지가 없음</div>
+        <div className={cn('empty-message')}>답지를 추가해 보세요</div>
       ) : selectList === 'post' ? (
         <ProfilePostDatas lists={profileData.posts} />
       ) : (

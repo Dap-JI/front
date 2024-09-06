@@ -2,33 +2,30 @@ import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss';
 import Image from 'next/image';
 import { NaverIcon, KakaoIcon } from '@/public/icon/';
-import { ProfileUserType } from '@/src/utils/type';
-import Link from 'next/link';
-import { text } from 'stream/consumers';
+import { ProfilePostType } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
+import FollowingBtn from '@/src/components/common/followingBtn';
+import useFollowRequest from '@/src/hooks/useFollowRequest';
 
 const cn = classNames.bind(styles);
 
 type ProfileFormProps = {
-  lists: ProfileUserType;
-  isProfileOwner: boolean;
+  profileInfo: ProfilePostType;
   params: {
     userId: string;
   };
 };
 
-const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
-  const {
-    img,
-    introduce,
-    provider,
-    //  followerCount, followingCount
-  } = lists;
+const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
   const { userId } = params;
   const router = useRouter();
+  const { handleFollowRequest, isFollow } = useFollowRequest({
+    userId: userId,
+    initalFollowToggle: profileInfo.isFollowing,
+  });
 
   const renderProviderIcon = () => {
-    switch (provider) {
+    switch (profileInfo.user.provider) {
       case 'kakao':
         return (
           <>
@@ -51,6 +48,7 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
               width="30"
               height="30"
               alt="provider 기본이미지"
+              priority
             />
             <span>Dap Ji</span>
           </>
@@ -68,7 +66,7 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
     <div className={cn('container')}>
       <div className={cn('profileWrapper')}>
         <Image
-          src={img || '/icon/icon.png'}
+          src={profileInfo.user.img || '/icon/icon.png'}
           alt="profileImage"
           width="120"
           height="120"
@@ -77,9 +75,11 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
         />
 
         <div className={cn('infoWrapper')}>
-          {isProfileOwner ? (
+          {profileInfo.isOwnProfile ? (
             <div className={cn('btnWrapper')}>
-              <div className={cn('oauth', `oauth-${provider}`)}>
+              <div
+                className={cn('oauth', `oauth-${profileInfo.user.provider}`)}
+              >
                 {renderProviderIcon()}
               </div>
               <div
@@ -91,16 +91,17 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
             </div>
           ) : (
             <div className={cn('btnWrapper')}>
-              <div className={cn('oauth', `oauth-${provider}`)}>
+              <div className={cn('oauth', `oauth-${'dapji'}`)}>
                 <Image
                   src={'/icon/icon.png'}
                   width="30"
                   height="30"
                   alt="provider 기본이미지"
+                  priority
                 />
                 <span>Dap Ji</span>
               </div>
-              <div className={cn('profileEdit')}>클로잉</div>
+              <FollowingBtn onClick={handleFollowRequest} isFollow={isFollow} />
             </div>
           )}
           <div className={cn('followWrapper')}>
@@ -108,24 +109,22 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
               className={cn('follower')}
               onClick={() => followPageClick(userId, 'follow')}
             >
-              <span>팔로워</span>
-              <span>122</span>
-              {/* <span>{followerCount}</span> */}
+              <span>클로워</span>
+              <span>{profileInfo.followerCount}</span>
             </div>
 
             <div
               className={cn('following')}
               onClick={() => followPageClick(userId, 'follow')}
             >
-              <span>팔로잉</span>
-              <span>122</span>
-              {/* <span>{followingCount}</span> */}
+              <span>클로잉</span>
+              <span>{profileInfo.followingCount}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className={cn('textWrapper')}>{introduce}</div>
+      <div className={cn('textWrapper')}>{profileInfo.user.introduce}</div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './boardDetailForm.module.scss';
 import { BoardDetailDataType } from '@/src/utils/type';
 import Image from 'next/image';
-import { DeleteIcon, EditIcon, CommentIcon } from '@/public/icon';
+import { DeleteIcon, EditIcon } from '@/public/icon';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import LikeAction from '../../common/likeAction';
 import { boardDeleteData } from '@/src/app/board/api';

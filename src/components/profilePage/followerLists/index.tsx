@@ -5,9 +5,11 @@ import { DeleteIcon } from '@/public/icon';
 import { FollowerType, FollowDetailType } from '@/src/utils/type';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { fetchFollowerData } from '@/src/app/profile/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import SearchBar from '../../common/searchBar';
+import { useQueryClient } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 
@@ -31,7 +33,7 @@ const FollowerList = ({ list }: FollowerListProps) => {
     <div className={cn('container')}>
       <div className={cn('infoWrapper')} onClick={profilePageClick}>
         <Image
-          src={img || 'icon/icon.png'}
+          src={img || '/icon/icon.png'}
           width={50}
           height={50}
           className={cn('profileImage')}
@@ -53,11 +55,12 @@ type FollowerListsProps = {
 
 const FollowerLists = ({ params }: FollowerListsProps) => {
   const { userId } = params;
+  const queryClient = useQueryClient();
 
   const [searchName, setSearchName] = useState('');
 
   const { data: followerDatas, ref } = useInfiniteScroll<FollowerType>({
-    queryKey: ['followerDatas'],
+    queryKey: ['followerDatas', userId, searchName],
     fetchFunction: (page = 1) =>
       fetchFollowerData({ page, search: searchName, userId }),
     getNextPageParam: (lastPage) =>
@@ -67,12 +70,23 @@ const FollowerLists = ({ params }: FollowerListsProps) => {
   const followerData =
     followerDatas?.pages.flatMap((page) => page.followers) ?? [];
 
+  const handleSearchChange = (value: string) => {
+    setSearchName(value);
+  };
+
+  useEffect(() => {
+    if (searchName !== '') {
+      queryClient.invalidateQueries({ queryKey: ['followerDatas'] });
+    }
+  }, [searchName, queryClient]);
+
   return (
     <div className={cn('outerContainer')}>
+      <SearchBar onSearchChange={handleSearchChange} searchName={searchName} />
       {followerData.map((list: FollowDetailType) => (
         <FollowerList key={list.user_idx} list={list} />
       ))}
-      <div ref={ref}/>
+      <div ref={ref} />
     </div>
   );
 };
