@@ -20,7 +20,7 @@ const BoardPage = () => {
   const [scrollDirection] = useScrollDirection('up');
   const queryClient = useQueryClient();
 
-  const { data: boardListGetData } = useInfiniteScroll<BoardResponseType>({
+  const { data: boardListGetData, ref } = useInfiniteScroll<BoardResponseType>({
     queryKey: ['boardListData', selectCategory, searchName],
     fetchFunction: (page = 1) =>
       boardListGetDatas({ page, search: searchName, category: selectCategory }),
@@ -66,6 +66,7 @@ const BoardPage = () => {
       </div>
       <div className={cn('secondContainer')}>
         <BoardLists lists={boardData} />
+        <div ref={ref} />
       </div>
     </div>
   );

@@ -4,9 +4,13 @@ import { BellIcon, RightArrowIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
 
-const Notification = () => {
+type NotificationProps = {
+  onClick: any;
+};
+
+const Notification = ({ onClick }: NotificationProps) => {
   return (
-    <div className={cn('container')}>
+    <div className={cn('container')} onClick={onClick}>
       <BellIcon />
       <p>
         8월 락랜드 회원권 할인 정보8월 락랜드 회원권 할인 정보8월 락랜드 회원권
