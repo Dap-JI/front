@@ -42,7 +42,6 @@ const FollowerList = ({ list }: FollowerListProps) => {
         />
         <span>{nickname}</span>
       </div>
-      <DeleteIcon onClick={handleFollowDelete} />
     </div>
   );
 };
@@ -82,10 +81,12 @@ const FollowerLists = ({ params }: FollowerListsProps) => {
 
   return (
     <div className={cn('outerContainer')}>
-      <SearchBar onSearchChange={handleSearchChange} searchName={searchName} />
-      {followerData.map((list: FollowDetailType) => (
-        <FollowerList key={list.user_idx} list={list} />
-      ))}
+      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <div className={cn('followerDataContainer')}>
+        {followerData.map((list: FollowDetailType) => (
+          <FollowerList key={list.user_idx} list={list} />
+        ))}
+      </div>
       <div ref={ref} />
     </div>
   );

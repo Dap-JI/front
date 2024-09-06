@@ -61,6 +61,9 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
   const followPageClick = (userId: string, page: string) => {
     router.push(`/profile/${userId}/follow?page=${page}`);
   };
+  const profileEditClick = (userId: string) => {
+    router.push(`/profile/${userId}/edit`);
+  };
 
   return (
     <div className={cn('container')}>
@@ -84,7 +87,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
               </div>
               <div
                 className={cn('profileEdit')}
-                onClick={() => followPageClick(userId, 'edit')}
+                onClick={() => profileEditClick(userId)}
               >
                 프로필 편집
               </div>
