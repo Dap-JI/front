@@ -2,14 +2,23 @@ import React, { useState } from 'react';
 import styles from './searchLists.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { userSearchDetailType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
-const SearchList = () => {
+type SearchListProps = {
+  list: userSearchDetailType;
+};
+
+const SearchList = ({ list }: SearchListProps) => {
+  if (!list) return null;
+  console.log('list====>', list);
+
+  const { user_idx, nickname, img, introduce } = list;
   return (
     <li className={cn('container')}>
       <Image
-        src={'/icon/icon.png'}
+        src={img || '/icon/icon.png'}
         width="50"
         height="50"
         alt="유저 검색 프로필 이미지"
@@ -17,16 +26,25 @@ const SearchList = () => {
         priority
       />
       <div className={cn('userInfo')}>
-        <span>111</span>
+        <span>{nickname}</span>
       </div>
     </li>
   );
 };
 
-const SearchLists = () => {
+type SearchListsProps = {
+  lists: userSearchDetailType[];
+};
+
+const SearchLists = ({ lists }: SearchListsProps) => {
+  if (!lists || lists.length === 0) {
+    return <p>검색 결과가 없습니다.</p>;
+  }
   return (
     <ul className={cn('outerContainer')}>
-      <SearchList />
+      {lists.map((list: userSearchDetailType) => (
+        <SearchList key={list?.user_idx} list={list} />
+      ))}
     </ul>
   );
 };
