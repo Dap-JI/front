@@ -14,7 +14,7 @@ type FollowerPageProps = {
 
 const FollowPage = ({ params }: FollowerPageProps) => {
   const searchParams = useSearchParams();
-  const page = searchParams.get('page') || 'follower'; // 기본값은 'follower'
+  const page = searchParams.get('page') || 'follower';
 
   return (
     <div className={cn('container')}>

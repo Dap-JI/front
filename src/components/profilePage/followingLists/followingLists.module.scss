@@ -1,5 +1,8 @@
 .outerContainer {
   width: 100%;
+  .followingDataContainer {
+    padding: 0 10px;
+  }
 }
 
 .container {
@@ -7,7 +10,6 @@
   height: 60px;
   @include flex-arrange(space-between, center);
   margin: 5px 0;
-  padding-right: 10px;
 
   .infoWrapper {
     @include flex-arrange(center, center);
@@ -21,3 +23,5 @@
     }
   }
 }
+
+
