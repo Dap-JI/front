@@ -96,13 +96,14 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   const deleteT = (date: string | null) => date?.split('T')[0];
   // 시간 가공
 
-  const profileClick = () => {
+  const profileClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     router.push(`/profile/${user_idx}`);
   };
   // 프로필 클릭
 
   return (
-    <div className={cn('container')}>
+    <div className={cn('container')} onClick={postDetailPage}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image
@@ -116,7 +117,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
             <span>{timeAgo}</span>
           </div>
         </div>
-        <DoubleRightArrowIcon onClick={postDetailPage} />
+        <DoubleRightArrowIcon />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>

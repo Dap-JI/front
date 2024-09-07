@@ -1,6 +1,10 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ProfilePostType, useFormProfileEditProps } from '@/src/utils/type';
+import {
+  ProfilePostType,
+  useFormProfileEditProps,
+  FollowRequestType,
+} from '@/src/utils/type';
 import instance from '@/src/utils/axios';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/src/hooks/useModal';
@@ -76,18 +80,47 @@ export const useLogout = (enabled: boolean) => {
     enabled,
   });
 };
-//void는 성공도는 실패만 나타냄
 
 //팔로워 조회
 
-export const fetchFollowerData = async (userId: string) => {
-  const res = await instance.get(`/api/followers/${userId}`);
+type fetchFollowDataProps = {
+  page: number;
+  search: string;
+  userId: string | null;
+};
+
+export const fetchFollowerData = async ({
+  page,
+  search,
+  userId,
+}: fetchFollowDataProps) => {
+  const res = await instance.get(`/api/followers/${userId}`, {
+    params: {
+      page,
+      search,
+    },
+  });
   return res.data;
 };
 
 //팔로잉 조회
 
-export const fetchFollowingData = async (userId: string) => {
-  const res = await instance.get(`/api/following/${userId}`);
+export const fetchFollowingData = async ({
+  page,
+  search,
+  userId,
+}: fetchFollowDataProps) => {
+  const res = await instance.get(`/api/following/${userId}`, {
+    params: {
+      page,
+      search,
+    },
+  });
+  return res.data;
+};
+
+//팔로우 요청
+export const fetchFollowPost = async (followIds: FollowRequestType) => {
+  const res = await instance.post(`/api/follow`, followIds);
   return res.data;
 };

@@ -1,10 +1,9 @@
 .container {
   width: 100%;
-  max-width: 500px;
+  // max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 
   .iconWrapper {
     display: flex;
@@ -13,9 +12,12 @@
     width: 90%;
     position: relative;
     margin-bottom: 10px;
-
+    @include font-style(1.5rem, rgb(36, 34, 34), 600);
+    p {
+      margin: 5px 0 0 0;
+    }
     .icon {
-      padding-bottom: 5px;
+      padding-bottom: 15px;
     }
 
     .underline {
