@@ -2,28 +2,30 @@ import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss';
 import Image from 'next/image';
 import { NaverIcon, KakaoIcon } from '@/public/icon/';
-import { ProfileUserType } from '@/src/utils/type';
-import Link from 'next/link';
-import { text } from 'stream/consumers';
+import { ProfilePostType } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
+import FollowingBtn from '@/src/components/common/followingBtn';
+import useFollowRequest from '@/src/hooks/useFollowRequest';
 
 const cn = classNames.bind(styles);
 
 type ProfileFormProps = {
-  lists: ProfileUserType;
-  isProfileOwner: boolean;
+  profileInfo: ProfilePostType;
   params: {
     userId: string;
   };
 };
 
-const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
-  const { img, introduce, provider } = lists;
+const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
   const { userId } = params;
   const router = useRouter();
+  const { handleFollowRequest, isFollow } = useFollowRequest({
+    userId: userId,
+    initalFollowToggle: profileInfo.isFollowing,
+  });
 
   const renderProviderIcon = () => {
-    switch (provider) {
+    switch (profileInfo.user.provider) {
       case 'kakao':
         return (
           <>
@@ -46,6 +48,7 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
               width="30"
               height="30"
               alt="provider 기본이미지"
+              priority
             />
             <span>Dap Ji</span>
           </>
@@ -56,14 +59,17 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
   };
 
   const followPageClick = (userId: string, page: string) => {
-    router.push(`/profile/${userId}/${page}`);
+    router.push(`/profile/${userId}/follow?page=${page}`);
+  };
+  const profileEditClick = (userId: string) => {
+    router.push(`/profile/${userId}/edit`);
   };
 
   return (
     <div className={cn('container')}>
       <div className={cn('profileWrapper')}>
         <Image
-          src={img || '/icon/icon.png'}
+          src={profileInfo.user.img || '/icon/icon.png'}
           alt="profileImage"
           width="120"
           height="120"
@@ -72,40 +78,56 @@ const ProfileForm = ({ lists, isProfileOwner, params }: ProfileFormProps) => {
         />
 
         <div className={cn('infoWrapper')}>
-          {isProfileOwner && (
+          {profileInfo.isOwnProfile ? (
             <div className={cn('btnWrapper')}>
-              <div className={cn('oauth', `oauth-${provider}`)}>
+              <div
+                className={cn('oauth', `oauth-${profileInfo.user.provider}`)}
+              >
                 {renderProviderIcon()}
               </div>
               <div
                 className={cn('profileEdit')}
-                onClick={() => followPageClick(userId, 'edit')}
+                onClick={() => profileEditClick(userId)}
               >
                 프로필 편집
               </div>
             </div>
-          )}  
+          ) : (
+            <div className={cn('btnWrapper')}>
+              <div className={cn('oauth', `oauth-${'dapji'}`)}>
+                <Image
+                  src={'/icon/icon.png'}
+                  width="30"
+                  height="30"
+                  alt="provider 기본이미지"
+                  priority
+                />
+                <span>Dap Ji</span>
+              </div>
+              <FollowingBtn onClick={handleFollowRequest} isFollow={isFollow} />
+            </div>
+          )}
           <div className={cn('followWrapper')}>
             <div
               className={cn('follower')}
               onClick={() => followPageClick(userId, 'follower')}
             >
-              <span>팔로워</span>
-              <span>122</span>
+              <span>클로워</span>
+              <span>{profileInfo.followerCount}</span>
             </div>
 
             <div
               className={cn('following')}
               onClick={() => followPageClick(userId, 'following')}
             >
-              <span>팔로잉</span>
-              <span>122</span>
+              <span>클로잉</span>
+              <span>{profileInfo.followingCount}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className={cn('textWrapper')}>{introduce}</div>
+      <div className={cn('textWrapper')}>{profileInfo.user.introduce}</div>
     </div>
   );
 };

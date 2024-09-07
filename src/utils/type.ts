@@ -131,7 +131,10 @@ export type ProfilePostType = {
   posts: ProfilePostDetailType[];
   meta: metaType;
   isOwnProfile: boolean;
+  isFollowing: boolean;
   userRole: string;
+  followerCount: number;
+  followingCount: number;
 };
 
 export type ProfileBoardDetailType = {
@@ -155,6 +158,31 @@ export type ProfileBoardType = {
 export type useFormProfileEditProps = {
   nickname: string;
   introduce: string;
+};
+
+//팔로우 상세 타입
+export type FollowDetailType = {
+  img: string;
+  nickname: string;
+  user_idx: number;
+};
+
+// 팔로잉 타입
+export type FollowingType = {
+  following: FollowDetailType[];
+  meta: metaType; // 메타 정보
+};
+
+// 팔로워  타입
+export type FollowerType = {
+  followers: FollowDetailType[];
+  meta: metaType; // 메타 정보
+};
+
+//팔로우 요청 타입
+export type FollowRequestType = {
+  follower_idx: number;
+  following_idx: string;
 };
 
 //////////////////////////포스트 디테일 페이지 타입들//////////////////////////
@@ -342,4 +370,16 @@ export type BoardRecommentUploadType = {
   content: string;
 };
 
-//게시판 답글 삭제 타입
+//////////////////////////유저 검색 타입//////////////////////////
+
+export type userSearchDetailType = {
+  user_idx: string;
+  nickname: string;
+  img: string | null;
+  introduce: string;
+};
+
+export type UserSearchType = {
+  users: userSearchDetailType[];
+  meta: metaType;
+};

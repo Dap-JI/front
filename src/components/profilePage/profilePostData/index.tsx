@@ -28,6 +28,7 @@ const ProfilePostData = ({ list }: ProfilePostDataProps) => {
           width="165"
           height="165"
           className={cn('image')}
+          priority
         />
       </Link>
     </div>

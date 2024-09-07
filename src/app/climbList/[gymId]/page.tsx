@@ -49,6 +49,10 @@ const DetailPage = ({ params }: DetailPageProps) => {
   };
   //업로드 페이지
 
+  const noticePageClick = () => {
+    router.push(`/climbList/${gymId}/notice`);
+  };
+
   if (isLoading || isUpLoading) {
     return <LoadingSpinner />;
   }
@@ -60,7 +64,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
         <AddIcon onClick={uploadPage} width="30" height="30" />
       </Header>
       <div className={cn('secondContainer')}>
-        <Notification />
+        <Notification onClick={noticePageClick} />
         <HoldColorList
           activeColor={activeColor}
           setActiveColor={setActiveColor}

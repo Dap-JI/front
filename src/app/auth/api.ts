@@ -29,20 +29,7 @@ export const NaverLogin = async (code: string) => {
   }
 };
 
-export const useMyInfo = () => {
-  const { setmyId } = useMyInfoStore();
-
-  const query = useQuery({
-    queryKey: ['myinfo'],
-    queryFn: () => instance.get('/api/myinfo'),
-    retry: 5,
-  });
-
-  useEffect(() => {
-    if (query.isSuccess && query.data) {
-      setmyId(query.data.data);
-    }
-  }, [query.isSuccess, query.data, setmyId]);
-
-  return query;
+export const fetchMyInfo = async () => {
+  const res = await instance.get('/api/myinfo');
+  return res.data;
 };

@@ -79,6 +79,7 @@ const CommentInput = ({
 
     if (tagNickname) {
       isBoard ? boardReCommentUpload(formData) : postReCommentUpload(formData);
+      reset();
       return;
     }
     isBoard ? boardCommentUpload(formData) : postCommentUpload(formData);
