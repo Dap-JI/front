@@ -36,13 +36,15 @@
     margin-top: 30px;
     .textWrapper {
       margin-bottom: 30px;
+      white-space: nowrap;
 
       h1 {
         @include font-style(1.8rem, black, 700);
         margin-bottom: 20px;
       }
       .contentWrapper {
-        @include font-style(1.3rem, black, 400);
+        @include font-style(1.3rem, black, 500);
+        white-space: pre-wrap;
       }
     }
     .boardImage {

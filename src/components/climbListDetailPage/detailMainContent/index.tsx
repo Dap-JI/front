@@ -101,6 +101,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     router.push(`/profile/${user_idx}`);
   };
   // 프로필 클릭
+  console.log(content);
 
   return (
     <div className={cn('container')} onClick={postDetailPage}>
@@ -152,7 +153,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           <CommentCount count={post_comment_count} />
         </div>
       </div>
-      <p>{content}</p>
+      <pre>{content}</pre>
       {post_comment[0]?.content && (
         <div className={cn('commentWrapper')}>
           <span className={cn('allComment')}>
