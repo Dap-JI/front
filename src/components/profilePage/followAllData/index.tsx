@@ -11,11 +11,14 @@ type FollowAllDataProps = {
   params: {
     userId: string;
   };
+  initialPage: string;
 };
 
-const FollowAllData = ({ params }: FollowAllDataProps) => {
-  const [selectList, setSelectList] = useState<string>('follower');
-  const [underlineStyle, setUnderlineStyle] = useState({ left: '0%' });
+const FollowAllData = ({ params, initialPage }: FollowAllDataProps) => {
+  const [selectList, setSelectList] = useState<string>(initialPage);
+  const [underlineStyle, setUnderlineStyle] = useState({
+    left: initialPage === 'follower' ? '0%' : '50%',
+  });
   const handleIconClick = (type: string, left: string) => {
     setSelectList(type);
     setUnderlineStyle({ left });

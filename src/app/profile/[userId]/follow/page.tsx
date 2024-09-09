@@ -2,7 +2,7 @@
 import classNames from 'classnames/bind';
 import styles from './followPage.module.scss';
 import FollowAllData from '@/src/components/profilePage/followAllData';
-import Header from '@/src/components/common/header';
+import { useSearchParams } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -13,11 +13,13 @@ type FollowerPageProps = {
 };
 
 const FollowPage = ({ params }: FollowerPageProps) => {
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') || 'follower';
+
   return (
     <div className={cn('container')}>
-      <Header back={true} />
       <div className={cn('secondContainer')}>
-        <FollowAllData params={params} />
+        <FollowAllData params={params} initialPage={page} />
       </div>
     </div>
   );

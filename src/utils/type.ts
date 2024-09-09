@@ -369,3 +369,17 @@ export type BoardRecommentUploadType = {
   comment_idx: number;
   content: string;
 };
+
+//////////////////////////유저 검색 타입//////////////////////////
+
+export type userSearchDetailType = {
+  user_idx: string;
+  nickname: string;
+  img: string | null;
+  introduce: string;
+};
+
+export type UserSearchType = {
+  users: userSearchDetailType[];
+  meta: metaType;
+};
