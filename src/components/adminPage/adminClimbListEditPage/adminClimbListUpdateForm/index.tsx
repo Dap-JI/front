@@ -24,7 +24,7 @@ const AdminClimbListEditForm = ({
 }: AdminClimbListEditFormProps) => {
   const { gymId } = params;
   //gymId값
-  const { logo, name, address, notice } = climbListDetail;
+  const { logo, name, address } = climbListDetail;
   //리스트 데이터
   const { mutate: climbListDatasUpdate } = useClimbListDataUpdate(gymId);
   //리스트 업데이트 함수
@@ -41,7 +41,6 @@ const AdminClimbListEditForm = ({
       name: '',
       logo: '',
       address: '',
-      notice: '',
     },
   });
 
@@ -57,7 +56,6 @@ const AdminClimbListEditForm = ({
     if (climbListDetail) {
       setValue('name', name);
       setValue('address', address);
-      setValue('notice', notice);
       setFileUrl(logo);
     }
   }, [climbListDetail, setValue]);
@@ -81,7 +79,6 @@ const AdminClimbListEditForm = ({
         })}
       />
       {errors.address && <span>{errors.address.message}</span>}
-      <CommonInput label="공지" register={register('notice')} />
       <CommonButton name="업로드" type="submit" />
     </form>
   );

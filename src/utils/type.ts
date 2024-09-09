@@ -31,7 +31,6 @@ export type GymsType = {
   name: string;
   address?: string;
   logo: string | null;
-  notice?: string | null;
 };
 
 export type ClimbLIstResponseType = {
@@ -44,7 +43,6 @@ export type useFormListUploadProps = {
   logo: any;
   name: string;
   address: string;
-  notice: string;
 };
 
 //////////////////////////클라이밍장별 영상 페이지 데이터//////////////////////////
@@ -382,4 +380,22 @@ export type userSearchDetailType = {
 export type UserSearchType = {
   users: userSearchDetailType[];
   meta: metaType;
+};
+
+//////////////////////////관리자 페이지//////////////////////////
+
+//공지 조회 타입
+export type noticeDataType = {
+  gym_notice_idx: string;
+  gym_idx: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+//공지 업로드 타입
+export type useFormNoticeUploadType = {
+  title: string;
+  content: string;
 };

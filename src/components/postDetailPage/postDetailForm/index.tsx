@@ -172,7 +172,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           <CommentCount count={post_comment_count} />
         </div>
       </div>
-      <p>{content}</p>
+      <pre>{content}</pre>
     </div>
   );
 };

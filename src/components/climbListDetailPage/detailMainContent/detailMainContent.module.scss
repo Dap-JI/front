@@ -139,10 +139,11 @@
     }
   }
 
-  p {
+  pre {
     width: 100%;
     height: auto;
     @include font-style(1.3rem, black, 500);
+    white-space: pre-wrap;
   }
 
   .commentWrapper {
