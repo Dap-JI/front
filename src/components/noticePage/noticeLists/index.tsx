@@ -12,7 +12,7 @@ type NoticeListProps = {
 const NoticeLists = ({ noticeDatas }: NoticeListProps) => {
   const { title, content, createdAt } = noticeDatas;
   const deleteT = (date: string | null) => date?.split('T')[0];
-
+console.log(content)
   return (
     <div className={cn('container')}>
       <header>
