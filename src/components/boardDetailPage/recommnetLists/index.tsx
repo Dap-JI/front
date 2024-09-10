@@ -105,7 +105,7 @@ const RecommnetLists = ({ boardRecomments }: RecommnetListsProps) => {
   //   if (container) {
   //     const height = container.scrollHeight;
   //     container.style.height = `${height}px`;
-  //     console.log(height);
+  //    
   //   }
   // }, [boardRecomments]);
   return (

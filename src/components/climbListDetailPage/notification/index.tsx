@@ -5,17 +5,15 @@ import { BellIcon, RightArrowIcon } from '@/public/icon';
 const cn = classNames.bind(styles);
 
 type NotificationProps = {
-  onClick: any;
+  onClick: () => void;
+  title: string | undefined;
 };
 
-const Notification = ({ onClick }: NotificationProps) => {
+const Notification = ({ onClick, title }: NotificationProps) => {
   return (
     <div className={cn('container')} onClick={onClick}>
       <BellIcon />
-      <p>
-        8월 락랜드 회원권 할인 정보8월 락랜드 회원권 할인 정보8월 락랜드 회원권
-        할인 정보
-      </p>
+      <p>{title}</p>
       <RightArrowIcon width="15" height="15" />
     </div>
   );

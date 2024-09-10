@@ -4,7 +4,7 @@ import styles from './noticPage.module.scss';
 import classNames from 'classnames/bind';
 import NoticeLists from '@/src/components/noticePage/noticeLists';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoticeData } from '../../api';
+import { fetchNoticeData } from '../../../api';
 import { noticeDataType } from '@/src/utils/type';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
@@ -13,14 +13,15 @@ const cn = classNames.bind(styles);
 type NoticepageProps = {
   params: {
     gymId: string;
+    noticeId: string;
   };
 };
 
 const Noticepage = ({ params }: NoticepageProps) => {
-  const { gymId } = params;
+  const { gymId, noticeId } = params;
   const { data: noticeDatas } = useQuery<noticeDataType>({
     queryKey: ['noticeDatas'],
-    queryFn: () => fetchNoticeData(gymId),
+    queryFn: () => fetchNoticeData(gymId, noticeId),
   });
 
   if (!noticeDatas) {

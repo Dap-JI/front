@@ -102,14 +102,13 @@ type PostRecommnetListsProps = {
 
 const PostRecommnetLists = ({ postRecommentData }: PostRecommnetListsProps) => {
   // const containerRef = useRef<HTMLDivElement>(null);
-  console.log(postRecommentData);
 
   // useEffect(() => {
   //   const container = containerRef.current;
   //   if (container) {
   //     const height = container.scrollHeight;
   //     container.style.height = `${height}px`;
-  //     console.log(height);
+  //     
   //   }
   // }, [postRecommentData]);
   return (

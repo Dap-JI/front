@@ -42,6 +42,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   });
   const lists = climbDetailData?.pages.flatMap((page) => page.posts) ?? [];
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
+  const noticeData = climbDetailData?.pages[0].notice;
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);
@@ -50,7 +51,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   //업로드 페이지
 
   const noticePageClick = () => {
-    router.push(`/climbList/${gymId}/notice`);
+    router.push(`/climbList/${gymId}/notice/${noticeData?.gym_notice_idx}`);
   };
 
   if (isLoading || isUpLoading) {
@@ -64,7 +65,9 @@ const DetailPage = ({ params }: DetailPageProps) => {
         <AddIcon onClick={uploadPage} width="30" height="30" />
       </Header>
       <div className={cn('secondContainer')}>
-        <Notification onClick={noticePageClick} />
+        {noticeData?.title && (
+          <Notification onClick={noticePageClick} title={noticeData?.title} />
+        )}
         <HoldColorList
           activeColor={activeColor}
           setActiveColor={setActiveColor}

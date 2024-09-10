@@ -16,7 +16,7 @@ type CardListProps = {
 };
 
 const AdminClimbList = ({ list }: CardListProps) => {
-  const { logo, name, gym_idx, address } = list;
+  const { logo, name, gym_idx, address, gym_notice_idx } = list;
   const router = useRouter();
 
   const { mutate: ClimbListDatasDelete } = useClimbListDatasDelete(gym_idx);
@@ -31,6 +31,10 @@ const AdminClimbList = ({ list }: CardListProps) => {
 
   const noticeUploadClick = () => {
     router.push(`/admin/list/${gym_idx}/nupload`);
+  };
+
+  const noticeEditClick = () => {
+    router.push(`/admin/list/${gym_idx}/notice/${gym_notice_idx}/edit`);
   };
 
   return (
@@ -50,8 +54,8 @@ const AdminClimbList = ({ list }: CardListProps) => {
         <span>{address}</span>
       </div>
       <div className={cn('actionBtn')}>
-        <span onClick={noticeUploadClick}>공지</span>
-        <span onClick={noticeUploadClick}>공지업로드</span>
+        {!gym_notice_idx && <span onClick={noticeUploadClick}>공지업로드</span>}
+        {gym_notice_idx && <span onClick={noticeEditClick}>공지수정</span>}
         <Link href={`/admin/list/${gym_idx}/edit`}>
           <EditIcon />
         </Link>
