@@ -33,12 +33,14 @@ type useCommentUploadDataProps = {
   category: string;
   mainKey: string;
   firKey: string;
+  secKey: string;
 };
 
 export const useCommentUploadData = ({
   category,
   mainKey,
   firKey,
+  secKey,
 }: useCommentUploadDataProps) => {
   const queryClient = useQueryClient();
   const { showModalHandler } = useModal();
@@ -48,6 +50,7 @@ export const useCommentUploadData = ({
     mutationFn: (formData: any) => instance.post(`/api/${category}`, formData),
     onSuccess: () => [
       queryClient.invalidateQueries({ queryKey: [`${firKey}`] }),
+      queryClient.invalidateQueries({ queryKey: [`${secKey}`] }),
     ],
     onError: () => {
       showModalHandler('alert', '댓글을 다시 업로드해 주세요');
