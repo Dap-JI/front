@@ -22,10 +22,6 @@ const FollowerList = ({ list }: FollowerListProps) => {
   const router = useRouter();
   const [scrollDirection] = useScrollDirection('up');
 
-  const handleFollowDelete = () => {
-    console.log('팔로워삭제');
-  };
-
   const profilePageClick = () => {
     router.push(`/profile/${user_idx}`);
   };

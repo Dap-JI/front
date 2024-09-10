@@ -12,7 +12,6 @@ type SearchListProps = {
 
 const SearchList = ({ list }: SearchListProps) => {
   if (!list) return null;
-  console.log('list====>', list);
 
   const { user_idx, nickname, img, introduce } = list;
   return (

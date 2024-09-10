@@ -23,8 +23,8 @@ const useFollowRequest = ({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profileDatas'] });
     },
-    onError: () => {
-      console.log('팔로우 실패');
+    onError: (e) => {
+      console.error(e, '팔로우 실패');
     },
   });
 
