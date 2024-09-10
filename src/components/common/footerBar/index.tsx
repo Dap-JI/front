@@ -62,7 +62,6 @@ const FooterBar = () => {
 
   return (
     <div className={cn('container')}>
-      <MarkerIcon width="30" height="30" onClick={() => routerClick('map')} />
       <BordIcon width="30" height="30" onClick={() => routerClick('board')} />
       <Link href="/climbList">
         <HomeIcon width="30" height="30" />

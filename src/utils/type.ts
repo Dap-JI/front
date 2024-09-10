@@ -31,6 +31,8 @@ export type GymsType = {
   name: string;
   address?: string;
   logo: string | null;
+  post_count: number;
+  gym_notice_idx: string;
 };
 
 export type ClimbLIstResponseType = {
