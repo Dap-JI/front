@@ -3,7 +3,7 @@ import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const Loading = () => {
   return (
-    <div>
+    <div style={{ background: 'rgb(247, 244, 244)' }}>
       <LoadingSpinner />
     </div>
   );

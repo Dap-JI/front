@@ -40,6 +40,7 @@ const CommentInput = ({
     category: 'comment',
     mainKey: 'boardCommentUpload',
     firKey: 'boardDetailComment',
+    secKey: 'boardDetailData',
   });
 
   const { mutate: boardReCommentUpload } = useRecommentUploadData({
@@ -53,6 +54,7 @@ const CommentInput = ({
     category: 'postComment',
     mainKey: 'postCommentUpload',
     firKey: 'postDetailComment',
+    secKey: 'postDetailDatas',
   });
 
   const { mutate: postReCommentUpload } = useRecommentUploadData({
