@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+'use client';
 import styles from './searchLists.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
