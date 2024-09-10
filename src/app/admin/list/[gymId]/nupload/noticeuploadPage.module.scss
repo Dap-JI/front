@@ -3,10 +3,10 @@
   height: 100vh;
   background: beige;
   overflow-y: scroll;
-  .searchBar {
-    margin-top: 60px;
-  }
+  position: relative;
+
   .secondContainer {
+    margin-top: 80px;
     margin-bottom: 100px;
     padding: 0 10px 10px 10px;
   }

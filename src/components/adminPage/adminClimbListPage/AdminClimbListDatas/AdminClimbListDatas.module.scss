@@ -2,9 +2,23 @@
   @include flex-arrange(flex-start, center);
   width: 100%;
   background-color: white;
-  padding: 0 5px;
-  margin-bottom: 10px;
-  gap: 10px;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  gap: 20px;
+  border-radius: 5px;
+
+  .textWrapper {
+    display: flex;
+    flex-direction: column;
+    text-decoration-line: none;
+    span:nth-child(1) {
+      @include font-style(1.2rem, black, 600);
+      margin-bottom: 5px;
+    }
+    span:nth-child(2) {
+      @include font-style(1.1rem, grey, 400);
+    }
+  }
   img {
     border-radius: 5px;
   }

@@ -12,6 +12,7 @@ import { useModal } from '@/src/hooks/useModal';
 import { useLikeAction } from '@/src/hooks/useLikeAction';
 import Link from 'next/link';
 import CommentCount from '../../common/commentCount';
+import LinkifyText from '@/src/hooks/useLinkifyText';
 
 const cn = classNames.bind(styles);
 
@@ -99,7 +100,9 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
       <main className={cn('mainWrapper')}>
         <div className={cn('textWrapper')}>
           <h1>{title}</h1>
-          <span className={cn('contentWrapper')}>{content}</span>
+          <pre className={cn('contentWrapper')}>
+            <LinkifyText text={content} />
+          </pre>
         </div>
         {img.length > 0 ? (
           img.map((image, index) => (
