@@ -4,13 +4,13 @@
   gap: 10px;
 
   height: 100vh;
-  background: beige;
+  background: rgb(247, 244, 244);
   padding: 80px 10px 10px 10px;
-  
+
   .signUpForm {
     width: 100%;
     @include flex-arrange(center, center);
     flex-direction: column;
-    gap: 10px;  
+    gap: 10px;
   }
 }

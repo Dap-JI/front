@@ -25,6 +25,8 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
     setSelectList(type);
     setUnderlineStyle({ left });
   };
+  console.log(profileData.posts.length);
+  console.log(profileData);
 
   return (
     <div className={cn('container')}>
@@ -43,9 +45,7 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
         </div>
         <div className={cn('underline')} style={underlineStyle} />
       </div>
-      {profileData.posts.length === 0 ? (
-        <div className={cn('empty-message')}>답지를 추가해 보세요</div>
-      ) : selectList === 'post' ? (
+      {selectList === 'post' ? (
         <ProfilePostDatas lists={profileData.posts} />
       ) : (
         <ProfileBoardDatas params={params} />

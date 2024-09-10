@@ -5,6 +5,8 @@
   @include flex-arrange(center, center);
   gap: 10px;
   top: 0;
+  background: rgb(247, 244, 244);
+
   .glass {
     position: absolute;
     top: 13px;
