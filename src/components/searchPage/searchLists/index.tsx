@@ -12,10 +12,11 @@ type SearchListProps = {
 };
 
 const SearchList = ({ list }: SearchListProps) => {
-  if (!list) return null;
   const router = useRouter();
+  if (!list) return null;
 
   const { user_idx, nickname, img, introduce } = list;
+
   const profileClick = () => {
     router.push(`/profile/${user_idx}`);
   };
