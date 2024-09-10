@@ -2,9 +2,10 @@
   @include flex-arrange(space-around, flex-start);
   width: 100%;
   height: 84px;
-  background: skyblue;
+  background: white;
   position: absolute;
   bottom: 0;
   position: fixed;
   padding-top: 20px;
+  border-top: 1px solid rgb(240, 240, 240);
 }
