@@ -36,7 +36,7 @@ const SearchBar = ({ onSearchChange, searchName, showAdd }: SearchBarProps) => {
   return (
     <div className={cn('container')}>
       <CommonInput
-        placeholder="검색어를 입력하세요"
+        placeholder="클라이밍장을 검색해보세요!"
         suffix={
           <GlassIcon
             width="15"
