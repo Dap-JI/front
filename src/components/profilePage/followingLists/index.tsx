@@ -23,9 +23,6 @@ const FollowingList = ({ list }: FollowingListProps) => {
   const [scrollDirection] = useScrollDirection('up');
   const router = useRouter();
 
-  const handleFollowDelete = () => {
-    console.log('팔로워삭제');
-  };
   const profilePageClick = () => {
     router.push(`/profile/${user_idx}`);
   };

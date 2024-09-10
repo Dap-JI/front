@@ -58,6 +58,10 @@ export type UserType = {
   nickname: string;
   img: string;
 };
+export type NoticeDetailType = {
+  gym_notice_idx: string;
+  title: string;
+};
 
 export type DetailType = {
   post_idx: string;
@@ -80,6 +84,7 @@ export type ClimbDetailResponseType = {
   gym_name: string; // 체육관 이름
   posts: DetailType[]; // 게시물 목록
   meta: metaType;
+  notice: NoticeDetailType;
   length?: number;
 };
 

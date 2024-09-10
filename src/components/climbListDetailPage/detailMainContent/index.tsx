@@ -101,7 +101,6 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
     router.push(`/profile/${user_idx}`);
   };
   // 프로필 클릭
-  console.log(content);
 
   return (
     <div className={cn('container')} onClick={postDetailPage}>
