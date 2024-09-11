@@ -11,7 +11,7 @@ type HoldColorListProps = {
 };
 
 const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
-  //빨, 주,노,초,파,남,보,흰,회,검,분,갈
+  // 빨, 주, 노, 초, 파, 남, 보, 흰, 회, 검, 분, 갈
   const colors = [
     'red',
     'orange',
@@ -27,23 +27,46 @@ const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
     'brown',
   ];
 
+  // 박스를 보여줄지 여부를 관리하는 상태
+  const [isBoxVisible, setIsBoxVisible] = useState(false);
+
   const activeClick = (color: string) => {
     setActiveColor((prev: string | null) => (prev === color ? null : color));
   };
-  //이전 클릭했던 값이 color이면 null로 바꾸고 아니면 color선택
+
+  // 박스 보이기 상태 토글
+  const toggleBoxVisibility = () => {
+    setIsBoxVisible(!isBoxVisible);
+  };
 
   return (
     <div className={cn('outerContainer')}>
-      <div className={cn('innerContainer')}>
-        {colors.map((color: string, index: number) => (
-          <HolderColor
-            key={index}
-            color={color}
-            active={color === activeColor}
-            onClick={() => activeClick(color)}
-          />
-        ))}
-      </div>
+      {/* 박스를 열기 위한 버튼 */}
+      {!isBoxVisible && (
+        <button onClick={toggleBoxVisibility} className={cn('toggleButton')}>
+          여기를 클릭해서 난이도별로 답지를 확인하세요!
+        </button>
+      )}
+
+      {/* 박스가 보여질 때 */}
+      {isBoxVisible && (
+        <div className={cn('innerContainer')}>
+          {/* 가장 왼쪽에 박스 닫기 버튼 추가 */}
+          <button onClick={toggleBoxVisibility} className={cn('closeButton')}>
+            닫기
+          </button>
+
+          {/* 동그라미 색상 리스트 */}
+          {colors.map((color: string, index: number) => (
+            <HolderColor
+              key={index}
+              color={color}
+              active={color === activeColor}
+              onClick={() => activeClick(color)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
