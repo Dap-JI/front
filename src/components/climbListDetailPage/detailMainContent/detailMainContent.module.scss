@@ -5,9 +5,8 @@
   width: 100%;
   background: white;
   margin-top: 10px;
-  // border-radius: 10px;
-  // padding: 10px;
   gap: 10px;
+  border-radius: 5px;
 
   .userWrapper {
     width: 100%;
@@ -34,11 +33,12 @@
 
   .contentWrapper {
     width: 100%;
-    height: 40px;
-    @include flex-arrange(space-between, center);
+    @include flex-arrange(center, flex-start);
     @include font-style(1.2rem, black, 400);
     margin-top: 15px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
+    flex-direction: column;
+    gap: 8px;
 
     .iconWrapper {
       display: flex;
@@ -46,12 +46,8 @@
     }
 
     .clearday {
-      @include flex-arrange(center, center);
-      flex-direction: column;
-      gap: 3px;
-      padding-left: 10px;
       span:nth-child(1) {
-        @include font-style(1.4rem, black, 400);
+        @include font-style(1rem, gray, 400);
       }
     }
 
@@ -59,14 +55,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      margin-left: 8px;
 
       .color {
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        // box-shadow:
-        //   0 4px 6px rgba(0, 0, 0, 0.1),
-        //   0 10px 20px rgba(0, 0, 0, 0.1);
       }
 
       .color-red {
@@ -136,21 +130,23 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 0px;
       }
     }
   }
 
   pre {
     width: 100%;
-    padding: 10px;
+    padding: 0 10px 0 10px;
     height: auto;
     @include font-style(1.3rem, black, 500);
     white-space: pre-wrap;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
 
   .commentWrapper {
     width: 100%;
+    padding: 0 10px 10px 10px;
     .allComment {
       @include font-style(1.2rem, gray, 400);
     }
@@ -171,9 +167,4 @@
       }
     }
   }
-}
-
-//DetailMainContentList
-.listContainer {
-  margin-bottom: 100px;
 }

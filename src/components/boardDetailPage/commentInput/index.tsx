@@ -36,13 +36,14 @@ const CommentInput = ({
   >();
   const { boardId, postId } = params;
 
+  //게시판 댓글
   const { mutate: boardCommentUpload } = useCommentUploadData({
     category: 'comment',
     mainKey: 'boardCommentUpload',
     firKey: 'boardDetailComment',
     secKey: 'boardDetailData',
   });
-
+  //게시판 답글
   const { mutate: boardReCommentUpload } = useRecommentUploadData({
     category: 'recomment',
     mainKey: 'boardReCommentUpload',
@@ -50,13 +51,14 @@ const CommentInput = ({
     secKey: 'boardDetailComment',
   });
 
+  //포스트 댓글
   const { mutate: postCommentUpload } = useCommentUploadData({
     category: 'postComment',
     mainKey: 'postCommentUpload',
     firKey: 'postDetailComment',
     secKey: 'postDetailDatas',
   });
-
+  //포스트 답글
   const { mutate: postReCommentUpload } = useRecommentUploadData({
     category: 'postRecomment',
     mainKey: 'postReCommentUpload',
