@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 import { useQueryClient } from '@tanstack/react-query';
 import SearchBar from '../../common/searchBar';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -55,7 +56,11 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
 
   const [searchName, setSearchName] = useState('');
 
-  const { data: followingDatas, ref } = useInfiniteScroll<FollowingType>({
+  const {
+    data: followingDatas,
+    ref,
+    isLoading,
+  } = useInfiniteScroll<FollowingType>({
     queryKey: ['followingDatas', userId, searchName],
     fetchFunction: (page = 1) =>
       fetchFollowingData({ page, search: searchName, userId }),
@@ -76,6 +81,9 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
     }
   }, [searchName, queryClient]);
 
+  if (isLoading) {
+    <LoadingSpinner />;
+  }
   return (
     <div className={cn('outerContainer')}>
       <SearchBar

@@ -8,6 +8,7 @@ import SearchLists from '@/src/components/searchPage/searchLists';
 import { fetchUserSearch } from './api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { UserSearchType } from '@/src/utils/type';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -15,7 +16,11 @@ const SearchPage = () => {
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
 
-  const { data: userSearchDatas, ref } = useInfiniteScroll<UserSearchType>({
+  const {
+    data: userSearchDatas,
+    ref,
+    isLoading,
+  } = useInfiniteScroll<UserSearchType>({
     queryKey: ['userSearchDatas', searchName],
     fetchFunction: (page = 1) => fetchUserSearch({ page, search: searchName }),
     enabled: !!searchName,
@@ -29,6 +34,10 @@ const SearchPage = () => {
   const handleSearchChange = (value: string) => {
     setSearchName(value);
   };
+  
+  if (isLoading) {
+    <LoadingSpinner />;
+  }
 
   return (
     <div className={cn('container')}>
@@ -39,7 +48,7 @@ const SearchPage = () => {
         })}
       >
         <SearchBar
-        placeholder='답지 유저를 검색해 보세요'
+          placeholder="답지 유저를 검색해 보세요"
           searchName={searchName}
           onSearchChange={handleSearchChange}
         />

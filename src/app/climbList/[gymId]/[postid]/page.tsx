@@ -27,24 +27,22 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   //포스트 상세페이지 데이터
 
-  const {
-    data: postDetailCommentData,
-    isFetchingNextPage,
-    ref,
-  } = useInfiniteScroll<PostCommentType>({
-    queryKey: ['postDetailComment'],
-    fetchFunction: (page = 1) =>
-      CommentDatas({
-        page,
-        content_id: postid,
-        category: 'postComment',
-      }),
-    getNextPageParam: (lastPage) =>
-      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
-  });
+  const { data: postDetailCommentData, ref } =
+    useInfiniteScroll<PostCommentType>({
+      queryKey: ['postDetailComment'],
+      fetchFunction: (page = 1) =>
+        CommentDatas({
+          page,
+          content_id: postid,
+          category: 'postComment',
+        }),
+      getNextPageParam: (lastPage) =>
+        lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+    });
 
   const commentDatas: PostCommentDetailType[] =
     postDetailCommentData?.pages.flatMap((page) => page.postComments) ?? [];
+  console.log(postDetailDatas);
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;

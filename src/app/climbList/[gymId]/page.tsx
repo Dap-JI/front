@@ -32,7 +32,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
   } = useInfiniteScroll<ClimbDetailResponseType>({
     queryKey: ['climbDetail', gymId, activeColor],
     fetchFunction: (pageParam = 1) =>
@@ -68,15 +67,17 @@ const DetailPage = ({ params }: DetailPageProps) => {
         {noticeData?.title && (
           <Notification onClick={noticePageClick} title={noticeData?.title} />
         )}
-        <HoldColorList
-          type="list"
-          activeColor={activeColor}
-          setActiveColor={setActiveColor}
-        />
         {lists.length === 0 ? (
           <NodetailData />
         ) : (
-          <DetailMainContentList lists={lists} />
+          <>
+            <HoldColorList
+              type="list"
+              activeColor={activeColor}
+              setActiveColor={setActiveColor}
+            />
+            <DetailMainContentList lists={lists} />
+          </>
         )}
         <div ref={ref} />
       </div>
