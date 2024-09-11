@@ -43,4 +43,10 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  .emptyMessage {
+    @include font-style(1.5rem, black, 600);
+    margin-top: 50px;
+    text-align: center;
+  }
 }
