@@ -66,7 +66,6 @@ const ProfileBoardDatas = ({ params }: ProfileBoardDatasProps) => {
   });
   const profileBoards =
     profileBoardData?.pages.flatMap((page) => page.boards) ?? [];
-  console.log(profileBoards.length);
   return (
     <div className={cn('outerContainer')}>
       {profileBoards.length === 0 ? (

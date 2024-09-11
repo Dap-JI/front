@@ -37,7 +37,7 @@ const CardList = ({ list }: CardListProps) => {
           <span>{address}</span>
         </div>
         <div className={cn('actionBtn')}>
-          <RightArrowIcon />
+          <RightArrowIcon width='15' height='15'/>
         </div>
       </li>
     </Link>
