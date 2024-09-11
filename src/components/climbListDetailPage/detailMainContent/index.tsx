@@ -135,14 +135,8 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           ))}
         </StyledSlider>
       </div>
+
       <div className={cn('contentWrapper')}>
-        <div className={cn('difficultyWrapper')}>
-          <span>난이도 </span>
-          <div className={cn('color', `color-${color}`)} />
-        </div>
-        <div className={cn('clearday')}>
-          <span>등반일</span> <span>{deleteT(clearday)}</span>
-        </div>
         <div className={cn('iconWrapper')}>
           <LikeAction
             likeToggle={likeToggle}
@@ -151,7 +145,15 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           />
           <CommentCount count={post_comment_count} />
         </div>
+        <div className={cn('clearday')}>
+          <span>등반일 : {deleteT(clearday)}</span>
+          <div className={cn('difficultyWrapper')}>
+            <span>난이도 </span>
+            <div className={cn('color', `color-${color}`)} />
+          </div>
+        </div>
       </div>
+
       <pre>{content}</pre>
       {post_comment[0]?.content && (
         <div className={cn('commentWrapper')}>

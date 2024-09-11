@@ -156,13 +156,6 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
         </StyledSlider>
       </div>
       <div className={cn('contentWrapper')}>
-        <div className={cn('difficultyWrapper')}>
-          <span>난이도 :</span>
-          <div className={cn('color', `color-${color}`)} />
-        </div>
-        <div className={cn('clearday')}>
-          <span>등반일</span> <span>{deleteT(clearday)}</span>
-        </div>
         <div className={cn('iconWrapper')}>
           <LikeAction
             likeToggle={likeToggle}
@@ -170,6 +163,13 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
             onClick={handleLikeClick}
           />
           <CommentCount count={post_comment_count} />
+        </div>
+        <div className={cn('clearday')}>
+          <span>등반일 : {deleteT(clearday)}</span>
+          <div className={cn('difficultyWrapper')}>
+            <span>난이도 </span>
+            <div className={cn('color', `color-${color}`)} />
+          </div>
         </div>
       </div>
       <pre>{content}</pre>
