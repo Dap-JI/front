@@ -30,7 +30,9 @@ const Header = ({ children, title, back, page }: HeaderProps) => {
     <div className={cn('container')}>
       {back === true ? <LeftArrowIcon onClick={backClick} /> : ''}
       {page ? <LeftArrowIcon onClick={pageMove} /> : ''}
-      <h1>{title}</h1>
+      <h1 >
+        {title}
+      </h1>
       {children}
     </div>
   );
