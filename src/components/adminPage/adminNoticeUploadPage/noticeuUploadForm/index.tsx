@@ -84,7 +84,7 @@ const NoticeuUploadForm = ({ params, initialData }: NoticeuUploadFormProps) => {
       setValue('title', initialData.title);
       setValue('content', initialData.content);
     }
-  }, [initialData]);
+  }, [initialData, setValue]);
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
