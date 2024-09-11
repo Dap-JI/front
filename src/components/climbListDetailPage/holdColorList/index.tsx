@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './holdColorList.module.scss';
 import HolderColor from '@/src/components/climbListDetailPage/holdColor';
 import { useState } from 'react';
+import { RightArrowIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
 
@@ -44,7 +45,7 @@ const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
       {/* 박스를 열기 위한 버튼 */}
       {!isBoxVisible && (
         <button onClick={toggleBoxVisibility} className={cn('toggleButton')}>
-          여기를 클릭해서 난이도별로 답지를 확인하세요!
+          여기를 탭해서 난이도별 답지를 확인하세요!
         </button>
       )}
 
@@ -67,6 +68,7 @@ const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
           ))}
         </div>
       )}
+      <RightArrowIcon width="15" height="15" />
     </div>
   );
 };
