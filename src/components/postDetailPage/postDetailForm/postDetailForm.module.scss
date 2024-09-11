@@ -23,6 +23,7 @@
         flex-direction: column;
         span:nth-child(1) {
           @include font-style(1.4rem, black, 600);
+          margin-bottom: 2px;
         }
         span:nth-child(2) {
           @include font-style(1rem, gray, 400);

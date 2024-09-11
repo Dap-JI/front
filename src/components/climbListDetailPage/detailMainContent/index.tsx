@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './detailMainContent.module.scss';
-import { DoubleRightArrowIcon, CommentIcon } from '@/public/icon';
+import { DoubleRightArrowIcon, CommentIcon,RightArrowIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import {
   DetailMainContentProps,
@@ -117,7 +117,8 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
             <span>{timeAgo}</span>
           </div>
         </div>
-        <DoubleRightArrowIcon />
+        {/* <DoubleRightArrowIcon /> */}
+        <RightArrowIcon width='15' height='15' />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>

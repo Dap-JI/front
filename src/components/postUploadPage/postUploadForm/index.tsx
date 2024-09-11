@@ -165,6 +165,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         )}
       </div>
       <HoldColorList
+        type="submit"
         activeColor={activeColor}
         setActiveColor={setActiveColor}
       />
