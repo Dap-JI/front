@@ -95,16 +95,6 @@ export type VideoLikeType = {
   likeCount: number;
 };
 
-// DetailMainContentProps 타입
-export type DetailMainContentProps = {
-  list: DetailType;
-};
-
-// DetailMainContentListProps 타입
-export type DetailMainContentListProps = {
-  lists: DetailType[];
-};
-
 //디테일 업로드 폼 타입
 export type useFormPostUploadProps = {
   clearday: string;
@@ -207,6 +197,7 @@ export type PostDetailDataType = {
   post_comment_count: number;
   User: UserType;
   is_liked: boolean;
+  gym_name: string;
 };
 
 //포스트 댓글 타입

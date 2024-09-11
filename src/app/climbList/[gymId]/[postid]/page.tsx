@@ -42,7 +42,6 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 
   const commentDatas: PostCommentDetailType[] =
     postDetailCommentData?.pages.flatMap((page) => page.postComments) ?? [];
-  console.log(postDetailDatas);
 
   if (isLoading || !postDetailDatas) {
     return <LoadingSpinner />;
@@ -50,7 +49,7 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <Header page={`/climbList/${gymId}`} />
+      <Header title={postDetailDatas.gym_name} page={`/climbList/${gymId}`} />
       <main className={cn('secondContainer', tagNickname && 'tagNickname')}>
         <section>
           <PostDetailForm params={params} postDetailDatas={postDetailDatas} />

@@ -76,7 +76,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
               activeColor={activeColor}
               setActiveColor={setActiveColor}
             />
-            <DetailMainContentList lists={lists} />
+            <DetailMainContentList lists={lists} gymName={gymName} />
           </>
         )}
         <div ref={ref} />

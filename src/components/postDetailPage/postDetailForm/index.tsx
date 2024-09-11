@@ -72,6 +72,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     like_count,
     is_liked,
     post_comment_count,
+    gym_name,
   } = postDetailDatas;
 
   const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
@@ -164,12 +165,15 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           />
           <CommentCount count={post_comment_count} />
         </div>
+
         <div className={cn('clearday')}>
-          <span>등반일 : {deleteT(clearday)}</span>
           <div className={cn('difficultyWrapper')}>
-            <span>난이도 </span>
+            <span>{gym_name} | </span>
+            <span>난이도</span>
             <div className={cn('color', `color-${color}`)} />
           </div>
+
+          <span>등반일 : {deleteT(clearday)}</span>
         </div>
       </div>
       <pre>{content}</pre>

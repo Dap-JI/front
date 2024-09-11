@@ -1,13 +1,9 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './detailMainContent.module.scss';
-import { DoubleRightArrowIcon, CommentIcon,RightArrowIcon } from '@/public/icon';
+import { RightArrowIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
-import {
-  DetailMainContentProps,
-  DetailType,
-  DetailMainContentListProps,
-} from '@/src/utils/type';
+import { DetailType } from '@/src/utils/type';
 import usePostStore from '@/src/utils/store/usePostStore';
 import Image from 'next/image';
 import Slider from 'react-slick';
@@ -43,7 +39,12 @@ export const StyledSlider = styled(Slider)`
   }
 `;
 
-const DetailMainContent = ({ list }: DetailMainContentProps) => {
+export type DetailMainContentProps = {
+  list: DetailType;
+  gymName: string;
+};
+
+const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
   const {
     color,
     User,
@@ -118,7 +119,7 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           </div>
         </div>
         {/* <DoubleRightArrowIcon /> */}
-        <RightArrowIcon width='15' height='15' />
+        <RightArrowIcon width="15" height="15" />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>
@@ -146,12 +147,15 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
           />
           <CommentCount count={post_comment_count} />
         </div>
+
         <div className={cn('clearday')}>
-          <span>등반일 : {deleteT(clearday)}</span>
           <div className={cn('difficultyWrapper')}>
-            <span>난이도 </span>
+            <span>{gymName} | </span>
+            <span>난이도</span>
             <div className={cn('color', `color-${color}`)} />
           </div>
+
+          <span>등반일 : {deleteT(clearday)}</span>
         </div>
       </div>
 
@@ -176,11 +180,19 @@ const DetailMainContent = ({ list }: DetailMainContentProps) => {
   );
 };
 
-const DetailMainContentList = ({ lists }: DetailMainContentListProps) => {
+export type DetailMainContentListProps = {
+  lists: DetailType[];
+  gymName: string;
+};
+
+const DetailMainContentList = ({
+  lists,
+  gymName,
+}: DetailMainContentListProps) => {
   return (
     <div className={cn('listContainer')}>
       {lists?.map((list: DetailType) => (
-        <DetailMainContent key={list.post_idx} list={list} />
+        <DetailMainContent key={list.post_idx} list={list} gymName={gymName} />
       ))}
     </div>
   );

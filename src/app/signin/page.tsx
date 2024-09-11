@@ -31,7 +31,7 @@ const SignInPage = () => {
         router.push('/join');
         return;
       }
-      router.push(`/climbList`);
+      router.push(`/auth/dapji`);
     },
     onError: (e) => {
       if (isServerError(e) && e.response && e.response.status === 401) {
