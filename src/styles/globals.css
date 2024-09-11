@@ -46,6 +46,14 @@ li {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'SpoqaHanSansNeo-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 div,
 span,
 h1,
@@ -54,11 +62,10 @@ h3,
 p,
 pre,
 button {
-
   /* 여기에 적용 */
 
   /* font-family: 'SUITE', sans-serif; */
-  font-family: 'CookieRun-Regular', sans-serif;
+  font-family: 'SpoqaHanSansNeo-Regular', sans-serif;
 }
 
 /*
