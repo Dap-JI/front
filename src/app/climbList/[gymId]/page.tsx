@@ -69,6 +69,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
           <Notification onClick={noticePageClick} title={noticeData?.title} />
         )}
         <HoldColorList
+          type="list"
           activeColor={activeColor}
           setActiveColor={setActiveColor}
         />

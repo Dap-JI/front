@@ -9,9 +9,14 @@ const cn = classNames.bind(styles);
 type HoldColorListProps = {
   activeColor?: string | null;
   setActiveColor: React.Dispatch<React.SetStateAction<string | null>>;
+  type: 'submit' | 'list';
 };
 
-const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
+const HoldColorList = ({
+  activeColor,
+  setActiveColor,
+  type,
+}: HoldColorListProps) => {
   // 빨, 주, 노, 초, 파, 남, 보, 흰, 회, 검, 분, 갈
   const colors = [
     'red',
@@ -39,36 +44,51 @@ const HoldColorList = ({ activeColor, setActiveColor }: HoldColorListProps) => {
   const toggleBoxVisibility = () => {
     setIsBoxVisible(!isBoxVisible);
   };
+  const renderColors = () => (
+    <div className={cn('innerContainer')}>
+      {colors.map((color: string, index: number) => (
+        <HolderColor
+          key={index}
+          color={color}
+          active={color === activeColor}
+          onClick={() => activeClick(color)}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <div className={cn('outerContainer')}>
-      {/* 박스를 열기 위한 버튼 */}
-      {!isBoxVisible && (
-        <button onClick={toggleBoxVisibility} className={cn('toggleButton')}>
-          여기를 탭해서 난이도별 답지를 확인하세요!
-        </button>
+      {type === 'submit' ? (
+        renderColors()
+      ) : (
+        <>
+          {!isBoxVisible && (
+            <button
+              onClick={toggleBoxVisibility}
+              className={cn('toggleButton')}
+            >
+              여기를 탭해서 난이도별 답지를 확인하세요!
+              <RightArrowIcon
+                width="15"
+                height="15"
+                className={cn('rightIcon')}
+              />
+            </button>
+          )}
+          {isBoxVisible && (
+            <div className={cn('innerContainer')}>
+              <button
+                onClick={toggleBoxVisibility}
+                className={cn('closeButton')}
+              >
+                닫기
+              </button>
+              {renderColors()}
+            </div>
+          )}
+        </>
       )}
-
-      {/* 박스가 보여질 때 */}
-      {isBoxVisible && (
-        <div className={cn('innerContainer')}>
-          {/* 가장 왼쪽에 박스 닫기 버튼 추가 */}
-          <button onClick={toggleBoxVisibility} className={cn('closeButton')}>
-            닫기
-          </button>
-
-          {/* 동그라미 색상 리스트 */}
-          {colors.map((color: string, index: number) => (
-            <HolderColor
-              key={index}
-              color={color}
-              active={color === activeColor}
-              onClick={() => activeClick(color)}
-            />
-          ))}
-        </div>
-      )}
-      <RightArrowIcon width="15" height="15" />
     </div>
   );
 };

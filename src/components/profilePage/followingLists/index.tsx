@@ -78,7 +78,11 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
 
   return (
     <div className={cn('outerContainer')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <SearchBar
+        searchName={searchName}
+        onSearchChange={handleSearchChange}
+        placeholder="클로잉을 검색해 보세요"
+      />
       <div className={cn('followingDataContainer')}>
         {followingData.map((list: FollowDetailType) => (
           <FollowingList key={list.user_idx} list={list} />

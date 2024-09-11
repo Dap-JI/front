@@ -39,6 +39,7 @@ const SearchPage = () => {
         })}
       >
         <SearchBar
+        placeholder='답지 유저를 검색해 보세요'
           searchName={searchName}
           onSearchChange={handleSearchChange}
         />
