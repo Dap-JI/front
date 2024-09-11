@@ -19,14 +19,15 @@ type NoticepageProps = {
 
 const Noticepage = ({ params }: NoticepageProps) => {
   const { gymId, noticeId } = params;
-  const { data: noticeDatas } = useQuery<noticeDataType>({
+  const { data: noticeDatas, isLoading } = useQuery<noticeDataType>({
     queryKey: ['noticeDatas'],
     queryFn: () => fetchNoticeData(gymId, noticeId),
   });
 
-  if (!noticeDatas) {
+  if (!noticeDatas || isLoading) {
     return <LoadingSpinner />;
   }
+  
   return (
     <div className={cn('container')}>
       <Header back={true} title="공지" />

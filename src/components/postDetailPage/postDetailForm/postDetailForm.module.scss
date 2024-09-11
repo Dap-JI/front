@@ -56,69 +56,68 @@
     }
 
     .clearday {
-      span:nth-child(1) {
-        @include font-style(1rem, gray, 400);
-      }
-    }
+      @include font-style(1rem, gray, 400);
+      display: flex;
+      flex-direction: column;
 
-    .difficultyWrapper {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: 8px;
+      .difficultyWrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
 
-      .color {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-      }
+        .color {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
 
-      .color-red {
-        background-color: red;
-      }
+        .color-red {
+          background-color: red;
+        }
 
-      .color-orange {
-        background-color: orange;
-      }
+        .color-orange {
+          background-color: orange;
+        }
 
-      .color-yellow {
-        background-color: yellow;
-      }
+        .color-yellow {
+          background-color: yellow;
+        }
 
-      .color-green {
-        background-color: green;
-      }
+        .color-green {
+          background-color: green;
+        }
 
-      .color-blue {
-        background-color: blue;
-      }
+        .color-blue {
+          background-color: blue;
+        }
 
-      .color-indigo {
-        background-color: indigo;
-      }
+        .color-indigo {
+          background-color: indigo;
+        }
 
-      .color-purple {
-        background-color: purple;
-      }
+        .color-purple {
+          background-color: purple;
+        }
 
-      .color-white {
-        background-color: white;
-        border: 1px solid black;
-      }
+        .color-white {
+          background-color: white;
+          border: 1px solid black;
+        }
 
-      .color-gray {
-        background-color: gray;
-      }
+        .color-gray {
+          background-color: gray;
+        }
 
-      .color-black {
-        background-color: black;
-      }
+        .color-black {
+          background-color: black;
+        }
 
-      .color-pink {
-        background-color: pink;
-      }
-      .color-brown {
-        background-color: brown;
+        .color-pink {
+          background-color: pink;
+        }
+        .color-brown {
+          background-color: brown;
+        }
       }
     }
   }
@@ -150,7 +149,7 @@
     height: auto;
     @include font-style(1.3rem, black, 500);
     white-space: pre-wrap;
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
 }
