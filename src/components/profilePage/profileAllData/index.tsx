@@ -1,4 +1,3 @@
-'use client';
 import classNames from 'classnames/bind';
 import styles from './ProfileAllData.module.scss';
 import { useState } from 'react';

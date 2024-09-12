@@ -28,29 +28,10 @@ li {
 
 /* ////폰트 적용 코드///  👇 */
 
-/* 수트폰트 (폰트 파일 다운받아서 사용하는 양식 => /public/fonts 에 있음 )*/
-
-@font-face {
-  font-family: 'SUITE';
-  src: url('/fonts/SUITE-Medium.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* 쿠키런 폰트 ( 눈누 사이트에 있는 '웹폰트로 사용' 그대로 적용하는 양식) */
-@font-face {
-  font-family: 'CookieRun-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 @font-face {
   font-family: 'SpoqaHanSansNeo-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
-    format('woff');
-  font-weight: normal;
+  src: url('/fonts/SpoqaHanSansNeo-Regular.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -64,13 +45,5 @@ pre,
 button {
   /* 여기에 적용 */
 
-  /* font-family: 'SUITE', sans-serif; */
   font-family: 'SpoqaHanSansNeo-Regular', sans-serif;
 }
-
-/*
-/ 눈누에서 폰트 괜찮은거 들어간다음에 오른쪽에 '웹폰트' 로 사용에 있는 코드 복사해서 이 파일에 붙여넣기
-/  font-family: 'SUITE', sans-serif; => 이 형식으로 'SUITE' 이부분만 해당 font-family 이름으로 바꾸기 
-/
-/ 
- */
