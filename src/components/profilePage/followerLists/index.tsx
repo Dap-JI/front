@@ -7,7 +7,6 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { fetchFollowerData } from '@/src/app/profile/api';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useScrollDirection from '@/src/hooks/useScrollDirection';
 import SearchBar from '../../common/searchBar';
 import { useQueryClient } from '@tanstack/react-query';
 import LoadingSpinner from '../../common/loadingSpinner';
@@ -21,7 +20,6 @@ type FollowerListProps = {
 const FollowerList = ({ list }: FollowerListProps) => {
   const { user_idx, nickname, img } = list;
   const router = useRouter();
-  const [scrollDirection] = useScrollDirection('up');
 
   const profilePageClick = () => {
     router.push(`/profile/${user_idx}`);

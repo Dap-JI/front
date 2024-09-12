@@ -26,7 +26,7 @@
           flex-direction: column;
           gap: 2px;
           .category {
-            @include font-style(1rem, gray, 400);
+            @include font-style(1.1rem, gray, 400);
           }
           .dataInfo {
             text-align: center;
@@ -35,19 +35,19 @@
               margin-right: 5px;
             }
             span:nth-child(2) {
-              @include font-style(1rem, gray, 400);
+              @include font-style(1.1rem, gray, 400);
             }
           }
         }
       }
 
       h1 {
-        @include font-style(1.6rem, black, 600);
+        @include font-style(1.8rem, black, 600);
         margin-top: 15px;
         margin-bottom: 10px;
       }
       .content {
-        @include font-style(1.1rem, gray, 400);
+        @include font-style(1.4rem, gray, 400);
       }
     }
 

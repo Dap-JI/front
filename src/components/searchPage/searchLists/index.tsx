@@ -44,7 +44,7 @@ type SearchListsProps = {
 
 const SearchLists = ({ lists }: SearchListsProps) => {
   if (!lists || lists.length === 0) {
-    return <p>검색 결과가 없습니다.</p>;
+    return <p className={cn('noSearchData')}>검색 결과가 없습니다.</p>;
   }
   return (
     <ul className={cn('outerContainer')}>

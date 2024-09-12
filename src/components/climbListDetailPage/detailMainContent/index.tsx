@@ -118,7 +118,6 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             <span>{timeAgo}</span>
           </div>
         </div>
-        {/* <DoubleRightArrowIcon /> */}
         <RightArrowIcon width="15" height="15" />
       </div>
       <div className={cn('videoWrapper')}>
