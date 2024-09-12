@@ -11,6 +11,7 @@ import { boardListGetDatas } from './api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { BoardResponseType } from '@/src/utils/type';
 import { useQueryClient } from '@tanstack/react-query';
+import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -20,7 +21,11 @@ const BoardPage = () => {
   const [scrollDirection] = useScrollDirection('up');
   const queryClient = useQueryClient();
 
-  const { data: boardListGetData, ref } = useInfiniteScroll<BoardResponseType>({
+  const {
+    data: boardListGetData,
+    ref,
+    isLoading,
+  } = useInfiniteScroll<BoardResponseType>({
     queryKey: ['boardListData', selectCategory, searchName],
     fetchFunction: (page = 1) =>
       boardListGetDatas({ page, search: searchName, category: selectCategory }),
@@ -44,6 +49,10 @@ const BoardPage = () => {
       queryClient.invalidateQueries({ queryKey: ['boardListData'] });
     }
   }, [searchName, selectCategory, queryClient]);
+  
+  if (isLoading) {
+    <LoadingSpinner />;
+  }
 
   return (
     <div className={cn('container')}>
@@ -54,6 +63,7 @@ const BoardPage = () => {
         })}
       >
         <SearchBar
+          placeholder="게시글을 검색해 보세요"
           showAdd={true}
           searchName={searchName}
           onSearchChange={handleSearchChange}

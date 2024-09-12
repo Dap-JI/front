@@ -4,15 +4,16 @@
   flex-direction: column;
   width: 100%;
   background: white;
-  border-bottom: 1px solid rgba(160, 154, 154, 0.5);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 10px;
+  margin-top: 10px;
   gap: 10px;
-  margin-top: 60px;
+  border-bottom: 1px solid rgb(160, 154, 154, 0.5);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
   .userWrapper {
     width: 100%;
+    padding: 10px 10px 0 10px;
+
     @include flex-arrange(space-between, center);
     .userInfo {
       @include flex-arrange(center, flex-start);
@@ -22,9 +23,10 @@
         flex-direction: column;
         span:nth-child(1) {
           @include font-style(1.4rem, black, 600);
+          margin-bottom: 2px;
         }
         span:nth-child(2) {
-          @include font-style(1rem, gray, 400);
+          @include font-style(1.1rem, gray, 400);
         }
       }
     }
@@ -41,10 +43,11 @@
 
   .contentWrapper {
     width: 100%;
-    height: 40px;
-    @include flex-arrange(space-between, center);
-    @include font-style(1.2rem, black, 400);
+    @include flex-arrange(center, flex-start);
     margin-top: 15px;
+    padding: 10px 10px 0 10px;
+    flex-direction: column;
+    gap: 8px;
 
     .iconWrapper {
       display: flex;
@@ -52,75 +55,68 @@
     }
 
     .clearday {
-      @include flex-arrange(center, center);
+      @include font-style(1.2rem, gray, 400);
+      display: flex;
       flex-direction: column;
-      gap: 3px;
-      padding-left: 10px;
-      span:nth-child(1) {
-        @include font-style(1.4rem, black, 400);
-      }
-    }
 
-    .difficultyWrapper {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      .difficultyWrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
 
-      .color {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        box-shadow:
-          0 4px 6px rgba(0, 0, 0, 0.1),
-          0 10px 20px rgba(0, 0, 0, 0.1);
-      }
+        .color {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
 
-      .color-red {
-        background-color: red;
-      }
+        .color-red {
+          background-color: red;
+        }
 
-      .color-orange {
-        background-color: orange;
-      }
+        .color-orange {
+          background-color: orange;
+        }
 
-      .color-yellow {
-        background-color: yellow;
-      }
+        .color-yellow {
+          background-color: yellow;
+        }
 
-      .color-green {
-        background-color: green;
-      }
+        .color-green {
+          background-color: green;
+        }
 
-      .color-blue {
-        background-color: blue;
-      }
+        .color-blue {
+          background-color: blue;
+        }
 
-      .color-indigo {
-        background-color: indigo;
-      }
+        .color-indigo {
+          background-color: indigo;
+        }
 
-      .color-purple {
-        background-color: purple;
-      }
+        .color-purple {
+          background-color: purple;
+        }
 
-      .color-white {
-        background-color: white;
-        border: 1px solid black;
-      }
+        .color-white {
+          background-color: white;
+          border: 1px solid black;
+        }
 
-      .color-gray {
-        background-color: gray;
-      }
+        .color-gray {
+          background-color: gray;
+        }
 
-      .color-black {
-        background-color: black;
-      }
+        .color-black {
+          background-color: black;
+        }
 
-      .color-pink {
-        background-color: pink;
-      }
-      .color-brown {
-        background-color: brown;
+        .color-pink {
+          background-color: pink;
+        }
+        .color-brown {
+          background-color: brown;
+        }
       }
     }
   }
@@ -143,14 +139,17 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 5px;
       }
     }
   }
-  p {
+  pre {
     width: 100%;
+    padding: 0 10px 0 10px;
     height: auto;
-    @include font-style(1.3rem, black, 500);
+    @include font-style(1.4rem, black, 400);
+    white-space: pre-wrap;
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 }
 

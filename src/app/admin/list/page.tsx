@@ -58,6 +58,7 @@ const AdminClimbListPage = () => {
 
       <div className={cn('searchBar')}>
         <SearchBar
+          placeholder="클라이밍장을 검색해 보세요"
           searchName={searchName}
           onSearchChange={handleSearchChange}
         />

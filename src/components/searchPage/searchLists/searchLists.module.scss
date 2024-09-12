@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+.noSearchData {
+  @include font-style(1.5rem, black, 400);
+}
+
 .container {
   width: 100%;
   height: 60px;
@@ -17,5 +21,15 @@
   }
   .userInfo {
     @include font-style(1.2rem, black, 500);
+    display: flex;
+    flex-direction: column;
+    span:nth-child(2) {
+      @include font-style(1rem, gray, 400);
+      margin-top: 5px;
+      width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }

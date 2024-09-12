@@ -27,8 +27,8 @@
       transition: left 0.3s ease;
     }
   }
-  .empty-message {
-    @include font-style(1.5rem, black, 500);
+  .emptyMessage {
+    @include font-style(1.5rem, black, 600);
     margin-top: 50px;
   }
 }

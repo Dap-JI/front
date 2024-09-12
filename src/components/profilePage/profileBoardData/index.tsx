@@ -23,7 +23,7 @@ const ProfileBoardData = ({ list }: ProfileBoardDataProps) => {
   const boardClick = () => {
     router.push(`/board/${board_idx}`);
   };
-  
+
   return (
     <div className={cn('container')} onClick={boardClick}>
       <div className={cn('dot')}>🔵</div>
@@ -68,9 +68,13 @@ const ProfileBoardDatas = ({ params }: ProfileBoardDatasProps) => {
     profileBoardData?.pages.flatMap((page) => page.boards) ?? [];
   return (
     <div className={cn('outerContainer')}>
-      {profileBoards.map((list) => (
-        <ProfileBoardData key={list.board_idx} list={list} />
-      ))}
+      {profileBoards.length === 0 ? (
+        <span className={cn('emptyMessage')}>게시글을 추가해 보세요🔥</span>
+      ) : (
+        profileBoards.map((list) => (
+          <ProfileBoardData key={list.board_idx} list={list} />
+        ))
+      )}
       <div ref={ref} />
     </div>
   );

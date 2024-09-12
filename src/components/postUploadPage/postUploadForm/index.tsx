@@ -13,6 +13,7 @@ import {
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import { useVideoDelete } from '@/src/app/climbList/api';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -68,7 +69,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   });
   const text = watch('content', '');
 
-  const { mutate: detailUploadDatas } = useDetailUploadDatas(gymId);
+  const { mutate: detailUploadDatas, isPending } = useDetailUploadDatas(gymId);
   const { mutate: postDetailUpdate } = usePostDetailUpdate(
     String(initialData?.post_idx),
     String(gymId),
@@ -141,6 +142,10 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       setValue('content', initialData.content);
     }
   }, [initialData, setValue]);
+  
+  if (isPending) {
+    <LoadingSpinner />;
+  }
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -165,6 +170,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         )}
       </div>
       <HoldColorList
+        type="submit"
         activeColor={activeColor}
         setActiveColor={setActiveColor}
       />

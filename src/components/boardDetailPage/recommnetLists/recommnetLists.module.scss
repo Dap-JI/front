@@ -14,18 +14,18 @@
 
     .contentWrapper {
       margin-left: 10px;
-      @include font-style(1.2rem, black, 400);
+      @include comment-content;
       width: 100%;
       .userInfo {
         display: block;
         margin-bottom: 5px;
 
         span:nth-child(1) {
-          @include font-style(1.2rem, black, 600);
+          @include comment-nickname;
         }
 
         span:nth-child(2) {
-          @include font-style(1rem, gray, 400);
+          @include font-style(1.1rem, gray, 400);
           margin-left: 5px;
         }
         .deleteIcon {
@@ -39,7 +39,3 @@
     right: 10px;
   }
 }
-// .outercontainer {
-//   overflow: hidden;
-//   transition: height 0.5s ease;
-// }

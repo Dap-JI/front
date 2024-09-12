@@ -199,7 +199,7 @@ const PostCommentLists = ({
           list={list}
           setTagNickname={setTagNickname}
           setSelectId={setSelectId}
-        />
+        />  
       ))}
     </div>
   );

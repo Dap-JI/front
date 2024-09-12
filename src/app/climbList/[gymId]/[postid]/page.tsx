@@ -27,21 +27,18 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
   const { data: postDetailDatas, isLoading } = usePostDetailDatas(postid);
   //포스트 상세페이지 데이터
 
-  const {
-    data: postDetailCommentData,
-    isFetchingNextPage,
-    ref,
-  } = useInfiniteScroll<PostCommentType>({
-    queryKey: ['postDetailComment'],
-    fetchFunction: (page = 1) =>
-      CommentDatas({
-        page,
-        content_id: postid,
-        category: 'postComment',
-      }),
-    getNextPageParam: (lastPage) =>
-      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
-  });
+  const { data: postDetailCommentData, ref } =
+    useInfiniteScroll<PostCommentType>({
+      queryKey: ['postDetailComment'],
+      fetchFunction: (page = 1) =>
+        CommentDatas({
+          page,
+          content_id: postid,
+          category: 'postComment',
+        }),
+      getNextPageParam: (lastPage) =>
+        lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+    });
 
   const commentDatas: PostCommentDetailType[] =
     postDetailCommentData?.pages.flatMap((page) => page.postComments) ?? [];
@@ -52,7 +49,7 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <Header page={`/climbList/${gymId}`} />
+      <Header title={postDetailDatas.gym_name} page={`/climbList/${gymId}`} />
       <main className={cn('secondContainer', tagNickname && 'tagNickname')}>
         <section>
           <PostDetailForm params={params} postDetailDatas={postDetailDatas} />

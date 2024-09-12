@@ -9,8 +9,6 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
-import { Suspense } from 'react';
-import Loading from '@/src/app/climbList/loading';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 
 const cn = classNames.bind(styles);
@@ -23,6 +21,7 @@ const ClimbListPage = () => {
     data: climbListData,
     ref,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteScroll<ClimbLIstResponseType>({
     queryKey: ['climbList', searchName],
     fetchFunction: (page = 1) => ClimbListDatas({ page, search: searchName }),
@@ -44,6 +43,10 @@ const ClimbListPage = () => {
     }
   }, [searchName, queryClient]);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className={cn('container')}>
       <div
@@ -53,15 +56,14 @@ const ClimbListPage = () => {
         })}
       >
         <SearchBar
+          placeholder="클라이밍장을 검색해 보세요"
           searchName={searchName}
           onSearchChange={handleSearchChange}
         />
       </div>
       <div className={cn('secondContainer')}>
-        <Suspense fallback={<Loading />}>
-          <CardListData lists={lists} />
-          <div ref={ref} />
-        </Suspense>
+        <CardListData lists={lists} />
+        <div ref={ref} />
       </div>
       {isFetchingNextPage && <LoadingSpinner />}
     </div>

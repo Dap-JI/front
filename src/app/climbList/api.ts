@@ -198,3 +198,9 @@ export const useVideoDelete = () => {
   });
   return videoDelete;
 };
+
+//클라이밍장별 공지 조회
+export const fetchNoticeData = async (gymId: string, noticeId: string) => {
+  const res = await instance.get(`/api/gyms/${gymId}/notice/${noticeId}`);
+  return res.data;
+};

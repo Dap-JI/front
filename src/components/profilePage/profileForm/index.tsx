@@ -30,14 +30,14 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
         return (
           <>
             <KakaoIcon width="17" height="17" />
-            <span>Kakao</span>
+            <span>KAKAO</span>
           </>
         );
       case 'naver':
         return (
           <>
             <NaverIcon width="30" height="30" />
-            <span>Naver</span>
+            <span>NAVER</span>
           </>
         );
       case 'dapji':
@@ -127,7 +127,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
         </div>
       </div>
 
-      <div className={cn('textWrapper')}>{profileInfo.user.introduce}</div>
+      <pre className={cn('textWrapper')}>{profileInfo.user.introduce}</pre>
     </div>
   );
 };

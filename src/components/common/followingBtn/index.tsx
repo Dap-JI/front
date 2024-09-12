@@ -11,7 +11,7 @@ type FollowingBtnProps = {
 const FollowingBtn = ({ onClick, isFollow }: FollowingBtnProps) => {
   return (
     <div className={cn('container', { follow: isFollow })} onClick={onClick}>
-      {isFollow ? '클로잉' : '클로우'}
+      {isFollow ? '클로잉 중' : '클로우 하기'}
     </div>
   );
 };

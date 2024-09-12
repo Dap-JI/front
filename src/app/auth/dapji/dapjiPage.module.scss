@@ -1,0 +1,5 @@
+.contaienr {
+  width: 100%;
+  height: 100vh;
+  @include flex-arrange(center, center);
+}

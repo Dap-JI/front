@@ -13,9 +13,15 @@ type SearchBarProps = {
   onSearchChange: (value: string) => void;
   searchName: string;
   showAdd?: boolean;
+  placeholder: string;
 };
 
-const SearchBar = ({ onSearchChange, searchName, showAdd }: SearchBarProps) => {
+const SearchBar = ({
+  onSearchChange,
+  searchName,
+  showAdd,
+  placeholder,
+}: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(searchName);
   const debouncedSearchTerm = useDebounce(inputValue, 500); // 0.6초 지연
 
@@ -36,7 +42,7 @@ const SearchBar = ({ onSearchChange, searchName, showAdd }: SearchBarProps) => {
   return (
     <div className={cn('container')}>
       <CommonInput
-        placeholder="검색어를 입력하세요"
+        placeholder={placeholder}
         suffix={
           <GlassIcon
             width="15"
