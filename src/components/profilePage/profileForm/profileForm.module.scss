@@ -4,6 +4,7 @@
   background: rgb(230, 222, 222);
   border-radius: 5px;
   padding: 0 8px;
+  font-size: 1.2rem;
 }
 
 .container {
@@ -35,6 +36,7 @@
       .profileEdit {
         @extend .btnStyle;
         @include flex-arrange(center, center);
+        @include font-style(1.2rem, black, 400);
       }
 
       .oauth {
@@ -76,5 +78,9 @@
         }
       }
     }
+  }
+  .textWrapper {
+    @include font-style(1.2rem, rgba(42, 41, 41), 400);
+    white-space: pre-wrap;
   }
 }

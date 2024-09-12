@@ -93,7 +93,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
   if (isLoading || isPending) {
     return <LoadingSpinner />;
   }
-  
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <ImageInput
@@ -137,6 +137,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
           {text.length}/{maxLength}
         </div>
       </div>
+      {errors.introduce && <span>{errors.introduce.message}</span>}
       <CommonButton name="수정하기" type="submit" />
       <ModalChoice />
     </form>

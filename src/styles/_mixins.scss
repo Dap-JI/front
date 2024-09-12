@@ -10,13 +10,13 @@
   font-weight: $weight;
 }
 
-@mixin comment-nickname($size: 1.2rem, $color: black, $weight: 600) {
+@mixin comment-nickname($size: 1.3rem, $color: black, $weight: 600) {
   font-size: $size;
   color: $color;
   font-weight: $weight;
 }
 
-@mixin comment-content($size: 1.2rem, $color: black, $weight: 400) {
+@mixin comment-content($size: 1.3rem, $color: black, $weight: 400) {
   font-size: $size;
   color: $color;
   font-weight: $weight;

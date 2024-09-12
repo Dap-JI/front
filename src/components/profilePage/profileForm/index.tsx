@@ -127,7 +127,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
         </div>
       </div>
 
-      <div className={cn('textWrapper')}>{profileInfo.user.introduce}</div>
+      <pre className={cn('textWrapper')}>{profileInfo.user.introduce}</pre>
     </div>
   );
 };

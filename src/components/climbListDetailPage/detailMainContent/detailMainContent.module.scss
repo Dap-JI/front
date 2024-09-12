@@ -26,7 +26,7 @@
           margin-bottom: 2px;
         }
         span:nth-child(2) {
-          @include font-style(1rem, gray, 400);
+          @include font-style(1.1rem, gray, 400);
         }
       }
     }
@@ -38,7 +38,6 @@
   .contentWrapper {
     width: 100%;
     @include flex-arrange(center, flex-start);
-    @include font-style(1.2rem, black, 400);
     margin-top: 15px;
     padding: 10px 10px 0 10px;
     flex-direction: column;
@@ -50,7 +49,7 @@
     }
 
     .clearday {
-      @include font-style(1rem, gray, 400);
+      @include font-style(1.2rem, gray, 400);
       display: flex;
       flex-direction: column;
 
@@ -138,10 +137,10 @@
   }
 
   pre {
+    @include font-style(1.4rem, black, 400);
     width: 100%;
     padding: 0 10px 0 10px;
     height: auto;
-    @include font-style(1.3rem, black, 500);
     white-space: pre-wrap;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -151,7 +150,7 @@
     width: 100%;
     padding: 0 10px 10px 10px;
     .allComment {
-      @include font-style(1.2rem, gray, 400);
+      @include font-style(1.1rem, gray, 400);
     }
 
     .comment {

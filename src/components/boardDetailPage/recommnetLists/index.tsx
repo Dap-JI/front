@@ -98,22 +98,8 @@ type RecommnetListsProps = {
 };
 
 const RecommnetLists = ({ boardRecomments }: RecommnetListsProps) => {
-  // const containerRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   const container = containerRef.current;
-  //   if (container) {
-  //     const height = container.scrollHeight;
-  //     container.style.height = `${height}px`;
-  //    
-  //   }
-  // }, [boardRecomments]);
   return (
-    <div
-      // ref={containerRef}
-      className={cn('outercontainer')}
-      // style={{ height: 0, overflow: 'hidden', transition: 'height 0.5s ease' }}
-    >
+    <div className={cn('outercontainer')}>
       {boardRecomments.map((recomment) => (
         <RecommnetList key={recomment.recomment_idx} recomment={recomment} />
       ))}

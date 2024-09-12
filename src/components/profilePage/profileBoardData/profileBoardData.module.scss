@@ -22,6 +22,8 @@
     }
     .infoWrapper {
       @include flex-arrange(center, space-evenly);
+      @include font-style(1.1rem, gray, 400);
+
       gap: 20px;
     }
   }

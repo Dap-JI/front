@@ -22,7 +22,7 @@
         flex-direction: column;
         gap: 2px;
         span:nth-child(1) {
-          @include font-style(1rem, gray, 400);
+          @include font-style(1.1rem, gray, 400);
           margin-right: 5px;
         }
         span:nth-child(2) {
@@ -39,11 +39,11 @@
       white-space: nowrap;
 
       h1 {
-        @include font-style(1.8rem, black, 700);
+        @include font-style(1.8rem, black, 600);
         margin-bottom: 20px;
       }
       .contentWrapper {
-        @include font-style(1.3rem, black, 500);
+        @include font-style(1.4rem, black, 400);
         white-space: pre-wrap;
       }
     }
