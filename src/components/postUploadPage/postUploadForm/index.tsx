@@ -142,7 +142,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       setValue('content', initialData.content);
     }
   }, [initialData, setValue]);
-  
+
   if (isPending) {
     <LoadingSpinner />;
   }
@@ -157,6 +157,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       <CommonInput
         id="clearday"
         type="date"
+        label="등반일을 선택해 주세요"
+        value={getTodayDate()}
         register={register('clearday', {
           required: '날짜를 선택해주세요',
           validate: (value) =>

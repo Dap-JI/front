@@ -2,6 +2,12 @@
   position: relative;
   width: 100%;
 
+  label {
+    margin-bottom: 10px;
+    display: block;
+    @include font-style(1.2rem, black, 400);
+  }
+
   .input {
     width: 100%;
     height: 40px;
