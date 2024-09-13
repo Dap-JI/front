@@ -1,6 +1,6 @@
 .customInput {
   padding: 5px 10px 10px 10px;
-  height: 60px;
+  height: 80px;
   width: 100%;
   background: white;
   position: fixed;
@@ -25,12 +25,12 @@
 
 .tagNameInput {
   padding-top: 30px;
-  height: 80px;
+  height: 100px;
   .tagNickname {
     width: 100%;
     @include flex-arrange(flex-start, center);
     position: absolute;
-    top: 7px;
+    top: 10px;
     left: 15px;
     span:nth-child(1) {
       display: block;
