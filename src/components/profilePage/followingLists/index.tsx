@@ -1,13 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './followingLists.module.scss';
 import Image from 'next/image';
-import { DeleteIcon } from '@/public/icon';
 import { FollowingType, FollowDetailType } from '@/src/utils/type';
 import { fetchFollowingData } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useScrollDirection from '@/src/hooks/useScrollDirection';
 import { useQueryClient } from '@tanstack/react-query';
 import SearchBar from '../../common/searchBar';
 import LoadingSpinner from '../../common/loadingSpinner';
@@ -21,7 +19,6 @@ type FollowingListProps = {
 const FollowingList = ({ list }: FollowingListProps) => {
   const { nickname, user_idx, img } = list;
 
-  const [scrollDirection] = useScrollDirection('up');
   const router = useRouter();
 
   const profilePageClick = () => {
