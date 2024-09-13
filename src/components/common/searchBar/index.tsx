@@ -64,7 +64,3 @@ const SearchBar = ({
   );
 };
 export default SearchBar;
-
-//사용자가 검색어를 모두 지우면 inputValue가 빈 문자열이 되고, 이 값이 디바운스된 후 debouncedSearchTerm도 빈 문자열이 된다
-//. 그런 다음 onSearchChange 함수가 빈 문자열을 인자로 호출되어 검색 결과를 초기화
-//쿼리값이 사라지니 전체 조회가 된다.

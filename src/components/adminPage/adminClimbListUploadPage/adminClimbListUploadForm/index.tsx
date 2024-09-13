@@ -65,4 +65,3 @@ const AdminClimbListUploadForm = () => {
 
 export default AdminClimbListUploadForm;
 
-//notice에 null값 추가해야할듯
