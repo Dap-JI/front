@@ -7,12 +7,16 @@ type OauthBtnStyleProps = {
   text: string;
   icon: React.ReactNode;
   color: string;
-  onClick : () => void;
+  onClick: () => void;
 };
 
-const OauthBtnStyle = ({ text, icon, color,onClick }: OauthBtnStyleProps) => {
+const OauthBtnStyle = ({ text, icon, color, onClick }: OauthBtnStyleProps) => {
   return (
-    <button className={cn('container')} style={{ backgroundColor: color }} onClick={onClick}>
+    <button
+      className={cn('container')}
+      style={{ backgroundColor: color }}
+      onClick={onClick}
+    >
       <div className={cn('icon')}>{icon}</div>
       <p className={cn('text')}>{text}</p>
     </button>
