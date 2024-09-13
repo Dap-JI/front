@@ -31,13 +31,13 @@ const SignUpPage = () => {
       router.push('/signin');
     },
     onError: (e) => {
-      if (isServerError(e) && e.response && e.response.status === 401) {
-        showModalHandler('alert', '이메일 중복');
+      if (isServerError(e) && e.response && e.response.status === 400) {
+        showModalHandler('alert', '이메일이 중복되었어요');
         return;
       }
 
       if (isServerError(e) && e.response && e.response.status === 500) {
-        showModalHandler('alert', '서버에러');
+        showModalHandler('alert', '관리자에게 문의해 주세요');
         return;
       }
     },
