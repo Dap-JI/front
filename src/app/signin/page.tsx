@@ -52,9 +52,7 @@ const SignInPage = () => {
     };
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify(formData));
-      console.log('ReactNativeWebView success');
     } else {
-      console.log('ReactNativeWebView is not available');
     }
     userSignIn(formData);
     console.log('로그인 버튼 눌림', formData);

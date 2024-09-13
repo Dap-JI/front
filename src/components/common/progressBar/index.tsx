@@ -1,6 +1,5 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useState } from 'react';
 import useProgressStore from '@/src/utils/store/useProgressStore';
 
 const ProgressBar = () => {
