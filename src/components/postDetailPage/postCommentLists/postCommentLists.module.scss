@@ -12,8 +12,12 @@
 
     .profileImage {
       width: 30px;
-      height: 30px;
+      // height: 30px;
+      height: auto;
       border-radius: 50%;
+
+      aspect-ratio: 1/1;
+      object-fit: cover;
     }
 
     .contentWrapper {
