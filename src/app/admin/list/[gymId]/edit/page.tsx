@@ -21,12 +21,13 @@ const AdminClimbListEditPage = ({ params }: AdminClimbListEditPageprops) => {
     <div className={cn('container')}>
       <Header title={'클라이밍짐 리스트 수정'} />
       <div className={cn('secondContainer')}>
-        <AdminClimbListEditForm climbListDetail={climbListDetail} params={params} />
+        <AdminClimbListEditForm
+          climbListDetail={climbListDetail}
+          params={params}
+        />
       </div>
     </div>
   );
 };
 
 export default AdminClimbListEditPage;
-
-//admin/list/edit

@@ -132,7 +132,7 @@ export const useDetailUploadDatas = (gymId: string | number) => {
   });
 };
 
-// 클라이밍장 포스트의 디테일 함수 `/api/posts/${postId}`
+// 클라이밍장 포스트의 디테일 함수 
 
 export const usePostDetailDatas = (postid: string) => {
   return useQuery({
@@ -142,7 +142,7 @@ export const usePostDetailDatas = (postid: string) => {
   });
 };
 
-//클라이밍장 포스트 수정 함수  `/api/posts/${postid}`
+//클라이밍장 포스트 수정 함수  
 export const usePostDetailUpdate = (postid: string, gymId: string) => {
   const router = useRouter();
   const { showModalHandler } = useModal();
@@ -160,7 +160,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
   });
 };
 
-//클라이밍장 포스트 삭제 함수 `/api/posts/${postid}`
+//클라이밍장 포스트 삭제 함수 
 export const usePostDetailDelete = (postid: string, gymId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -180,7 +180,7 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
   });
 };
 
-//클라이밍장 동영상 개별 삭제 함수 `videos/delete` 바디에 url
+//클라이밍장 동영상 개별 삭제 함수 
 
 export const useVideoDelete = () => {
   const queryClient = useQueryClient();
@@ -197,4 +197,10 @@ export const useVideoDelete = () => {
     },
   });
   return videoDelete;
+};
+
+//클라이밍장별 공지 조회
+export const fetchNoticeData = async (gymId: string, noticeId: string) => {
+  const res = await instance.get(`/api/gyms/${gymId}/notice/${noticeId}`);
+  return res.data;
 };

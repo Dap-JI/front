@@ -7,9 +7,9 @@ import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { fetchFollowerData } from '@/src/app/profile/api';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useScrollDirection from '@/src/hooks/useScrollDirection';
 import SearchBar from '../../common/searchBar';
 import { useQueryClient } from '@tanstack/react-query';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -20,11 +20,6 @@ type FollowerListProps = {
 const FollowerList = ({ list }: FollowerListProps) => {
   const { user_idx, nickname, img } = list;
   const router = useRouter();
-  const [scrollDirection] = useScrollDirection('up');
-
-  const handleFollowDelete = () => {
-    console.log('팔로워삭제');
-  };
 
   const profilePageClick = () => {
     router.push(`/profile/${user_idx}`);
@@ -58,7 +53,11 @@ const FollowerLists = ({ params }: FollowerListsProps) => {
 
   const [searchName, setSearchName] = useState('');
 
-  const { data: followerDatas, ref } = useInfiniteScroll<FollowerType>({
+  const {
+    data: followerDatas,
+    ref,
+    isLoading,
+  } = useInfiniteScroll<FollowerType>({
     queryKey: ['followerDatas', userId, searchName],
     fetchFunction: (page = 1) =>
       fetchFollowerData({ page, search: searchName, userId }),
@@ -79,9 +78,17 @@ const FollowerLists = ({ params }: FollowerListsProps) => {
     }
   }, [searchName, queryClient]);
 
+  if (isLoading) {
+    <LoadingSpinner />;
+  }
+
   return (
     <div className={cn('outerContainer')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <SearchBar
+        searchName={searchName}
+        onSearchChange={handleSearchChange}
+        placeholder="클로워를 검색해 보세요"
+      />
       <div className={cn('followerDataContainer')}>
         {followerData.map((list: FollowDetailType) => (
           <FollowerList key={list.user_idx} list={list} />

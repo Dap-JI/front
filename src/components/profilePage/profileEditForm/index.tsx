@@ -12,6 +12,7 @@ import { nickname_reg } from '@/src/utils/regex';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '../../common/moadlChoice';
 import { useNicknameCheck } from '@/src/app/join/api';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -36,8 +37,8 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
   });
   const { userId } = params;
   const [fileUrl, setFileUrl] = useState<string | ArrayBuffer | null>(null);
-  const { data: profileData } = useProfileDatas(userId);
-  const { mutate: profileUpdate } = useProfileUpdate(userId);
+  const { data: profileData, isLoading } = useProfileDatas(userId);
+  const { mutate: profileUpdate, isPending } = useProfileUpdate(userId);
   const text = watch('introduce', '');
   const nickname = watch('nickname', '');
   const maxLength = 100;
@@ -89,6 +90,10 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
     }
   };
 
+  if (isLoading || isPending) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <ImageInput
@@ -132,6 +137,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
           {text.length}/{maxLength}
         </div>
       </div>
+      {errors.introduce && <span>{errors.introduce.message}</span>}
       <CommonButton name="수정하기" type="submit" />
       <ModalChoice />
     </form>

@@ -31,7 +31,7 @@ const SignInPage = () => {
         router.push('/join');
         return;
       }
-      router.push(`/climbList`);
+      router.push(`/auth/dapji`);
     },
     onError: (e) => {
       if (isServerError(e) && e.response && e.response.status === 401) {
@@ -50,7 +50,12 @@ const SignInPage = () => {
     const formData = {
       ...data,
     };
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(formData));
+    } else {
+    }
     userSignIn(formData);
+    console.log('로그인 버튼 눌림', formData);
   };
 
   return (

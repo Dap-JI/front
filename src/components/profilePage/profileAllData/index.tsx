@@ -1,4 +1,3 @@
-'use client';
 import classNames from 'classnames/bind';
 import styles from './ProfileAllData.module.scss';
 import { useState } from 'react';
@@ -43,10 +42,12 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
         </div>
         <div className={cn('underline')} style={underlineStyle} />
       </div>
-      {profileData.posts.length === 0 ? (
-        <div className={cn('empty-message')}>답지를 추가해 보세요</div>
-      ) : selectList === 'post' ? (
-        <ProfilePostDatas lists={profileData.posts} />
+      {selectList === 'post' ? (
+        profileData.posts.length === 0 ? (
+          <span className={cn('emptyMessage')}>답지를 추가해 보세요🔥</span>
+        ) : (
+          <ProfilePostDatas lists={profileData.posts} />
+        )
       ) : (
         <ProfileBoardDatas params={params} />
       )}

@@ -1,11 +1,12 @@
 .container {
   width: 100%;
   height: 100vh;
-  background: beige;
+  background: rgb(247, 244, 244);
   overflow-y: scroll;
 
   .secondContainer {
-    margin-top: 80px;
+    margin-top: 70px;
+    margin-bottom: 90px;
     padding: 0 10px 10px 10px;
   }
 }

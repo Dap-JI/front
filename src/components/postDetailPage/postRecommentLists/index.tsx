@@ -101,23 +101,8 @@ type PostRecommnetListsProps = {
 };
 
 const PostRecommnetLists = ({ postRecommentData }: PostRecommnetListsProps) => {
-  // const containerRef = useRef<HTMLDivElement>(null);
-  console.log(postRecommentData);
-
-  // useEffect(() => {
-  //   const container = containerRef.current;
-  //   if (container) {
-  //     const height = container.scrollHeight;
-  //     container.style.height = `${height}px`;
-  //     console.log(height);
-  //   }
-  // }, [postRecommentData]);
   return (
-    <div
-      // ref={containerRef}
-      className={cn('outercontainer')}
-      // style={{ height: 0, overflow: 'hidden', transition: 'height 0.5s ease' }}
-    >
+    <div className={cn('outercontainer')}>
       {postRecommentData.map((postRecomment) => (
         <PostRecommnetList
           key={postRecomment.post_recomment_idx}

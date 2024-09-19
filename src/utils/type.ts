@@ -31,7 +31,8 @@ export type GymsType = {
   name: string;
   address?: string;
   logo: string | null;
-  notice?: string | null;
+  post_count: number;
+  gym_notice_idx: string;
 };
 
 export type ClimbLIstResponseType = {
@@ -44,7 +45,6 @@ export type useFormListUploadProps = {
   logo: any;
   name: string;
   address: string;
-  notice: string;
 };
 
 //////////////////////////클라이밍장별 영상 페이지 데이터//////////////////////////
@@ -59,6 +59,10 @@ type postCommentType = {
 export type UserType = {
   nickname: string;
   img: string;
+};
+export type NoticeDetailType = {
+  gym_notice_idx: string;
+  title: string;
 };
 
 export type DetailType = {
@@ -82,22 +86,13 @@ export type ClimbDetailResponseType = {
   gym_name: string; // 체육관 이름
   posts: DetailType[]; // 게시물 목록
   meta: metaType;
+  notice: NoticeDetailType;
   length?: number;
 };
 
 //클라이밍장별 영상 좋아요 타입
 export type VideoLikeType = {
   likeCount: number;
-};
-
-// DetailMainContentProps 타입
-export type DetailMainContentProps = {
-  list: DetailType;
-};
-
-// DetailMainContentListProps 타입
-export type DetailMainContentListProps = {
-  lists: DetailType[];
 };
 
 //디테일 업로드 폼 타입
@@ -202,6 +197,7 @@ export type PostDetailDataType = {
   post_comment_count: number;
   User: UserType;
   is_liked: boolean;
+  gym_name: string;
 };
 
 //포스트 댓글 타입
@@ -382,4 +378,22 @@ export type userSearchDetailType = {
 export type UserSearchType = {
   users: userSearchDetailType[];
   meta: metaType;
+};
+
+//////////////////////////관리자 페이지//////////////////////////
+
+//공지 조회 타입
+export type noticeDataType = {
+  gym_notice_idx: string;
+  gym_idx: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+//공지 업로드 타입
+export type useFormNoticeUploadType = {
+  title: string;
+  content: string;
 };

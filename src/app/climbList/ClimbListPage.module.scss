@@ -1,14 +1,14 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  background: beige;
-  padding-bottom: 100px;
+  background: rgb(247, 244, 244);
+  padding-bottom: 80px;
 
   .header-container {
     position: sticky;
     top: 60px; /* 스크롤 시 항상 화면 상단에 고정 */
     z-index: 1;
-    background: linear-gradient(to right, #171a27, #282c3e);
+    background: rgb(247, 244, 244);
     transition: top 0.5s ease-in-out;
 
     &.up {

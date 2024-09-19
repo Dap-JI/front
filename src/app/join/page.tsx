@@ -93,7 +93,7 @@ export default JoinPage;
 
 //닉네임 중복을 확인하는 컴포넌트이다.
 //nickname을 패스파라미터로 받고 enabled를 설정해 true일때만 api를 요청하도록 설정
-//-> enabled를 true로 바꾸기 위한 state를 하나 설정하고 인풋에 입력한 nickname을 담을 state하나 설정
+//-l> enabed를 true로 바꾸기 위한 state를 하나 설정하고 인풋에 입력한 nickname을 담을 state하나 설정
 //   const onSubmit = (data: onSubmitType) => {
 //   setNickname(data.nickname);
 //   setCheck(true);

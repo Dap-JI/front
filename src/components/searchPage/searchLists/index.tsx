@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+'use client';
 import styles from './searchLists.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { userSearchDetailType } from '@/src/utils/type';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -11,12 +12,16 @@ type SearchListProps = {
 };
 
 const SearchList = ({ list }: SearchListProps) => {
+  const router = useRouter();
   if (!list) return null;
-  console.log('list====>', list);
 
   const { user_idx, nickname, img, introduce } = list;
+
+  const profileClick = () => {
+    router.push(`/profile/${user_idx}`);
+  };
   return (
-    <li className={cn('container')}>
+    <li className={cn('container')} onClick={profileClick}>
       <Image
         src={img || '/icon/icon.png'}
         width="50"
@@ -27,6 +32,7 @@ const SearchList = ({ list }: SearchListProps) => {
       />
       <div className={cn('userInfo')}>
         <span>{nickname}</span>
+        <span>{introduce}</span>
       </div>
     </li>
   );
@@ -38,7 +44,7 @@ type SearchListsProps = {
 
 const SearchLists = ({ lists }: SearchListsProps) => {
   if (!lists || lists.length === 0) {
-    return <p>검색 결과가 없습니다.</p>;
+    return <p className={cn('noSearchData')}>검색 결과가 없습니다.</p>;
   }
   return (
     <ul className={cn('outerContainer')}>

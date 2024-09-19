@@ -1,7 +1,6 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './toast.module.scss';
-
 import { CompleteIcon, WarnIcon } from '@/public/icon';
 import { useToastStore } from '@/src/utils/store/useToastStore';
 

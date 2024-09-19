@@ -28,7 +28,7 @@
         }
 
         span:nth-child(2) {
-          @include font-style(1rem, gray, 400);
+          @include font-style(1.1rem, gray, 400);
           margin-left: 5px;
         }
         .deleteIcon {
@@ -38,7 +38,7 @@
       .replyButton {
         display: block;
         margin-top: 8px;
-        @include font-style(1rem, gray, 400);
+        @include font-style(1.1rem, gray, 400);
       }
     }
   }

@@ -13,6 +13,7 @@ import {
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import { useVideoDelete } from '@/src/app/climbList/api';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -68,7 +69,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   });
   const text = watch('content', '');
 
-  const { mutate: detailUploadDatas } = useDetailUploadDatas(gymId);
+  const { mutate: detailUploadDatas, isPending } = useDetailUploadDatas(gymId);
   const { mutate: postDetailUpdate } = usePostDetailUpdate(
     String(initialData?.post_idx),
     String(gymId),
@@ -142,6 +143,10 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   }, [initialData, setValue]);
 
+  if (isPending) {
+    <LoadingSpinner />;
+  }
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <VideoInput
@@ -152,6 +157,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       <CommonInput
         id="clearday"
         type="date"
+        label="등반일을 선택해 주세요"
+        value={getTodayDate()}
         register={register('clearday', {
           required: '날짜를 선택해주세요',
           validate: (value) =>
@@ -165,6 +172,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         )}
       </div>
       <HoldColorList
+        type="submit"
         activeColor={activeColor}
         setActiveColor={setActiveColor}
       />

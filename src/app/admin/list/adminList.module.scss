@@ -1,13 +1,12 @@
 .container {
   width: 100%;
   height: 100vh;
-  background: beige;
+  background: rgb(247, 244, 244);
   overflow-y: scroll;
   .searchBar {
     margin-top: 60px;
   }
   .secondContainer {
-    margin-top: 150px;
     margin-bottom: 100px;
     padding: 0 10px 10px 10px;
   }

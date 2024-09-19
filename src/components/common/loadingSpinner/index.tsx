@@ -1,12 +1,14 @@
 import Image from 'next/image';
-
+import styles from './loadingSpinner.module.scss';
+import classNames from 'classnames/bind';
+const cn = classNames.bind(styles);
 const LoadingSpinner = () => {
   return (
-    <div>
+    <div className={cn('container')}>
       <Image
         src="/icon/spinner.gif"
-        width="50"
-        height="50"
+        width="100"
+        height="100"
         alt="loadingSpinner"
         priority
       />

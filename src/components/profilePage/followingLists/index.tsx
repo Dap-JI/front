@@ -1,15 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './followingLists.module.scss';
 import Image from 'next/image';
-import { DeleteIcon } from '@/public/icon';
 import { FollowingType, FollowDetailType } from '@/src/utils/type';
 import { fetchFollowingData } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useScrollDirection from '@/src/hooks/useScrollDirection';
 import { useQueryClient } from '@tanstack/react-query';
 import SearchBar from '../../common/searchBar';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -20,12 +19,8 @@ type FollowingListProps = {
 const FollowingList = ({ list }: FollowingListProps) => {
   const { nickname, user_idx, img } = list;
 
-  const [scrollDirection] = useScrollDirection('up');
   const router = useRouter();
 
-  const handleFollowDelete = () => {
-    console.log('팔로워삭제');
-  };
   const profilePageClick = () => {
     router.push(`/profile/${user_idx}`);
   };
@@ -58,7 +53,11 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
 
   const [searchName, setSearchName] = useState('');
 
-  const { data: followingDatas, ref } = useInfiniteScroll<FollowingType>({
+  const {
+    data: followingDatas,
+    ref,
+    isLoading,
+  } = useInfiniteScroll<FollowingType>({
     queryKey: ['followingDatas', userId, searchName],
     fetchFunction: (page = 1) =>
       fetchFollowingData({ page, search: searchName, userId }),
@@ -79,9 +78,16 @@ const FollowingLists = ({ params }: FollowingListsProps) => {
     }
   }, [searchName, queryClient]);
 
+  if (isLoading) {
+    <LoadingSpinner />;
+  }
   return (
     <div className={cn('outerContainer')}>
-      <SearchBar searchName={searchName} onSearchChange={handleSearchChange} />
+      <SearchBar
+        searchName={searchName}
+        onSearchChange={handleSearchChange}
+        placeholder="클로잉을 검색해 보세요"
+      />
       <div className={cn('followingDataContainer')}>
         {followingData.map((list: FollowDetailType) => (
           <FollowingList key={list.user_idx} list={list} />

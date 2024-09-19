@@ -62,18 +62,22 @@ const FooterBar = () => {
 
   return (
     <div className={cn('container')}>
-      <MarkerIcon width="30" height="30" onClick={() => routerClick('map')} />
-      <BordIcon width="30" height="30" onClick={() => routerClick('board')} />
+      <BordIcon
+        width="30"
+        height="30"
+        onClick={() => routerClick('board')}
+        fill="balck"
+      />
       <Link href="/climbList">
-        <HomeIcon width="30" height="30" />
+        <HomeIcon width="30" height="30" fill="balck" />
       </Link>
       <GlassIcon
         width="30"
         height="30"
         onClick={() => routerClick('search')}
-        fill="white"
+        fill="balck"
       />
-      <UserIcon width="30" height="30" onClick={profileClick} />
+      <UserIcon width="30" height="30" onClick={profileClick} fill="balck" />
     </div>
   );
 };

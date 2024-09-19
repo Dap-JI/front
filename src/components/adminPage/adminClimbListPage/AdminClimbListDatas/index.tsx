@@ -7,6 +7,8 @@ import { useClimbListDatasDelete } from '@/src/app/climbList/api';
 import Link from 'next/link';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
+import { useRouter } from 'next/navigation';
+
 const cn = classNames.bind(styles);
 
 type CardListProps = {
@@ -14,7 +16,8 @@ type CardListProps = {
 };
 
 const AdminClimbList = ({ list }: CardListProps) => {
-  const { logo, name, gym_idx, address } = list;
+  const { logo, name, gym_idx, address, gym_notice_idx } = list;
+  const router = useRouter();
 
   const { mutate: ClimbListDatasDelete } = useClimbListDatasDelete(gym_idx);
   const { showModalHandler } = useModal();
@@ -24,6 +27,14 @@ const AdminClimbList = ({ list }: CardListProps) => {
       ClimbListDatasDelete();
     };
     showModalHandler('choice', '진짜 삭제할거야? 잘못눌렀지?', confirmAction);
+  };
+
+  const noticeUploadClick = () => {
+    router.push(`/admin/list/${gym_idx}/nupload`);
+  };
+
+  const noticeEditClick = () => {
+    router.push(`/admin/list/${gym_idx}/notice/${gym_notice_idx}/edit`);
   };
 
   return (
@@ -38,9 +49,13 @@ const AdminClimbList = ({ list }: CardListProps) => {
           className={cn('image')}
         />
       </div>
-      <span>{name}</span>
-      <span>{address}</span>
+      <div className={cn('textWrapper')}>
+        <span>{name}</span>
+        <span>{address}</span>
+      </div>
       <div className={cn('actionBtn')}>
+        {!gym_notice_idx && <span onClick={noticeUploadClick}>공지업로드</span>}
+        {gym_notice_idx && <span onClick={noticeEditClick}>공지수정</span>}
         <Link href={`/admin/list/${gym_idx}/edit`}>
           <EditIcon />
         </Link>

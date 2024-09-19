@@ -6,9 +6,7 @@ import ImageInput from '@/src/components/common/imageInput';
 import CommonInput from '@/src/components/common/commonInput';
 import CommonButton from '@/src/components/common/commonButton';
 import { useForm } from 'react-hook-form';
-import {
-  useClimbListDatasUpload,
-} from '@/src/app/climbList/api';
+import { useClimbListDatasUpload } from '@/src/app/climbList/api';
 import { useFormListUploadProps } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
@@ -26,7 +24,6 @@ const AdminClimbListUploadForm = () => {
     defaultValues: {
       name: '',
       address: '',
-      notice: '',
       logo: '',
     },
   });
@@ -48,20 +45,19 @@ const AdminClimbListUploadForm = () => {
         foldername="gym-logo"
       />
       <CommonInput
-        placeholder='클라이밍장 이름을 입력해주세요'
+        placeholder="클라이밍장 이름을 입력해주세요"
         register={register('name', {
           required: '클라이밍짐 이름을 입력해 주세요',
         })}
       />
       {errors.name && <span>{errors.name.message}</span>}
       <CommonInput
-        placeholder='주소를 입력해주세요'
+        placeholder="주소를 입력해주세요"
         register={register('address', {
           required: '주소를 입력해 주세요',
         })}
       />
       {errors.address && <span>{errors.address.message}</span>}
-      <CommonInput label="공지" register={register('notice')} />
       <CommonButton name="업로드" type="submit" />
     </form>
   );
@@ -69,4 +65,3 @@ const AdminClimbListUploadForm = () => {
 
 export default AdminClimbListUploadForm;
 
-//notice에 null값 추가해야할듯

@@ -18,6 +18,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '../../common/loadingSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -46,7 +47,7 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
     formState: { errors },
   } = useForm<useFormBoardUploadType>();
 
-  const { mutate: boardUpload } = useMutation({
+  const { mutate: boardUpload, isPending } = useMutation({
     mutationKey: ['boardUpload'],
     mutationFn: (formData) => boardUploadData(formData),
     onSuccess: () => {
@@ -134,6 +135,10 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
     }
   }, [initialData, setValue]);
 
+  if (isPending) {
+    <LoadingSpinner />;
+  }
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <CategoryLists
@@ -187,7 +192,6 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
         setFileUrl={setFileUrl}
         setDeleteUrl={setDeleteUrl}
       />
-
       <CommonButton name="업로드 " type="submit" />
       <ModalChoice />
     </form>

@@ -32,7 +32,6 @@ const DetailPage = ({ params }: DetailPageProps) => {
     ref,
     isLoading,
     isFetchingNextPage,
-    hasNextPage,
   } = useInfiniteScroll<ClimbDetailResponseType>({
     queryKey: ['climbDetail', gymId, activeColor],
     fetchFunction: (pageParam = 1) =>
@@ -42,6 +41,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   });
   const lists = climbDetailData?.pages.flatMap((page) => page.posts) ?? [];
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
+  const noticeData = climbDetailData?.pages[0].notice;
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);
@@ -50,7 +50,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   //업로드 페이지
 
   const noticePageClick = () => {
-    router.push(`/climbList/${gymId}/notice`);
+    router.push(`/climbList/${gymId}/notice/${noticeData?.gym_notice_idx}`);
   };
 
   if (isLoading || isUpLoading) {
@@ -64,15 +64,20 @@ const DetailPage = ({ params }: DetailPageProps) => {
         <AddIcon onClick={uploadPage} width="30" height="30" />
       </Header>
       <div className={cn('secondContainer')}>
-        <Notification onClick={noticePageClick} />
-        <HoldColorList
-          activeColor={activeColor}
-          setActiveColor={setActiveColor}
-        />
+        {noticeData?.title && (
+          <Notification onClick={noticePageClick} title={noticeData?.title} />
+        )}
         {lists.length === 0 ? (
           <NodetailData />
         ) : (
-          <DetailMainContentList lists={lists} />
+          <>
+            <HoldColorList
+              type="list"
+              activeColor={activeColor}
+              setActiveColor={setActiveColor}
+            />
+            <DetailMainContentList lists={lists} gymName={gymName} />
+          </>
         )}
         <div ref={ref} />
       </div>
