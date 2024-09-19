@@ -67,17 +67,15 @@ const DetailPage = ({ params }: DetailPageProps) => {
         {noticeData?.title && (
           <Notification onClick={noticePageClick} title={noticeData?.title} />
         )}
+        <HoldColorList
+          type="list"
+          activeColor={activeColor}
+          setActiveColor={setActiveColor}
+        />
         {lists.length === 0 ? (
           <NodetailData />
         ) : (
-          <>
-            <HoldColorList
-              type="list"
-              activeColor={activeColor}
-              setActiveColor={setActiveColor}
-            />
-            <DetailMainContentList lists={lists} gymName={gymName} />
-          </>
+          <DetailMainContentList lists={lists} gymName={gymName} />
         )}
         <div ref={ref} />
       </div>
