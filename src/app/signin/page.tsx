@@ -52,10 +52,8 @@ const SignInPage = () => {
     };
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify(formData));
-    } else {
     }
     userSignIn(formData);
-    console.log('로그인 버튼 눌림', formData);
   };
 
   return (
