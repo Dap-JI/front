@@ -3,7 +3,6 @@
   align-items: center;
   width: 100%;
   overflow-x: scroll;
-  height: 60px;
   background: white;
   border-radius: 5px;
   padding: 10px;
@@ -11,7 +10,7 @@
 
   .toggleButton {
     width: 100%;
-    padding: 0;
+    padding: 10px 5px;
     @include flex-arrange(space-between, center);
   }
 
@@ -19,5 +18,9 @@
     display: flex;
     white-space: nowrap;
     gap: 5px;
+    padding-right: 5px;
   }
+}
+.outerContainer::-webkit-scrollbar {
+  display: none;
 }

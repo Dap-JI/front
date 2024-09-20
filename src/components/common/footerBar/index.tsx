@@ -68,9 +68,12 @@ const FooterBar = () => {
         onClick={() => routerClick('board')}
         fill="balck"
       />
-      <Link href="/climbList">
-        <HomeIcon width="30" height="30" fill="balck" />
-      </Link>
+      <HomeIcon
+        width="30"
+        height="30"
+        fill="balck"
+        onClick={() => routerClick('climbList')}
+      />
       <GlassIcon
         width="30"
         height="30"

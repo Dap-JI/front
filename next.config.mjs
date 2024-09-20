@@ -1,9 +1,4 @@
 /** @type {import('next').NextConfig} */
-import nextPwa from 'next-pwa';
-
-const withPWA = nextPwa({
-  dest: 'public',
-});
 
 const nextConfig = {
   reactStrictMode: false,
@@ -26,4 +21,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-// export default withPWA(nextConfig); // PWA 설정을 사용하려면 이 줄을 활성화하세요.

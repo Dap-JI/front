@@ -28,10 +28,10 @@ const SignInPage = () => {
     mutationFn: (formData: fetchSignInType) => fetchSignIn(formData),
     onSuccess: (data: any) => {
       if (data.user.nickname === null) {
-        router.push('/join');
+        router.replace('/join');
         return;
       }
-      router.push(`/auth/dapji`);
+      router.replace(`/auth/dapji`);
     },
     onError: (e) => {
       if (isServerError(e) && e.response && e.response.status === 401) {
@@ -52,10 +52,8 @@ const SignInPage = () => {
     };
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify(formData));
-    } else {
     }
     userSignIn(formData);
-    console.log('로그인 버튼 눌림', formData);
   };
 
   return (
