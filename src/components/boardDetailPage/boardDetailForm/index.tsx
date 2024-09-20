@@ -53,7 +53,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
     mutationKey: ['boardDelete'],
     mutationFn: () => boardDeleteData(board_idx),
     onSuccess: () => {
-      router.push(`/board`);
+      router.replace(`/board`);
     },
     onError: () => {
       showModalHandler('alert', '게시글 삭제에 실패했어요');
@@ -68,6 +68,10 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
       boardDelete();
     };
     showModalHandler('choice', '게시글을 삭제하시겠어요?', confirmAction);
+  };
+
+  const boardEditClick = () => {
+    router.replace(`/board/${board_idx}/edit`);
   };
 
   return (
@@ -90,9 +94,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         </div>
         {isMyId && (
           <div className={cn('iconWrapper')}>
-            <Link href={`/board/${board_idx}/edit`}>
-              <EditIcon />
-            </Link>
+            <EditIcon onClick={boardEditClick} />
             <DeleteIcon onClick={handleBoardDelete} />
           </div>
         )}

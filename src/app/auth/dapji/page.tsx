@@ -14,7 +14,7 @@ const Dapjipage = () => {
   useEffect(() => {
     if (myId) {
       setTimeout(() => {
-        router.push(`/climbList`);
+        router.replace(`/climbList`);
       }, 2000);
       return;
     }

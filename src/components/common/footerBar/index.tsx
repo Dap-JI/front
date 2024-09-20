@@ -39,12 +39,12 @@ const FooterBar = () => {
 
   const profileClick = () => {
     if (myId) {
-      router.push(`/profile/${myId}`);
+      router.replace(`/profile/${myId}`);
     }
   };
 
   const routerClick = (page: string) => {
-    router.push(`/${page}`);
+    router.replace(`/${page}`);
   };
   const isClimbListSpecificPostPath = path.match(/^\/climbList\/\d+\/\d+$/);
 
