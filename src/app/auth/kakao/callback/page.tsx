@@ -18,10 +18,10 @@ const KakaoCallback = () => {
         const data = await KakaoLogin(code);
         if (data) {
           if (!data.nickname) {
-            router.push('/join');
+            router.replace('/join');
             return;
           }
-          router.push('/climbList');
+          router.replace('/climbList');
         }
       }
     };

@@ -22,7 +22,7 @@ const Header = ({ children, title, back, page }: HeaderProps) => {
 
   const pageMove = () => {
     if (page) {
-      router.push(page);
+      router.replace(page);
     }
   };
 
