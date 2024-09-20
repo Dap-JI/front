@@ -32,11 +32,12 @@ const NaverCallback = () => {
   return (
     <div className={cn('contaienr')}>
       <Image
-        src="/pwaIcons/icon-192x192.png"
+        src="/splash_screens/splash.png"
         width="200"
         height="200"
         alt="로고"
         priority
+        className={cn('image')}
       />
     </div>
   );

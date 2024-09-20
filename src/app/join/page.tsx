@@ -49,7 +49,7 @@ const JoinPage = () => {
         initializeNickname(formData);
         showModalHandler('alert', '답지를 즐겨보세요🔥');
         setTimeout(() => {
-          router.push('/climbList');
+          router.replace('/climbList');
         }, 1300);
         return;
       }
