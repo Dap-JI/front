@@ -32,12 +32,11 @@ const KakaoCallback = () => {
   return (
     <div className={cn('contaienr')}>
       <Image
-        src="/splash_screens/splash.png"
-        width="200"
-        height="200"
-        alt="로고"
+        src="/icon/dapjilogo.svg"
+        width={200}
+        height={200}
+        alt="답지 메인 로고"
         priority
-        className={cn('image')}
       />
     </div>
   );

@@ -70,7 +70,7 @@ const SignUpPage = () => {
         {errors.password && <span>{errors.password.message as string}</span>}
         <CommonButton name="회원가입" type="submit" />
       </form>
-      <span onClick={() => router.push(`/signin`)}>로그인 ㄱㄱ</span>
+      <span onClick={() => router.replace(`/signin`)}>로그인 ㄱㄱ</span>
       <ModalChoice />
     </div>
   );
