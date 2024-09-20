@@ -14,7 +14,10 @@ const Home = () => {
       <div className={cn('loginContaienr')}>
         <OauthBtnForm />
       </div>
-      <span className={cn('loginClick')} onClick={() => router.push(`/signin`)}>
+      <span
+        className={cn('loginClick')}
+        onClick={() => router.replace(`/signin`)}
+      >
         🤫
       </span>
     </div>
