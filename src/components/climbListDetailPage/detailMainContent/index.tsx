@@ -126,7 +126,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             <div key={index} className={cn('videoBox')}>
               <video
                 src={url}
-                autoPlay
+                // autoPlay
                 muted
                 controls
                 playsInline
