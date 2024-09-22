@@ -44,6 +44,7 @@ const PostCommentList = memo(
       content_id: post_comment_idx,
       mainKey: 'postCommentDelete',
       firKey: 'postDetailComment',
+      secKey: 'postDetailDatas',
     });
 
     const [showRecomments, setShowRecomments] = useState(false);
@@ -199,7 +200,7 @@ const PostCommentLists = ({
           list={list}
           setTagNickname={setTagNickname}
           setSelectId={setSelectId}
-        />  
+        />
       ))}
     </div>
   );

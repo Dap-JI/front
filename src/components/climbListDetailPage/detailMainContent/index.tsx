@@ -104,7 +104,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
   // 프로필 클릭
 
   return (
-    <div className={cn('container')} onClick={postDetailPage}>
+    <div className={cn('container')}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image
@@ -118,7 +118,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             <span>{timeAgo}</span>
           </div>
         </div>
-        <RightArrowIcon width="15" height="15" />
+        <RightArrowIcon width="15" height="15" onClick={postDetailPage} />
       </div>
       <div className={cn('videoWrapper')}>
         <StyledSlider {...settings}>
@@ -126,10 +126,10 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             <div key={index} className={cn('videoBox')}>
               <video
                 src={url}
+                muted={true}
                 autoPlay
-                muted
-                controls
                 playsInline
+                controls
                 controlsList="nodownload"
               />
             </div>
@@ -137,7 +137,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
         </StyledSlider>
       </div>
 
-      <div className={cn('contentWrapper')}>
+      <div className={cn('contentWrapper')} onClick={postDetailPage}>
         <div className={cn('iconWrapper')}>
           <LikeAction
             likeToggle={likeToggle}
@@ -146,7 +146,6 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
           />
           <CommentCount count={post_comment_count} />
         </div>
-
         <div className={cn('clearday')}>
           <div className={cn('difficultyWrapper')}>
             <span>{gymName} | </span>

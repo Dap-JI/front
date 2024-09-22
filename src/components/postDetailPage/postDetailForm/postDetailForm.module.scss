@@ -6,10 +6,7 @@
   background: white;
   margin-top: 10px;
   gap: 10px;
-  border-bottom: 1px solid rgb(160, 154, 154, 0.5);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-
+  border-radius: 5px;
   .userWrapper {
     width: 100%;
     padding: 10px 10px 0 10px;
@@ -156,6 +153,12 @@
 }
 
 //DetailMainContentList
-.listContainer {
-  margin-bottom: 100px;
+// .listContainer {
+//   margin-bottom: 100px;
+// }
+
+.hasComment {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid rgba(160, 154, 154, 0.5);
 }

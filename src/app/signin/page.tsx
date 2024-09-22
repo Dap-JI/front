@@ -78,8 +78,8 @@ const SignInPage = () => {
         {errors.password && <span>{errors.password.message as string}</span>}
         <CommonButton name="로그인" type="submit" />
       </form>
-      <span onClick={() => router.push(`/signup`)}>회원가입 ㄱㄱ</span>
-      <span onClick={() => router.push(`/`)}>소셜로그인 ㄱㄱ</span>
+      <span onClick={() => router.replace(`/signup`)}>회원가입 ㄱㄱ</span>
+      <span onClick={() => router.replace(`/`)}>소셜로그인 ㄱㄱ</span>
       <ModalChoice />
     </div>
   );

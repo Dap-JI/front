@@ -124,7 +124,7 @@ export const useDetailUploadDatas = (gymId: string | number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
 
-      router.push(`/climbList/${gymId}`);
+      router.replace(`/climbList/${gymId}`);
     },
     onError: () => {
       showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');
@@ -132,7 +132,7 @@ export const useDetailUploadDatas = (gymId: string | number) => {
   });
 };
 
-// 클라이밍장 포스트의 디테일 함수 
+// 클라이밍장 포스트의 디테일 함수
 
 export const usePostDetailDatas = (postid: string) => {
   return useQuery({
@@ -142,7 +142,7 @@ export const usePostDetailDatas = (postid: string) => {
   });
 };
 
-//클라이밍장 포스트 수정 함수  
+//클라이밍장 포스트 수정 함수
 export const usePostDetailUpdate = (postid: string, gymId: string) => {
   const router = useRouter();
   const { showModalHandler } = useModal();
@@ -152,7 +152,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.patch(`/api/posts/${postid}`, formData),
     onSuccess: () => {
-      router.push(`/climbList/${gymId}/${postid}`);
+      router.replace(`/climbList/${gymId}/${postid}`);
     },
     onError: () => {
       showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');
@@ -160,7 +160,7 @@ export const usePostDetailUpdate = (postid: string, gymId: string) => {
   });
 };
 
-//클라이밍장 포스트 삭제 함수 
+//클라이밍장 포스트 삭제 함수
 export const usePostDetailDelete = (postid: string, gymId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -171,7 +171,7 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
     mutationFn: () => instance.delete(`/api/posts/${postid}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['climbList'] });
-      router.push(`/climbList/${gymId}`);
+      router.replace(`/climbList/${gymId}`);
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
@@ -180,7 +180,7 @@ export const usePostDetailDelete = (postid: string, gymId: string) => {
   });
 };
 
-//클라이밍장 동영상 개별 삭제 함수 
+//클라이밍장 동영상 개별 삭제 함수
 
 export const useVideoDelete = () => {
   const queryClient = useQueryClient();

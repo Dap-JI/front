@@ -47,3 +47,16 @@ button {
 
   font-family: 'SpoqaHanSansNeo-Regular', sans-serif;
 }
+
+button,
+div,
+a {
+  outline: none; /* 기본 아웃라인 효과 제거 */
+  box-shadow: none; /* 그림자 효과 제거 */
+  -webkit-tap-highlight-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* 모바일 브라우저에서 클릭 시 강조 색상 제거 */
+}

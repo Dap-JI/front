@@ -99,7 +99,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
   const deleteT = (date: string | null) => date?.split('T')[0];
   //시간 가공하는 함수
   const editPage = () => {
-    router.push(`/climbList/${gym_idx}/${post_idx}/edit`);
+    router.replace(`/climbList/${gym_idx}/${post_idx}/edit`);
   };
   //수정페이지 이동
   const deleteClick = () => {
@@ -115,7 +115,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
   //프로필 이동
 
   return (
-    <div className={cn('container')}>
+    <div className={cn('container', { hasComment: post_comment_count > 0 })}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image
@@ -146,10 +146,10 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
             <div key={index} className={cn('videoBox')}>
               <video
                 src={url}
+                muted={true}
                 autoPlay
-                muted
-                controls
                 playsInline
+                controls
                 controlsList="nodownload"
               />
             </div>

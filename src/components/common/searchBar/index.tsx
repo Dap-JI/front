@@ -6,6 +6,7 @@ import { GlassIcon, AddIcon } from '@/public/icon';
 import { useState, useEffect } from 'react';
 import useDebounce from '@/src/hooks/useDebounce';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -24,7 +25,7 @@ const SearchBar = ({
 }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(searchName);
   const debouncedSearchTerm = useDebounce(inputValue, 500); // 0.6초 지연
-
+  const router = useRouter();
   useEffect(() => {
     if (debouncedSearchTerm || debouncedSearchTerm === '') {
       onSearchChange(debouncedSearchTerm);
@@ -37,6 +38,10 @@ const SearchBar = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+  };
+
+  const uploadClick = () => {
+    router.replace('/board/upload');
   };
 
   return (
@@ -55,11 +60,7 @@ const SearchBar = ({
         value={inputValue}
         onChange={handleChange}
       />
-      {showAdd && (
-        <Link href={'/board/upload'}>
-          <AddIcon width="30" height="30" />
-        </Link>
-      )}
+      {showAdd && <AddIcon width="30" height="30" onClick={uploadClick} />}
     </div>
   );
 };

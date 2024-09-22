@@ -62,7 +62,7 @@ export const useProfileUpdate = (userId: string) => {
       instance.patch(`/api/profile/me`, formData),
     onSuccess: (updatedProfileData) => {
       queryClient.setQueryData(['profileDatas'], updatedProfileData);
-      router.push(`/profile/${userId}`);
+      router.replace(`/profile/${userId}`);
     },
     onError: (e) => {
       console.error(e, '프로필 수정 에러');

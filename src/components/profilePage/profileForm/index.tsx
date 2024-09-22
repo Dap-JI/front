@@ -62,7 +62,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
     router.push(`/profile/${userId}/follow?page=${page}`);
   };
   const profileEditClick = (userId: string) => {
-    router.push(`/profile/${userId}/edit`);
+    router.replace(`/profile/${userId}/edit`);
   };
 
   return (

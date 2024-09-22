@@ -6,7 +6,7 @@
   height: 100vh;
 
   h1 {
-    @include font-style(6rem, skyblue, 800);
+    @include font-style(6rem, #38b6ff, 800);
     margin: 0;
     padding-top: 100px;
     padding-bottom: 100px;

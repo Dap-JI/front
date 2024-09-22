@@ -51,7 +51,7 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
     mutationKey: ['boardUpload'],
     mutationFn: (formData) => boardUploadData(formData),
     onSuccess: () => {
-      router.push('/board');
+      router.replace('/board');
     },
     onError: (e) => {
       showModalHandler('alert', '업로드를  다시 시도해 주세요');
@@ -63,7 +63,7 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
     mutationKey: ['boardUpdate'],
     mutationFn: (formData) => boardUpdateData(boardId, formData),
     onSuccess: () => {
-      router.push(`/board/${boardId}`);
+      router.replace(`/board/${boardId}`);
     },
     onError: (e) => {
       showModalHandler('alert', '수정을 다시 시도해 주세요');
