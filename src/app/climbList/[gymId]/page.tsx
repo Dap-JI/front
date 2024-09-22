@@ -45,7 +45,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
   // 뒤로가기
   const uploadPage = () => {
     setIsUpLoading(true);
-    router.push(`/climbList/${gymId}/upload`);
+    router.replace(`/climbList/${gymId}/upload`);
   };
   //업로드 페이지
 

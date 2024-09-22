@@ -67,7 +67,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/');
+      router.replace('/');
     }
   }, [isSuccess, router]);
 
