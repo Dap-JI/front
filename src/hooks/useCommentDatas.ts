@@ -65,6 +65,7 @@ type useCommentDeleteDataProps = {
   content_id: string;
   mainKey: string;
   firKey: string;
+  secKey: string;
 };
 
 export const useCommentDeleteData = ({
@@ -72,6 +73,7 @@ export const useCommentDeleteData = ({
   content_id,
   mainKey,
   firKey,
+  secKey,
 }: useCommentDeleteDataProps) => {
   const queryClient = useQueryClient();
   const { showModalHandler } = useModal();
@@ -81,6 +83,7 @@ export const useCommentDeleteData = ({
     mutationFn: () => instance.delete(`/api/${category}/${content_id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [`${firKey}`] });
+      queryClient.invalidateQueries({ queryKey: [`${secKey}`] });
     },
     onError: () => {
       showModalHandler('alert', '댓글 삭제에 실패했어요');

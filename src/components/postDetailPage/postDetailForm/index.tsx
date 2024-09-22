@@ -115,7 +115,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
   //프로필 이동
 
   return (
-    <div className={cn('container')}>
+    <div className={cn('container', { hasComment: post_comment_count > 0 })}>
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image

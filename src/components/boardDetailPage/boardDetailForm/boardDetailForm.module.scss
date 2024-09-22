@@ -1,9 +1,8 @@
 .container {
   width: 100%;
   background: white;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: 1px solid rgb(160, 154, 154, 0.5);
+
+  border-radius: 5px;
   padding: 10px;
   .boardDetailHeader {
     @include flex-arrange(space-between, center);
@@ -65,3 +64,12 @@
     margin-top: 5px;
   }
 }
+
+.hasComment {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid rgba(160, 154, 154, 0.5);
+}
+
+// 댓글 삭제시 본문에 comment_input도 바뀌도록 
+//boardDetailData
