@@ -146,10 +146,10 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
             <div key={index} className={cn('videoBox')}>
               <video
                 src={url}
+                muted={true}
                 autoPlay
-                muted
-                controls
                 playsInline
+                controls
                 controlsList="nodownload"
               />
             </div>
