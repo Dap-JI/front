@@ -79,12 +79,14 @@ const BoardDetailPage = ({ params }: BoardDetailPageProps) => {
           {isFetchingNextPage && <LoadingSpinner />}
         </section>
       </main>
-      <CommentInput
-        params={{ boardId: boardId }}
-        tagNickname={tagNickname}
-        setTagNickname={setTagNickname}
-        selectId={selectId}
-      />
+      <div className={cn('commentInputWrapper')}>
+        <CommentInput
+          params={{ boardId: boardId }}
+          tagNickname={tagNickname}
+          setTagNickname={setTagNickname}
+          selectId={selectId}
+        />
+      </div>
       <ModalChoice />
     </div>
   );

@@ -75,7 +75,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
   };
 
   return (
-    <div className={cn('container')}>
+    <div className={cn('container', { hasComment: comment_count > 0 })}>
       <header className={cn('boardDetailHeader')}>
         <div className={cn('userInfo')}>
           <Link href={`/profile/${user_idx}`}>
@@ -135,3 +135,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
 };
 
 export default BoardDetailForm;
+
+  // border-top-left-radius: 5px;
+  // border-top-right-radius: 5px;
+  // border-bottom: 1px solid rgb(160, 154, 154, 0.5);

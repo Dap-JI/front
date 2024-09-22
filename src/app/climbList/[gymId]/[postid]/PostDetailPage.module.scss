@@ -12,6 +12,11 @@
   .tagNickname {
     margin-bottom: 100px;
   }
+  .commentInputWrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 }
 
 .container::-webkit-scrollbar {

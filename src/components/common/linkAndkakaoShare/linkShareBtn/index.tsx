@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './linkShareBtn.module.scss';
 import { LinkIcon } from '@/public/icon';
 import { useToast } from '@/src/hooks/useToast';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ type LinkSahreBtnProps = {
 const LinkSahreBtn = ({ params }: LinkSahreBtnProps) => {
   const { showToastHandler } = useToast();
   const { postid, gymId } = params;
+  const router = useRouter();
 
   const url =
     typeof window !== 'undefined'
@@ -32,6 +34,7 @@ const LinkSahreBtn = ({ params }: LinkSahreBtnProps) => {
   const handleCopyClick = () => {
     copyToClipboard(url);
   };
+
   return (
     <>
       <LinkIcon

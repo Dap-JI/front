@@ -3,11 +3,10 @@ import styles from './footerBar.module.scss';
 import classNames from 'classnames/bind';
 import { HomeIcon, BordIcon, UserIcon, MarkerIcon } from '@/public/icon';
 import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { fetchMyInfo } from '@/src/app/auth/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import { GlassIcon } from '@/public/icon';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -48,6 +47,10 @@ const FooterBar = () => {
   };
   const isClimbListSpecificPostPath = path.match(/^\/climbList\/\d+\/\d+$/);
 
+  const getIconFill = (iconPath: string) => {
+    return path === iconPath ? '#38B6FF' : 'black';
+  };
+
   if (
     path === '/' ||
     path === '/join' ||
@@ -59,28 +62,33 @@ const FooterBar = () => {
   ) {
     return null;
   }
-
+  
   return (
     <div className={cn('container')}>
       <BordIcon
         width="30"
         height="30"
         onClick={() => routerClick('board')}
-        fill="balck"
+        fill={getIconFill('/board')}
       />
       <HomeIcon
         width="30"
         height="30"
-        fill="balck"
         onClick={() => routerClick('climbList')}
+        fill={getIconFill('/climbList')}
       />
       <GlassIcon
         width="30"
         height="30"
         onClick={() => routerClick('search')}
-        fill="balck"
+        fill={getIconFill('/search')}
       />
-      <UserIcon width="30" height="30" onClick={profileClick} fill="balck" />
+      <UserIcon
+        width="30"
+        height="30"
+        onClick={profileClick}
+        fill={getIconFill(`/profile/${myId}`)}
+      />
     </div>
   );
 };

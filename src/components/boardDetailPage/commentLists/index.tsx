@@ -45,6 +45,7 @@ const CommentList = memo(
       content_id: comment_idx,
       mainKey: 'boardCommentDelete',
       firKey: 'boardDetailComment',
+      secKey: 'boardDetailData',
     });
 
     const [showRecomments, setShowRecomments] = useState(false);

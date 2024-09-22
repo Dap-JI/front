@@ -63,12 +63,14 @@ const PostDetailPage = ({ params }: PostDetailPageProps) => {
           <div ref={ref} />
         </section>
       </main>
-      <CommentInput
-        params={{ postId: postid }}
-        tagNickname={tagNickname}
-        setTagNickname={setTagNickname}
-        selectId={selectId}
-      />
+      <div className={cn('commentInputWrapper')}>
+        <CommentInput
+          params={{ postId: postid }}
+          tagNickname={tagNickname}
+          setTagNickname={setTagNickname}
+          selectId={selectId}
+        />
+      </div>
       <ModalChoice />
     </div>
   );
