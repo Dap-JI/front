@@ -6,19 +6,28 @@ const cn = classNames.bind(styles);
 type OauthBtnStyleProps = {
   text: string;
   icon: React.ReactNode;
-  color: string;
+  backColor: string;
   onClick: () => void;
+  textColor: string;
 };
 
-const OauthBtnStyle = ({ text, icon, color, onClick }: OauthBtnStyleProps) => {
+const OauthBtnStyle = ({
+  text,
+  icon,
+  backColor,
+  onClick,
+  textColor,
+}: OauthBtnStyleProps) => {
   return (
     <button
       className={cn('container')}
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: backColor }}
       onClick={onClick}
     >
       <div className={cn('icon')}>{icon}</div>
-      <p className={cn('text')}>{text}</p>
+      <p className={cn('text')} style={{ color: textColor }}>
+        {text}
+      </p>
     </button>
   );
 };
