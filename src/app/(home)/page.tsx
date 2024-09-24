@@ -8,11 +8,10 @@ import Image from 'next/image';
 const cn = classNames.bind(styles);
 
 const Home = () => {
-  const router = useRouter();
   return (
     <div className={cn('container')}>
       <Image
-        src="/icon/dapjilogo.svg"
+        src={process.env.NEXT_PUBLIC_URL + `/icon/dapjilogo.svg`}
         width={300}
         height={200}
         alt="답지 메인 로고"

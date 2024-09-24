@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   return (
     <div className={cn('container')}>
       <Image
-        src="/icon/spinner.gif"
+        src={process.env.NEXT_PUBLIC_URL + '/icon/spinner.gif'}
         width="100"
         height="100"
         alt="loadingSpinner"

@@ -119,7 +119,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image
-            src={User.img || '/icon/icon.png'}
+            src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
             width="30"
             height="30"
             alt="userImg"

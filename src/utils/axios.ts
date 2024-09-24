@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 const instance = axios.create({
   baseURL,
@@ -11,4 +11,3 @@ const instance = axios.create({
 });
 
 export default instance;
-

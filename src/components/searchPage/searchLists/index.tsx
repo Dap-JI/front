@@ -23,7 +23,7 @@ const SearchList = ({ list }: SearchListProps) => {
   return (
     <li className={cn('container')} onClick={profileClick}>
       <Image
-        src={img || '/icon/icon.png'}
+        src={img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
         width="50"
         height="50"
         alt="유저 검색 프로필 이미지"
