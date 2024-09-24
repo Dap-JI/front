@@ -32,7 +32,7 @@ const KakaoCallback = () => {
   return (
     <div className={cn('contaienr')}>
       <Image
-        src="/icon/dapjilogo.svg"
+        src={process.env.NEXT_PUBLIC_URL + '/icon/dapjilogo.svg'}
         width={200}
         height={200}
         alt="답지 메인 로고"

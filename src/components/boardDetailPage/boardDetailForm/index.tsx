@@ -80,7 +80,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         <div className={cn('userInfo')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
-              src={User.img || '/icon/icon.png'}
+              src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
               width="30"
               height="30"
               alt="게시물 작성자 프로필 이미지"
@@ -136,6 +136,6 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
 
 export default BoardDetailForm;
 
-  // border-top-left-radius: 5px;
-  // border-top-right-radius: 5px;
-  // border-bottom: 1px solid rgb(160, 154, 154, 0.5);
+// border-top-left-radius: 5px;
+// border-top-right-radius: 5px;
+// border-bottom: 1px solid rgb(160, 154, 154, 0.5);
