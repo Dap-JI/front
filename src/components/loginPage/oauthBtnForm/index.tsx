@@ -66,7 +66,6 @@ const OauthBtnForm = () => {
             width="60"
             height="30"
             alt="애플 로고"
-            property="true"
           />
         }
         text="Dap Ji 아이디 로그인"

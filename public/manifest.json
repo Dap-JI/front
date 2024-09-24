@@ -1,12 +1,14 @@
 {
-  "theme_color": "#F5F5DC",
-  "background_color": "#F5F5DC",
+  "id": "/",
+  "theme_color": "#f7f4f4",
+  "background_color": "#f7f4f4",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "name": "DapJi",
   "short_name": "DapJi",
   "description": "DapJi",
+  "form_factor": "wide",
   "icons": [
     {
       "src": "/pwaIcons/icon-192x192.png",

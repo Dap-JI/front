@@ -48,7 +48,6 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
               width="30"
               height="30"
               alt="provider 기본이미지"
-              priority
             />
             <span>Dap Ji</span>
           </>
