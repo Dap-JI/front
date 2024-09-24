@@ -10,7 +10,7 @@ const LoadingSpinner = () => {
         width="100"
         height="100"
         alt="loadingSpinner"
-        priority
+        unoptimized
       />
     </div>
   );

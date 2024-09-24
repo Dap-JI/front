@@ -14,18 +14,13 @@ const Home = () => {
       <Image
         src="/icon/dapjilogo.svg"
         width={300}
-        height={300}
+        height={200}
         alt="답지 메인 로고"
+        priority
       />
       <div className={cn('loginContaienr')}>
         <OauthBtnForm />
       </div>
-      <span
-        className={cn('loginClick')}
-        onClick={() => router.replace(`/signin`)}
-      >
-        🤫
-      </span>
     </div>
   );
 };
