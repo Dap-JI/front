@@ -41,7 +41,7 @@ const AdminClimbList = ({ list }: CardListProps) => {
     <li className={cn('innercontainer')}>
       <div className={cn('image')}>
         <Image
-          src={logo || '/icon/icon.png'}
+          src={logo || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
           alt="로고이미지"
           width={60}
           height={60}

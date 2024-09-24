@@ -16,7 +16,7 @@ const LinkPreview = ({ linkPreview }: LinkPreviewProps) => {
   return (
     <div className={cn('linkPreview')}>
       <Image
-        src={linkPreview.img || '/icon/icon.png'}
+        src={linkPreview.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
         alt="링크 미리보기"
         height="50"
         width="50"

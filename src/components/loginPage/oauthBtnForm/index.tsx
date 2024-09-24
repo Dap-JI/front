@@ -48,7 +48,7 @@ const OauthBtnForm = () => {
       <OauthBtnStyle
         icon={
           <Image
-            src="/icon/applewhitepng.png"
+            src={process.env.NEXT_PUBLIC_URL + `/icon/applewhitepng.png`}
             width="24"
             height="27"
             alt="애플 로고"
@@ -62,7 +62,7 @@ const OauthBtnForm = () => {
       <OauthBtnStyle
         icon={
           <Image
-            src="/icon/dapjilogo.svg"
+            src={process.env.NEXT_PUBLIC_URL + `/icon/dapjilogo.svg`}
             width="60"
             height="30"
             alt="애플 로고"

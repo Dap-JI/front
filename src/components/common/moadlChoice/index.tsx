@@ -53,7 +53,12 @@ const ModalChoice = () => {
     >
       <div className={cn('container')}>
         <div className={cn('contentWrapper')}>
-          <Image src={'/icon/icon.png'} alt="logo" width="70" height="70" />
+          <Image
+            src={process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
+            alt="logo"
+            width="70"
+            height="70"
+          />
           <p>{content}</p>
         </div>
 

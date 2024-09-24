@@ -44,7 +44,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
         return (
           <>
             <Image
-              src={'/icon/icon.png'}
+              src={process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
               width="30"
               height="30"
               alt="provider 기본이미지"
@@ -68,7 +68,10 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
     <div className={cn('container')}>
       <div className={cn('profileWrapper')}>
         <Image
-          src={profileInfo.user.img || '/icon/icon.png'}
+          src={
+            profileInfo.user.img ||
+            process.env.NEXT_PUBLIC_URL + '/icon/icon.png'
+          }
           alt="profileImage"
           width="120"
           height="120"
@@ -95,7 +98,7 @@ const ProfileForm = ({ params, profileInfo }: ProfileFormProps) => {
             <div className={cn('btnWrapper')}>
               <div className={cn('oauth', `oauth-${'dapji'}`)}>
                 <Image
-                  src={'/icon/icon.png'}
+                  src={process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
                   width="30"
                   height="30"
                   alt="provider 기본이미지"
