@@ -11,6 +11,7 @@ const LoadingSpinner = () => {
         height="100"
         alt="loadingSpinner"
         unoptimized
+        priority
       />
     </div>
   );

@@ -13,9 +13,15 @@ type ProfileEditPageProps = {
 };
 
 const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
+  const { userId } = params;
+  const handleAccountDeletion = () => {
+    alert('탈퇴 완료!');
+  };
   return (
     <div className={cn('container')}>
-      <Header back={true} />
+      <Header page={`/profile/${userId}`}>
+        <span onClick={handleAccountDeletion}>회원 탈퇴</span>
+      </Header>
       <div className={cn('secondContainer')}>
         <ProfileEditForm params={params} />
       </div>

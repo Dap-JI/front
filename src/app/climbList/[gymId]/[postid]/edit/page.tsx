@@ -23,7 +23,7 @@ const PostDetailEditPage = ({ params }: PostDetailEditPageProps) => {
 
   return (
     <div className={cn('container')}>
-      <Header back={true} />
+      <Header page={`/climbList/${gymId}/${postid}`} />
       <div className={cn('secondContainer')}>
         <PostUploadForm gymId={gymId} initialData={postDetailDatas} />
       </div>
