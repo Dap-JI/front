@@ -1,6 +1,6 @@
 .container {
   @include flex-arrange(space-around, center);
-  @include font-style(1.2, white, 700);
+  @include font-style(1.4rem, white, 700);
   width: 100%;
   height: 50px;
   border-radius: 5px;
