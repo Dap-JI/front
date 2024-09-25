@@ -2,7 +2,6 @@
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
 import OauthBtnForm from '@/src/components/loginPage/oauthBtnForm';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 const cn = classNames.bind(styles);

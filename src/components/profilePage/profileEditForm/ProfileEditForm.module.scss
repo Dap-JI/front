@@ -2,7 +2,10 @@
   width: 100%;
   @include flex-arrange;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  .email {
+    @include font-style(1.1rem, gray, 400);
+  }
 
   .textareaContainer {
     position: relative;
