@@ -118,6 +118,7 @@ export type ProfileUserType = {
   img: string;
   introduce: string | null;
   provider: string;
+  email: string;
 };
 
 export type ProfilePostType = {
