@@ -101,6 +101,7 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
         setFileUrl={setFileUrl}
         foldername="profile-picture"
       />
+      <span className={cn('email')}>{profileData?.user.email}</span>
       <div>
         <CommonInput
           type="text"
