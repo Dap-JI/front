@@ -1,6 +1,7 @@
 .container {
+  position: relative; // 부모 컨테이너에 상대 위치 설정
   width: 100%;
-  height: 100px; // 클라이밍장 정보를 표시하기 위해 높이를 늘림
+  height: 94.5px;
   background: white;
   border-radius: 5px;
   padding: 10px; // 여유 있는 공간을 위해 padding 추가
@@ -38,7 +39,7 @@
     .address {
       @include font-style(1.1rem, gray, 400);
       margin: 0;
-      width: 250px;
+      width: 220px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -50,8 +51,13 @@
   }
 
   .favoriteStatus {
-    @include font-style(1.2rem, #e74c3c, 500); // 좋아요 표시 스타일 변경
     text-align: right;
+    position: absolute;
+    font-size: 4.75vw;
+    right: 0; // 오른쪽 끝으로 이동
+    top: 50%; // 수직 가운데 정렬
+    margin-right: 15px;
+    transform: translateY(-50%); // 가운데 정렬을 위한 변환
   }
 }
 
