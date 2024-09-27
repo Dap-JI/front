@@ -29,11 +29,11 @@ export const fethcProfilePostDatas = async ({
 
 //프로필 유저 정보 및 게시판 정보
 
-export const fetchProfileBoardDatas = async ({
+export const fetchProfileFavoriteGyms = async ({
   userId,
   page = 1,
 }: ProfileDataProps) => {
-  const res = await instance.get(`/api/profile_board/${userId}`, {
+  const res = await instance.get(`/api/profile_favoriteGym/${userId}`, {
     params: {
       page,
     },

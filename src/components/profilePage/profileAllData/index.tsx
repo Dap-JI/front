@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './ProfileAllData.module.scss';
 import { useState } from 'react';
-import ProfileBoardDatas from '../profileBoardData';
+import ProfileGymDatas from '../profileGymData/ProfileGymDatas';
 import ProfilePostDatas from '../profilePostData';
 import { PostIcon, BoardIcon } from '@/public/icon';
 import { ProfilePostDetailType } from '@/src/utils/type';
@@ -49,7 +49,7 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
           <ProfilePostDatas lists={profileData.posts} />
         )
       ) : (
-        <ProfileBoardDatas params={params} />
+        <ProfileGymDatas params={params} />
       )}
     </div>
   );

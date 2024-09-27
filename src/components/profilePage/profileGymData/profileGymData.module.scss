@@ -1,0 +1,69 @@
+.container {
+  width: 100%;
+  height: 100px; // 클라이밍장 정보를 표시하기 위해 높이를 늘림
+  background: white;
+  border-radius: 5px;
+  padding: 10px; // 여유 있는 공간을 위해 padding 추가
+  @include flex-arrange(flex-start, center);
+  gap: 20px;
+
+  .logoWrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // 로고 이미지가 잘리지 않게
+    }
+  }
+
+  .mainContent {
+    @include flex-arrange(center, flex-start);
+    flex-direction: column;
+    margin-right: auto;
+    gap: 5px;
+
+    .name {
+      @include font-style(1.4rem, black, 600); // 이름의 폰트 스타일 변경
+      margin: 0;
+      width: 200px; // 클라이밍장 이름이 길어질 수 있으므로 넓이 확장
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .address {
+      @include font-style(1.1rem, gray, 400);
+      margin: 0;
+      width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .postCount {
+      @include font-style(1.1rem, gray, 400);
+    }
+  }
+
+  .favoriteStatus {
+    @include font-style(1.2rem, #e74c3c, 500); // 좋아요 표시 스타일 변경
+    text-align: right;
+  }
+}
+
+.outerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // 리스트 간의 간격을 조금 더 넓힘
+
+  .emptyMessage {
+    @include font-style(1.5rem, black, 600);
+    margin-top: 50px;
+    text-align: center;
+  }
+}
