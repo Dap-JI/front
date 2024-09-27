@@ -33,6 +33,7 @@ const ProfileGymData = ({ gym }: ProfileGymDataProps) => {
         <span className={cn('address')}>{address}</span>
         <span className={cn('postCount')}>올린 동영상 수: {post_count}</span>
       </div>
+      <div className={cn('favoriteStatus')}>⭐</div>{' '}
     </div>
   );
 };
