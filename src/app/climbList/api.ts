@@ -89,6 +89,11 @@ export const useClimbListDataUpdate = (gymId: string) => {
   });
 };
 
+//클라이밍장 리스트 선호도 추가 함수
+
+
+
+
 //클라이밍장 포스트 데이터 조회 함수
 
 type ClimbDetailDatasProps = {

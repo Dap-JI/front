@@ -5,6 +5,8 @@ import { GymsType } from '@/src/utils/type';
 import Image from 'next/image';
 import { RightArrowIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
+import FavoriteAction from '../favoriteClimbList';
+import useFavoriteAction from '@/src/hooks/useFavoriteAction';
 
 const cn = classNames.bind(styles);
 
@@ -13,8 +15,12 @@ type CardListProps = {
 };
 
 const CardList = ({ list }: CardListProps) => {
-  const { logo, name, gym_idx, address } = list;
+  const { logo, name, gym_idx, address, is_favorite } = list;
   const router = useRouter();
+  const { handleFavoriteClick, favoriteToggle } = useFavoriteAction({
+    initalFavoriteToggle: is_favorite,
+    gymId: gym_idx,
+  });
 
   const detailClick = () => {
     router.push(`/climbList/${gym_idx}`);
@@ -33,8 +39,14 @@ const CardList = ({ list }: CardListProps) => {
         />
       </div>
       <div className={cn('textWrapper')}>
-        <span>{name}</span>
-        <span>{address}</span>
+        <div className={cn('nameWrapper')}>
+          <span className={cn('name')}>{name}</span>
+          <FavoriteAction
+            favoriteToggle={favoriteToggle}
+            onClick={handleFavoriteClick}
+          />
+        </div>
+        <span className={cn('address')}>{address}</span>
       </div>
       <div className={cn('actionBtn')}>
         <RightArrowIcon width="15" height="15" />

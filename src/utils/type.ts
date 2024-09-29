@@ -33,6 +33,7 @@ export type GymsType = {
   logo: string | null;
   post_count: number;
   gym_notice_idx: string;
+  is_favorite: boolean;
 };
 
 export type ClimbLIstResponseType = {
