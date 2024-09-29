@@ -1,75 +1,39 @@
 .container {
-  position: relative; // 부모 컨테이너에 상대 위치 설정
-  width: 100%;
-  height: 94.5px;
-  background: white;
-  border-radius: 5px;
-  padding: 10px; // 여유 있는 공간을 위해 padding 추가
   @include flex-arrange(flex-start, center);
-  gap: 20px;
-
-  .logoWrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; // 로고 이미지가 잘리지 않게
-    }
-  }
-
-  .mainContent {
-    @include flex-arrange(center, flex-start);
-    flex-direction: column;
-    margin-right: auto;
-    gap: 5px;
-
-    .name {
-      @include font-style(1.4rem, black, 600); // 이름의 폰트 스타일 변경
-      margin: 0;
-      width: 200px; // 클라이밍장 이름이 길어질 수 있으므로 넓이 확장
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .address {
-      @include font-style(1.1rem, gray, 400);
-      margin: 0;
-      width: 220px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .postCount {
-      @include font-style(1.1rem, gray, 400);
-    }
-  }
-
-  .favoriteStatus {
-    text-align: right;
-    position: absolute;
-    font-size: 4.75vw;
-    right: 0; // 오른쪽 끝으로 이동
-    top: 50%; // 수직 가운데 정렬
-    margin-right: 15px;
-    transform: translateY(-50%); // 가운데 정렬을 위한 변환
-  }
-}
-
-.outerContainer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; // 리스트 간의 간격을 조금 더 넓힘
+  background-color: white;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  gap: 10px;
+  border-radius: 5px;
+  border-bottom: 1.5px solid rgb(240, 240, 240); /* 아래 테두리 추가 */
 
-  .emptyMessage {
-    @include font-style(1.5rem, black, 600);
-    margin-top: 50px;
-    text-align: center;
+  .textWrapper {
+    display: flex;
+    flex-direction: column;
+    text-decoration-line: none;
+    width: 100%;
+    .nameWrapper {
+      @include flex-arrange(flex-start, center);
+      gap: 5px;
+      width: 100%;
+      .name {
+        @include font-style(1.6rem, black, 600);
+        margin-bottom: 3px;
+      }
+    }
+    .address {
+      @include font-style(1.1rem, grey, 400);
+    }
+  }
+
+  img {
+    border-radius: 5px;
+  }
+
+  .actionBtn {
+    margin-left: auto;
+    @include flex-arrange(flex-start, center);
+    gap: 20px;
   }
 }

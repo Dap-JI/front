@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './profileGymData.module.scss';
 import { fetchProfileFavoriteGyms } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
-import { GymsType, metaType } from '@/src/utils/type';
+import { GymsType, metaType, ProfileFavoriteGymType } from '@/src/utils/type';
 import ProfileGymData from './profileGymData';
 
 const cn = classNames.bind(styles);
@@ -13,13 +13,6 @@ type ProfileGymDatasProps = {
   };
 };
 
-type ProfileGymPageType = {
-  favoriteGyms: GymsType[];
-  meta: metaType;
-  isOwnProfile: boolean;
-  userRole: string;
-};
-
 const ProfileGymDatas = ({ params }: ProfileGymDatasProps) => {
   const { userId } = params;
 
@@ -28,7 +21,7 @@ const ProfileGymDatas = ({ params }: ProfileGymDatasProps) => {
     ref,
     isLoading,
     error,
-  } = useInfiniteScroll<ProfileGymPageType>({
+  } = useInfiniteScroll<ProfileFavoriteGymType>({
     queryKey: ['profileFavoriteGyms', userId],
     fetchFunction: (page = 1) =>
       fetchProfileFavoriteGyms({
