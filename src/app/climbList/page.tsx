@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import { FavoritedIcon, FavoriteIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
 
