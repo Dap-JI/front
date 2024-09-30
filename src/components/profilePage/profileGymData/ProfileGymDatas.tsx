@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './profileGymData.module.scss';
 import { fetchProfileFavoriteGyms } from '@/src/app/profile/api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
-import { GymsType, metaType, ProfileFavoriteGymType } from '@/src/utils/type';
+import { ProfileFavoriteGymType } from '@/src/utils/type';
 import ProfileGymData from './profileGymData';
 
 const cn = classNames.bind(styles);
@@ -11,9 +11,10 @@ type ProfileGymDatasProps = {
   params: {
     userId: string;
   };
+  name: string;
 };
 
-const ProfileGymDatas = ({ params }: ProfileGymDatasProps) => {
+const ProfileGymDatas = ({ params, name }: ProfileGymDatasProps) => {
   const { userId } = params;
 
   const {
@@ -39,7 +40,14 @@ const ProfileGymDatas = ({ params }: ProfileGymDatasProps) => {
   return (
     <div className={cn('outerContainer')}>
       {profileGyms.length > 0 ? (
-        profileGyms.map((gym) => <ProfileGymData key={gym.gym_idx} gym={gym} />)
+        <>
+          <span className={cn('favoriteList')}>
+            {name}님의 최애 클라이밍장 🔥
+          </span>
+          {profileGyms.map((gym) => (
+            <ProfileGymData key={gym.gym_idx} gym={gym} />
+          ))}
+        </>
       ) : (
         <span className={cn('emptyMessage')}>
           아직 선호하는 클라이밍장이 없네요!😒
@@ -47,9 +55,10 @@ const ProfileGymDatas = ({ params }: ProfileGymDatasProps) => {
       )}
       {isLoading && <span>Loading...</span>}
       <div ref={ref} />
-      {error && <span>오류가 발생했습니다.</span>}
     </div>
   );
 };
 
 export default ProfileGymDatas;
+
+//00님의 최애 클라이밍장

@@ -7,6 +7,6 @@ export const categoryListData = [
 ];
 
 export const favoritecategoryListData = [
-  { category_idx: 1, category: '전체' },
-  { category_idx: 2, category: '선호 클라이밍장' },
+  { category_idx: 1, category: '인기순' },
+  { category_idx: 2, category: '즐겨찾기' },
 ];
