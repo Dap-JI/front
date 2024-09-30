@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './VideoInput.module.scss';
 import { useMutation } from '@tanstack/react-query';
@@ -13,6 +13,7 @@ import { CircleXIcon, PlusIcon } from '@/public/icon';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { isServerError } from '@/src/utils/axiosError';
+import { Video, MediaUrl } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -36,17 +37,11 @@ export const StyledSlider = styled(Slider)`
   }
 `;
 type VideoInputProps = {
-  mediaUrl: {
-    videoUrl: string[];
-    thumbnailUrl: string[];
-  };
-  setMediaUrl: React.Dispatch<
-    React.SetStateAction<{
-      videoUrl: string[];
-      thumbnailUrl: string[];
-    }>
+  mediaUrl: MediaUrl;
+  setMediaUrl: React.Dispatch<React.SetStateAction<MediaUrl>>;
+  setDeletedVideos: React.Dispatch<
+    React.SetStateAction<{ videoUrl: string; thumbnailUrl: string }[]>
   >;
-  setDeletedVideos: any;
 };
 
 const VideoInput = ({
@@ -69,10 +64,10 @@ const VideoInput = ({
     draggable: true,
   };
 
-  const { mutate: videoUpload, isPending } = useMutation({
+  const { mutate: videoUpload } = useMutation({
     mutationKey: ['videoFile'],
-    mutationFn: async (videos: FormData) => {
-      const response = await instance.post('/api/videos', videos, {
+    mutationFn: async ({ formData }: { formData: FormData }) => {
+      const response = await instance.post('/api/videos', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -88,11 +83,25 @@ const VideoInput = ({
       return response.data; // API 응답 데이터 반환
     },
     onSuccess: (data) => {
-      // 성공적으로 업로드된 경우 mediaUrl을 상태에 저장
-      setMediaUrl((prev) => ({
-        videoUrl: [...prev.videoUrl, ...data.videoUrls],
-        thumbnailUrl: [...prev.thumbnailUrl, ...data.thumbnailUrls],
-      }));
+      const { videoUrls, thumbnailUrls } = data;
+
+      setMediaUrl((prev) => {
+        const updatedVideos = [...prev.videos];
+
+        // 업로드된 동영상의 blob URL을 S3 URL로 대체
+        for (let i = 0; i < videoUrls.length; i++) {
+          updatedVideos[prev.videos.length - videoUrls.length + i] = {
+            ...updatedVideos[prev.videos.length - videoUrls.length + i],
+            s3Url: videoUrls[i],
+          };
+        }
+
+        return {
+          ...prev,
+          videos: updatedVideos,
+          thumbnailUrl: [...prev.thumbnailUrl, ...thumbnailUrls],
+        };
+      });
     },
     onError: (e) => {
       if (isServerError(e) && e.response && e.response.status === 401) {
@@ -113,11 +122,13 @@ const VideoInput = ({
 
     if (files && files.length > 0) {
       // 현재 업로드된 동영상 개수와 새로 추가하려는 동영상 개수 확인
-      if (mediaUrl.videoUrl.length + files.length > 10) {
+      if (mediaUrl.videos.length + files.length > 10) {
         showModalHandler('alert', '최대 10개까지 업로드가 가능해요.');
         return;
       }
+
       const formData = new FormData();
+      const newVideos: Video[] = [];
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -126,51 +137,66 @@ const VideoInput = ({
           return;
         }
 
+        // 동영상 파일의 객체 URL 생성
+        const blobUrl = URL.createObjectURL(file);
+        newVideos.push({ blobUrl });
         formData.append('videos', file);
       }
 
-      videoUpload(formData);
+      // 미리보기를 위해 mediaUrl 상태 업데이트
+      setMediaUrl((prev) => ({
+        ...prev,
+        videos: [...prev.videos, ...newVideos],
+      }));
+
+      // 동영상 업로드 함수 호출
+      videoUpload({ formData });
     }
   };
+
   const handleRemoveVideo = (index: number) => {
-    const videoToRemove = mediaUrl.videoUrl[index];
-    const thumbnailToRemove = mediaUrl.thumbnailUrl[index];
+    const videoToRemove = mediaUrl.videos[index];
 
-    // 삭제할 동영상과 썸네일 URL을 deletedVideos 배열에 추가
-    setDeletedVideos((prev: string[]) => [
-      ...prev,
-      { videoUrl: videoToRemove, thumbnailUrl: thumbnailToRemove },
-    ]);
+    // blob URL 해제
+    if (videoToRemove.blobUrl) {
+      URL.revokeObjectURL(videoToRemove.blobUrl);
+    }
 
-    // 브라우저에서 동영상 제거
-    const updatedVideos = mediaUrl.videoUrl.filter((_, i) => i !== index);
-    const updatedThumbnailUrl = mediaUrl.thumbnailUrl.filter(
-      (_, i) => i !== index,
-    );
+    // 업로드된 동영상이면 삭제 요청에 추가
+    if (videoToRemove.s3Url) {
+      const thumbnailToRemove = mediaUrl.thumbnailUrl[index];
+      setDeletedVideos((prev) => [
+        ...prev,
+        { videoUrl: videoToRemove.s3Url!, thumbnailUrl: thumbnailToRemove },
+      ]);
+    }
 
-    setMediaUrl({
-      videoUrl: updatedVideos,
-      thumbnailUrl: updatedThumbnailUrl,
+    // 상태에서 동영상과 썸네일 제거
+    setMediaUrl((prev) => {
+      const newVideos = prev.videos.filter((_, i) => i !== index);
+      const newThumbnailUrl = prev.thumbnailUrl.filter((_, i) => i !== index);
+      return {
+        ...prev,
+        videos: newVideos,
+        thumbnailUrl: newThumbnailUrl,
+      };
     });
   };
 
-  if (isPending) {
-    return (
-      <div style={{ width: '100px', marginTop: '10px' }}>
-        <CircularProgressbar
-          value={progress}
-          text={`${progress}%`}
-          styles={buildStyles({
-            trailColor: '#d6d6d6',
-          })}
-        />
-      </div>
-    );
-  }
+  // 컴포넌트 언마운트 시 blob URL 해제
+  useEffect(() => {
+    return () => {
+      mediaUrl.videos.forEach((video) => {
+        if (video.blobUrl) {
+          URL.revokeObjectURL(video.blobUrl);
+        }
+      });
+    };
+  }, [mediaUrl.videos]);
 
   return (
     <div className={cn('container')}>
-      {mediaUrl.videoUrl.length === 10 ? (
+      {mediaUrl.videos.length === 10 ? (
         <span className={cn('maxVideo')}>최대 10개까지 업로드가 가능해요</span>
       ) : (
         <>
@@ -190,14 +216,14 @@ const VideoInput = ({
       <div className={styles.uploadInput}>
         <div className={cn('videoWrapper')}>
           <StyledSlider {...settings}>
-            {mediaUrl.videoUrl?.map((url, index) => (
+            {mediaUrl.videos?.map((video, index) => (
               <div key={index} className={cn('videoBox')}>
                 <CircleXIcon
                   className={cn('close')}
                   onClick={() => handleRemoveVideo(index)}
                 />
                 <video
-                  src={url}
+                  src={video.s3Url || video.blobUrl}
                   controls
                   playsInline
                   muted

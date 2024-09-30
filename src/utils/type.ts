@@ -389,3 +389,13 @@ export type useFormNoticeUploadType = {
   title: string;
   content: string;
 };
+
+export type Video = {
+  blobUrl?: string;
+  s3Url?: string;
+};
+
+export type MediaUrl = {
+  videos: Video[];
+  thumbnailUrl: string[];
+};
