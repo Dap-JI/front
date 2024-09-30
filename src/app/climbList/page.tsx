@@ -10,12 +10,15 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import { useQueryClient } from '@tanstack/react-query';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
+import CategoryLists from '@/src/components/boardPage/categroyLists';
+import { favoritecategoryListData } from '@/src/utils/categoryListDatas';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
+  const [selectCategory, setSelectCategory] = useState<string | null>('전체');
 
   const {
     data: climbListData,
@@ -35,6 +38,9 @@ const ClimbListPage = () => {
     setSearchName(value);
   };
 
+  const handleSelectCategory = (category: string) => {
+    setSelectCategory(category);
+  };
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -59,6 +65,11 @@ const ClimbListPage = () => {
           placeholder="클라이밍장을 검색해 보세요"
           searchName={searchName}
           onSearchChange={handleSearchChange}
+        />
+        <CategoryLists
+          lists={favoritecategoryListData}
+          selectCategory={selectCategory}
+          onCategorySelect={handleSelectCategory}
         />
       </div>
       <div className={cn('secondContainer')}>

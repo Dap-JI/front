@@ -1,54 +1,54 @@
-.container {
-  width: 100%;
-  height: 50px;
-  background: white;
-  border-radius: 5px;
-  padding: 5px;
-  @include flex-arrange(flex-start, center);
-  gap: 20px;
-  .mainContent {
-    @include flex-arrange(center, flex-start);
-    flex-direction: column;
-    margin-right: auto;
-    gap: 5px;
+// .container {
+//   width: 100%;
+//   height: 50px;
+//   background: white;
+//   border-radius: 5px;
+//   padding: 5px;
+//   @include flex-arrange(flex-start, center);
+//   gap: 20px;
+//   .mainContent {
+//     @include flex-arrange(center, flex-start);
+//     flex-direction: column;
+//     margin-right: auto;
+//     gap: 5px;
 
-    .title {
-      @include font-style(1.2rem, black, 600);
-      margin: 0;
-      width: 100px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .infoWrapper {
-      @include flex-arrange(center, space-evenly);
-      @include font-style(1.1rem, gray, 400);
+//     .title {
+//       @include font-style(1.2rem, black, 600);
+//       margin: 0;
+//       width: 100px;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       white-space: nowrap;
+//     }
+//     .infoWrapper {
+//       @include flex-arrange(center, space-evenly);
+//       @include font-style(1.1rem, gray, 400);
 
-      gap: 20px;
-    }
-  }
-  .iconWrapper {
-    @include flex-arrange(flex-end, center);
-    gap: 10px;
+//       gap: 20px;
+//     }
+//   }
+//   .iconWrapper {
+//     @include flex-arrange(flex-end, center);
+//     gap: 10px;
 
-    .like {
-      @include flex-arrange(center);
-      @include font-style(1.3rem, black, 400);
-      gap: 3px;
-      width: 35px;
-    }
-  }
-}
+//     .like {
+//       @include flex-arrange(center);
+//       @include font-style(1.3rem, black, 400);
+//       gap: 3px;
+//       width: 35px;
+//     }
+//   }
+// }
 
-.outerContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+// .outerContainer {
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 5px;
 
-  .emptyMessage {
-    @include font-style(1.5rem, black, 600);
-    margin-top: 50px;
-    text-align: center;
-  }
-}
+//   .emptyMessage {
+//     @include font-style(1.5rem, black, 600);
+//     margin-top: 50px;
+//     text-align: center;
+//   }
+// }

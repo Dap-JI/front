@@ -9,7 +9,7 @@ import { AddIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import { ClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import Header from '@/src/components/common/header';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
@@ -33,7 +33,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
     isLoading,
     isFetchingNextPage,
   } = useInfiniteScroll<ClimbDetailResponseType>({
-    queryKey: ['climbDetail', gymId, activeColor],
+    queryKey: ['climbDetail', activeColor],
     fetchFunction: (pageParam = 1) =>
       ClimbDetailDatas({ pageParam, gymId, color: activeColor }),
     getNextPageParam: (lastPage) =>

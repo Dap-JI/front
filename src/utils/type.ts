@@ -33,6 +33,7 @@ export type GymsType = {
   logo: string | null;
   post_count: number;
   gym_notice_idx: string;
+  is_favorite: boolean;
 };
 
 export type ClimbLIstResponseType = {
@@ -133,18 +134,8 @@ export type ProfilePostType = {
   followingCount: number;
 };
 
-export type ProfileBoardDetailType = {
-  board_idx: string;
-  title: string;
-  category: string;
-  created_at: any;
-  like_count: number;
-  comment_count: number;
-};
-
-export type ProfileBoardType = {
-  user: ProfileUserType;
-  boards: ProfileBoardDetailType[];
+export type ProfileFavoriteGymType = {
+  favoriteGyms: GymsType[];
   meta: metaType;
   isOwnProfile: boolean;
   userRole: string;

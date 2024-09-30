@@ -10,14 +10,20 @@ import { useModal } from '@/src/hooks/useModal';
 type ClimbListProps = {
   page: number;
   search: string;
+  // category: string;
 };
 
 //클라이밍장 리스트 조회 함수
-export const ClimbListDatas = async ({ page = 1, search }: ClimbListProps) => {
+export const ClimbListDatas = async ({
+  page = 1,
+  search,
+  // category,
+}: ClimbListProps) => {
   const res = await instance.get(`/api/gyms`, {
     params: {
       page,
       search,
+      // category,
     },
   });
   return res.data;
@@ -88,6 +94,8 @@ export const useClimbListDataUpdate = (gymId: string) => {
     },
   });
 };
+
+//클라이밍장 리스트 선호도 추가 함수
 
 //클라이밍장 포스트 데이터 조회 함수
 
