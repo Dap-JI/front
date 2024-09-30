@@ -127,12 +127,8 @@ const ProfileEditForm = ({ params }: EditFormProps) => {
       <div className={cn('textareaContainer')}>
         <textarea
           className={cn('limitedTextarea')}
-          {...register('introduce', {
-            maxLength: {
-              value: 100,
-              message: '최대 100자까지 가능합니다. ',
-            },
-          })}
+          maxLength={100}
+          {...register('introduce')}
         />
         <div className={cn('charCount')}>
           {text.length}/{maxLength}
