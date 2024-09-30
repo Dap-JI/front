@@ -46,6 +46,7 @@ const ProfileGymData = ({ gym }: ProfileGymDataProps) => {
           /> */}
         </div>
         <span className={cn('address')}>{address}</span>
+        <span className={cn('post_count')}>동영상 갯수 : {post_count}</span>
       </div>
       <div className={cn('actionBtn')}>
         <RightArrowIcon width="15" height="15" />

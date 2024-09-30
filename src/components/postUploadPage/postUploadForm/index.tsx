@@ -51,6 +51,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 
   //난이도 색
   const maxLength = 100;
+
   const {
     register,
     handleSubmit,
@@ -158,7 +159,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         id="clearday"
         type="date"
         label="등반일을 선택해 주세요"
-        value={getTodayDate()}
+        defaultValue={getTodayDate()}
         register={register('clearday', {
           required: '날짜를 선택해주세요',
           validate: (value) =>
