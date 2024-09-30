@@ -10,7 +10,6 @@ import useScrollDirection from '@/src/hooks/useScrollDirection';
 import { boardListGetDatas } from './api';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { BoardResponseType } from '@/src/utils/type';
-import { useQueryClient } from '@tanstack/react-query';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 
 const cn = classNames.bind(styles);
@@ -19,7 +18,6 @@ const BoardPage = () => {
   const [selectCategory, setSelectCategory] = useState<string | null>('전체');
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
-  const queryClient = useQueryClient();
 
   const {
     data: boardListGetData,
@@ -36,19 +34,13 @@ const BoardPage = () => {
   const boardData =
     boardListGetData?.pages.flatMap((page) => page.boards) ?? [];
 
-  const handleSelectCategory = (category: string) => {
-    setSelectCategory(category);
-  };
-
   const handleSearchChange = (value: string) => {
     setSearchName(value);
   };
-
-  useEffect(() => {
-    if (searchName !== '') {
-      queryClient.invalidateQueries({ queryKey: ['boardListData'] });
-    }
-  }, [searchName, selectCategory, queryClient]);
+  
+  const handleSelectCategory = (category: string) => {
+    setSelectCategory(category);
+  };
 
   if (isLoading) {
     <LoadingSpinner />;

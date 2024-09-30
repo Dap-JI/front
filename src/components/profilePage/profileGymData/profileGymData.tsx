@@ -4,6 +4,7 @@ import { GymsType } from '@/src/utils/type';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import FavoriteAction from '../../climbListPage/favoriteClimbList';
+import useFavoriteAction from '@/src/hooks/useFavoriteAction';
 import { RightArrowIcon } from '@/public/icon';
 
 const cn = classNames.bind(styles);
@@ -13,13 +14,13 @@ type ProfileGymDataProps = {
 };
 
 const ProfileGymData = ({ gym }: ProfileGymDataProps) => {
-  const { name, address, logo, post_count, gym_idx } = gym;
+  const { name, address, logo, post_count, gym_idx, is_favorite } = gym;
   const router = useRouter();
 
-  // const { handleFavoriteClick, favoriteToggle } = useFavoriteAction({
-  //   initalFavoriteToggle: is_favorite,
-  //   gymId: gym_idx,
-  // });
+  const { handleFavoriteClick, favoriteToggle } = useFavoriteAction({
+    initalFavoriteToggle: is_favorite,
+    gymId: gym_idx,
+  });
 
   const gymClick = () => {
     router.push(`/climbList/${gym_idx}`);
@@ -40,10 +41,10 @@ const ProfileGymData = ({ gym }: ProfileGymDataProps) => {
       <div className={cn('textWrapper')}>
         <div className={cn('nameWrapper')}>
           <span className={cn('name')}>{name}</span>
-          {/* <FavoriteAction
+          <FavoriteAction
             favoriteToggle={favoriteToggle}
             onClick={handleFavoriteClick}
-          /> */}
+          />
         </div>
         <span className={cn('address')}>{address}</span>
         <span className={cn('post_count')}>동영상 갯수 : {post_count}</span>
