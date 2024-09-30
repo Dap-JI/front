@@ -1,48 +1,35 @@
 import styles from './commonInput.module.scss';
 import classNames from 'classnames/bind';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import { HTMLAttributes } from 'react';
 
 const cn = classNames.bind(styles);
 
-type inputProps = {
+interface inputProps extends HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   label?: string;
   id?: string;
-  register?: UseFormRegisterReturn;
-  suffix?: React.ReactNode;
-  type?: string;
-  value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string; // 추가
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-};
+  type?: string;
+  value?: string;
+  register?: UseFormRegisterReturn;
+  suffix?: React.ReactNode;
+}
 
 const CommonInput = ({
-  placeholder,
   label,
   id,
   suffix,
   register,
-  type = 'text',
-  value,
-  onChange,
-  className, // 추가
-  onKeyDown,
+  className,
   ...rest
 }: inputProps) => {
   return (
     <div className={cn('container', className)}>
       <label htmlFor={id}>{label}</label>
-      <input
-        className={cn('input')}
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        {...register}
-        {...rest}
-      />
+      <input className={cn('input')} id={id} {...register} {...rest} />
       {suffix}
     </div>
   );

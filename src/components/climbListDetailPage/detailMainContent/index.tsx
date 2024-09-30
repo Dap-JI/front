@@ -63,6 +63,8 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
   //리스트 데이터들
 
   const timeAgo = useTimeAgo(createdAt);
+  const cleartimeAgo = useTimeAgo(clearday);
+
   const { likeCount, likeToggle, handleLikeClick } = useLikeAction({
     category: 'posts',
     content_id: post_idx,
@@ -153,7 +155,9 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             <div className={cn('color', `color-${color}`)} />
           </div>
 
-          <span>등반일 : {deleteT(clearday)}</span>
+          <span>
+            등반일 : {deleteT(clearday)} ({cleartimeAgo})
+          </span>
         </div>
       </div>
 
