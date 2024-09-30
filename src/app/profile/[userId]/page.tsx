@@ -55,6 +55,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 
   const profileDataObject = {
     posts: profilePosts,
+    userName: name,
   };
 
   const handleLogoutClick = () => {

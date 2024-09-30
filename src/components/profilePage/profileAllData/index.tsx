@@ -11,6 +11,7 @@ const cn = classNames.bind(styles);
 type ProfileAllDataProps = {
   profileData: {
     posts: ProfilePostDetailType[];
+    userName: string;
   };
   params: {
     userId: string;
@@ -49,7 +50,7 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
           <ProfilePostDatas lists={profileData.posts} />
         )
       ) : (
-        <ProfileGymDatas params={params} />
+        <ProfileGymDatas params={params} name={profileData.userName} />
       )}
     </div>
   );
