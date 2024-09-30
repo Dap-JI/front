@@ -49,7 +49,7 @@ const BoardPage = () => {
       queryClient.invalidateQueries({ queryKey: ['boardListData'] });
     }
   }, [searchName, selectCategory, queryClient]);
-  
+
   if (isLoading) {
     <LoadingSpinner />;
   }
