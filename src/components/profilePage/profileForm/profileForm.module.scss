@@ -82,5 +82,6 @@
   .textWrapper {
     @include font-style(1.2rem, rgba(42, 41, 41), 400);
     white-space: pre-wrap;
+    word-break: break-word;
   }
 }

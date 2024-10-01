@@ -14,6 +14,7 @@ import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import { useVideoDelete } from '@/src/app/climbList/api';
 import LoadingSpinner from '../../common/loadingSpinner';
+import { Video, MediaUrl } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -22,32 +23,31 @@ type PostUploadFormProps = {
   initialData?: PostDetailDataType;
 };
 
-type MediaUrlType = {
-  videoUrl: string[];
-  thumbnailUrl: string[];
-};
-
 const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   const [deletedVideos, setDeletedVideos] = useState<
     { videoUrl: string; thumbnailUrl: string }[]
   >([]);
 
-  const [mediaUrl, setMediaUrl] = useState<MediaUrlType>({
-    videoUrl: initialData?.media
+  const [mediaUrl, setMediaUrl] = useState<MediaUrl>({
+    videos: initialData?.media
       ? Array.isArray(initialData.media)
-        ? initialData.media
-        : [initialData.media] // 단일 문자열인 경우 배열로 변환
+        ? initialData.media.map((url) => ({ s3Url: url }))
+        : [{ s3Url: initialData.media }]
       : [],
     thumbnailUrl: initialData?.thumbnailUrl
       ? Array.isArray(initialData.thumbnailUrl)
         ? initialData.thumbnailUrl
-        : [initialData.thumbnailUrl] // 단일 문자열인 경우 배열로 변환
-      : [], // 업로드 시 썸네일은 없으므로 null로 설정
+        : [initialData.thumbnailUrl]
+      : [],
   });
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
   );
   const { showModalHandler } = useModal();
+
+  console.log('videos=====>', mediaUrl.videos);
+  console.log('thumbnailUrl=====>', mediaUrl.thumbnailUrl);
+  //mediaurl은 bloburl나옴
 
   //난이도 색
   const maxLength = 100;
@@ -64,10 +64,11 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       media: initialData?.media
         ? Array.isArray(initialData.media)
           ? initialData.media
-          : [initialData.media] // 단일 문자열인 경우 배열로 변환
-        : [], // media는 항상 string[] 타입이어야 하므로 기본값을 빈 배열로 설정
+          : [initialData.media]
+        : [],
     },
   });
+  
   const text = watch('content', '');
 
   const { mutate: detailUploadDatas, isPending } = useDetailUploadDatas(gymId);
@@ -77,18 +78,28 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   );
   const { mutate: videoDelete } = useVideoDelete();
 
-  const emptyVideoUrl = mediaUrl.videoUrl.length === 0;
+  const emptyVideos = mediaUrl.videos.length === 0;
 
   const onSubmit = (data: useFormPostUploadProps) => {
     //폼데이터에 들어갈 데이터들
-    if (emptyVideoUrl) {
+    if (emptyVideos) {
       showModalHandler('alert', '동영상, 등반일, 난이도 선택은 필수에요.');
+      return;
+    }
+
+    // s3Url이 존재하는 동영상만 추출
+    const s3VideoUrls = mediaUrl.videos
+      .map((video) => video.s3Url)
+      .filter((url): url is string => url !== undefined);
+
+    if (s3VideoUrls.length !== mediaUrl.videos.length) {
+      showModalHandler('alert', '동영상 업로드가 완료될 때까지 기다려주세요.');
       return;
     }
 
     const formData = {
       ...data,
-      media: mediaUrl.videoUrl,
+      media: s3VideoUrls,
       thumbnailUrl: mediaUrl.thumbnailUrl,
       color: activeColor,
       gym_idx: Number(gymId),
@@ -145,7 +156,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   }, [initialData, setValue]);
 
   if (isPending) {
-    <LoadingSpinner />;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -196,3 +207,5 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 };
 
 export default PostUploadForm;
+
+//ramonak/react-progress-bar
