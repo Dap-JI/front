@@ -124,15 +124,12 @@ export const ClimbDetailDatas = async ({
 export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   const { showModalHandler } = useModal();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.post('/api/posts', formData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
-
       router.replace(`/climbList/${gymId}`);
     },
     onError: () => {

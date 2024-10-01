@@ -389,3 +389,14 @@ export type useFormNoticeUploadType = {
   title: string;
   content: string;
 };
+
+//비디오 인풋 미리보기 테스트 타입
+export type Video = {
+  blobUrl?: string;
+  s3Url?: string;
+};
+
+export type MediaUrl = {
+  videos: Video[];
+  thumbnailUrl: string[];
+};
