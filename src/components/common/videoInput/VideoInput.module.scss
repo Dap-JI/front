@@ -14,6 +14,7 @@
     height: 50px;
     border: 1px solid black;
     border-radius: 10px;
+    cursor: pointer; /* 클릭 가능한 영역 표시 */
   }
 
   .filetextInput {
@@ -37,6 +38,7 @@
         top: -35px;
         right: 0px;
         z-index: 6;
+        cursor: pointer; /* 클릭 가능한 아이콘 표시 */
       }
 
       video {
@@ -49,5 +51,33 @@
         border-radius: 5px;
       }
     }
+  }
+
+  /* 새로운 선형 프로그레스 바 스타일 추가 */
+  .progressWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* 프로그레스 바와 콘텐츠 사이의 간격 조정 */
+  }
+
+  .linearProgressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #d6d6d6;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  .progressBar {
+    height: 100%;
+    background-color: #38b6ff;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .progressText {
+    font-size: 14px;
+    color: #000;
   }
 }
