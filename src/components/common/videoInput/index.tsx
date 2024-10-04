@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './VideoInput.module.scss';
@@ -9,7 +8,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import { CircleXIcon, PlusIcon } from '@/public/icon';
 import { Video, MediaUrl } from '@/src/utils/type';
-import axios from 'axios';
 import instance from '@/src/utils/axios';
 
 const cn = classNames.bind(styles);
@@ -33,18 +31,21 @@ export const StyledSlider = styled(Slider)`
     justify-content: center;
   }
 `;
+
 type VideoInputProps = {
   mediaUrl: MediaUrl;
   setMediaUrl: React.Dispatch<React.SetStateAction<MediaUrl>>;
   setDeletedVideos: React.Dispatch<
     React.SetStateAction<{ videoUrl: string; thumbnailUrl: string }[]>
   >;
+  setSelectedFiles: React.Dispatch<React.SetStateAction<File[]>>; // 새롭게 추가된 Props
 };
 
 const VideoInput = ({
   mediaUrl,
   setMediaUrl,
   setDeletedVideos,
+  setSelectedFiles, // 새롭게 추가된 Props
 }: VideoInputProps) => {
   const { showModalHandler } = useModal();
   const [progress, setProgress] = useState<number>(0);
@@ -78,7 +79,7 @@ const VideoInput = ({
     });
   };
 
-  // 파일 업로드 핸들러
+  // 파일 업로드 핸들러 (검증만 수행)
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     const maxSize = 500 * 1024 * 1024; // 500MB
@@ -139,99 +140,8 @@ const VideoInput = ({
         videos: [...prev.videos, ...newVideos],
       }));
 
-      // 유효한 파일을 S3에 업로드
-      await requestAndUploadToS3(validFiles, validFiles.length);
-    }
-  };
-
-  // 서버에 사전 서명된 URL을 요청하고 S3에 파일을 업로드하는 함수
-  const requestAndUploadToS3 = async (
-    files: File[],
-    newVideosCount: number,
-  ) => {
-    try {
-      setIsUploading(true);
-
-      // 서버에 사전 서명된 URL 요청
-      const fileMetadata = files.map((file) => ({
-        name: file.name,
-        type: file.type,
-      }));
-
-      const response = await instance.post('/api/get-upload-urls', {
-        files: fileMetadata,
-      });
-
-      const { uploadUrls, videoKeys } = response.data;
-
-      // 사전 서명된 URL을 사용하여 S3에 파일 업로드
-      const uploadPromises = uploadUrls.map((url: string, index: number) =>
-        uploadToS3(files[index], url),
-      );
-
-      await Promise.all(uploadPromises);
-
-      // 업로드된 파일의 S3 키를 서버에 전달하여 동영상 처리 요청
-      await processUploadedVideos(videoKeys, newVideosCount);
-    } catch (error) {
-      console.error('Error uploading to S3', error);
-      showModalHandler('alert', '동영상 업로드 중 오류가 발생했습니다.');
-    } finally {
-      setIsUploading(false);
-      setProgress(0);
-    }
-  };
-
-  // S3에 파일을 업로드하는 함수
-  const uploadToS3 = async (file: File, url: string) => {
-    await axios.put(url, file, {
-      headers: {
-        'Content-Type': file.type,
-      },
-      onUploadProgress: (progressEvent) => {
-        if (progressEvent.total) {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          );
-          setProgress(percentCompleted);
-        }
-      },
-    });
-  };
-
-  // 서버에 업로드된 동영상의 S3 키를 전달하여 동영상 처리 요청
-  const processUploadedVideos = async (
-    videoKeys: string[],
-    newVideosCount: number,
-  ) => {
-    try {
-      const response = await instance.post('/api/process-uploaded-videos', {
-        videoKeys,
-      });
-
-      const { videoUrls, thumbnailUrls } = response.data;
-
-      // 서버로부터 받은 처리된 동영상 URL과 썸네일 URL을 상태에 업데이트
-      setMediaUrl((prev) => {
-        const updatedVideos = [...prev.videos];
-
-        // 업로드된 동영상의 blob URL을 S3 URL로 대체
-        for (let i = 0; i < videoUrls.length; i++) {
-          updatedVideos[prev.videos.length - newVideosCount + i] = {
-            ...updatedVideos[prev.videos.length - newVideosCount + i],
-            s3Url: videoUrls[i],
-          };
-        }
-
-        return {
-          ...prev,
-          videos: updatedVideos,
-          thumbnailUrl: [...prev.thumbnailUrl, ...thumbnailUrls],
-        };
-      });
-    } catch (error) {
-      console.error('Error processing uploaded videos', error);
-      showModalHandler('alert', '동영상 처리 중 오류가 발생했습니다.');
+      // 선택된 파일을 부모 컴포넌트로 전달
+      setSelectedFiles((prev) => [...prev, ...validFiles]);
     }
   };
 
@@ -316,17 +226,7 @@ const VideoInput = ({
           </StyledSlider>
         </div>
       </div>
-      {isUploading && (
-        <div className={cn('progressWrapper')}>
-          <div className={cn('linearProgressBar')}>
-            <div
-              className={cn('progressBar')}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <span className={cn('progressText')}>{progress}%</span>
-        </div>
-      )}
+      {/* 업로드 관련 UI는 부모 컴포넌트에서 관리 */}
     </div>
   );
 };
