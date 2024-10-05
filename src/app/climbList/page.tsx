@@ -11,6 +11,7 @@ import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { favoritecategoryListData } from '@/src/utils/categoryListDatas';
+import ProgressBar from '@/src/components/common/progressBar';
 
 const cn = classNames.bind(styles);
 
@@ -71,6 +72,7 @@ const ClimbListPage = () => {
           selectCategory={selectCategory}
           onCategorySelect={handleSelectCategory}
         />
+        <ProgressBar />
       </div>
       <div className={cn('secondContainer')}>
         <CardListData lists={lists} />

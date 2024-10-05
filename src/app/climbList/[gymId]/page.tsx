@@ -9,11 +9,12 @@ import { AddIcon } from '@/public/icon';
 import { useRouter } from 'next/navigation';
 import { ClimbDetailDatas } from '@/src/app/climbList/api';
 import NodetailData from '@/src/components/common/noDetailData';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import Header from '@/src/components/common/header';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ClimbDetailResponseType } from '@/src/utils/type';
+import useIsUploadingStore from '@/src/utils/store/useUploadingStore';
 
 const cn = classNames.bind(styles);
 type DetailPageProps = {
@@ -22,7 +23,8 @@ type DetailPageProps = {
 
 const DetailPage = ({ params }: DetailPageProps) => {
   const [activeColor, setActiveColor] = useState<string | null>(null);
-  const [isUpLoading, setIsUpLoading] = useState(false);
+  // const { isUploading, setIsUploading } = useIsUploadingStore();
+  // console.log(isUploading);
 
   const router = useRouter();
   const { gymId } = params;
@@ -43,8 +45,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
   const gymName = climbDetailData?.pages[0]?.gym_name ?? '';
   const noticeData = climbDetailData?.pages[0].notice;
   // 뒤로가기
+
   const uploadPage = () => {
-    setIsUpLoading(true);
     router.replace(`/climbList/${gymId}/upload`);
   };
   //업로드 페이지
@@ -53,7 +55,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
     router.push(`/climbList/${gymId}/notice/${noticeData?.gym_notice_idx}`);
   };
 
-  if (isLoading || isUpLoading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 

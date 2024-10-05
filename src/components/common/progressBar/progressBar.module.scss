@@ -1,0 +1,25 @@
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; /* 프로그레스 바와 콘텐츠 사이의 간격 조정 */
+
+  .linearProgressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #d6d6d6;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-right: 10px;
+    .progressBar {
+      height: 100%;
+      background-color: #38b6ff;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .progressText {
+    font-size: 14px;
+    color: #000;
+  }
+}
