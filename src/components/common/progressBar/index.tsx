@@ -1,5 +1,5 @@
 import useProgressStore from '@/src/utils/store/useProgressStore';
-import styles from './ProgressBar.module.scss';
+import styles from './progressBar.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);

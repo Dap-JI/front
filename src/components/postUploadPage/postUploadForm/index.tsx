@@ -72,7 +72,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 
   const text = watch('content', '');
 
-  const { mutate: detailUploadDatas, isPending } = useDetailUploadDatas(gymId);
+  const { mutate: detailUploadDatas } = useDetailUploadDatas(gymId);
   const { mutate: postDetailUpdate } = usePostDetailUpdate(
     String(initialData?.post_idx),
     String(gymId),
@@ -154,7 +154,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   };
 
-  // 제출 핸들러
+  ///////////////////////// 제출 핸들러
+
   const onSubmit = async (data: useFormPostUploadProps) => {
     if (emptyVideos) {
       showModalHandler('alert', '동영상, 등반일, 난이도 선택은 필수에요.');
@@ -230,9 +231,10 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
     handleVideoDelete(); // 게시글 생성 후 동영상 삭제 처리
 
-    // 삭제된 동영상 리스트 초기화
+    // // 삭제된 동영상 리스트 초기화
     setDeletedVideos([]);
   };
+  //////////////////////////////////////////////////
 
   //시간 기본값 설정
   const formatDate = (date: Date) => {
