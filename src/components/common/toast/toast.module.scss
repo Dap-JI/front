@@ -1,27 +1,37 @@
 .container {
   @include font-style(1.5rem, white, 500);
+  background-color: rgba(0, 0, 0, 0.8);
   @include flex-arrange(center, center);
   padding: 18px 8px;
-  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   backdrop-filter: blur(0.8px);
   position: fixed;
   top: 2%;
-  right: 50%;
-  transform: translateX(50%);
-  animation: fadeout 3s linear;
+  left: 50%;
+  transform: translate(-50%, 0);
+  animation: slideOut 1s forwards;
   z-index: 100;
   max-width: 250px;
   width: 100%;
-  @keyframes fadeout {
+
+  .complete {
+    padding-top: 5px;
+    width: 30px;
+    height: 30px;
+  }
+
+  @keyframes slideOut {
     0% {
       opacity: 1;
+      transform: translate(-50%, 0);
     }
-    40% {
+    90% {
       opacity: 1;
+      transform: translate(-50%, 0);
     }
     100% {
       opacity: 0;
+      transform: translate(-50%, 20px);
     }
   }
   span {

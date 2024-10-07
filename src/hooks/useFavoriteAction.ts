@@ -44,9 +44,13 @@ const useFavoriteAction = ({
   });
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
+    const message = favoriteToggle
+      ? '즐겨찾기를 취소했어요.'
+      : '즐겨찾기에 추가했어요';
     e.stopPropagation();
     favoriteRequest();
-    showToastHandler('즐겨찾기', 'check');
+
+    showToastHandler(message, 'check');
   };
 
   return { handleFavoriteClick, favoriteToggle };
