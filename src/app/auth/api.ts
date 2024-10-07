@@ -29,6 +29,19 @@ export const NaverLogin = async (code: string) => {
   }
 };
 
+export const AppleLogin = async (code: string) => {
+  try {
+    const res = await instance.get(`/api/auth/apple/callback`, {
+      params: {
+        code: code,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e, '애플 로그인 에러');
+  }
+};
+
 export const fetchMyInfo = async () => {
   const res = await instance.get('/api/myinfo');
   return res.data;

@@ -13,7 +13,7 @@ const NaverCallback = () => {
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
-    const fetchUserKakao = async () => {
+    const fetchUserNaver = async () => {
       if (code) {
         const data = await NaverLogin(code);
         if (data) {
@@ -26,7 +26,7 @@ const NaverCallback = () => {
       }
     };
 
-    fetchUserKakao();
+    fetchUserNaver();
   }, [router]);
 
   return (
