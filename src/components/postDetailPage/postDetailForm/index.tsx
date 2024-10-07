@@ -8,7 +8,7 @@ import { usePostDetailDelete } from '@/src/app/climbList/api';
 import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
 import Image from 'next/image';
 import { useModal } from '@/src/hooks/useModal';
-import LinkAndKakaoShare from '@/src/components/common/linkAndkakaoShare';
+import LinkShare from '@/src/components/common/linkShare';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
@@ -136,7 +136,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
               <DeleteIcon onClick={deleteClick} />
             </>
           )}
-          <LinkAndKakaoShare params={params} />
+          <LinkShare params={params} />
         </div>
       </div>
 

@@ -37,7 +37,7 @@
   .btnStyle {
     margin-left: auto;
     @include flex-arrange(center, flex-end);
-    gap: 25px;
+    gap: 15px;
   }
 
   .contentWrapper {
