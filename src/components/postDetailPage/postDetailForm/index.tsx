@@ -81,7 +81,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     initalLikeCount: like_count,
     initalLikeToggle: is_liked,
     firQueryKeyName: 'postDetailDatas',
-    secQueryKeyName: 'climbDetail',
+    secQueryKeyName: 'climbPost',
   });
 
   const router = useRouter();
@@ -176,7 +176,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           <span>등반일 : {deleteT(clearday)}</span>
         </div>
       </div>
-      <pre>{content}</pre>
+      {content && <pre>{content}</pre>}
     </div>
   );
 };

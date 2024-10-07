@@ -6,11 +6,38 @@
 
   .secondContainer {
     margin-top: 70px;
-    margin-bottom: 90px;
+    margin-bottom: 80px;
     padding: 0 10px 10px 10px;
+    .progressWrapper {
+      width: 100%;
+      @include flex-arrange(center, center);
+      flex-direction: column;
+      .progressText {
+        margin: auto;
+        @include font-style(1.2rem, black, 400);
+
+        margin: auto;
+        @include font-style(1.2rem, black, 400);
+        background: linear-gradient(120deg, #000 30%, #fff 40%, #000 70%);
+        background-size: 200% 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: gradientMove 5s linear infinite;
+      }
+    }
   }
 }
 
 .container::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

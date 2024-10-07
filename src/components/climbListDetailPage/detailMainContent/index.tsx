@@ -70,7 +70,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
     content_id: post_idx,
     initalLikeCount: like_count,
     initalLikeToggle: is_like,
-    firQueryKeyName: 'climbDetail',
+    firQueryKeyName: 'climbPost',
     secQueryKeyName: 'postDetailDatas',
   });
 
@@ -160,8 +160,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
           </span>
         </div>
       </div>
-
-      <pre>{content}</pre>
+      {content && <pre>{content}</pre>}
       {post_comment[0]?.content && (
         <div className={cn('commentWrapper')}>
           <span className={cn('allComment')}>
