@@ -42,7 +42,7 @@ const ProfileGymDatas = ({ params, name }: ProfileGymDatasProps) => {
       {profileGyms.length > 0 ? (
         <>
           <span className={cn('favoriteList')}>
-            {name}님의 최애 클라이밍장 🔥
+            {name}님의 최애 클라이밍장 ❤️
           </span>
           {profileGyms.map((gym) => (
             <ProfileGymData key={gym.gym_idx} gym={gym} />
@@ -50,7 +50,7 @@ const ProfileGymDatas = ({ params, name }: ProfileGymDatasProps) => {
         </>
       ) : (
         <span className={cn('emptyMessage')}>
-          아직 선호하는 클라이밍장이 없네요!😒
+          아직 선호하는 클라이밍장이 없네요😒
         </span>
       )}
       {isLoading && <span>Loading...</span>}

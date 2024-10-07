@@ -48,7 +48,7 @@ const ProfileGymData = ({ gym }: ProfileGymDataProps) => {
         </div>
         <span className={cn('address')}>{address}</span>
         <span className={cn('post_count')}>
-          ❤️ {post_count}개의 동영상을 올렸어요!
+          ❤️ {post_count}개의 답지를 올렸어요
         </span>
       </div>
       <div className={cn('actionBtn')}>

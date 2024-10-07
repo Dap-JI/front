@@ -176,7 +176,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
           <span>등반일 : {deleteT(clearday)}</span>
         </div>
       </div>
-      <pre>{content}</pre>
+      {content && <pre>{content}</pre>}
     </div>
   );
 };

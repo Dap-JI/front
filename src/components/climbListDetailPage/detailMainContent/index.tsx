@@ -160,8 +160,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
           </span>
         </div>
       </div>
-
-      <pre>{content}</pre>
+      {content && <pre>{content}</pre>}
       {post_comment[0]?.content && (
         <div className={cn('commentWrapper')}>
           <span className={cn('allComment')}>

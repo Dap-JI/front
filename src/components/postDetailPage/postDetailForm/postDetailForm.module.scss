@@ -44,6 +44,7 @@
     width: 100%;
     @include flex-arrange(center, flex-start);
     margin-top: 15px;
+    margin-bottom: 10px;
     padding: 10px 10px 0 10px;
     flex-direction: column;
     gap: 8px;
@@ -148,15 +149,10 @@
     @include font-style(1.4rem, black, 400);
     white-space: pre-wrap;
     word-break: break-word;
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 20px;
   }
 }
-
-//DetailMainContentList
-// .listContainer {
-//   margin-bottom: 100px;
-// }
 
 .hasComment {
   border-bottom-left-radius: 0;

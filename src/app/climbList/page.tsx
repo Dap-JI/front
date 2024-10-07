@@ -11,7 +11,6 @@ import LoadingSpinner from '@/src/components/common/loadingSpinner';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { favoritecategoryListData } from '@/src/utils/categoryListDatas';
-import ProgressBar from '@/src/components/common/progressBar';
 
 const cn = classNames.bind(styles);
 
