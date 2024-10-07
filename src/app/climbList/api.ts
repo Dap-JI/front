@@ -10,24 +10,25 @@ import { useModal } from '@/src/hooks/useModal';
 type ClimbListProps = {
   page: number;
   search: string;
-  // category: string;
+  is_favorite?: boolean;
 };
 
 //클라이밍장 리스트 조회 함수
 export const ClimbListDatas = async ({
-  page = 1,
+  page,
   search,
-  // category,
+  is_favorite,
 }: ClimbListProps) => {
   const res = await instance.get(`/api/gyms`, {
     params: {
       page,
       search,
-      // category,
+      is_favorite,
     },
   });
   return res.data;
 };
+
 //클라이밍장 리스트 상세 조회 함수
 export const useClimbListDetails = (gymId: string) => {
   return useQuery({
@@ -123,16 +124,13 @@ export const ClimbDetailDatas = async ({
 export const useDetailUploadDatas = (gymId: string | number) => {
   const router = useRouter();
   const { showModalHandler } = useModal();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['detailUpload'],
     mutationFn: (formData: useFormPostUploadProps) =>
       instance.post('/api/posts', formData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userProfileData'] });
-
-      router.replace(`/climbList/${gymId}`);
+      // showModalHandler('alert', '업로드가 완료되었습니다. ');
     },
     onError: () => {
       showModalHandler('alert', '동영상,등반일, 난이도 선택은 필수에요.');

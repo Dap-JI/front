@@ -16,7 +16,9 @@ type CardListProps = {
 
 const CardList = ({ list }: CardListProps) => {
   const { logo, name, gym_idx, address, is_favorite } = list;
+
   const router = useRouter();
+  
   const { handleFavoriteClick, favoriteToggle } = useFavoriteAction({
     initalFavoriteToggle: is_favorite,
     gymId: gym_idx,

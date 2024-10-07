@@ -17,5 +17,6 @@
     margin-top: 30px;
     @include font-style(1.4rem, black, 400);
     white-space: pre-wrap;
+    word-break: break-word;
   }
 }

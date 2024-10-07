@@ -6,19 +6,20 @@ import CardListData from '@/src/components/climbListPage/cardListData';
 import { ClimbListDatas } from '@/src/app/climbList/api';
 import { ClimbLIstResponseType } from '@/src/utils/type';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LoadingSpinner from '@/src/components/common/loadingSpinner';
-import { useQueryClient } from '@tanstack/react-query';
 import useScrollDirection from '@/src/hooks/useScrollDirection';
 import CategoryLists from '@/src/components/boardPage/categroyLists';
 import { favoritecategoryListData } from '@/src/utils/categoryListDatas';
+import ProgressBar from '@/src/components/common/progressBar';
 
 const cn = classNames.bind(styles);
 
 const ClimbListPage = () => {
   const [searchName, setSearchName] = useState('');
   const [scrollDirection] = useScrollDirection('up');
-  const [selectCategory, setSelectCategory] = useState<string | null>('전체');
+  const [selectCategory, setSelectCategory] = useState<string | null>('인기순');
+  const [isFavorite, setIsFavorite] = useState<any>(false);
 
   const {
     data: climbListData,
@@ -26,8 +27,9 @@ const ClimbListPage = () => {
     isFetchingNextPage,
     isLoading,
   } = useInfiniteScroll<ClimbLIstResponseType>({
-    queryKey: ['climbList', searchName],
-    fetchFunction: (page = 1) => ClimbListDatas({ page, search: searchName }),
+    queryKey: ['climbList', searchName, isFavorite],
+    fetchFunction: (page = 1) =>
+      ClimbListDatas({ page, search: searchName, is_favorite: isFavorite }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
@@ -40,14 +42,13 @@ const ClimbListPage = () => {
 
   const handleSelectCategory = (category: string) => {
     setSelectCategory(category);
-  };
-  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (searchName !== '') {
-      queryClient.invalidateQueries({ queryKey: ['climbList'] });
+    if (category === '즐겨찾기') {
+      setIsFavorite(true);
+      return;
     }
-  }, [searchName, queryClient]);
+    setIsFavorite(false);
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -13,7 +13,11 @@ import {
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import { useVideoDelete } from '@/src/app/climbList/api';
-import LoadingSpinner from '../../common/loadingSpinner';
+import { MediaUrl } from '@/src/utils/type';
+import instance from '@/src/utils/axios';
+import useIsUploadingStore from '@/src/utils/store/useUploadingStore';
+import useProgressStore from '@/src/utils/store/useProgressStore';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -22,34 +26,31 @@ type PostUploadFormProps = {
   initialData?: PostDetailDataType;
 };
 
-type MediaUrlType = {
-  videoUrl: string[];
-  thumbnailUrl: string[];
-};
-
 const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   const [deletedVideos, setDeletedVideos] = useState<
     { videoUrl: string; thumbnailUrl: string }[]
   >([]);
 
-  const [mediaUrl, setMediaUrl] = useState<MediaUrlType>({
-    videoUrl: initialData?.media
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [mediaUrl, setMediaUrl] = useState<MediaUrl>({
+    videos: initialData?.media
       ? Array.isArray(initialData.media)
-        ? initialData.media
-        : [initialData.media] // 단일 문자열인 경우 배열로 변환
+        ? initialData.media.map((url) => ({ s3Url: url }))
+        : [{ s3Url: initialData.media }]
       : [],
     thumbnailUrl: initialData?.thumbnailUrl
       ? Array.isArray(initialData.thumbnailUrl)
         ? initialData.thumbnailUrl
-        : [initialData.thumbnailUrl] // 단일 문자열인 경우 배열로 변환
-      : [], // 업로드 시 썸네일은 없으므로 null로 설정
+        : [initialData.thumbnailUrl]
+      : [],
   });
   const [activeColor, setActiveColor] = useState<string | null>(
     initialData?.color || null,
   );
   const { showModalHandler } = useModal();
+  const router = useRouter();
 
-  //난이도 색
+  // 난이도 색
   const maxLength = 100;
 
   const {
@@ -64,10 +65,11 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       media: initialData?.media
         ? Array.isArray(initialData.media)
           ? initialData.media
-          : [initialData.media] // 단일 문자열인 경우 배열로 변환
-        : [], // media는 항상 string[] 타입이어야 하므로 기본값을 빈 배열로 설정
+          : [initialData.media]
+        : [],
     },
   });
+
   const text = watch('content', '');
 
   const { mutate: detailUploadDatas, isPending } = useDetailUploadDatas(gymId);
@@ -77,19 +79,134 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   );
   const { mutate: videoDelete } = useVideoDelete();
 
-  const emptyVideoUrl = mediaUrl.videoUrl.length === 0;
+  const { isUploading, setIsUploading } = useIsUploadingStore();
+  const { progress, setProgress } = useProgressStore();
 
-  const onSubmit = (data: useFormPostUploadProps) => {
-    //폼데이터에 들어갈 데이터들
-    if (emptyVideoUrl) {
+  const emptyVideos =
+    mediaUrl.videos.length === 0 && selectedFiles.length === 0;
+
+  // S3에 파일 업로드 함수
+  const uploadToS3 = async (file: File, url: string) => {
+    await instance.put(url, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+      onUploadProgress: (progressEvent) => {
+        if (progressEvent.total) {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total,
+          );
+          setProgress(percentCompleted);
+        }
+      },
+    });
+  };
+
+  // 서버에 업로드된 동영상의 S3 키를 전달하여 동영상 처리 요청
+  const processUploadedVideos = async (
+    videoKeys: string[],
+    newVideosCount: number,
+  ) => {
+    try {
+      const response = await instance.post('/api/process-uploaded-videos', {
+        videoKeys,
+      });
+
+      const { videoUrls, thumbnailUrls } = response.data;
+      return { videoUrls, thumbnailUrls };
+    } catch (error) {
+      console.error('Error processing uploaded videos', error);
+      showModalHandler('alert', '동영상 처리 중 오류가 발생했습니다.');
+      throw error; // 에러를 호출자에게 전달
+    }
+  };
+
+  // 업로드 및 처리 프로세스를 수행하는 함수
+  const handleUploadProcess = async () => {
+    try {
+      // 1. 사전 서명된 URL 요청
+      const fileMetadata = selectedFiles.map((file) => ({
+        name: file.name,
+        type: file.type,
+      }));
+
+      const response = await instance.post('/api/get-upload-urls', {
+        files: fileMetadata,
+      });
+
+      const { uploadUrls, videoKeys } = response.data;
+      // 2. S3에 파일 업로드
+      const uploadPromises = uploadUrls.map((url: string, index: number) =>
+        uploadToS3(selectedFiles[index], url),
+      );
+
+      await Promise.all(uploadPromises);
+
+      // 3. 서버에 동영상 키 전달 및 처리 요청
+      const { videoUrls: processedVideoUrls, thumbnailUrls } =
+        await processUploadedVideos(videoKeys, selectedFiles.length);
+
+      return { videoUrls: processedVideoUrls, thumbnailUrls };
+    } catch (error) {
+      console.error('Error uploading to S3', error);
+      showModalHandler('alert', '동영상 업로드 중 오류가 발생했습니다.');
+      throw error; // 에러를 호출자에게 전달
+    }
+  };
+
+  // 제출 핸들러
+  const onSubmit = async (data: useFormPostUploadProps) => {
+    if (emptyVideos) {
       showModalHandler('alert', '동영상, 등반일, 난이도 선택은 필수에요.');
+      return;
+    }
+
+    let processedVideoUrls: string[] = [];
+    let processedThumbnailUrls: string[] = [];
+
+    // 업로드가 필요한 파일이 있는 경우
+    if (selectedFiles.length > 0) {
+      try {
+        router.replace(`/climbList/${gymId}`);
+
+        setIsUploading(true);
+        setProgress(0);
+
+        const { videoUrls, thumbnailUrls } = await handleUploadProcess();
+        processedVideoUrls = videoUrls;
+        processedThumbnailUrls = thumbnailUrls;
+      } catch (error) {
+        console.error('Error during upload process', error);
+        // 에러 핸들링은 handleUploadProcess 내에서 수행됨
+        return;
+      } finally {
+        setIsUploading(false);
+      }
+    }
+
+    // 기존 동영상 URL 추가
+    const existingVideoUrls = mediaUrl.videos
+      .map((video) => video.s3Url)
+      .filter((url): url is string => !!url); // 타입 가드 사용
+    const existingThumbnailUrls = mediaUrl.thumbnailUrl;
+
+    // 최종 동영상 URL 및 썸네일 URL 병합
+    const finalVideoUrls = [...existingVideoUrls, ...processedVideoUrls];
+    const finalThumbnailUrls = [
+      ...existingThumbnailUrls,
+      ...processedThumbnailUrls,
+    ];
+
+    // 서버로부터 받은 URL들을 사용하여 조건 검사
+    if (finalVideoUrls.length !== mediaUrl.videos.length) {
+      showModalHandler('alert', '동영상 업로드가 완료될 때까지 기다려주세요.');
       return;
     }
 
     const formData = {
       ...data,
-      media: mediaUrl.videoUrl,
-      thumbnailUrl: mediaUrl.thumbnailUrl,
+      media: finalVideoUrls,
+      thumbnailUrl: finalThumbnailUrls,
       color: activeColor,
       gym_idx: Number(gymId),
     };
@@ -105,27 +222,19 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       });
     };
 
-    const confirmAction = () => {
-      if (initialData) {
-        postDetailUpdate(formData);
-        handleVideoDelete(); // 수정 후 동영상 삭제 처리
-      } else {
-        detailUploadDatas(formData);
-        handleVideoDelete(); // 수정 후 동영상 삭제 처리
-      }
+    // 게시글 생성 후 동영상 삭제 처리
+    if (initialData) {
+      postDetailUpdate(formData);
+    } else {
+      detailUploadDatas(formData);
+    }
+    handleVideoDelete(); // 게시글 생성 후 동영상 삭제 처리
 
-      // 삭제된 동영상 리스트 초기화
-      setDeletedVideos([]);
-    };
-
-    // 모달을 표시하고, 사용자가 확인 버튼을 눌렀을 때 `confirmAction` 실행
-    const message = initialData
-      ? '답지를 수정 하시나요?'
-      : '답지를 업로드 하시나요?';
-
-    showModalHandler('choice', message, confirmAction);
+    // 삭제된 동영상 리스트 초기화
+    setDeletedVideos([]);
   };
 
+  //시간 기본값 설정
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -137,6 +246,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     return formatDate(new Date());
   };
 
+  //수정인지 업로드인지 확인
   useEffect(() => {
     if (initialData) {
       setValue('clearday', formatDate(new Date(initialData.clearday)));
@@ -144,16 +254,13 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   }, [initialData, setValue]);
 
-  if (isPending) {
-    <LoadingSpinner />;
-  }
-
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <VideoInput
         mediaUrl={mediaUrl}
         setMediaUrl={setMediaUrl}
         setDeletedVideos={setDeletedVideos}
+        setSelectedFiles={setSelectedFiles} // 새롭게 추가된 Props
       />
       <CommonInput
         id="clearday"

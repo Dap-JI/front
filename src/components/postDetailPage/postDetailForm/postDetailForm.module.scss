@@ -64,8 +64,8 @@
         gap: 4px;
 
         .color {
-          width: 20px;
-          height: 20px;
+          width: 13px;
+          height: 13px;
           border-radius: 50%;
         }
 
@@ -147,6 +147,7 @@
     height: auto;
     @include font-style(1.4rem, black, 400);
     white-space: pre-wrap;
+    word-break: break-word;
     margin-top: 10px;
     margin-bottom: 20px;
   }
