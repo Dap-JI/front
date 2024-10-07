@@ -72,7 +72,6 @@ const ClimbListPage = () => {
           selectCategory={selectCategory}
           onCategorySelect={handleSelectCategory}
         />
-        <ProgressBar />
       </div>
       <div className={cn('secondContainer')}>
         <CardListData lists={lists} />

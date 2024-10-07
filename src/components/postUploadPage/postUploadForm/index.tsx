@@ -13,9 +13,11 @@ import {
 import CommonButton from '../../common/commonButton';
 import { useModal } from '@/src/hooks/useModal';
 import { useVideoDelete } from '@/src/app/climbList/api';
-import LoadingSpinner from '../../common/loadingSpinner';
-import { Video, MediaUrl } from '@/src/utils/type';
+import { MediaUrl } from '@/src/utils/type';
 import instance from '@/src/utils/axios';
+import useIsUploadingStore from '@/src/utils/store/useUploadingStore';
+import useProgressStore from '@/src/utils/store/useProgressStore';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -29,7 +31,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     { videoUrl: string; thumbnailUrl: string }[]
   >([]);
 
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]); // 새롭게 추가된 상태
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [mediaUrl, setMediaUrl] = useState<MediaUrl>({
     videos: initialData?.media
       ? Array.isArray(initialData.media)
@@ -46,6 +48,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     initialData?.color || null,
   );
   const { showModalHandler } = useModal();
+  const router = useRouter();
 
   // 난이도 색
   const maxLength = 100;
@@ -76,8 +79,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
   );
   const { mutate: videoDelete } = useVideoDelete();
 
-  const [isUploading, setIsUploading] = useState<boolean>(false); // 새롭게 추가된 상태
-  const [progress, setProgress] = useState<number>(0); // 새롭게 추가된 상태
+  const { isUploading, setIsUploading } = useIsUploadingStore();
+  const { progress, setProgress } = useProgressStore();
 
   const emptyVideos =
     mediaUrl.videos.length === 0 && selectedFiles.length === 0;
@@ -93,7 +96,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
           const percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total,
           );
-          setProgress((prev) => Math.max(prev, percentCompleted));
+          setProgress(percentCompleted);
         }
       },
     });
@@ -138,7 +141,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
       );
 
       await Promise.all(uploadPromises);
-      console.log('All uploads to S3 completed');
 
       // 3. 서버에 동영상 키 전달 및 처리 요청
       const { videoUrls: processedVideoUrls, thumbnailUrls } =
@@ -165,6 +167,8 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     // 업로드가 필요한 파일이 있는 경우
     if (selectedFiles.length > 0) {
       try {
+        router.replace(`/climbList/${gymId}`);
+
         setIsUploading(true);
         setProgress(0);
 
@@ -230,6 +234,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     setDeletedVideos([]);
   };
 
+  //시간 기본값 설정
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -241,17 +246,13 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     return formatDate(new Date());
   };
 
+  //수정인지 업로드인지 확인
   useEffect(() => {
     if (initialData) {
       setValue('clearday', formatDate(new Date(initialData.clearday)));
       setValue('content', initialData.content);
     }
   }, [initialData, setValue]);
-
-  useEffect(() => {}, [mediaUrl]);
-  if (isPending) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -261,18 +262,6 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
         setDeletedVideos={setDeletedVideos}
         setSelectedFiles={setSelectedFiles} // 새롭게 추가된 Props
       />
-      {/* 업로드 진행 상태 표시 */}
-      {isUploading && (
-        <div className={cn('progressWrapper')}>
-          <div className={cn('linearProgressBar')}>
-            <div
-              className={cn('progressBar')}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <span className={cn('progressText')}>{progress}%</span>
-        </div>
-      )}
       <CommonInput
         id="clearday"
         type="date"

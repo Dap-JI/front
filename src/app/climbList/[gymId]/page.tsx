@@ -15,6 +15,8 @@ import Header from '@/src/components/common/header';
 import useInfiniteScroll from '@/src/hooks/useInfiniteScroll';
 import { ClimbDetailResponseType } from '@/src/utils/type';
 import useIsUploadingStore from '@/src/utils/store/useUploadingStore';
+import useProgressStore from '@/src/utils/store/useProgressStore';
+import ProgressBar from '@/src/components/common/progressBar';
 
 const cn = classNames.bind(styles);
 type DetailPageProps = {
@@ -23,8 +25,8 @@ type DetailPageProps = {
 
 const DetailPage = ({ params }: DetailPageProps) => {
   const [activeColor, setActiveColor] = useState<string | null>(null);
-  // const { isUploading, setIsUploading } = useIsUploadingStore();
-  // console.log(isUploading);
+  const { isUploading, setIsUploading } = useIsUploadingStore();
+  const { progress, setProgress } = useProgressStore();
 
   const router = useRouter();
   const { gymId } = params;
@@ -74,6 +76,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
           activeColor={activeColor}
           setActiveColor={setActiveColor}
         />
+        {isUploading && <ProgressBar />}
         {lists.length === 0 ? (
           <NodetailData />
         ) : (
