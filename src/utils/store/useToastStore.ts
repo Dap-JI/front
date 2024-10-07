@@ -13,8 +13,6 @@ export const useToastStore = create<ToastState>((set) => ({
   visible: false,
   showToast: (text, type) => {
     set({ text, type, visible: true });
-    setTimeout(() => set({ visible: false }), 3000);
+    setTimeout(() => set({ visible: false }), 1000);
   },
 }));
-
-//여긴 toast의 상태변화를관리 \

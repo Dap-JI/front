@@ -14,7 +14,6 @@ type LinkSahreBtnProps = {
 const LinkSahreBtn = ({ params }: LinkSahreBtnProps) => {
   const { showToastHandler } = useToast();
   const { postid, gymId } = params;
-  const router = useRouter();
 
   const url =
     typeof window !== 'undefined'
@@ -25,7 +24,7 @@ const LinkSahreBtn = ({ params }: LinkSahreBtnProps) => {
   const copyToClipboard = async (url: any) => {
     try {
       await navigator.clipboard.writeText(url);
-      showToastHandler('링크를 복사했습니다!', 'check');
+      showToastHandler('링크를 복사했어요!', 'check');
     } catch (error) {
       console.error(error);
     }

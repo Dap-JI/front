@@ -13,7 +13,7 @@ const Toast = () => {
 
   return (
     <div className={cn('container')}>
-      {type === 'check' ? <CompleteIcon /> : <WarnIcon />}
+      {type === 'check' ? <CompleteIcon className={cn("complete")} /> : <WarnIcon />}
       <span>{text}</span>
     </div>
   );
