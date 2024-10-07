@@ -17,21 +17,17 @@ type ProfileGymDatasProps = {
 const ProfileGymDatas = ({ params, name }: ProfileGymDatasProps) => {
   const { userId } = params;
 
-  const {
-    data: profileGymData,
-    ref,
-    isLoading,
-    error,
-  } = useInfiniteScroll<ProfileFavoriteGymType>({
-    queryKey: ['profileFavoriteGyms', userId],
-    fetchFunction: (page = 1) =>
-      fetchProfileFavoriteGyms({
-        page,
-        userId,
-      }),
-    getNextPageParam: (lastPage) =>
-      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
-  });
+  const { data: profileGymData, ref } =
+    useInfiniteScroll<ProfileFavoriteGymType>({
+      queryKey: ['profileFavoriteGyms', userId],
+      fetchFunction: (page = 1) =>
+        fetchProfileFavoriteGyms({
+          page,
+          userId,
+        }),
+      getNextPageParam: (lastPage) =>
+        lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+    });
 
   // 각 페이지의 favoriteGyms 배열을 하나로 병합
   const profileGyms =
@@ -59,5 +55,3 @@ const ProfileGymDatas = ({ params, name }: ProfileGymDatasProps) => {
 };
 
 export default ProfileGymDatas;
-
-//00님의 최애 클라이밍장

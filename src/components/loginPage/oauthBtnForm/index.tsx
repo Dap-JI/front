@@ -22,7 +22,7 @@ const OauthBtnForm = () => {
   };
 
   const AppleLogin = () => {
-    alert('애플로그인임!');
+    OauthPopup('apple');
   };
 
   const DapJiLogin = () => {
