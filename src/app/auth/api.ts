@@ -1,7 +1,4 @@
 import instance from '@/src/utils/axios';
-import { useQuery } from '@tanstack/react-query';
-import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
-import { useEffect } from 'react';
 
 export const KakaoLogin = async (code: string | null) => {
   try {

@@ -45,7 +45,7 @@ const ProfileAllData = ({ profileData, params }: ProfileAllDataProps) => {
       </div>
       {selectList === 'post' ? (
         profileData.posts.length === 0 ? (
-          <span className={cn('emptyMessage')}>답지를 추가해 보세요🔥</span>
+          <span className={cn('emptyMessage')}>답지를 추가해 보세요 🔥</span>
         ) : (
           <ProfilePostDatas lists={profileData.posts} />
         )

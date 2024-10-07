@@ -28,7 +28,7 @@
     }
   }
   .emptyMessage {
-    @include font-style(1.5rem, black, 600);
+    @include font-style(1.6rem, black, 400);
     margin-top: 50px;
   }
 }

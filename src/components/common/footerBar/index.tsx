@@ -48,7 +48,7 @@ const FooterBar = () => {
   const isClimbListSpecificPostPath = path.match(/^\/climbList\/\d+\/\d+$/);
 
   const getIconFill = (iconPath: string) => {
-    return path === iconPath ? '#38B6FF' : 'black';
+    return path.startsWith(iconPath) ? '#38B6FF' : 'black';
   };
 
   if (
@@ -62,7 +62,7 @@ const FooterBar = () => {
   ) {
     return null;
   }
-  
+
   return (
     <div className={cn('container')}>
       <BordIcon
