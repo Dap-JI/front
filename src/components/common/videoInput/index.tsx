@@ -48,8 +48,6 @@ const VideoInput = ({
   setSelectedFiles, // 새롭게 추가된 Props
 }: VideoInputProps) => {
   const { showModalHandler } = useModal();
-  const [progress, setProgress] = useState<number>(0);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const settings = {
     dots: true,
