@@ -226,7 +226,6 @@ const VideoInput = ({
           </StyledSlider>
         </div>
       </div>
-      {/* 업로드 관련 UI는 부모 컴포넌트에서 관리 */}
     </div>
   );
 };

@@ -1,19 +1,18 @@
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import useProgressStore from '@/src/utils/store/useProgressStore';
+import styles from './ProgressBar.module.scss';
+import classNames from 'classnames/bind';
+
+const cn = classNames.bind(styles);
 
 const ProgressBar = () => {
   const { progress, setProgress } = useProgressStore();
 
   return (
-    <div style={{ width: '100px', marginTop: '10px' }}>
-      <CircularProgressbar
-        value={progress}
-        text={`${progress}%`}
-        styles={buildStyles({
-          trailColor: '#d6d6d6',
-        })}
-      />
+    <div className={cn('progressWrapper')}>
+      <div className={cn('linearProgressBar')}>
+        <div className={cn('progressBar')} style={{ width: `${progress}%` }} />
+      </div>
+      <span className={cn('progressText')}>{progress}%</span>
     </div>
   );
 };
