@@ -10,7 +10,7 @@
 
   .toggleButton {
     width: 100%;
-    padding: 10px 5px;
+    padding: 10px 0 10px 5px;
     @include flex-arrange(space-between, center);
   }
 

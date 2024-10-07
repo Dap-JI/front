@@ -7,7 +7,7 @@ import CommonInput from '../../common/commonInput';
 import { useForm } from 'react-hook-form';
 import { useFormPostUploadProps, PostDetailDataType } from '@/src/utils/type';
 import {
-  useDetailUploadDatas,
+  usePostDetailUpload,
   usePostDetailUpdate,
 } from '@/src/app/climbList/api';
 import CommonButton from '../../common/commonButton';
@@ -72,7 +72,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
 
   const text = watch('content', '');
 
-  const { mutate: detailUploadDatas } = useDetailUploadDatas(gymId);
+  const { mutate: postDetailUpload } = usePostDetailUpload(gymId);
   const { mutate: postDetailUpdate } = usePostDetailUpdate(
     String(initialData?.post_idx),
     String(gymId),
@@ -154,7 +154,7 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     }
   };
 
-  ///////////////////////// 제출 핸들러
+  //제출 핸들러
 
   const onSubmit = async (data: useFormPostUploadProps) => {
     if (emptyVideos) {
@@ -166,75 +166,84 @@ const PostUploadForm = ({ gymId, initialData }: PostUploadFormProps) => {
     let processedThumbnailUrls: string[] = [];
 
     // 업로드가 필요한 파일이 있는 경우
-    if (selectedFiles.length > 0) {
-      try {
-        router.replace(`/climbList/${gymId}`);
 
-        setIsUploading(true);
-        setProgress(0);
+    const confirmAction = async () => {
+      if (selectedFiles.length > 0) {
+        try {
+          router.replace(`/climbList/${gymId}`);
+          setIsUploading(true);
+          setProgress(0);
 
-        const { videoUrls, thumbnailUrls } = await handleUploadProcess();
-        processedVideoUrls = videoUrls;
-        processedThumbnailUrls = thumbnailUrls;
-      } catch (error) {
-        console.error('Error during upload process', error);
-        // 에러 핸들링은 handleUploadProcess 내에서 수행됨
-        return;
-      } finally {
-        setIsUploading(false);
+          const { videoUrls, thumbnailUrls } = await handleUploadProcess();
+          processedVideoUrls = videoUrls;
+          processedThumbnailUrls = thumbnailUrls;
+        } catch (error) {
+          console.error('Error during upload process', error);
+          // 에러 핸들링은 handleUploadProcess 내에서 수행됨
+          return;
+        } finally {
+          setIsUploading(false);
+        }
       }
-    }
 
-    // 기존 동영상 URL 추가
-    const existingVideoUrls = mediaUrl.videos
-      .map((video) => video.s3Url)
-      .filter((url): url is string => !!url); // 타입 가드 사용
-    const existingThumbnailUrls = mediaUrl.thumbnailUrl;
+      // 기존 동영상 URL 추가
+      const existingVideoUrls = mediaUrl.videos
+        .map((video) => video.s3Url)
+        .filter((url): url is string => !!url); // 타입 가드 사용
+      const existingThumbnailUrls = mediaUrl.thumbnailUrl;
 
-    // 최종 동영상 URL 및 썸네일 URL 병합
-    const finalVideoUrls = [...existingVideoUrls, ...processedVideoUrls];
-    const finalThumbnailUrls = [
-      ...existingThumbnailUrls,
-      ...processedThumbnailUrls,
-    ];
+      // 최종 동영상 URL 및 썸네일 URL 병합
+      const finalVideoUrls = [...existingVideoUrls, ...processedVideoUrls];
+      const finalThumbnailUrls = [
+        ...existingThumbnailUrls,
+        ...processedThumbnailUrls,
+      ];
 
-    // 서버로부터 받은 URL들을 사용하여 조건 검사
-    if (finalVideoUrls.length !== mediaUrl.videos.length) {
-      showModalHandler('alert', '동영상 업로드가 완료될 때까지 기다려주세요.');
-      return;
-    }
+      // 서버로부터 받은 URL들을 사용하여 조건 검사
+      if (finalVideoUrls.length !== mediaUrl.videos.length) {
+        showModalHandler(
+          'alert',
+          '동영상 업로드가 완료될 때까지 기다려주세요.',
+        );
+        return;
+      }
 
-    const formData = {
-      ...data,
-      media: finalVideoUrls,
-      thumbnailUrl: finalThumbnailUrls,
-      color: activeColor,
-      gym_idx: Number(gymId),
+      const formData = {
+        ...data,
+        media: finalVideoUrls,
+        thumbnailUrl: finalThumbnailUrls,
+        color: activeColor,
+        gym_idx: Number(gymId),
+      };
+
+      // 동영상 삭제 처리 함수
+      const handleVideoDelete = () => {
+        deletedVideos.forEach(({ videoUrl, thumbnailUrl }) => {
+          const videoToDelete = {
+            videoUrl: videoUrl,
+            thumbnailUrl: thumbnailUrl,
+          };
+          videoDelete(videoToDelete);
+        });
+      };
+
+      // 게시글 생성 후 동영상 삭제 처리
+      if (initialData) {
+        postDetailUpdate(formData);
+      } else {
+        postDetailUpload(formData);
+      }
+      handleVideoDelete(); // 게시글 생성 후 동영상 삭제 처리
+
+      // // 삭제된 동영상 리스트 초기화
+      setDeletedVideos([]);
     };
+    const message = initialData
+      ? '답지를 수정 하시나요?'
+      : '답지를 업로드 하시나요?';
 
-    // 동영상 삭제 처리 함수
-    const handleVideoDelete = () => {
-      deletedVideos.forEach(({ videoUrl, thumbnailUrl }) => {
-        const videoToDelete = {
-          videoUrl: videoUrl,
-          thumbnailUrl: thumbnailUrl,
-        };
-        videoDelete(videoToDelete);
-      });
-    };
-
-    // 게시글 생성 후 동영상 삭제 처리
-    if (initialData) {
-      postDetailUpdate(formData);
-    } else {
-      detailUploadDatas(formData);
-    }
-    handleVideoDelete(); // 게시글 생성 후 동영상 삭제 처리
-
-    // // 삭제된 동영상 리스트 초기화
-    setDeletedVideos([]);
+    showModalHandler('choice', message, confirmAction);
   };
-  //////////////////////////////////////////////////
 
   //시간 기본값 설정
   const formatDate = (date: Date) => {

@@ -4,31 +4,30 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useMyInfoStore } from '@/src/utils/store/useMyImfoStore';
+import { AppleLogin } from '@/src/app/auth/api';
 
 const cn = classNames.bind(styles);
 
 const AppleCallback = () => {
-  const { myId } = useMyInfoStore();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const code = new URLSearchParams(window.location.search).get('code');
-  //   const fetchUserKakao = async () => {
-  //     if (code) {
-  //       const data = await KakaoLogin(code);
-  //       if (data) {
-  //         if (!data.nickname) {
-  //           router.replace('/join');
-  //           return;
-  //         }
-  //         router.replace('/climbList');
-  //       }
-  //     }
-  //   };
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get('code');
+    const fetchUserApple = async () => {
+      if (code) {
+        const data = await AppleLogin(code);
+        if (data) {
+          if (!data.nickname) {
+            router.replace('/join');
+            return;
+          }
+          router.replace('/climbList');
+        }
+      }
+    };
 
-  //   fetchUserKakao();
-  // }, [router]);
+    fetchUserApple();
+  }, [router]);
 
   return (
     <div className={cn('contaienr')}>
