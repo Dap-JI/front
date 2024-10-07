@@ -70,7 +70,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
     content_id: post_idx,
     initalLikeCount: like_count,
     initalLikeToggle: is_like,
-    firQueryKeyName: 'climbDetail',
+    firQueryKeyName: 'climbPost',
     secQueryKeyName: 'postDetailDatas',
   });
 

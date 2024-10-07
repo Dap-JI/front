@@ -83,7 +83,7 @@ export type DetailType = {
   is_like: boolean;
 };
 
-export type ClimbDetailResponseType = {
+export type ClimbPostResponseType = {
   gym_name: string; // 체육관 이름
   posts: DetailType[]; // 게시물 목록
   meta: metaType;

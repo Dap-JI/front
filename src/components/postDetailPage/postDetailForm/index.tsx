@@ -81,7 +81,7 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
     initalLikeCount: like_count,
     initalLikeToggle: is_liked,
     firQueryKeyName: 'postDetailDatas',
-    secQueryKeyName: 'climbDetail',
+    secQueryKeyName: 'climbPost',
   });
 
   const router = useRouter();
