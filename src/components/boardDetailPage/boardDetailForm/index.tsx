@@ -89,7 +89,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
           </Link>
           <div className={cn('userText')}>
             <span>{category}</span>
-            <span>{User?.nickname || '❗탈퇴한 사용자입니다'}</span>
+            <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
           </div>
         </div>
         {isMyId && (

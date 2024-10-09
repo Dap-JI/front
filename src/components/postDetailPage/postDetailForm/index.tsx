@@ -119,13 +119,13 @@ const PostDetailForm = ({ params, postDetailDatas }: PostDetailFormProps) => {
       <div className={cn('userWrapper')}>
         <div className={cn('userInfo')} onClick={profileClick}>
           <Image
-            src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
+            src={User?.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
             width="30"
             height="30"
             alt="userImg"
           />
           <div className={cn('dateWrapper')}>
-            <span>{User.nickname}</span>
+            <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
             <span>{timeAgo}</span>
           </div>
         </div>
