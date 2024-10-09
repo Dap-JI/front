@@ -80,7 +80,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
         <div className={cn('userInfo')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
-              src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
+              src={User?.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
               width="30"
               height="30"
               alt="게시물 작성자 프로필 이미지"
@@ -89,7 +89,7 @@ const BoardDetailForm = ({ boardDetailData }: BoardDetailFormProps) => {
           </Link>
           <div className={cn('userText')}>
             <span>{category}</span>
-            <span>{User.nickname}</span>
+            <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
           </div>
         </div>
         {isMyId && (

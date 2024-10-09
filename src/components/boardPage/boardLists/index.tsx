@@ -71,7 +71,7 @@ const BoardList = ({ list }: BoardListProps) => {
         <section className={cn('contentWrapper')}>
           <header className={cn('userInfo')}>
             <Image
-              src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
+              src={User?.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
               width={30}
               height={30}
               alt="유저 이미지"
@@ -81,7 +81,7 @@ const BoardList = ({ list }: BoardListProps) => {
             <div className={cn('dateWrapper')}>
               <span className={cn('category')}>{category}</span>
               <div className={cn('dataInfo')}>
-                <span>{User.nickname}</span>
+                <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
                 <span>{timeAgo}</span>
               </div>
             </div>
