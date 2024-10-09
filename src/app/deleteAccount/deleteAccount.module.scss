@@ -6,9 +6,22 @@
   padding: 30px 10px 50px 10px;
   @include flex-arrange(flex-start, center);
   flex-direction: column;
-
-  h2 {
-    @include font-style(2.5rem, black, 400);
+  header {
+    width: 100%;
+    @include flex-arrange(center, center);
+    flex-direction: column;
+    h2 {
+      @include font-style(2.5rem, black, 400);
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+    .back {
+      @include font-style(1.3rem, black, 400);
+      text-align: center;
+      // width: 100%;
+      margin-bottom: 20px;
+      border-bottom: 1px solid black;
+    }
   }
 
   .warnLists {

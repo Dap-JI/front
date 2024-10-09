@@ -1,8 +1,6 @@
 'use client';
 import styles from './deleteAccount.module.scss';
 import classNames from 'classnames/bind';
-import { fetchDeleteAccount } from './api';
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import DeleteAccountForm from '@/src/components/deleteAccountPage/deleteAccountForm';
 import { WarnIcon } from '@/public/icon';
@@ -10,12 +8,17 @@ import { WarnIcon } from '@/public/icon';
 const cn = classNames.bind(styles);
 
 const DeleteAccountPage = () => {
- 
-
+  const router = useRouter();
+  const backClick = () => {
+    router.back();
+  };
   return (
     <section className={cn('container')}>
       <header>
-        <h2>탈퇴 전 확인해 주세요</h2>
+        <h2>계정 삭제 전 확인해 주세요</h2>
+        <span onClick={backClick} className={cn('back')}>
+          답지 보러 돌아가기
+        </span>
       </header>
       <ul className={cn('warnLists')}>
         <li>- 다른 클라이머의 답지를 볼 수 없어요</li>

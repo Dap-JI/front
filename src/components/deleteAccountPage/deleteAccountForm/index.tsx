@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
-import CommonButton from '../../common/commonButton';
 import styles from './deleteAccountForm.module.scss';
 import classNames from 'classnames/bind';
 import { fetchDeleteAccount } from '@/src/app/deleteAccount/api';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useModal } from '@/src/hooks/useModal';
 
 const cn = classNames.bind(styles);
 
@@ -21,6 +21,7 @@ const DeleteAccountForm = () => {
   const maxLength = '200';
   const text = watch('deleteReason', '');
   const isAgreed = watch('agreeCheck');
+  const { showModalHandler } = useModal();
 
   const { mutate: deleteAccount } = useMutation({
     mutationKey: ['deleteAccount'],
@@ -34,7 +35,11 @@ const DeleteAccountForm = () => {
   });
 
   const onSubmit = (data: any) => {
-    console.log('formData===>', data);
+    const confirmAction = () => {
+      deleteAccount();
+    };
+
+    showModalHandler('choice', '정말 계정을 삭제하시나요?', confirmAction);
   };
 
   return (
@@ -81,7 +86,7 @@ const DeleteAccountForm = () => {
         </label>
       </div>
 
-      <h3>구체적인 이유가 있다면 알려주세요</h3>
+      <h3>✏️ 구체적인 이유가 있다면 알려주세요</h3>
       <div className={cn('deleteReasonWrapper')}>
         <textarea {...register('deleteReason')} maxLength={200} />
         <small>
@@ -108,7 +113,7 @@ const DeleteAccountForm = () => {
         disabled={!isAgreed}
         type="submit"
       >
-        탈퇴하기
+        삭제하기
       </button>
     </form>
   );
