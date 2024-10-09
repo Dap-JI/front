@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './profileEditPage.module.scss';
 import ProfileEditForm from '@/src/components/profilePage/profileEditForm';
 import Header from '@/src/components/common/header';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -14,9 +15,12 @@ type ProfileEditPageProps = {
 
 const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
   const { userId } = params;
+  const router = useRouter();
+
   const handleAccountDeletion = () => {
-    alert('탈퇴 완료!');
+    router.push(`/deleteAccount`);
   };
+
   return (
     <div className={cn('container')}>
       <Header page={`/profile/${userId}`}>

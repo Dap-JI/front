@@ -6,6 +6,7 @@
 
 .noSearchData {
   @include font-style(1.5rem, black, 400);
+  text-align: center;
 }
 
 .container {

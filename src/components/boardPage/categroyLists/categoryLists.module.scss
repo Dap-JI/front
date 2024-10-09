@@ -8,14 +8,14 @@
 }
 
 .category {
-  @include font-style(1rem, black, 500);
+  @include font-style(1.3rem, rgb(70, 70, 70), 500);
   @include flex-arrange(center, center);
   width: 100%;
-  max-width: 100px;
+  // max-width: 210px;
   height: 30px;
   padding: 3px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   background: white;
   transition:
