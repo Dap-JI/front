@@ -58,7 +58,8 @@ const FooterBar = () => {
     (path.startsWith('/board') && path !== '/board') ||
     isClimbListSpecificPostPath ||
     path === '/signup' ||
-    path === '/signin'
+    path === '/signin' ||
+    path === '/deleteAccount'
   ) {
     return null;
   }

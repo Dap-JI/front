@@ -124,3 +124,4 @@ export const fetchFollowPost = async (followIds: FollowRequestType) => {
   const res = await instance.post(`/api/follow`, followIds);
   return res.data;
 };
+
