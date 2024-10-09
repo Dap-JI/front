@@ -10,18 +10,7 @@ import { WarnIcon } from '@/public/icon';
 const cn = classNames.bind(styles);
 
 const DeleteAccountPage = () => {
-  const router = useRouter();
-
-  const { mutate: deleteAccount } = useMutation({
-    mutationKey: ['deleteAccount'],
-    mutationFn: () => fetchDeleteAccount(),
-    onSuccess: () => {
-      router.replace(`/`);
-    },
-    onError: () => {
-      console.log('에러');
-    },
-  });
+ 
 
   return (
     <section className={cn('container')}>
