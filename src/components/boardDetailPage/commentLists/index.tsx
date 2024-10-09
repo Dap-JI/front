@@ -121,7 +121,7 @@ const CommentList = memo(
         <div className={cn('mainWrapper')}>
           <Link href={`/profile/${user_idx}`}>
             <Image
-              src={User.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
+              src={User?.img || process.env.NEXT_PUBLIC_URL + '/icon/icon.png'}
               width="30"
               height="30"
               alt="댓글 작성자 프로필 이미지"
@@ -130,7 +130,7 @@ const CommentList = memo(
           </Link>
           <div className={cn('contentWrapper')}>
             <div className={cn('userInfo')}>
-              <span>{User.nickname}</span>
+              <span>{User?.nickname || '❗탈퇴한 사용자입니다'}</span>
               <span>{timeAgo}</span>
               {isMyId && (
                 <DeleteIcon
