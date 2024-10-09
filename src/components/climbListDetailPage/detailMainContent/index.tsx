@@ -116,7 +116,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             alt="userImg"
           />
           <div className={cn('dateWrapper')}>
-            <span>{User.nickname}</span>
+            <span>{User?.nickname}</span>
             <span>{timeAgo}</span>
           </div>
         </div>
@@ -172,7 +172,7 @@ const DetailMainContent = ({ list, gymName }: DetailMainContentProps) => {
             </Link>
           </span>
           <div className={cn('comment')}>
-            <span>{post_comment[0].User.nickname}</span>
+            <span>{post_comment[0].User?.nickname}</span>
             <span>{post_comment[0].content}</span>
           </div>
         </div>

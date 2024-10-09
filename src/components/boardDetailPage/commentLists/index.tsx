@@ -111,7 +111,7 @@ const CommentList = memo(
     //답글 더 있으면 보여주기
 
     const tagNicknameClick = () => {
-      setTagNickname(`@${User.nickname}`);
+      setTagNickname(`@${User?.nickname}`);
       setSelectId(comment_idx);
     };
     //닉네임 태그하면 태그네임이랑 commentid 설정
@@ -130,7 +130,7 @@ const CommentList = memo(
           </Link>
           <div className={cn('contentWrapper')}>
             <div className={cn('userInfo')}>
-              <span>{User?.nickname || '❗탈퇴한 사용자입니다'}</span>
+              <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
               <span>{timeAgo}</span>
               {isMyId && (
                 <DeleteIcon

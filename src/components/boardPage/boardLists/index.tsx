@@ -81,7 +81,7 @@ const BoardList = ({ list }: BoardListProps) => {
             <div className={cn('dateWrapper')}>
               <span className={cn('category')}>{category}</span>
               <div className={cn('dataInfo')}>
-                <span>{User?.nickname || '❗탈퇴한 사용자입니다'}</span>
+                <span>{User?.nickname || '❗탈퇴한 사용자'}</span>
                 <span>{timeAgo}</span>
               </div>
             </div>
