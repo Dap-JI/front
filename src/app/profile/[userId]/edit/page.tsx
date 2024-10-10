@@ -18,7 +18,7 @@ const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
   const router = useRouter();
 
   const handleAccountDeletion = () => {
-    router.push(`/deleteAccount`);
+    router.replace(`/deleteAccount`);
   };
 
   return (

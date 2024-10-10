@@ -13,10 +13,6 @@ import { initializeNicknameType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
-type onSubmitType = {
-  nickname: string;
-};
-
 //일단 enabled 설저해야 하니까 state하나 만들어서 true로 만들어줘야함
 
 const JoinPage = () => {
@@ -47,10 +43,6 @@ const JoinPage = () => {
       const { data: nicknameCheck } = await refetch();
       if (nicknameCheck?.data.available) {
         initializeNickname(formData);
-        showModalHandler('alert', '답지를 즐겨보세요🔥');
-        setTimeout(() => {
-          router.replace('/climbList');
-        }, 1300);
         return;
       }
       showModalHandler('alert', '닉네임이 중복되었어요');

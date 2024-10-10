@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 import DeleteAccountForm from '@/src/components/deleteAccountPage/deleteAccountForm';
 import { WarnIcon } from '@/public/icon';
+import ModalChoice from '@/src/components/common/moadlChoice';
 
 const cn = classNames.bind(styles);
 
@@ -29,7 +30,7 @@ const DeleteAccountPage = () => {
           - 다른 클라이머의 <strong>답지를 볼 수 없어요</strong>
         </li>
         <li>
-          - 게시판에 작성한 <strong>글과 댓글은 사라지지 않아요</strong>
+          - 자유게시판에 작성한 <strong>글과 댓글은 사라지지 않아요</strong>
         </li>
         <li>
           <WarnIcon width="20" height="20" />
@@ -37,6 +38,7 @@ const DeleteAccountPage = () => {
         </li>
       </ul>
       <DeleteAccountForm />
+      <ModalChoice />
     </section>
   );
 };

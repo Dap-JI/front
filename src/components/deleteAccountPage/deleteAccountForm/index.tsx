@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useModal } from '@/src/hooks/useModal';
+import { DeleteAccountType } from '@/src/utils/type';
 
 const cn = classNames.bind(styles);
 
@@ -16,30 +17,35 @@ const DeleteAccountForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<DeleteAccountType>();
   const router = useRouter();
   const maxLength = '200';
-  const text = watch('deleteReason', '');
+  const text = watch('detail_reason', '');
   const isAgreed = watch('agreeCheck');
   const { showModalHandler } = useModal();
 
   const { mutate: deleteAccount } = useMutation({
     mutationKey: ['deleteAccount'],
-    mutationFn: () => fetchDeleteAccount(),
+    mutationFn: (formData: DeleteAccountType) => fetchDeleteAccount(formData),
     onSuccess: () => {
-      router.replace(`/`);
+      showModalHandler('alert', ' 답지를 이용해 주셔서 감사합니다. ', () => {
+        router.replace(`/`);
+      });
     },
     onError: () => {
       console.log('에러');
     },
   });
 
-  const onSubmit = (data: any) => {
-    const confirmAction = () => {
-      deleteAccount();
+  const onSubmit = (data: DeleteAccountType) => {
+    const formData = {
+      ...data,
     };
-
+    const confirmAction = () => {
+      deleteAccount(formData);
+    };
     showModalHandler('choice', '정말 계정을 삭제하시나요?', confirmAction);
+    console.log(data);
   };
 
   return (
@@ -52,43 +58,38 @@ const DeleteAccountForm = () => {
         </label>
 
         <label>
-          <input type="checkbox" {...register('contentLacking')} />
+          <input type="checkbox" {...register('content_lacking')} />
           콘텐츠가 부족해요
         </label>
 
         <label>
-          <input type="checkbox" {...register('slowUpload')} />
+          <input type="checkbox" {...register('slow_upload')} />
           동영상 업로드 속도가 느려요
         </label>
 
         <label>
-          <input type="checkbox" {...register('unstableService')} />
+          <input type="checkbox" {...register('unstable_service')} />
           서비스가 불안정해요
         </label>
 
         <label>
-          <input type="checkbox" {...register('newAccount')} />새 계정을 만들고
+          <input type="checkbox" {...register('new_account')} />새 계정을 만들고
           싶어요
         </label>
 
         <label>
-          <input type="checkbox" value="notUsing" {...register('notUsing')} />잘
-          사용하지 않아요
+          <input type="checkbox" {...register('not_using')} />잘 사용하지 않아요
         </label>
 
         <label>
-          <input
-            type="checkbox"
-            value="designIssue"
-            {...register('designIssue')}
-          />
+          <input type="checkbox" {...register('design_issue')} />
           디자인이 마음에 안들어요
         </label>
       </div>
 
       <h3>✏️ 구체적인 이유가 있다면 알려주세요</h3>
       <div className={cn('deleteReasonWrapper')}>
-        <textarea {...register('deleteReason')} maxLength={200} />
+        <textarea {...register('detail_reason')} maxLength={200} />
         <small>
           {text.length}/{maxLength}
         </small>

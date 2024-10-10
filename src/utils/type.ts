@@ -400,3 +400,17 @@ export type MediaUrl = {
   videos: Video[];
   thumbnailUrl: string[];
 };
+
+//////////////////////////계정삭제 페이지//////////////////////////
+
+export type DeleteAccountType = {
+  nothing: boolean;
+  content_lacking: boolean;
+  slow_upload: boolean;
+  unstable_service: boolean;
+  new_account: boolean;
+  not_using: boolean;
+  design_issue: boolean;
+  detail_reason: string;
+  agreeCheck?: boolean;
+};
