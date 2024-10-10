@@ -80,7 +80,7 @@ const ModalChoice = () => {
             <CommonButton
               name="확인"
               freeStyle="alertBtn"
-              onClick={closeModal}
+              onClick={handleConfirm}
             />
           )}
         </div>

@@ -18,13 +18,13 @@ const ProfileEditPage = ({ params }: ProfileEditPageProps) => {
   const router = useRouter();
 
   const handleAccountDeletion = () => {
-    router.push(`/deleteAccount`);
+    router.replace(`/deleteAccount`);
   };
 
   return (
     <div className={cn('container')}>
       <Header page={`/profile/${userId}`}>
-        <span onClick={handleAccountDeletion}>회원 탈퇴</span>
+        <span onClick={handleAccountDeletion}>계정 삭제</span>
       </Header>
       <div className={cn('secondContainer')}>
         <ProfileEditForm params={params} />
