@@ -3,7 +3,7 @@
   height: 50px;
   background: white;
   border-radius: 5px;
-  box-shadow: 0 0 4px;
+  border: 1px solid #d1d1d1;
   @include font-style(1.7rem, black, 600);
 }
 
