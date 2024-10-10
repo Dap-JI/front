@@ -10,25 +10,30 @@
     width: 100%;
     @include flex-arrange(center, center);
     flex-direction: column;
-    h2 {
-      @include font-style(2.5rem, black, 400);
-      margin-bottom: 10px;
+    h1 {
+      @include font-style(2.5rem, black, 600);
+      margin-bottom: 5px;
       margin-top: 20px;
     }
     .back {
       @include font-style(1.3rem, black, 400);
       text-align: center;
-      // width: 100%;
       margin-bottom: 20px;
       border-bottom: 1px solid black;
     }
   }
 
+  h2 {
+    @include font-style(2.5rem, black, 400);
+    margin-bottom: 5px;
+    margin-top: 26px;
+  }
+
   .warnLists {
     width: 100%;
-    max-width: 300px;
+    max-width: 340px;
     padding: 10px 0;
-    @include font-style(1.3rem, black, 400);
+    @include font-style(1.4rem, black, 400);
     flex-direction: column;
     margin-top: 0;
     margin-bottom: 10px;
@@ -37,13 +42,13 @@
       margin-bottom: 10px;
       width: 100%;
     }
-    li:nth-child(2) {
+
+    li:nth-child(4) {
       display: flex;
-      flex-direction: column;
-      span {
+      align-items: center;
+      gap: 3px;
+      strong {
         @include font-style(1.2rem, red, 400);
-        @include flex-arrange(flex-start, center);
-        padding-top: 5px;
       }
     }
   }
