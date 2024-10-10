@@ -19,6 +19,7 @@ import { useModal } from '@/src/hooks/useModal';
 import ModalChoice from '@/src/components/common/moadlChoice';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '../../common/loadingSpinner';
+import AnonymousToggle from '../anonymousToggle';
 
 const cn = classNames.bind(styles);
 
@@ -192,6 +193,7 @@ const BoardUploadForm = ({ params, initialData }: BoardUploadFormProps) => {
         setFileUrl={setFileUrl}
         setDeleteUrl={setDeleteUrl}
       />
+      <AnonymousToggle />
       <CommonButton name="업로드 " type="submit" />
       <ModalChoice />
     </form>

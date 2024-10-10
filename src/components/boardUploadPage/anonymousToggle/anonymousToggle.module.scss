@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  .isAnonymousText {
+    color: gray;
+    @include font-style(1.3rem, gray, 400);
+    transition: color 0.3s ease;
+    &.isAnonymous {
+      @include font-style(1.3rem, black, 400);
+      color: black;
+    }
+  }
+
+  .isAnonymousBtnWrapper {
+    width: 50px;
+    height: 25px;
+    background: rgb(56, 182, 255, 0.4);
+    border-radius: 20px;
+    padding: 1px;
+    position: relative;
+
+    .isAnonymousBtn {
+      width: 50%;
+      height: 23px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(0, -50%);
+      top: 50%;
+      left: 1px;
+      transition: transform 0.3s ease;
+      padding: 0;
+    }
+
+    &.isAnonymous {
+      background: #38b6ff;
+
+      .isAnonymousBtn {
+        transform: translate(23px, -50%);
+      }
+    }
+  }
+}
